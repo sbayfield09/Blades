@@ -8,7 +8,7 @@ from PIL import Image, ImageChops, ImageFilter
 W,H=1280,720
 STATES=['marketplace','xbox live','games','media','system']
 PREFIX=['Marketplace','XboxLive','Games','Media','System']
-COLORS=[(206,118,59),(199,165,94),(100,195,44),(37,140,221),(128,98,213)]
+COLORS=[(222,91,15),(218,151,57),(47,178,47),(37,150,220),(144,91,212)]
 ORIGINS=[140,202,250,294,335]
 SUBMENU_RAIL_LEFT=24
 SUBMENU_RIGHT=1165

@@ -1,0 +1,22 @@
+Blades animated background attribution
+
+Motion and lighting adapted from BladeAmbientTexture.cs; blade tint values
+from BladeCenterHost.cs in the user-supplied DashX360 project.
+
+Original project by zivvoz / DashX360 - inspired by Microsoft's Xbox 360
+Dashboard interfaces.
+
+Source: https://github.com/ZivvoZ/dashx360
+Inspected revision: 0c8adb2cef4ad7dff2bf889351efa1f1c244aef2
+Paths:
+XboxMetroLauncher/XboxMetroLauncher.Controls/BladeAmbientTexture.cs
+XboxMetroLauncher/XboxMetroLauncher.Controls/BladeCenterHost.cs
+
+The upstream README's "Working on the Project" section states:
+"If you use this project, modify it, or build on top of it, please credit
+Xbox/Microsoft, the project and the project's creator."
+
+This notice records the upstream attribution and source. It does not assign
+a new licence to upstream code or third-party assets. Xbox/Microsoft and
+other rights holders retain ownership of their respective material. The
+standalone application is independent and unaffiliated with Microsoft/Xbox.

@@ -1,4 +1,4 @@
-# Local DashX360 skin (Blades 0.6.0)
+# Local DashX360 skin (Blades 0.7.0)
 
 The optional skin imports the separated blade artwork, runners, header/footer
 masks, tray masks and menu icons from the repository supplied by the user:
@@ -46,7 +46,7 @@ The shared archive is optional. Missing images use embedded fallbacks.
 Copy both files to the console:
 
 ```text
-Hdd1:\Blades\default.xex           # version 0.6.0
+Hdd1:\Blades\default.xex           # version 0.7.0
 Hdd1:\Blades\Assets\blades.xzp    # premade pack download
 ```
 
@@ -92,9 +92,12 @@ it is an icon font and cannot replace the dashboard text atlas. It has not
 been embedded or used. The earlier font upload that the user withdrew was
 ignored.
 
-The procedural backgrounds, content layout, gamer-card data and animation
-timing remain reconstructed. Upstream WAV sounds were located but are not
+The background now reuses DashX360's animated implementation; see
+[ANIMATED-BACKGROUND.md](ANIMATED-BACKGROUND.md). Content layout, gamer-card
+data and navigation timing retain their existing limitations. Upstream WAV sounds were located but are not
 used by this version; navigation still uses synthesised ticks. Exact font,
 background, sound and layout matching remain outstanding.
 
 Version 0.6.0 preserves icon canvas padding and aspect ratios, reduces frame opacity, and corrects card/menu/tray/footer anchors. See [MENU-ALIGNMENT.md](MENU-ALIGNMENT.md) for the comparison. Use the matching XEX and premade artwork pack together.
+
+Version 0.7.0 retints the frame/tray art to DashX360's blade palette for the continuous background animation. BSK2 geometry and the 195-entry resource set remain identical. No background video file is required.
