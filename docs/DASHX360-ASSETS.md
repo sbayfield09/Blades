@@ -10,7 +10,19 @@ Credit: original project by **zivvoz / DashX360**, inspired by Microsoft's Xbox
 trademarks. Upstream describes its own recreation as still being improved;
 using its artwork does not establish an exact match to dashboard 5766.
 
-## Prepare on your PC
+## Download the premade pack
+
+The public repository now includes both release files:
+
+- [Compiled XEX](../dist/Blades/default.xex)
+- [Premade artwork ZIP](../dist/Blades-artwork-pack.zip)
+
+Download both and extract the artwork ZIP into `Hdd1:\Blades\`, placing the
+artwork at `Hdd1:\Blades\Assets\blades.xzp`. Put `default.xex` alongside the
+`Assets` folder. No conversion is needed. Every future release will include
+both files, as requested by the user.
+
+## Optional: rebuild the pack on your PC
 
 Install Python 3 and Pillow (`sudo apt install python3-pil git` on LMDE/Debian).
 Download `tools/import-dashx360-skin.py` from this project, then run:
@@ -43,12 +55,14 @@ skin pack to display the imported blade artwork. The application tries
 `Assets/blades.xzp` first, then `Assets/shrdres.xzp` if the first archive cannot
 be opened. An explicit `BLADES_RESOURCE_PACK` overrides both on the desktop.
 
-No upstream images, firmware, fonts or sound recordings are embedded in the
-public XEX or included in the public repository. The conversion script reads
-the user's checkout and writes a local pack; it does not download or publish
-artwork. The public script is original project code. The upstream repository
-has no root formal licence, and its README explicitly retains third-party
-ownership of original Xbox assets.
+The public XEX embeds no upstream media. At the user's request, a separate
+premade artwork ZIP is provided alongside it, including source attribution and
+installation instructions. This ZIP contains the converted blade artwork and
+shared images described here; it includes no dashboard firmware, font or sound
+recordings. The conversion script reads a local checkout and does not download
+or publish artwork itself. The upstream repository has no root formal licence,
+and its README explicitly retains third-party ownership of original Xbox
+assets. Ownership is unchanged by this conversion.
 
 ## Conversion and limits
 
