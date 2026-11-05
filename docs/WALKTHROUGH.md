@@ -1,10 +1,10 @@
-# Blades 0.12 navigation walkthrough
+# Blades 0.13 navigation walkthrough
 
-[Watch or download the MP4](../dist/Blades-v0.12-walkthrough.mp4)
+[Watch or download the MP4](../dist/Blades-v0.13-walkthrough.mp4)
 
 63 seconds, 1280x720 at 30 fps, with stereo navigation audio at 48 kHz, including the imported transition whooshes.
 This is a scripted desktop capture of the shared renderer and navigation code,
-using the published v0.12 premade artwork pack and glyphs recovered from the
+using the published v0.13 premade artwork pack and glyphs recovered from the
 user's Convection font resources, including the revised ABXY prompt sprites. The opening idle view also shows the reused
 DashX360 background animation in motion.
 
@@ -24,3 +24,5 @@ Version 0.10 includes the six imported transition recordings. Hear menu open/clo
 Version 0.11 includes the measured transition corrections described in [TRANSITION-AUDIT.md](TRANSITION-AUDIT.md). This is a fresh capture of the revised renderer.
 
 Version 0.12 adds the corrected selected-row shadow; see [MENU-SHADOW.md](MENU-SHADOW.md). This is a fresh capture of the release renderer.
+
+Version 0.13 corrects the lower-left fade of the selected-menu shadow; see [MENU-SHADOW.md](MENU-SHADOW.md). This is a fresh capture of the release renderer.

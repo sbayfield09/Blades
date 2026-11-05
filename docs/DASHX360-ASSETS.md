@@ -1,4 +1,4 @@
-# Local DashX360 skin (Blades 0.12.0)
+# Local DashX360 skin (Blades 0.13.0)
 
 The optional skin imports the separated blade artwork, runners, header/footer
 masks, tray masks and menu icons from the repository supplied by the user:
@@ -46,7 +46,7 @@ The shared archive is optional. Missing images use embedded fallbacks.
 Copy both files to the console:
 
 ```text
-Hdd1:\Blades\default.xex           # version 0.12.0
+Hdd1:\Blades\default.xex           # version 0.13.0
 Hdd1:\Blades\Assets\blades.xzp    # premade pack download
 ```
 
@@ -107,3 +107,5 @@ Version 0.10.0 adds six complete stereo transition recordings and an audio notic
 Version 0.11 corrects transition timing and cap/rail motion against the supplied recording. Its 213-entry pack payload is byte-identical to 0.10; updated install notes accompany it. See [TRANSITION-AUDIT.md](TRANSITION-AUDIT.md).
 
 Version 0.12 corrects the selected-menu shadow and its divider join. The 213-entry payload remains unchanged; see [MENU-SHADOW.md](MENU-SHADOW.md).
+
+Version 0.13 adds the reference-based fade toward the selected row's lower-left corner. The resource payload remains 213 entries; see [MENU-SHADOW.md](MENU-SHADOW.md).
