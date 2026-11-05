@@ -1,4 +1,4 @@
-Blades 0.11.0 - five-blade 5766-style test build
+Blades 0.12.0 - five-blade 5766-style test build
 
 Compilation and structural XEX validation passed. Console execution and
 Peer Pressure/kernel 17559 compatibility have not been verified.
@@ -19,7 +19,7 @@ including rapid navigation. Animation should continue while each sound plays.
 Check that the background visibly deforms while idle and continues moving
 through blade and submenu changes. This version reuses DashX360's animation
 implementation; its source/attribution is in licenses\DASHX360-NOTICE.txt.
-The matching 0.11 artwork pack also includes glyphs recovered from the supplied
+The matching 0.12 artwork pack also includes glyphs recovered from the supplied
 Convection font. Check text appearance, spacing, button-letter centring and softer disabled prompts.
 No console system-font replacement or flash modification is needed.
 
@@ -46,3 +46,7 @@ Reference timing was tested with the shared renderer; console frame pacing
 has not been measured. See docs/TRANSITION-AUDIT.md.
 Check that inactive tab labels clear early during submenu opening and return
 late while closing.
+
+Version 0.12: check the softer shadow below the selected row, rounded right
+join and fading right edge. Move among first, middle and last rows on each
+blade and in Console Settings. Xbox Live keeps a flatter root-list shadow.
