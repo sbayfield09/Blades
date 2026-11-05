@@ -1,0 +1,6 @@
+Blades 0.5.0 - hardware test build
+SDK commit: 5f6dc726f65f6d171493a3628c2415c03551f27b
+powerpc-xsdk-elf-gcc (GCC) 15.3.0
+Title ID: 0x424C4453
+Resolution: 1280x720
+Console/Peer Pressure compatibility: unverified
