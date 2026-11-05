@@ -1,4 +1,4 @@
-# Local DashX360 skin (Blades 0.10.0)
+# Local DashX360 skin (Blades 0.11.0)
 
 The optional skin imports the separated blade artwork, runners, header/footer
 masks, tray masks and menu icons from the repository supplied by the user:
@@ -46,7 +46,7 @@ The shared archive is optional. Missing images use embedded fallbacks.
 Copy both files to the console:
 
 ```text
-Hdd1:\Blades\default.xex           # version 0.10.0
+Hdd1:\Blades\default.xex           # version 0.11.0
 Hdd1:\Blades\Assets\blades.xzp    # premade pack download
 ```
 
@@ -103,3 +103,5 @@ The 0.9 pack has 206 entries: all previous 198 resources unchanged, plus eight e
 Version 0.9.0 gives the button letters a compact, heavier treatment, centres their visible ink and softens disabled prompts. See [BUTTON-PROMPTS.md](BUTTON-PROMPTS.md).
 
 Version 0.10.0 adds six complete stereo transition recordings and an audio notice, bringing the pack to 213 entries; all previous 206 entries are unchanged. See [TRANSITION-AUDIO.md](TRANSITION-AUDIO.md) for reference matching and playback details. To rebuild with sounds, add `--audio dashx360/Assets/Audio/Sounds` to the conversion command; this optional step requires FFmpeg. The premade ZIP already contains the converted sounds.
+
+Version 0.11 corrects transition timing and cap/rail motion against the supplied recording. Its 213-entry pack payload is byte-identical to 0.10; updated install notes accompany it. See [TRANSITION-AUDIT.md](TRANSITION-AUDIT.md).

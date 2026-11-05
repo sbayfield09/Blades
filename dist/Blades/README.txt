@@ -1,4 +1,4 @@
-Blades 0.10.0 - five-blade 5766-style test build
+Blades 0.11.0 - five-blade 5766-style test build
 
 Compilation and structural XEX validation passed. Console execution and
 Peer Pressure/kernel 17559 compatibility have not been verified.
@@ -19,7 +19,7 @@ including rapid navigation. Animation should continue while each sound plays.
 Check that the background visibly deforms while idle and continues moving
 through blade and submenu changes. This version reuses DashX360's animation
 implementation; its source/attribution is in licenses\DASHX360-NOTICE.txt.
-The matching 0.10 artwork pack also includes glyphs recovered from the supplied
+The matching 0.11 artwork pack also includes glyphs recovered from the supplied
 Convection font. Check text appearance, spacing, button-letter centring and softer disabled prompts.
 No console system-font replacement or flash modification is needed.
 
@@ -39,3 +39,10 @@ The XEX alone retains embedded artwork. A matching retail 5766 shrdres.xzp
 is also supported; the converter can merge it into the local skin pack.
 Check default.log for a loaded local XUIZ archive message (213 entries with
 the matching premade pack). Fonts, backgrounds, layout effects and audio remain approximate.
+
+Version 0.11: compare the cap fold/reopen/overshoot and slower submenu content
+fade. Blade transitions finish in about 0.55 s; submenus in about 0.94 s.
+Reference timing was tested with the shared renderer; console frame pacing
+has not been measured. See docs/TRANSITION-AUDIT.md.
+Check that inactive tab labels clear early during submenu opening and return
+late while closing.
