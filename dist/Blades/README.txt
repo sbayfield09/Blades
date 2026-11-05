@@ -1,4 +1,4 @@
-Blades 0.18.0 - disc drive hardware test build
+Blades 0.19.0 - disc drive hardware test build
 
 Copy default.xex into your Blades folder and extract the matching premade
 Blades-artwork-pack.zip there so Assets/blades.xzp is present. No conversion
@@ -40,7 +40,7 @@ and five-second performance summaries remain enabled. Keep the complete log
 if disc control, title detection or launching fails.
 
 Desktop state-machine, metadata, sanitizer and renderer checks passed. The new
-DVD hardware path still requires physical-console validation. The 118-second
+DVD hardware path still requires physical-console validation. The 52-second
 walkthrough is desktop GPU playback with explicitly simulated disc hardware;
 it is not evidence of Xbox disc I/O or console FPS.
 
@@ -52,3 +52,14 @@ Artwork/indicator credit: zivvoz / DashX360, inspired by Microsoft Xbox 360.
 Licences, attribution, build information and checksums are included. This
 standalone app does not change console configuration, profiles, saved games,
 NAND, or the configured default dashboard.
+
+Version 0.19 corrects media detection from the supplied console log:
+- FFFFFFFE is pending identification; Reading continues while the drive works.
+- XAM can return a title ID; nonzero returns no longer discard a game result.
+- Cached CLOSED/EMPTY changes during authentication retain the active read.
+- Repeated settled no-media results return to Open Tray after an empty close.
+- Unsupported results keep being polled so a later valid result can recover.
+
+Please retry closing both an empty tray and a tray containing a game. Leave a
+game inserted until its title appears, then press A to launch it. Autoplay
+remains off. New logs distinguish the raw media word from the function return.

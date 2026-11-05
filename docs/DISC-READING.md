@@ -1,4 +1,4 @@
-# Blades 0.18 disc drive
+# Blades 0.19 disc drive
 
 Games, Xbox Live and Media now share a working disc row: **Open Tray → Opening
 → Close Tray → Closing → Reading → Play <title>**. A operates the selected row;
@@ -86,3 +86,31 @@ API facts were cross-checked with XboxUnity/freestyledash revision
 df89a42edf055370e3383576c93199a3713c41e9 (DVDMonitor, xboxtools, SMC and XEX
 readers), and Xenia's public export/format definitions. No XDK library or
 upstream dashboard implementation is linked into this XEX.
+
+## Version 0.19: pending identification and empty close
+
+![Desktop GPU regression cases, simulated hardware](images/v0.19-disc-regression.png)
+
+The user's v0.18 hardware log exposed two incorrect assumptions: media word
+FFFFFFFE was masked to 254 and immediately labelled unsupported; a later
+return of 5553083B with media word 1 was ignored because the code expected a
+zero success return. The return word can carry a title ID. The corrected
+classification uses the full documented media word, with invalid/unwritten
+values treated as pending rather than an invented unsupported type.
+
+Reading now survives cached CLOSED/EMPTY changes during identification. A
+valid game result proceeds to metadata reading even with a nonzero return.
+No-media requires two repeated queries after at least three seconds of close
+settling, then returns Open Tray. Documented non-game types require three
+repeated queries and settling; unknown media gets the existing 30-second
+identification window. Polling continues after an unsupported/error result.
+Physical opening/closing still invalidates old reads and launch requests.
+
+Regression cases cover the captured pending/title-ID responses, both cached
+tray values during an empty close, transient other media, stale results and
+recovery. The new 52-second video exercises the shared policy with simulated
+hardware, including Reading during pending identification and Open Tray after
+an empty close. Native disc operation needs another console test; the v0.18
+log's working tray commands and 59.8–60 FPS do not establish v0.19 game launch.
+
+[Version 0.19 audit](data/v0.19-disc-fix-audit.json).

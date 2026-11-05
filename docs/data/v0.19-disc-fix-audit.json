@@ -1,0 +1,74 @@
+{
+  "version": "0.19.0",
+  "fixes": [
+    "preserve full FFFFFFFE pending word instead of masking to type 254",
+    "classify the media output independently of a nonzero return/title ID",
+    "retain reading epoch across cached CLOSED/EMPTY changes",
+    "settled no-media returns Open Tray",
+    "continue polling unsupported results for recovery"
+  ],
+  "captured_cases": [
+    {
+      "return": "00000000",
+      "raw_media": "FFFFFFFE",
+      "expected": "pending identification; keep Reading"
+    },
+    {
+      "return": "5553083B",
+      "raw_media": "00000001",
+      "expected": "game; attempt disc metadata read"
+    },
+    {
+      "return": "00000000",
+      "raw_media": "00000000",
+      "expected": "Open Tray after repeated no-media confirmation"
+    }
+  ],
+  "settling": {
+    "minimum_seconds_for_none_or_documented_other": 3,
+    "no_media_consecutive_polls": 2,
+    "documented_other_consecutive_polls": 3,
+    "unknown_identification_window_seconds": 30
+  },
+  "validation": {
+    "desktop_suites_passed": 13,
+    "gpu_comparisons": 221,
+    "asan_ubsan_disc": "passed",
+    "regressions": "pending spin-up, cached state changes, positive title-ID return, empty close under both cached values, transient/stable unsupported media, recovery, stale tokens, no autoplay",
+    "native_xex": "structural/header/image/import digest checks passed; 19 pages; 70 XAM and 120 kernel slots",
+    "verifier_mutations": "passed"
+  },
+  "xex": {
+    "container_version": "0.0.19.0",
+    "entry_point": "0x820c5e50",
+    "system_flags": "0x21"
+  },
+  "artwork": {
+    "entries": 234,
+    "unchanged_from": "0.18.0",
+    "payload_sha256": "c6470ec2ab422e1f5f2984bd244a79173269fd40fa157714be98af8dd183c55c",
+    "zip_integrity": "passed"
+  },
+  "walkthrough": {
+    "duration_seconds": 52,
+    "resolution": [
+      1280,
+      720
+    ],
+    "fps": 30,
+    "audio": "AAC 48 kHz stereo",
+    "source": "fresh desktop GPU; visibly labelled simulated disc hardware",
+    "pending_reading_seconds": [
+      13,
+      20
+    ],
+    "empty_close_open_tray_seconds": 35,
+    "full_decode": "passed"
+  },
+  "physical_validation": "v0.19 correction requires another console test; supplied v0.18 log confirms the reported bug and working tray movement",
+  "artifact_sha256": {
+    "Blades/default.xex": "2dbf1ef5ed6ae62fe2c6cd383ca56f5bb6e0b00bb0f7e5e5ab10091aa3f25a25",
+    "Blades-artwork-pack.zip": "f04c94ae040e34503a6b8d110cbfb81694a3a0df1d3daca74ab925e55471c81d",
+    "Blades-v0.19-walkthrough.mp4": "66f7faaf81dadc2157665509f5e61e74048f5fb42ce815035763492a14b71df4"
+  }
+}
