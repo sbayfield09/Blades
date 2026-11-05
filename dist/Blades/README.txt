@@ -1,4 +1,4 @@
-Blades 0.14.0 - five-blade 5766-style test build
+Blades 0.15.0 - five-blade 5766-style test build
 
 Compilation and structural XEX validation passed. Console execution and
 Peer Pressure/kernel 17559 compatibility have not been verified.
@@ -19,7 +19,7 @@ including rapid navigation. Animation should continue while each sound plays.
 Check that the background visibly deforms while idle and continues moving
 through blade and submenu changes. This version reuses DashX360's animation
 implementation; its source/attribution is in licenses\DASHX360-NOTICE.txt.
-The matching 0.14 artwork pack also includes glyphs recovered from the supplied
+The matching 0.15 artwork pack also includes glyphs recovered from the supplied
 Convection font. Check text appearance, spacing, button-letter centring and softer disabled prompts.
 No console system-font replacement or flash modification is needed.
 
@@ -54,9 +54,19 @@ blade and in Console Settings. Xbox Live keeps a flatter root-list shadow.
 Version 0.13: the broad underside shadow should fade toward the selected row's
 lower-left corner while the rounded right-hand shadow remains stronger.
 
-Version 0.14 optimizes the swirl filtering while preserving its source field
-and motion timing. After about ten seconds, default.log contains steady
-perf: summaries every five seconds: submitted FPS, render/background/upload/
-wait times in microseconds, and missed/late presentation counters. The startup
-background line should identify the VMX row filter. Console performance has
-not been measured in this environment; the log records the actual hardware.
+Version 0.15 draws the swirl, artwork, text and transparency on the GPU.
+The 213-entry artwork/sound/font payload is unchanged. Startup should identify
+GPU 720p rendering, followed by gpu-check: PASS swirl_source and, on the
+initial Games root, gpu-check: PASS final_background. These read actual GPU
+pixels once. Any FAIL is useful diagnostic evidence; keep the complete log.
+
+After ten seconds, default.log has perf: summaries every five seconds:
+fps, cpu_us, gpu_us, texture_upload_us, gpu_wait_us, present_wait_us, missed,
+late, list_builds, draws, bg_updates and resident_kb. Idle list_builds should
+normally be zero; background updates continue independently. GPU and CPU times
+overlap, and texture_upload_us is included in cpu_us. See GPU-RENDERER.md.
+
+The previous 0.14 log measured 7.5-8.7 FPS on the user's 360. Performance and
+appearance of this new GPU backend still need testing on physical hardware.
+Check idle motion, rapid navigation, all transitions, Guide open/close, audio
+and confirmed exit. The fresh release video is desktop GPU playback.

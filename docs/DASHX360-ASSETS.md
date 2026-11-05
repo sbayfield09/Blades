@@ -1,4 +1,4 @@
-# Local DashX360 skin (Blades 0.14.0)
+# Local DashX360 skin (Blades 0.15.0)
 
 The optional skin imports the separated blade artwork, runners, header/footer
 masks, tray masks and menu icons from the repository supplied by the user:
@@ -46,7 +46,7 @@ The shared archive is optional. Missing images use embedded fallbacks.
 Copy both files to the console:
 
 ```text
-Hdd1:\Blades\default.xex           # version 0.14.0
+Hdd1:\Blades\default.xex           # version 0.15.0
 Hdd1:\Blades\Assets\blades.xzp    # premade pack download
 ```
 
@@ -111,3 +111,5 @@ Version 0.12 corrects the selected-menu shadow and its divider join. The 213-ent
 Version 0.13 adds the reference-based fade toward the selected row's lower-left corner. The resource payload remains 213 entries; see [MENU-SHADOW.md](MENU-SHADOW.md).
 
 Version 0.14 optimizes the 384x216 swirl's 720p filtering with cached rows and Xbox VMX operations, retaining the 213-entry pack payload. See [BACKGROUND-PERFORMANCE.md](BACKGROUND-PERFORMANCE.md).
+
+Version 0.15 uses GPU swirl generation, scaling, artwork/text blending and retained menu commands. The 213-entry payload remains unchanged. See [GPU-RENDERER.md](GPU-RENDERER.md).

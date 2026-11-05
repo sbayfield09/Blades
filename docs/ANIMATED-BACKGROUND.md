@@ -60,3 +60,5 @@ match to Microsoft's original dashboard. Menu font and demo services retain
 their existing limitations.
 
 Version 0.14 caches horizontally expanded source rows and filters vertically with SIMD (Xbox VMX / desktop SSE2). The source equations, 384x216 grid and sampling clock remain the same; separable-rounding changes are at most one RGB level in the compared frames. See [BACKGROUND-PERFORMANCE.md](BACKGROUND-PERFORMANCE.md).
+
+Version 0.15 evaluates the supplied equations in a 384x216 pixel shader on the Xbox, then performs the 720p interpolation on the GPU. The palette and 30 Hz clock are retained; the scalar/SIMD renderer remains the desktop software reference. See [GPU-RENDERER.md](GPU-RENDERER.md).

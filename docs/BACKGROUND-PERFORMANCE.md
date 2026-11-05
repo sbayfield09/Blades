@@ -1,5 +1,10 @@
 # Blades 0.14 background performance
 
+Version 0.15 replaces the Xbox software path with a GPU compositor after the
+user's v0.14 console log measured 7.5–8.7 FPS. See [GPU-RENDERER.md](GPU-RENDERER.md)
+for that change, its checks and the new log fields. The desktop timings below
+remain historical v0.14 measurements.
+
 The swirl performed its 720p filtering in a scalar CPU loop on every draw.
 Profiling showed this dominated the background cost, even when its animation
 sample had not changed. Version 0.14 keeps the supplied DashX360 deformation
