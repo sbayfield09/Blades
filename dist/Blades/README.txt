@@ -1,4 +1,4 @@
-Blades 0.16.0 - five-blade 5766-style test build
+Blades 0.17.0 - five-blade 5766-style test build
 
 Compilation and structural XEX validation passed. Console execution and
 Peer Pressure/kernel 17559 compatibility have not been verified.
@@ -19,7 +19,7 @@ including rapid navigation. Animation should continue while each sound plays.
 Check that the background visibly deforms while idle and continues moving
 through blade and submenu changes. This version reuses DashX360's animation
 implementation; its source/attribution is in licenses\DASHX360-NOTICE.txt.
-The matching 0.16 artwork pack also includes glyphs recovered from the supplied
+The matching 0.17 artwork pack also includes glyphs recovered from the supplied
 Convection font. Check text appearance, spacing, button-letter centring and softer disabled prompts.
 No console system-font replacement or flash modification is needed.
 
@@ -78,3 +78,18 @@ The logo itself is unchanged. Use the matching 214-entry artwork pack.
 The four blade-switch recordings already rise in frequency from left to right;
 no pitch shifting was added. The fresh 81-second desktop GPU walkthrough
 includes a complete sweep in both directions near the end.
+
+Version 0.17 starts with the short Blades runner-opening animation, followed
+by the normal Games root. It does not enter language selection/onboarding.
+The existing dash_2ndLevelClose whoosh plays once during the late content
+reveal. Menu input is suppressed until the opening completes; held buttons
+need release before navigation. Guide handling remains available.
+
+Use the matching 218-entry pack. Startup images/root textures are prewarmed
+before its clock starts. Expected log: startup artwork prewarmed, blade opening,
+startup complete, and both gpu-check PASS messages. The final-background
+check is delayed until the startup panels have cleared. Check the opening
+for hitches, the whoosh/tail, normal main-menu landing and ordinary navigation.
+
+The prior 0.16 hardware log showed 59.9-60 FPS idle and 55.5-59.9 FPS during
+navigation. This new startup path still needs physical-console validation.

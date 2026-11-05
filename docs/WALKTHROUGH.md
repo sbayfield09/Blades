@@ -1,14 +1,15 @@
-# Blades 0.16 navigation walkthrough
+# Blades 0.17 navigation walkthrough
 
-[Watch or download the MP4](../dist/Blades-v0.16-walkthrough.mp4)
+[Watch or download the MP4](../dist/Blades-v0.17-walkthrough.mp4)
 
 81 seconds, 1280x720 at 30 fps, with stereo navigation audio at 48 kHz, including the imported transition whooshes.
 This is a fresh scripted desktop GPU capture of the shared drawing plan, GLSL shaders and navigation code,
-using the published v0.16 premade artwork pack and glyphs recovered from the
+using the published v0.17 premade artwork pack and glyphs recovered from the
 user's Convection font resources, including the revised ABXY prompt sprites. The opening idle view also shows the reused
 DashX360 background animation in motion.
 
-- 00:00 Idle Games view and moving background
+- 00:00 Blades opening with late whoosh, landing at the Games main menu
+- 00:02 Idle Games view and moving background
 - 00:08 Games navigation and submenu
 - 00:14 Media and submenu
 - 00:20 System icons and Console Settings
@@ -34,3 +35,5 @@ Version 0.14 uses the optimized background filter. This fresh desktop capture de
 Version 0.15 was recorded through the headless EGL/OpenGL backend (Mesa llvmpipe), using the production GPU drawing plan and shader sources. It is not a recording of Xbox execution or a measurement of console FPS. See [GPU-RENDERER.md](GPU-RENDERER.md).
 
 Version 0.16 shows the repaired grey Xbox Live panel, its narrow outer shadow, and the faint groove beneath the top branding. The complete sweeps demonstrate the original boundary-specific whooshes without pitch modification. See [BRANDING-AUDIO-REVIEW.md](BRANDING-AUDIO-REVIEW.md). This is fresh desktop GPU playback, not Xbox performance footage.
+
+Version 0.17 begins with the live-rendered Blades opening. The curved shutters come from the supplied asset repository; it ends at the normal Games root and includes its one-shot whoosh. This fresh 81-second desktop GPU capture includes startup, navigation and the boundary-sound sweeps. See [STARTUP-ANIMATION.md](STARTUP-ANIMATION.md).

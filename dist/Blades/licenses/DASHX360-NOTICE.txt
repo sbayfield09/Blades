@@ -35,3 +35,11 @@ XboxMetroLauncher/XboxMetroLauncher.Controls/BladeRingBackground.cs, inspected
 at repository revision 7d92705cf2131e6159120cfa5ae10736ddfabf68. Geometry,
 neutral colour, bevel, ring spacing and outer shadow follow the user-supplied
 reference. This is adapted vector artwork, not an extracted retail bitmap.
+
+Version 0.17 imports Assets/Blades/Startup/anim-left-runner.png and
+anim-right-runner.png, cropped after conversion to the 1280x720 design grid.
+The initial radial reveal and side-leaf staging adapt MainWindow.xaml,
+MainWindow.cs and BladesArtworkHost.cs in the same project at pinned revision
+0c8adb2cef4ad7dff2bf889351efa1f1c244aef2. Shutter positions are measured from
+the user-supplied reference recording. Startup reuses dash_2ndLevelClose.wav
+without pitch modification; all previously supplied recordings are unchanged.

@@ -1,0 +1,256 @@
+{
+  "version": "0.17.0",
+  "target": "normal five-blade Games root, no onboarding or console boot video",
+  "duration_seconds": 1.1666666666666667,
+  "sound_cue_seconds": 1,
+  "asset_source_revision": "0c8adb2cef4ad7dff2bf889351efa1f1c244aef2",
+  "reference_shutter_edges": [
+    {
+      "frame": 0,
+      "seconds": 0,
+      "left": 640,
+      "right": 640,
+      "note": "closed silver panels before first green frame"
+    },
+    {
+      "frame": 1,
+      "seconds": 0.03336666666666667,
+      "left": 518,
+      "right": 775
+    },
+    {
+      "frame": 2,
+      "seconds": 0.06673333333333334,
+      "left": 502,
+      "right": 789
+    },
+    {
+      "frame": 3,
+      "seconds": 0.1001,
+      "left": 484,
+      "right": 808
+    },
+    {
+      "frame": 4,
+      "seconds": 0.13346666666666668,
+      "left": 476,
+      "right": 836
+    },
+    {
+      "frame": 5,
+      "seconds": 0.16683333333333333,
+      "left": 459,
+      "right": 853
+    },
+    {
+      "frame": 6,
+      "seconds": 0.2002,
+      "left": 442,
+      "right": 869
+    },
+    {
+      "frame": 7,
+      "seconds": 0.23356666666666667,
+      "left": 425,
+      "right": 885
+    },
+    {
+      "frame": 8,
+      "seconds": 0.26693333333333336,
+      "left": 398,
+      "right": 891
+    },
+    {
+      "frame": 9,
+      "seconds": 0.3003,
+      "left": 392,
+      "right": 906
+    },
+    {
+      "frame": 10,
+      "seconds": 0.33366666666666667,
+      "left": 367,
+      "right": 921
+    },
+    {
+      "frame": 11,
+      "seconds": 0.3670333333333333,
+      "left": 351,
+      "right": 947
+    },
+    {
+      "frame": 12,
+      "seconds": 0.4004,
+      "left": 336,
+      "right": 951
+    },
+    {
+      "frame": 13,
+      "seconds": 0.4337666666666667,
+      "left": 331,
+      "right": 965
+    },
+    {
+      "frame": 14,
+      "seconds": 0.46713333333333334,
+      "left": 316,
+      "right": 989
+    },
+    {
+      "frame": 15,
+      "seconds": 0.5005,
+      "left": 302,
+      "right": 994
+    },
+    {
+      "frame": 16,
+      "seconds": 0.5338666666666667,
+      "left": 278,
+      "right": 1007
+    },
+    {
+      "frame": 17,
+      "seconds": 0.5672333333333334,
+      "left": 274,
+      "right": 1020
+    },
+    {
+      "frame": 18,
+      "seconds": 0.6006,
+      "left": 261,
+      "right": 1033
+    },
+    {
+      "frame": 19,
+      "seconds": 0.6339666666666667,
+      "left": 247,
+      "right": 1046
+    },
+    {
+      "frame": 20,
+      "seconds": 0.6673333333333333,
+      "left": 234,
+      "right": 1058
+    },
+    {
+      "frame": 21,
+      "seconds": 0.7007,
+      "left": 212,
+      "right": 1071
+    },
+    {
+      "frame": 22,
+      "seconds": 0.7340666666666666,
+      "left": 208,
+      "right": 1083
+    },
+    {
+      "frame": 23,
+      "seconds": 0.7674333333333333,
+      "left": 196,
+      "right": 1095
+    },
+    {
+      "frame": 24,
+      "seconds": 0.8008,
+      "left": 183,
+      "right": 1107
+    },
+    {
+      "frame": 25,
+      "seconds": 0.8341666666666666,
+      "left": 170,
+      "right": 1119
+    },
+    {
+      "frame": 26,
+      "seconds": 0.8675333333333334,
+      "left": 149,
+      "right": 1131
+    },
+    {
+      "frame": 27,
+      "seconds": 0.9009,
+      "left": 146,
+      "right": 1142
+    },
+    {
+      "frame": 28,
+      "seconds": 0.9342666666666667,
+      "left": 134,
+      "right": 1154
+    },
+    {
+      "frame": 29,
+      "seconds": 0.9676333333333333,
+      "left": 122,
+      "right": 1165
+    }
+  ],
+  "reference_audio_search": [
+    {
+      "asset": "dash_2ndLevelClose.wav",
+      "video_time": 9.3406875,
+      "correlation": 0.7222623174560903,
+      "template_duration": 0.5013125
+    },
+    {
+      "asset": "15. Back 2.mp3",
+      "video_time": 9.8045,
+      "correlation": 0.46204903573923684,
+      "template_duration": 0.0616875
+    },
+    {
+      "asset": "12. Select B.mp3",
+      "video_time": 9.7665,
+      "correlation": 0.36725414928290795,
+      "template_duration": 0.4851875
+    },
+    {
+      "asset": "blades-menu-open.wav",
+      "video_time": 9.6664375,
+      "correlation": 0.36492384632134967,
+      "template_duration": 0.4653125
+    },
+    {
+      "asset": "10. Select A.mp3",
+      "video_time": 9.7869375,
+      "correlation": 0.3003982259738161,
+      "template_duration": 0.0534375
+    }
+  ],
+  "audio_scope": "full original stereo menu-close recording reused once at late content reveal; captured A/V delay not reproduced",
+  "physical_console_startup_validated": false,
+  "prior_0_16_hardware_baseline": {
+    "idle_fps": [
+      59.9,
+      60.0
+    ],
+    "navigation_fps": [
+      55.5,
+      59.9
+    ],
+    "idle_missed_frames": 0,
+    "gpu_pixel_checks": "both PASS; sampled RGB error 0"
+  },
+  "validation": {
+    "desktop_suites_passed": 12,
+    "startup_frames": 36,
+    "gpu_comparisons": 149,
+    "worst_rgb_channel_error": 4,
+    "worst_mean_rgb_error": 0.478396,
+    "settled_pose": "pixel-identical to normal root in software playback",
+    "memory_checks": "ASan/UBSan startup and full dashboard, actual pack"
+  },
+  "pack": {
+    "entries": 218,
+    "unchanged_previous_entries": 214,
+    "added_entries": [
+      "startup/layout.bin",
+      "startup/left.png",
+      "startup/reveal.png",
+      "startup/right.png"
+    ],
+    "sha256": "0ecc7f50cf268a87e8c36cc1422722b63ef882fbd528ab60c3493133608de33c"
+  }
+}

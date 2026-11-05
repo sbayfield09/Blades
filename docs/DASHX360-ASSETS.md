@@ -1,4 +1,4 @@
-# Local DashX360 skin (Blades 0.16.0)
+# Local DashX360 skin (Blades 0.17.0)
 
 The optional skin imports the separated blade artwork, runners, header/footer
 masks, tray masks and menu icons from the repository supplied by the user:
@@ -46,7 +46,7 @@ The shared archive is optional. Missing images use embedded fallbacks.
 Copy both files to the console:
 
 ```text
-Hdd1:\Blades\default.xex           # version 0.16.0
+Hdd1:\Blades\default.xex           # version 0.17.0
 Hdd1:\Blades\Assets\blades.xzp    # premade pack download
 ```
 
@@ -115,3 +115,5 @@ Version 0.14 optimizes the 384x216 swirl's 720p filtering with cached rows and X
 Version 0.15 uses GPU swirl generation, scaling, artwork/text blending and retained menu commands. The 213-entry payload remains unchanged. See [GPU-RENDERER.md](GPU-RENDERER.md).
 
 Version 0.16 adds branding/live-panel.png, derived from the repository's grey rounded panel/ring styling and the supplied reference geometry, including the subtle outer shadow. The 213 previous payloads are unchanged; total 214 entries. See [BRANDING-AUDIO-REVIEW.md](BRANDING-AUDIO-REVIEW.md).
+
+Version 0.17 adds the two original curved startup shutters, their layout and the radial green reveal derived from the supplied repository. All 214 previous payloads are unchanged; total 218 entries. Startup finishes at the main Games root. See [STARTUP-ANIMATION.md](STARTUP-ANIMATION.md).
