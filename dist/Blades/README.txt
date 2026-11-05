@@ -1,4 +1,4 @@
-Blades 0.15.0 - five-blade 5766-style test build
+Blades 0.16.0 - five-blade 5766-style test build
 
 Compilation and structural XEX validation passed. Console execution and
 Peer Pressure/kernel 17559 compatibility have not been verified.
@@ -19,7 +19,7 @@ including rapid navigation. Animation should continue while each sound plays.
 Check that the background visibly deforms while idle and continues moving
 through blade and submenu changes. This version reuses DashX360's animation
 implementation; its source/attribution is in licenses\DASHX360-NOTICE.txt.
-The matching 0.15 artwork pack also includes glyphs recovered from the supplied
+The matching 0.16 artwork pack also includes glyphs recovered from the supplied
 Convection font. Check text appearance, spacing, button-letter centring and softer disabled prompts.
 No console system-font replacement or flash modification is needed.
 
@@ -70,3 +70,11 @@ The previous 0.14 log measured 7.5-8.7 FPS on the user's 360. Performance and
 appearance of this new GPU backend still need testing on physical hardware.
 Check idle motion, rapid navigation, all transitions, Guide open/close, audio
 and confirmed exit. The fresh release video is desktop GPU playback.
+
+Version 0.16 restores the faint divider beneath the top Xbox 360/Xbox Live
+branding. The panel under Chat and IM uses a neutral grey texture with a
+recessed bevel, continuous green rings and a subtle padded outer shadow.
+The logo itself is unchanged. Use the matching 214-entry artwork pack.
+The four blade-switch recordings already rise in frequency from left to right;
+no pitch shifting was added. The fresh 81-second desktop GPU walkthrough
+includes a complete sweep in both directions near the end.

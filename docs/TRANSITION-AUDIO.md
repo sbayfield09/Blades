@@ -37,9 +37,7 @@ Source: [ZivvoZ/dashx360](https://github.com/ZivvoZ/dashx360/tree/0c8adb2cef4ad7
 | Return from expanded menu | `dash_2ndLevelClose.wav` | 0.501 s |
 
 Each blade boundary uses its recording in either direction. The upstream
-Games-to-Media and Media-to-Games files are byte-identical. The other boundary
-recordings are selected by their supplied names; those three were not
-independently matched to a transition in the supplied video.
+Games-to-Media and Media-to-Games files are byte-identical. At the initial v0.10 audit, the other three boundary recordings were selected by their supplied names. The v0.16 review also matches Live/Games and Media/System in a rapid left-to-right reference sequence; Marketplace/Live remains filename-mapped. See [BRANDING-AUDIO-REVIEW.md](BRANDING-AUDIO-REVIEW.md).
 
 The importer preserves stereo, converts to PCM16 at 48 kHz and includes all
 six complete clips in the premade pack. It applies no trims or time stretching.
@@ -72,3 +70,5 @@ and an audio attribution notice. The XEX has no embedded upstream recordings.
 Credit: original project by zivvoz / DashX360, inspired by Microsoft's Xbox
 360 Dashboard interfaces. Xbox audio and other supplied assets remain owned
 by Microsoft and their respective rights holders.
+
+Version 0.16 verifies the existing rising sequence across the four boundaries. The recordings and mixer are unchanged. The new walkthrough includes complete sweeps in both directions.

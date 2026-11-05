@@ -1,0 +1,79 @@
+{
+  "version": "0.16.0",
+  "asset_source_revision": "0c8adb2cef4ad7dff2bf889351efa1f1c244aef2",
+  "audio_processing": "original PCM samples unchanged; no pitch shifting or time stretching",
+  "frequency_measurement": "full mono average of original stereo clip, Hann window, power FFT; peak is a noise-spectrum peak, not musical fundamental pitch",
+  "boundaries": [
+    {
+      "boundary": "marketplace-to-live",
+      "spectral_peak_hz": 446.1206896551724,
+      "power_centroid_hz": 1601.300837475794,
+      "source_pcm_sha256": "d64163cfe56ed571a5de2131b41161fa3d0bb81bb31336e86b324afea47d3986"
+    },
+    {
+      "boundary": "live-to-games",
+      "spectral_peak_hz": 510.77586206896547,
+      "power_centroid_hz": 1706.8586740700268,
+      "source_pcm_sha256": "7bdbe0269bcc08bd6855483ec6d470267478f02fe880f3435f316f673352508e"
+    },
+    {
+      "boundary": "games-to-media",
+      "spectral_peak_hz": 633.6206896551723,
+      "power_centroid_hz": 1979.758590296756,
+      "source_pcm_sha256": "a2db4075b89819cb57af0c2ef59da8b565221a0aa7c48b0d57fba704d58b3399"
+    },
+    {
+      "boundary": "media-to-system",
+      "spectral_peak_hz": 766.1637931034481,
+      "power_centroid_hz": 2350.6158129762825,
+      "source_pcm_sha256": "027cd05f6e476ab810c30eb12a5f84ddd5ec66957c14e681a370038684cc742b"
+    }
+  ],
+  "video_checks": {
+    "method": "16 kHz mono, mean-subtracted template, normalized cross-correlation; video interval 1600\u20131880 seconds",
+    "matches": [
+      {
+        "boundary": "live-to-games",
+        "seconds": 1703.4592,
+        "correlation": 0.7476
+      },
+      {
+        "boundary": "games-to-media",
+        "seconds": 1703.8804,
+        "correlation": 0.7378
+      },
+      {
+        "boundary": "media-to-system",
+        "seconds": 1704.3965,
+        "correlation": 0.7573
+      }
+    ],
+    "marketplace_live_limitation": "No confident Marketplace/Live match in inspected intervals; lowest cue is identified by supplied asset name."
+  },
+  "panel_style_source_revision": "7d92705cf2131e6159120cfa5ae10736ddfabf68",
+  "pack_entries": 214,
+  "unchanged_previous_entries": 213,
+  "panel": {
+    "image_size": [
+      415,
+      118
+    ],
+    "core_size": [
+      405,
+      108
+    ],
+    "padding": 5,
+    "shadow_blur_px": 1.4,
+    "shadow_offset_y_px": 1,
+    "shadow_max_opacity": 0.28,
+    "pack_sha256": "cfd7a4d5b14705f76c5b9a70271c0f7bd2e34f41d94afd6a6fbb1af7b86e5173"
+  },
+  "validation": {
+    "desktop_suites_passed": 11,
+    "gpu_comparisons": 113,
+    "worst_rgb_channel_difference": 4,
+    "worst_mean_absolute_rgb_error": 0.478396,
+    "previous_213_entries_unchanged": true,
+    "physical_console_validated": false
+  }
+}

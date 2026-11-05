@@ -28,3 +28,10 @@ blades-switch-games-to-media.wav, blades-switch-media-to-system.wav,
 blades-menu-open.wav and dash_2ndLevelClose.wav. Xbox/Microsoft and the
 respective rights holders retain ownership of these sounds. Recordings are
 converted to PCM16 stereo at 48 kHz; the XEX embeds none of these recordings.
+
+The v0.16 Xbox Live panel texture adapts the rounded grey Border in
+XboxMetroLauncher/MainWindow.xaml and the ring colour/stroke from
+XboxMetroLauncher/XboxMetroLauncher.Controls/BladeRingBackground.cs, inspected
+at repository revision 7d92705cf2131e6159120cfa5ae10736ddfabf68. Geometry,
+neutral colour, bevel, ring spacing and outer shadow follow the user-supplied
+reference. This is adapted vector artwork, not an extracted retail bitmap.
