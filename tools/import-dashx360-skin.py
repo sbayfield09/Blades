@@ -2,15 +2,16 @@
 """Prepare user-supplied DashX360 art locally. No upstream media is bundled.
 Requires Pillow. Optionally merges a local shrdres.xzp to preserve stock logos.
 """
-import argparse, io, math, re, struct
+import argparse, io, struct
 from pathlib import Path
-import xml.etree.ElementTree as ET
 from PIL import Image, ImageChops, ImageFilter
 W,H=1280,720
 STATES=['marketplace','xbox live','games','media','system']
 PREFIX=['Marketplace','XboxLive','Games','Media','System']
 COLORS=[(206,118,59),(199,165,94),(100,195,44),(37,140,221),(128,98,213)]
-ORIGINS=[140,195,250,294,335]
+ORIGINS=[140,202,250,294,335]
+SUBMENU_RAIL_LEFT=24
+SUBMENU_RIGHT=1165
 
 
 def unpack_shared(path):
@@ -29,35 +30,15 @@ def unpack_shared(path):
     return out
 
 
-def polygon(path):
-    # WPF absolute M/L/C/Z geometry, sampled into a polygon. No WPF runtime/code is used.
-    tokens=re.findall(r'[MLCZ]|[-+]?(?:\d*\.\d+|\d+)(?:[eE][-+]?\d+)?',path)
-    points=[];p=0;current=(0,0)
-    while p<len(tokens):
-        op=tokens[p];p+=1
-        if op in ('M','L'):
-            current=(float(tokens[p]),float(tokens[p+1]));p+=2;points.append(current)
-        elif op=='C':
-            values=list(map(float,tokens[p:p+6]));p+=6
-            a=current;b=values[:2];c=values[2:4];d=values[4:]
-            for step in range(1,49):
-                t=step/48;s=1-t
-                points.append((s*s*s*a[0]+3*s*s*t*b[0]+3*s*t*t*c[0]+t*t*t*d[0],s*s*s*a[1]+3*s*s*t*b[1]+3*s*t*t*c[1]+t*t*t*d[1]))
-            current=tuple(d)
-        elif op=='Z':break
-        else:raise ValueError('unsupported geometry command '+op)
-    return [(x*W/1920,y*H/1080) for x,y in points]
-
-
-def row_bounds(points):
+def opaque_edges(image):
+    # The visible content outline excludes the coloured tab and translucent
+    # folds. Derive the underpaint from the actual chrome silhouette instead.
+    opaque=image.getchannel('A').point(lambda value:255 if value>=128 else 0)
     rows=[]
     for y in range(H):
-        scan=min(max(y+0.5,min(p[1] for p in points)+1e-4),max(p[1] for p in points)-1e-4);hits=[]
-        for a,b in zip(points,points[1:]+points[:1]):
-            if (a[1]<=scan<b[1]) or (b[1]<=scan<a[1]):hits.append(a[0]+(scan-a[1])*(b[0]-a[0])/(b[1]-a[1]))
-        if len(hits)<2:raise ValueError('body geometry has an empty scan line')
-        left=max(0,min(W-1,int(math.floor(min(hits)))));right=max(left+1,min(W,int(math.ceil(max(hits)))))
-        rows.append((left,right))
+        bounds=opaque.crop((0,y,W,y+1)).getbbox()
+        if not bounds:raise ValueError('chrome silhouette has an empty scan line')
+        rows.append(bounds[0])
     return rows
 
 
@@ -68,17 +49,19 @@ def main():
     ap.add_argument('--output',required=True,type=Path,help='local Assets/blades.xzp destination')
     args=ap.parse_args();root=args.source;art=root/'Assets/Blades'
     entries=unpack_shared(args.shared) if args.shared else {}
-    rects=[]
+    rects=[];edges={}
     def add_image(state,slot,path,mask=None):
         im=Image.open(path).convert('RGBA').resize((W,H),Image.Resampling.LANCZOS)
+        if slot==state or (state<4 and slot==state+1) or slot==6:
+            edges[state,slot]=opaque_edges(im)
         if mask:
             rgba=Image.new('RGBA',(W,H));pixels=rgba.load();alpha=im.getchannel('A');bounds=alpha.getbbox()
             if not bounds:raise ValueError('empty mask')
             edge=ImageChops.subtract(alpha,alpha.filter(ImageFilter.MinFilter(5))) if mask in ('tray','circle') else None
             for y in range(bounds[1],bounds[3]):
                 t=(y-bounds[1])/max(1,bounds[3]-bounds[1]-1)
-                if mask=='top':color=tuple(int(v*(0.27+0.31*t)) for v in COLORS[state]);opacity=220
-                elif mask=='bottom':color=tuple(int(v*0.7+180*0.3) for v in COLORS[state]);opacity=75
+                if mask=='top':color=tuple(int(v*(0.4+0.3*t)) for v in COLORS[state]);opacity=95
+                elif mask=='bottom':color=tuple(int(v*0.55) for v in COLORS[state]);opacity=90
                 elif mask=='icon':color=tuple(int(v*0.35) for v in COLORS[state]);opacity=110
                 else:color=tuple(int(v*0.6) for v in COLORS[state]);opacity=45
                 for x in range(bounds[0],bounds[2]):
@@ -89,9 +72,16 @@ def main():
         bbox=im.getbbox()
         if not bbox:raise ValueError(f'empty art: {path}')
         x,y,right,bottom=bbox;im=im.crop(bbox)
+        # Match the shared 5766 capture: 68px header, footer starting at 610,
+        # tray centered at y=561. Keep the circle and bar on one shared anchor.
+        if slot==7:im=im.resize((im.width,68),Image.Resampling.LANCZOS)
+        elif slot==8:
+            y=610;im=im.resize((im.width,H-y),Image.Resampling.LANCZOS)
+        elif slot>=9:
+            x+=ORIGINS[state]-ORIGINS[2]+44;y+=10
+            if slot==9:im=im.resize((im.width+10,im.height),Image.Resampling.LANCZOS)
         if max(im.size)>1024:raise ValueError(f'cropped resource exceeds decoder limit: {path} {im.size}')
         payload=io.BytesIO();im.save(payload,format='PNG')
-        if slot>=9:x+=ORIGINS[state]-ORIGINS[2]
         if x<0 or x+im.width>W:raise ValueError('tray placement exceeds design bounds')
         entries[f'skin/{state}/{slot}.png']=payload.getvalue();rects.append((x,y,im.width,im.height))
     for state,label in enumerate(STATES):
@@ -105,13 +95,20 @@ def main():
         add_image(state,7,art/'FocusedOverlays'/f'{PREFIX[state]}FocusedTop.png','top')
         add_image(state,8,art/'FocusedOverlays'/f'{PREFIX[state]}FocusedBottom.png','bottom')
         for slot,name in enumerate(('bar','circle','icon'),9):add_image(state,slot,art/'OpenTray'/f'open tray {name}.png',{'bar':'tray','circle':'circle','icon':'icon'}[name])
-    xml=ET.parse(root/'XboxMetroLauncher/XboxMetroLauncher.Themes/DashX360_CenterBladeBodies.xaml').getroot()
-    geometries={node.attrib.get('{http://schemas.microsoft.com/winfx/2006/xaml}Key'):node.text for node in xml if node.tag.endswith('Geometry')}
-    geometry_names=['Marketplace','XboxLIVE','Games','Media','System']
-    manifest=bytearray(struct.pack('>4s4H',b'BSK1',W,H,5,12))
+    manifest=bytearray(struct.pack('>4s4H',b'BSK2',W,H,5,12))
     for rect in rects:manifest.extend(struct.pack('>4H',*rect))
-    for label in geometry_names:
-        for left,right in row_bounds(polygon(geometries[label+'CenterBodyGeometry'])):manifest.extend(struct.pack('>2H',left,right))
+    for expanded in (False,True):
+        for state in range(5):
+            active_x=rects[state*12+state][0];runner_x=rects[state*12+6][0]
+            for y in range(H):
+                if expanded:
+                    left=edges[state,state][y]-active_x+SUBMENU_RAIL_LEFT
+                    right=edges[state,6][y]-runner_x+SUBMENU_RIGHT+1
+                else:
+                    left=edges[state,state][y]
+                    right=edges[state,state+1 if state<4 else 6][y]+1
+                left=max(0,min(W-1,left));right=max(left+1,min(W,right))
+                manifest.extend(struct.pack('>2H',left,right))
     entries['skin/layout.bin']=manifest
     # Additional menu icons that were absent from shrdres.xzp.
     icon_paths={
@@ -121,9 +118,12 @@ def main():
         (3,0):'media/music.png',(3,1):'media/pictures.png',(3,2):'media/videos.png',(3,3):'media/video store.png',(3,4):'media/media center.png',
         (4,0):'system/console settings.png',(4,1):'system/family settings.png',(4,2):'system/memory.png',(4,3):'system/network settings.png',(4,5):'system/initial setup.png'}
     for (blade,row),name in icon_paths.items():
-        im=Image.open(art/'ProvidedIconsFit'/name).convert('RGBA');bounds=im.getbbox()
-        if not bounds:continue
-        im=im.crop(bounds);im.thumbnail((64,64),Image.Resampling.LANCZOS)
+        im=Image.open(art/'ProvidedIconsFit'/name).convert('RGBA')
+        if not im.getbbox():continue
+        # Preserve the source's design padding: cropping a thin console glyph
+        # and later fitting it to a square makes it as wide as a memory icon.
+        im.thumbnail((64,64),Image.Resampling.LANCZOS)
+        tile=Image.new('RGBA',(64,64));tile.alpha_composite(im,((64-im.width)//2,(64-im.height)//2));im=tile
         out=io.BytesIO();im.save(out,format='PNG');entries[f'skin/icon/{blade}/{row}.png']=out.getvalue()
     table=bytearray();payload=bytearray()
     for name,data in sorted(entries.items()):

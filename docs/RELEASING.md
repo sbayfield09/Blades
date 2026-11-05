@@ -21,8 +21,8 @@ branch holds the public downloadable files. Use a temporary Git index to add
 only release artifacts and their instructions/notices, preserving the current
 working tree. Do not replace the public branch with unrelated local changes.
 
-The v0.5.0 pack contains 195 XUIZ entries: five blade states, additional menu
-icons, the layout manifest and retail 5766 shared images. Original project by
+The v0.6.0 pack contains 195 XUIZ entries: five blade states, additional menu
+icons, the BSK2 root/expanded layout manifest and retail 5766 shared images. Original project by
 zivvoz / DashX360, inspired by Microsoft's Xbox 360 Dashboard interfaces.
 Asset ownership remains with the respective rights holders. See
 `DASHX360-ASSETS.md` for pinned sources, conversion details and remaining visual

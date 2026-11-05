@@ -1,4 +1,4 @@
-Blades 0.5.0 - five-blade 5766-style test build
+Blades 0.6.0 - five-blade 5766-style test build
 
 Compilation and structural XEX validation passed. Console execution and
 Peer Pressure/kernel 17559 compatibility have not been verified.
@@ -24,9 +24,9 @@ No NAND, kernel, XAM, exploit, Aurora, saved-game or profile modifications.
 No Microsoft firmware assets or proprietary XDK components are included.
 Licences and SHA256SUMS are included in this directory.
 
-Optional blade artwork: generate blades.xzp on your PC using
-tools/import-dashx360-skin.py and copy it into the Assets folder. See
-docs/DASHX360-ASSETS.md. Credit: zivvoz / DashX360, inspired by Microsoft Xbox.
+Blade artwork: download the matching premade Blades-artwork-pack.zip and
+extract it here so Assets\blades.xzp is present. No conversion is needed.
+See docs/DASHX360-ASSETS.md. Credit: zivvoz / DashX360, inspired by Microsoft Xbox.
 The XEX alone retains embedded artwork. A matching retail 5766 shrdres.xzp
 is also supported; the converter can merge it into the local skin pack.
 Check default.log for a loaded local XUIZ archive message (195 entries with

@@ -1,4 +1,4 @@
-# Local DashX360 skin (Blades 0.5.0)
+# Local DashX360 skin (Blades 0.6.0)
 
 The optional skin imports the separated blade artwork, runners, header/footer
 masks, tray masks and menu icons from the repository supplied by the user:
@@ -46,8 +46,8 @@ The shared archive is optional. Missing images use embedded fallbacks.
 Copy both files to the console:
 
 ```text
-Hdd1:\Blades\default.xex           # version 0.5.0 or newer
-Hdd1:\Blades\Assets\blades.xzp    # generated on your PC
+Hdd1:\Blades\default.xex           # version 0.6.0
+Hdd1:\Blades\Assets\blades.xzp    # premade pack download
 ```
 
 The new executable alone retains the embedded appearance. It needs the local
@@ -68,10 +68,12 @@ assets. Ownership is unchanged by this conversion.
 
 The converter scales the 1920x1080 artwork to the renderer's 1280x720 canvas,
 crops transparent margins and tints the primary-colour masks to each blade's
-palette. It samples the supplied WPF body geometries into scan-line bounds;
-the Xbox application runs no WPF or upstream C# code. Five states contain
-twelve sprites each; eighteen additional icons and a big-endian `BSK1`
-layout manifest are stored in a bounded XUIZ v1 container. With the inspected
+palette. Version 0.6.0 derives root and expanded surface bounds from the
+actual blade/runner alpha silhouettes, covering the active tab and curved
+edges beneath the chrome. The Xbox application runs no WPF or upstream C# code. Five states contain
+twelve sprites each; eighteen additional icons and a big-endian
+`BSK2` layout manifest are stored in a bounded XUIZ v1 container. The runtime
+also accepts the earlier `BSK1` layout format. With the inspected
 116-entry shared archive, the resulting pack has 195 entries.
 
 Runtime source PNG dimensions are limited to 1024, archive size to 16 MiB and
@@ -94,3 +96,5 @@ The procedural backgrounds, content layout, gamer-card data and animation
 timing remain reconstructed. Upstream WAV sounds were located but are not
 used by this version; navigation still uses synthesised ticks. Exact font,
 background, sound and layout matching remain outstanding.
+
+Version 0.6.0 preserves icon canvas padding and aspect ratios, reduces frame opacity, and corrects card/menu/tray/footer anchors. See [MENU-ALIGNMENT.md](MENU-ALIGNMENT.md) for the comparison. Use the matching XEX and premade artwork pack together.
