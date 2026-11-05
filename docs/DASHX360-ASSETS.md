@@ -1,4 +1,4 @@
-# Local DashX360 skin (Blades 0.17.0)
+# Local DashX360 skin (Blades 0.18.0)
 
 The optional skin imports the separated blade artwork, runners, header/footer
 masks, tray masks and menu icons from the repository supplied by the user:
@@ -117,3 +117,5 @@ Version 0.15 uses GPU swirl generation, scaling, artwork/text blending and retai
 Version 0.16 adds branding/live-panel.png, derived from the repository's grey rounded panel/ring styling and the supplied reference geometry, including the subtle outer shadow. The 213 previous payloads are unchanged; total 214 entries. See [BRANDING-AUDIO-REVIEW.md](BRANDING-AUDIO-REVIEW.md).
 
 Version 0.17 adds the two original curved startup shutters, their layout and the radial green reveal derived from the supplied repository. All 214 previous payloads are unchanged; total 218 entries. Startup finishes at the main Games root. See [STARTUP-ANIMATION.md](STARTUP-ANIMATION.md).
+
+Version 0.18 adds sixteen transparent disc-reading frames adapted from the pinned repository's BladesLoadingIndicator.cs, with its console silhouette and orbiting dots. The premade pack has 234 entries, retaining all 218 previous payloads byte for byte. See [DISC-READING.md](DISC-READING.md) for source credit, native behavior and hardware validation limits.

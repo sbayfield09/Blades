@@ -43,3 +43,10 @@ MainWindow.cs and BladesArtworkHost.cs in the same project at pinned revision
 0c8adb2cef4ad7dff2bf889351efa1f1c244aef2. Shutter positions are measured from
 the user-supplied reference recording. Startup reuses dash_2ndLevelClose.wav
 without pitch modification; all previously supplied recordings are unchanged.
+
+Version 0.18 adapts the console silhouette, sixteen-dot orbit and 1.7 Hz
+timing from XboxMetroLauncher/XboxMetroLauncher.Controls/BladesLoadingIndicator.cs
+at pinned revision 0c8adb2cef4ad7dff2bf889351efa1f1c244aef2. The small transparent
+frames use the dark indicator treatment observed in the user's disc-reading
+video. They are prepared in the premade pack and played through the existing
+GPU compositor; no video footage is embedded.

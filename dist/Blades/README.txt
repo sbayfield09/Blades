@@ -1,95 +1,54 @@
-Blades 0.17.0 - five-blade 5766-style test build
+Blades 0.18.0 - disc drive hardware test build
 
-Compilation and structural XEX validation passed. Console execution and
-Peer Pressure/kernel 17559 compatibility have not been verified.
-System-service entries use demo data or unsupported-feature dialogs.
-
-Copy this complete Blades directory to Hdd1:\Blades\ and launch default.xex
-from Aurora's file browser. Keep your existing dashboard setup unchanged.
+Copy default.xex into your Blades folder and extract the matching premade
+Blades-artwork-pack.zip there so Assets/blades.xzp is present. No conversion
+is required. The pack contains 234 entries; all 218 previous entries remain
+unchanged, with sixteen small disc-reading indicator frames added.
 
 Controls: D-pad/left stick navigate, LB/RB change blades, A select, B back.
-Back opens an exit menu; choose Return to system dashboard to confirm.
-The destination is the console's configured system dashboard, not a guessed
-Aurora path. Do not configure Blades as the default dashboard yet.
+X opens the existing profile placeholder. Back opens the confirmed exit menu.
+Y ejects a loaded/reading disc from ordinary menus, including submenus. Release
+it before another press. The physical eject button is monitored independently.
 
-Test: image/colours, all five blades, submenu select/back, animations,
-controller reconnect, selection sounds, Guide open/close and confirmed exit.
-Listen for complete stereo whooshes on each blade change and submenu open/back,
-including rapid navigation. Animation should continue while each sound plays.
-Check that the background visibly deforms while idle and continues moving
-through blade and submenu changes. This version reuses DashX360's animation
-implementation; its source/attribution is in licenses\DASHX360-NOTICE.txt.
-The matching 0.17 artwork pack also includes glyphs recovered from the supplied
-Convection font. Check text appearance, spacing, button-letter centring and softer disabled prompts.
-No console system-font replacement or flash modification is needed.
+Select the disc row on Games, Media or Xbox Live:
+  Open Tray -> Opening -> Close Tray -> Closing -> Reading -> Play <title>
+A opens an empty closed tray, closes an open tray, or launches a ready game.
+Insertion and boot with a game already inside never request automatic launch.
+Busy states cannot be selected as games or submenus. Labels follow hardware
+state, with no fixed artificial reading duration. An empty close returns to
+Open Tray. Original modal/startup input guards still apply.
 
-Read default.log beside default.xex after a failure. Provide the log and a
-console screenshot; the log records completed boot stages and API failures.
-Optional network logging: net_log.txt beside default.xex containing PC_IP 7371,
-with xsdk's tools/net_log.py running on the PC.
+This release targets Xbox 360 game DVDs with default.xex. Titles come from
+nxeart or the executable's XDBF metadata. Missing/invalid metadata uses Play
+Xbox 360 Game; long titles are shortened to fit. Other disc formats are not
+played by this build. Unsupported/unreadable discs can be ejected and replaced.
 
-No NAND, kernel, XAM, exploit, Aurora, saved-game or profile modifications.
-No Microsoft firmware assets or proprietary XDK components are included.
-Licences and SHA256SUMS are included in this directory.
+Check on your 360:
+- Start with no disc, and separately with a game already inside.
+- Use A for open/close; verify the reported states and actual game title.
+- Wait on Play for several seconds: the game must not start by itself.
+- Press A on Play and confirm the game launches.
+- Use Y with a loaded game, then while Reading; verify ejection.
+- Open/close using the physical button, including during title detection.
+- Replace a game and confirm the old title clears immediately.
+- Try an empty close and an unreadable/unsupported disc; verify recovery.
+- Check Guide, reconnect, normal navigation and confirmed exit.
 
-Blade artwork: download the matching premade Blades-artwork-pack.zip and
-extract it here so Assets\blades.xzp is present. No conversion is needed.
-See docs/DASHX360-ASSETS.md. Credit: zivvoz / DashX360, inspired by Microsoft Xbox.
-The XEX alone retains embedded artwork. A matching retail 5766 shrdres.xzp
-is also supported; the converter can merge it into the local skin pack.
-Check default.log for a loaded local XUIZ archive message (213 entries with
-the matching premade pack). Fonts, backgrounds, layout effects and audio remain approximate.
+default.log records API availability, tray state, media type, title ID, state
+generation, command acceptance and manual-launch failures. GPU pixel checks
+and five-second performance summaries remain enabled. Keep the complete log
+if disc control, title detection or launching fails.
 
-Version 0.11: compare the cap fold/reopen/overshoot and slower submenu content
-fade. Blade transitions finish in about 0.55 s; submenus in about 0.94 s.
-Reference timing was tested with the shared renderer; console frame pacing
-has not been measured. See docs/TRANSITION-AUDIT.md.
-Check that inactive tab labels clear early during submenu opening and return
-late while closing.
+Desktop state-machine, metadata, sanitizer and renderer checks passed. The new
+DVD hardware path still requires physical-console validation. The 118-second
+walkthrough is desktop GPU playback with explicitly simulated disc hardware;
+it is not evidence of Xbox disc I/O or console FPS.
 
-Version 0.12: check the softer shadow below the selected row, rounded right
-join and fading right edge. Move among first, middle and last rows on each
-blade and in Console Settings. Xbox Live keeps a flatter root-list shadow.
+The existing opening, one-shot whoosh, animated background, Convection atlas
+and menu artwork are retained. Metadata runs on a separate worker/core; tray
+monitoring continues while files are read.
 
-Version 0.13: the broad underside shadow should fade toward the selected row's
-lower-left corner while the rounded right-hand shadow remains stronger.
-
-Version 0.15 draws the swirl, artwork, text and transparency on the GPU.
-The 213-entry artwork/sound/font payload is unchanged. Startup should identify
-GPU 720p rendering, followed by gpu-check: PASS swirl_source and, on the
-initial Games root, gpu-check: PASS final_background. These read actual GPU
-pixels once. Any FAIL is useful diagnostic evidence; keep the complete log.
-
-After ten seconds, default.log has perf: summaries every five seconds:
-fps, cpu_us, gpu_us, texture_upload_us, gpu_wait_us, present_wait_us, missed,
-late, list_builds, draws, bg_updates and resident_kb. Idle list_builds should
-normally be zero; background updates continue independently. GPU and CPU times
-overlap, and texture_upload_us is included in cpu_us. See GPU-RENDERER.md.
-
-The previous 0.14 log measured 7.5-8.7 FPS on the user's 360. Performance and
-appearance of this new GPU backend still need testing on physical hardware.
-Check idle motion, rapid navigation, all transitions, Guide open/close, audio
-and confirmed exit. The fresh release video is desktop GPU playback.
-
-Version 0.16 restores the faint divider beneath the top Xbox 360/Xbox Live
-branding. The panel under Chat and IM uses a neutral grey texture with a
-recessed bevel, continuous green rings and a subtle padded outer shadow.
-The logo itself is unchanged. Use the matching 214-entry artwork pack.
-The four blade-switch recordings already rise in frequency from left to right;
-no pitch shifting was added. The fresh 81-second desktop GPU walkthrough
-includes a complete sweep in both directions near the end.
-
-Version 0.17 starts with the short Blades runner-opening animation, followed
-by the normal Games root. It does not enter language selection/onboarding.
-The existing dash_2ndLevelClose whoosh plays once during the late content
-reveal. Menu input is suppressed until the opening completes; held buttons
-need release before navigation. Guide handling remains available.
-
-Use the matching 218-entry pack. Startup images/root textures are prewarmed
-before its clock starts. Expected log: startup artwork prewarmed, blade opening,
-startup complete, and both gpu-check PASS messages. The final-background
-check is delayed until the startup panels have cleared. Check the opening
-for hitches, the whoosh/tail, normal main-menu landing and ordinary navigation.
-
-The prior 0.16 hardware log showed 59.9-60 FPS idle and 55.5-59.9 FPS during
-navigation. This new startup path still needs physical-console validation.
+Artwork/indicator credit: zivvoz / DashX360, inspired by Microsoft Xbox 360.
+Licences, attribution, build information and checksums are included. This
+standalone app does not change console configuration, profiles, saved games,
+NAND, or the configured default dashboard.

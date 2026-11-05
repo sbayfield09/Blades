@@ -2,7 +2,7 @@
 """Prepare user-supplied DashX360 art locally. No upstream media is bundled.
 Requires Pillow. Optionally merges a local shrdres.xzp to preserve stock logos.
 """
-import argparse, io, struct, subprocess, wave
+import argparse, io, struct, subprocess, wave, math
 from pathlib import Path
 from PIL import Image, ImageChops, ImageFilter, ImageDraw, ImageFont
 W,H=1280,720
@@ -13,6 +13,110 @@ ORIGINS=[140,202,250,294,335]
 SUBMENU_RAIL_LEFT=24
 SUBMENU_RIGHT=1165
 
+
+def live_panel_image():
+    """Xbox Live promotional panel, independent of its existing logo image.
+
+    Adapts DashX360 MainWindow.xaml's rounded grey Border and
+    BladeRingBackground.cs's 181/204/40 ring colour and 1.8px stroke.
+    The supplied later-Blades screenshot fixes the 405x108 footprint, opaque
+    neutral interior, bevel and five closely spaced rings. The upstream panel
+    is vector/XAML artwork, not a standalone background bitmap. Bake it once
+    so an idle console never repaints the panel's rings or border on the CPU.
+    """
+    scale=4;w,h=405,108;size=(w*scale,h*scale)
+    def rounded(inset,radius):
+        mask=Image.new('L',size)
+        ImageDraw.Draw(mask).rounded_rectangle((inset*scale,inset*scale,(w-inset)*scale-1,
+            (h-inset)*scale-1),radius=radius*scale,fill=255)
+        return mask
+    def vertical(top,bottom):
+        out=Image.new('RGBA',size)
+        draw=ImageDraw.Draw(out)
+        for y in range(size[1]):
+            t=y/(size[1]-1);color=tuple(round(a+(b-a)*t) for a,b in zip(top,bottom))
+            draw.line((0,y,size[0],y),fill=color)
+        return out
+    panel=vertical((57,63,55,255),(112,117,91,255));panel.putalpha(rounded(0,12))
+    bevel=vertical((105,114,105,255),(105,114,106,255));bevel.putalpha(rounded(1.5,10.5));panel.alpha_composite(bevel)
+    inset=vertical((66,74,70,255),(62,70,66,255));inset.putalpha(rounded(3,9));panel.alpha_composite(inset)
+    face=vertical((77,84,80,255),(75,81,77,255));face_mask=rounded(4,8);face.putalpha(face_mask)
+    panel.alpha_composite(face)
+    rings=Image.new('RGBA',size);draw=ImageDraw.Draw(rings);cx,cy=-4,56
+    # The photograph's crest positions are ~225,234,243,253,265 at y=459
+    # (panel left ~203). Keep that tighter spacing than the upstream animation.
+    for radius,alpha in ((26,48),(35,96),(44,150),(54,132),(66,78)):
+        draw.ellipse(((cx-radius)*scale,(cy-radius)*scale,(cx+radius)*scale,(cy+radius)*scale),
+            outline=(181,204,40,alpha),width=round(1.8*scale))
+    rings.putalpha(ImageChops.multiply(rings.getchannel('A'),face_mask))
+    glow=rings.filter(ImageFilter.GaussianBlur(.6*scale));glow.putalpha(ImageChops.multiply(
+        glow.getchannel('A').point(lambda a:round(a*.22)),face_mask))
+    panel.alpha_composite(glow);panel.alpha_composite(rings)
+    panel.putalpha(rounded(0,12))
+    panel=panel.resize((w,h),Image.Resampling.LANCZOS)
+    # A narrow soft shadow extends beyond the bevel in the supplied reference.
+    # Keep it in padded transparent artwork, so the renderer never clips it at
+    # the panel rectangle or paints a large dark rectangle behind the tile.
+    padding=5;shadow=Image.new('L',(w+padding*2,h+padding*2))
+    shadow.paste(panel.getchannel('A'),(padding,padding+1))
+    shadow=shadow.filter(ImageFilter.GaussianBlur(1.4)).point(lambda a:round(a*.28))
+    out=Image.new('RGBA',shadow.size,(0,0,0,0));out.putalpha(shadow)
+    out.alpha_composite(panel,(padding,padding))
+    return out
+
+
+def add_live_panel(entries):
+    out=io.BytesIO();live_panel_image().save(out,format='PNG')
+    entries['branding/live-panel.png']=out.getvalue()
+
+
+def add_startup(entries,root):
+    """Keep the supplied curved shutters intact, cropped only to their alpha
+    bounds after design-resolution conversion. No boot video is embedded."""
+    rectangles=[]
+    for side in ('left','right'):
+        im=Image.open(root/'Assets/Blades/Startup'/f'anim-{side}-runner.png').convert('RGBA')
+        im=im.resize((W,H),Image.Resampling.LANCZOS);bounds=im.getbbox()
+        if not bounds:raise ValueError('empty startup shutter')
+        x,y,r,b=bounds;im=im.crop(bounds)
+        if max(im.size)>1024:raise ValueError('startup shutter exceeds decoder limits')
+        out=io.BytesIO();im.save(out,format='PNG');entries[f'startup/{side}.png']=out.getvalue()
+        rectangles.append((x,y,im.width,im.height))
+    entries['startup/layout.bin']=struct.pack('>4s4H',b'STP1',W,H,2,0)+b''.join(struct.pack('>4H',*r) for r in rectangles)
+    # The initial green reveal is the repository's radial XAML brush, baked
+    # once instead of evaluating a per-pixel CPU gradient during launch.
+    im=Image.new('RGB',(512,288));pixels=im.load()
+    colors=((191,236,194),(119,207,88),(58,173,44))
+    for y in range(im.height):
+        for x in range(im.width):
+            radius=min(1,math.hypot((x/(im.width-1)-.5)/.62,(y/(im.height-1)-.48)/.78))
+            a,b,t=(colors[0],colors[1],radius/.45) if radius<.45 else (colors[1],colors[2],(radius-.45)/.55)
+            pixels[x,y]=tuple(round(c+(d-c)*t) for c,d in zip(a,b))
+    out=io.BytesIO();im.save(out,format='PNG');entries['startup/reveal.png']=out.getvalue()
+
+
+def add_disc_reading(entries):
+    # Adapt BladesLoadingIndicator.cs at pinned 0c8adb2. The supplied disc
+    # reference shows the dark console/dot treatment against the blade colour.
+    # Bake its actual geometry into small transparent frames; playback is 27.2 Hz.
+    scale=4
+    def box(x,y,r):return tuple(round(v*scale*.96) for v in (x-r,y-r,x+r,y+r))
+    for frame in range(16):
+        image=Image.new('RGBA',(96*scale,96*scale));draw=ImageDraw.Draw(image)
+        for i in range(16):
+            angle=i*math.pi/8-math.pi/2;behind=(frame-i)%16
+            alpha=int(35+180*math.exp(-behind*.85))
+            draw.ellipse(box(50+36*math.cos(angle),50+36*math.sin(angle),3.5),fill=(33,56,56,alpha))
+        points=[(40,29),(60,29)]
+        for step in range(1,33):
+            t=step/32;points.append(((1-t)**2*60+2*(1-t)*t*55+t*t*60,(1-t)**2*29+2*(1-t)*t*50+t*t*71))
+        points.append((40,71))
+        for step in range(1,33):
+            t=step/32;points.append(((1-t)**2*40+2*(1-t)*t*45+t*t*40,(1-t)**2*71+2*(1-t)*t*50+t*t*29))
+        draw.polygon([(round(x*.96*scale),round(y*.96*scale)) for x,y in points],fill=(33,56,56,150))
+        draw.ellipse(box(50,61,2),fill=(189,225,155,255))
+        image=image.resize((96,96),Image.Resampling.LANCZOS);out=io.BytesIO();image.save(out,format='PNG')
+        entries[f'disc/reading-{frame:02d}.png']=out.getvalue()
 
 def unpack_shared(path):
     d=path.read_bytes()
@@ -167,6 +271,9 @@ def main():
         im.thumbnail((64,64),Image.Resampling.LANCZOS)
         tile=Image.new('RGBA',(64,64));tile.alpha_composite(im,((64-im.width)//2,(64-im.height)//2));im=tile
         out=io.BytesIO();im.save(out,format='PNG');entries[f'skin/icon/{blade}/{row}.png']=out.getvalue()
+    add_live_panel(entries)
+    add_startup(entries,root)
+    add_disc_reading(entries)
     if args.audio:
         sounds={'menu-open':'blades-menu-open','menu-close':'dash_2ndLevelClose',
             'marketplace-live':'blades-switch-marketplace-to-live',

@@ -1,0 +1,63 @@
+{
+  "version": "0.18.0",
+  "target": "Xbox 360 game DVDs; manual launch only",
+  "autoplay": false,
+  "tray_poll_hz": 10,
+  "metadata_worker_hardware_thread": 4,
+  "physical_hardware_validation": "pending user console test",
+  "xex": {
+    "sha256": "733b5c7de049a503ab7bed221de229895f9c98f79e6498346db44df0513ed628",
+    "container_version": "0.0.18.0",
+    "entry_point": "0x820c5c58",
+    "system_flags": "0x21",
+    "no_forced_reboot": true,
+    "verified_pages": 19,
+    "xam_imports": 70,
+    "kernel_imports": 120,
+    "structural_and_digest_validation": "passed",
+    "verifier_mutations": "passed"
+  },
+  "artwork": {
+    "entries": 234,
+    "unchanged_previous_entries": 218,
+    "new_indicator_frames": 16,
+    "payload_sha256": "c6470ec2ab422e1f5f2984bd244a79173269fd40fa157714be98af8dd183c55c",
+    "zip_integrity": "passed"
+  },
+  "validation": {
+    "desktop_suites_passed": 13,
+    "desktop_gpu_comparisons": 221,
+    "worst_rgb_channel_error": 4,
+    "worst_rgb_mean_error": 0.478396,
+    "asan_ubsan_disc": "passed including per-byte corrupted XEX fixtures and boot-inserted-disc state",
+    "asan_ubsan_dashboard": "passed",
+    "desktop_real_encrypted_xex": {
+      "source_sha256": "8ac65275d67fe8f5447276bfc606f796a76a1c20f68b097bc126dfeed6618f4b",
+      "title_id": "FFFE07D1",
+      "recovered_title": "Xbox 360 Dashboard",
+      "codec": "independent OpenSSL/libmspack desktop test; native console codec unverified"
+    }
+  },
+  "walkthrough": {
+    "file": "Blades-v0.18-walkthrough.mp4",
+    "duration_seconds": 118,
+    "resolution": [
+      1280,
+      720
+    ],
+    "fps": 30,
+    "audio": "AAC 48 kHz stereo",
+    "full_decode": "passed",
+    "source": "fresh desktop GPU playback; disc hardware simulated; visible caption",
+    "simulated_title": "Halo 3",
+    "manual_launch_request_seconds": 99,
+    "y_eject_seconds": 100,
+    "physical_button_close_seconds": 103,
+    "physical_button_eject_seconds": 112
+  },
+  "artifact_sha256": {
+    "Blades/default.xex": "733b5c7de049a503ab7bed221de229895f9c98f79e6498346db44df0513ed628",
+    "Blades-artwork-pack.zip": "8df6673fb9475fda58481bc6835ab16ea3f0489edd6ff635aba9e0969836b45b",
+    "Blades-v0.18-walkthrough.mp4": "161cf854dd98c3a27ec465c25b206f7dfa97e1933fba3fe8c3265d8579a27724"
+  }
+}
