@@ -1,4 +1,4 @@
-# Local DashX360 skin (Blades 0.7.0)
+# Local DashX360 skin (Blades 0.8.0)
 
 The optional skin imports the separated blade artwork, runners, header/footer
 masks, tray masks and menu icons from the repository supplied by the user:
@@ -46,7 +46,7 @@ The shared archive is optional. Missing images use embedded fallbacks.
 Copy both files to the console:
 
 ```text
-Hdd1:\Blades\default.xex           # version 0.7.0
+Hdd1:\Blades\default.xex           # version 0.8.0
 Hdd1:\Blades\Assets\blades.xzp    # premade pack download
 ```
 
@@ -85,12 +85,10 @@ still need physical-console testing.
 
 ## What remains approximate
 
-Menu text uses Open Sans Regular. No TTF/OTF/WOFF font is bundled in the
-inspected DashX360 tree. The newly supplied `Segoe Xbox Symbol` font (version
-1.05 build 147) has 413 private-use characters and no printable Latin letters;
-it is an icon font and cannot replace the dashboard text atlas. It has not
-been embedded or used. The earlier font upload that the user withdrew was
-ignored.
+Version 0.8.0 uses a glyph atlas recovered from the user's Convection font
+resources when the matching pack is present. The XEX retains Open Sans as a
+fallback. See [CONVECTION-FONT.md](CONVECTION-FONT.md) for verified source and
+loading details. Segoe Xbox Symbol was not used as a menu font.
 
 The background now reuses DashX360's animated implementation; see
 [ANIMATED-BACKGROUND.md](ANIMATED-BACKGROUND.md). Content layout, gamer-card
@@ -101,3 +99,5 @@ background, sound and layout matching remain outstanding.
 Version 0.6.0 preserves icon canvas padding and aspect ratios, reduces frame opacity, and corrects card/menu/tray/footer anchors. See [MENU-ALIGNMENT.md](MENU-ALIGNMENT.md) for the comparison. Use the matching XEX and premade artwork pack together.
 
 Version 0.7.0 retints the frame/tray art to DashX360's blade palette for the continuous background animation. BSK2 geometry and the 195-entry resource set remain identical. No background video file is required.
+
+The 0.8 pack has 198 entries: all previous 195 resources unchanged, plus font atlas, metrics and notice. Font containers and raw TTF files are not distributed.

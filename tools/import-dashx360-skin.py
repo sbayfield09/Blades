@@ -4,7 +4,7 @@ Requires Pillow. Optionally merges a local shrdres.xzp to preserve stock logos.
 """
 import argparse, io, struct
 from pathlib import Path
-from PIL import Image, ImageChops, ImageFilter
+from PIL import Image, ImageChops, ImageFilter, ImageDraw, ImageFont
 W,H=1280,720
 STATES=['marketplace','xbox live','games','media','system']
 PREFIX=['Marketplace','XboxLive','Games','Media','System']
@@ -46,6 +46,7 @@ def main():
     ap=argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--source',required=True,type=Path,help='local DashX360 checkout')
     ap.add_argument('--shared',type=Path,help='optional user-supplied retail shrdres.xzp')
+    ap.add_argument('--font',type=Path,help='optional decoded user-supplied Convection TTF')
     ap.add_argument('--output',required=True,type=Path,help='local Assets/blades.xzp destination')
     args=ap.parse_args();root=args.source;art=root/'Assets/Blades'
     entries=unpack_shared(args.shared) if args.shared else {}
@@ -110,6 +111,24 @@ def main():
                 left=max(0,min(W-1,left));right=max(left+1,min(W,right))
                 manifest.extend(struct.pack('>2H',left,right))
     entries['skin/layout.bin']=manifest
+    if args.font:
+        font=ImageFont.truetype(str(args.font),48)
+        alpha=Image.new('L',(1024,384));advances=[]
+        for code in range(32,127):
+            tile=Image.new('L',(64,64));draw=ImageDraw.Draw(tile)
+            bounds=font.getbbox(chr(code),anchor='ls')
+            if bounds[2]>bounds[0] and (bounds[0]+2<0 or bounds[1]+43<0 or bounds[2]+2>64 or bounds[3]+43>64):
+                raise ValueError(f'font glyph exceeds its atlas cell: {code}')
+            draw.text((2,43),chr(code),font=font,anchor='ls',fill=255)
+            n=code-32;alpha.paste(tile,((n%16)*64,(n//16)*64))
+            advance=round(font.getlength(chr(code))*64)
+            if not 0<advance<=64*64:raise ValueError('invalid font advance')
+            advances.append(advance)
+        atlas=Image.new('RGBA',alpha.size,(255,255,255,0));atlas.putalpha(alpha)
+        out=io.BytesIO();atlas.save(out,format='PNG')
+        entries['font/atlas.png']=out.getvalue()
+        entries['font/metrics.bin']=struct.pack('>4s6H95H',b'BFN1',48,64,32,95,16,2,*advances)
+        entries['font/NOTICE.txt']=b'Glyph coverage from the user-supplied Convection / Xbox TC font resources. Font rights remain with Microsoft and the respective rights holders. No raw TTF or system font container is included.\n'
     # Additional menu icons that were absent from shrdres.xzp.
     icon_paths={
         (0,0):'marketplace/game store.png',(0,1):'marketplace/video store.png',(0,2):'marketplace/account management.png',
