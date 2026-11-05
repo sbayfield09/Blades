@@ -1,4 +1,4 @@
-Blades animated background attribution
+Blades DashX360 background and transition-audio attribution
 
 Motion and lighting adapted from BladeAmbientTexture.cs; blade tint values
 from BladeCenterHost.cs in the user-supplied DashX360 project.
@@ -20,3 +20,11 @@ This notice records the upstream attribution and source. It does not assign
 a new licence to upstream code or third-party assets. Xbox/Microsoft and
 other rights holders retain ownership of their respective material. The
 standalone application is independent and unaffiliated with Microsoft/Xbox.
+
+Transition recordings in the separate artwork/audio pack come from
+Assets/Audio/Sounds in the same pinned repository revision. Used files:
+blades-switch-marketplace-to-live.wav, blades-switch-live-to-games.wav,
+blades-switch-games-to-media.wav, blades-switch-media-to-system.wav,
+blades-menu-open.wav and dash_2ndLevelClose.wav. Xbox/Microsoft and the
+respective rights holders retain ownership of these sounds. Recordings are
+converted to PCM16 stereo at 48 kHz; the XEX embeds none of these recordings.

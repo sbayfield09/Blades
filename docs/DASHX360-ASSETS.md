@@ -1,4 +1,4 @@
-# Local DashX360 skin (Blades 0.9.0)
+# Local DashX360 skin (Blades 0.10.0)
 
 The optional skin imports the separated blade artwork, runners, header/footer
 masks, tray masks and menu icons from the repository supplied by the user:
@@ -46,7 +46,7 @@ The shared archive is optional. Missing images use embedded fallbacks.
 Copy both files to the console:
 
 ```text
-Hdd1:\Blades\default.xex           # version 0.9.0
+Hdd1:\Blades\default.xex           # version 0.10.0
 Hdd1:\Blades\Assets\blades.xzp    # premade pack download
 ```
 
@@ -58,8 +58,7 @@ be opened. An explicit `BLADES_RESOURCE_PACK` overrides both on the desktop.
 The public XEX embeds no upstream media. At the user's request, a separate
 premade artwork ZIP is provided alongside it, including source attribution and
 installation instructions. This ZIP contains the converted blade artwork and
-shared images described here; it includes no dashboard firmware, raw font containers or sound
-recordings. The conversion script reads a local checkout and does not download
+shared images described here; it includes no dashboard firmware, raw font containers. The conversion script reads a local checkout and does not download
 or publish artwork itself. The upstream repository has no root formal licence,
 and its README explicitly retains third-party ownership of original Xbox
 assets. Ownership is unchanged by this conversion.
@@ -85,15 +84,14 @@ still need physical-console testing.
 
 ## What remains approximate
 
-Version 0.9.0 uses a glyph atlas recovered from the user's Convection font
+Version 0.8.0 introduced a glyph atlas recovered from the user's Convection font
 resources when the matching pack is present. The XEX retains Open Sans as a
 fallback. See [CONVECTION-FONT.md](CONVECTION-FONT.md) for verified source and
 loading details. Segoe Xbox Symbol was not used as a menu font.
 
 The background now reuses DashX360's animated implementation; see
 [ANIMATED-BACKGROUND.md](ANIMATED-BACKGROUND.md). Content layout, gamer-card
-data and navigation timing retain their existing limitations. Upstream WAV sounds were located but are not
-used by this version; navigation still uses synthesised ticks. Exact font,
+data and navigation timing retain their existing limitations. Version 0.10 imports six transition WAVs; short focus/select/dialog ticks remain synthesised. Exact font,
 background, sound and layout matching remain outstanding.
 
 Version 0.6.0 preserves icon canvas padding and aspect ratios, reduces frame opacity, and corrects card/menu/tray/footer anchors. See [MENU-ALIGNMENT.md](MENU-ALIGNMENT.md) for the comparison. Use the matching XEX and premade artwork pack together.
@@ -103,3 +101,5 @@ Version 0.7.0 retints the frame/tray art to DashX360's blade palette for the con
 The 0.9 pack has 206 entries: all previous 198 resources unchanged, plus eight enabled/disabled ABXY prompt sprites. The earlier 0.8 pack added the font atlas, metrics and notice to the original 195 resources. Font containers and raw TTF files are not distributed.
 
 Version 0.9.0 gives the button letters a compact, heavier treatment, centres their visible ink and softens disabled prompts. See [BUTTON-PROMPTS.md](BUTTON-PROMPTS.md).
+
+Version 0.10.0 adds six complete stereo transition recordings and an audio notice, bringing the pack to 213 entries; all previous 206 entries are unchanged. See [TRANSITION-AUDIO.md](TRANSITION-AUDIO.md) for reference matching and playback details. To rebuild with sounds, add `--audio dashx360/Assets/Audio/Sounds` to the conversion command; this optional step requires FFmpeg. The premade ZIP already contains the converted sounds.

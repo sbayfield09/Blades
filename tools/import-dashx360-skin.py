@@ -2,7 +2,7 @@
 """Prepare user-supplied DashX360 art locally. No upstream media is bundled.
 Requires Pillow. Optionally merges a local shrdres.xzp to preserve stock logos.
 """
-import argparse, io, struct
+import argparse, io, struct, subprocess, wave
 from pathlib import Path
 from PIL import Image, ImageChops, ImageFilter, ImageDraw, ImageFont
 W,H=1280,720
@@ -47,6 +47,7 @@ def main():
     ap.add_argument('--source',required=True,type=Path,help='local DashX360 checkout')
     ap.add_argument('--shared',type=Path,help='optional user-supplied retail shrdres.xzp')
     ap.add_argument('--font',type=Path,help='optional decoded user-supplied Convection TTF')
+    ap.add_argument('--audio',type=Path,help='optional DashX360 Audio/Sounds directory; requires ffmpeg')
     ap.add_argument('--output',required=True,type=Path,help='local Assets/blades.xzp destination')
     args=ap.parse_args();root=args.source;art=root/'Assets/Blades'
     entries=unpack_shared(args.shared) if args.shared else {}
@@ -166,6 +167,21 @@ def main():
         im.thumbnail((64,64),Image.Resampling.LANCZOS)
         tile=Image.new('RGBA',(64,64));tile.alpha_composite(im,((64-im.width)//2,(64-im.height)//2));im=tile
         out=io.BytesIO();im.save(out,format='PNG');entries[f'skin/icon/{blade}/{row}.png']=out.getvalue()
+    if args.audio:
+        sounds={'menu-open':'blades-menu-open','menu-close':'dash_2ndLevelClose',
+            'marketplace-live':'blades-switch-marketplace-to-live',
+            'live-games':'blades-switch-live-to-games','games-media':'blades-switch-games-to-media',
+            'media-system':'blades-switch-media-to-system'}
+        for key,source in sounds.items():
+            path=args.audio/(source+'.wav')
+            pcm=subprocess.run(['ffmpeg','-v','error','-i',str(path),'-ar','48000','-ac','2',
+                '-c:a','pcm_s16le','-f','s16le','pipe:1'],check=True,stdout=subprocess.PIPE).stdout
+            if not pcm or len(pcm)%4 or len(pcm)>48000*2*4:raise ValueError('invalid audio duration: '+str(path))
+            out=io.BytesIO()
+            with wave.open(out,'wb') as wav:
+                wav.setnchannels(2);wav.setsampwidth(2);wav.setframerate(48000);wav.writeframes(pcm)
+            entries['audio/'+key+'.wav']=out.getvalue()
+        entries['audio/NOTICE.txt']=b'Transition recordings from the user-supplied ZivvoZ/dashx360 repository, revision 0c8adb2cef4ad7dff2bf889351efa1f1c244aef2. Original project: zivvoz / DashX360. Xbox audio rights remain with Microsoft and respective rights holders. Converted only to PCM16 stereo at 48 kHz.\n'
     table=bytearray();payload=bytearray()
     for name,data in sorted(entries.items()):
         raw=name.encode('utf-16-be');chars=len(raw)//2
