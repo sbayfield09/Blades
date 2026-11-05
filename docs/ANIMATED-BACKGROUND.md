@@ -58,3 +58,5 @@ included in `licenses/DASHX360-NOTICE.txt` beside the executable. The upstream
 project is itself a recreation; this release does not establish an identical
 match to Microsoft's original dashboard. Menu font and demo services retain
 their existing limitations.
+
+Version 0.14 caches horizontally expanded source rows and filters vertically with SIMD (Xbox VMX / desktop SSE2). The source equations, 384x216 grid and sampling clock remain the same; separable-rounding changes are at most one RGB level in the compared frames. See [BACKGROUND-PERFORMANCE.md](BACKGROUND-PERFORMANCE.md).

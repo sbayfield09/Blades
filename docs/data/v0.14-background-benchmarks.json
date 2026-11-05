@@ -1,0 +1,64 @@
+{
+  "environment": "Linux desktop CPU, not Xbox FPS",
+  "frames_per_case": 180,
+  "runs": {
+    "before": [
+      {
+        "background held": 2.53,
+        "background 30Hz": 3.032,
+        "background 60Hz repeats": 2.782,
+        "whole dashboard 30Hz": 7.629
+      },
+      {
+        "background held": 2.218,
+        "background 30Hz": 2.734,
+        "background 60Hz repeats": 2.396,
+        "whole dashboard 30Hz": 7.241
+      },
+      {
+        "background held": 2.495,
+        "background 30Hz": 3.04,
+        "background 60Hz repeats": 2.74,
+        "whole dashboard 30Hz": 7.426
+      }
+    ],
+    "after": [
+      {
+        "background held": 0.278,
+        "background 30Hz": 1.658,
+        "background 60Hz repeats": 0.94,
+        "whole dashboard 30Hz": 6.042
+      },
+      {
+        "background held": 0.266,
+        "background 30Hz": 1.648,
+        "background 60Hz repeats": 0.928,
+        "whole dashboard 30Hz": 5.96
+      },
+      {
+        "background held": 0.268,
+        "background 30Hz": 1.62,
+        "background 60Hz repeats": 0.955,
+        "whole dashboard 30Hz": 6.018
+      }
+    ]
+  },
+  "median_ms_per_frame": {
+    "background held": {
+      "before": 2.495,
+      "after": 0.268
+    },
+    "background 30Hz": {
+      "before": 3.032,
+      "after": 1.648
+    },
+    "background 60Hz repeats": {
+      "before": 2.74,
+      "after": 0.94
+    },
+    "whole dashboard 30Hz": {
+      "before": 7.426,
+      "after": 6.018
+    }
+  }
+}
