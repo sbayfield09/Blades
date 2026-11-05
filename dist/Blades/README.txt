@@ -1,4 +1,4 @@
-Blades 0.8.0 - five-blade 5766-style test build
+Blades 0.9.0 - five-blade 5766-style test build
 
 Compilation and structural XEX validation passed. Console execution and
 Peer Pressure/kernel 17559 compatibility have not been verified.
@@ -17,8 +17,8 @@ controller reconnect, selection sounds, Guide open/close and confirmed exit.
 Check that the background visibly deforms while idle and continues moving
 through blade and submenu changes. This version reuses DashX360's animation
 implementation; its source/attribution is in licenses\DASHX360-NOTICE.txt.
-The matching 0.8 artwork pack also includes glyphs recovered from the supplied
-Convection font. Check text appearance, spacing and button-label alignment.
+The matching 0.9 artwork pack also includes glyphs recovered from the supplied
+Convection font. Check text appearance, spacing, button-letter centring and softer disabled prompts.
 No console system-font replacement or flash modification is needed.
 
 Read default.log beside default.xex after a failure. Provide the log and a
@@ -35,5 +35,5 @@ extract it here so Assets\blades.xzp is present. No conversion is needed.
 See docs/DASHX360-ASSETS.md. Credit: zivvoz / DashX360, inspired by Microsoft Xbox.
 The XEX alone retains embedded artwork. A matching retail 5766 shrdres.xzp
 is also supported; the converter can merge it into the local skin pack.
-Check default.log for a loaded local XUIZ archive message (195 entries with
-both sources). Fonts, backgrounds, layout effects and audio remain approximate.
+Check default.log for a loaded local XUIZ archive message (206 entries with
+the matching premade pack). Fonts, backgrounds, layout effects and audio remain approximate.

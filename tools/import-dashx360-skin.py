@@ -129,6 +129,28 @@ def main():
         entries['font/atlas.png']=out.getvalue()
         entries['font/metrics.bin']=struct.pack('>4s6H95H',b'BFN1',48,64,32,95,16,2,*advances)
         entries['font/NOTICE.txt']=b'Glyph coverage from the user-supplied Convection / Xbox TC font resources. Font rights remain with Microsoft and the respective rights holders. No raw TTF or system font container is included.\n'
+        # Button letters have their own compact, heavier treatment. Rasterize
+        # above target resolution and centre the actual ink, not its advance.
+        button_font=ImageFont.truetype(str(args.font),88)
+        for letter in 'ABXY':
+            if letter+'-Button.png' not in entries or 'disabled-Button.png' not in entries:continue
+            ink=Image.new('L',(160,160))
+            ImageDraw.Draw(ink).text((30,20),letter,font=button_font,fill=255,stroke_width=1,stroke_fill=255)
+            bounds=ink.getbbox()
+            if not bounds:raise ValueError('missing button letter '+letter)
+            ink=ink.crop(bounds);height=72;width=round(ink.width*height/ink.height)
+            ink=ink.resize((width,height),Image.Resampling.LANCZOS)
+            mask=Image.new('L',(128,128));mask.paste(ink,((128-width)//2,(128-height)//2))
+            mask=mask.resize((32,32),Image.Resampling.LANCZOS)
+            for disabled in (False,True):
+                source='disabled-Button.png' if disabled else letter+'-Button.png'
+                sphere=Image.open(io.BytesIO(entries[source])).convert('RGBA')
+                if sphere.size!=(32,32):raise ValueError('unexpected button texture size')
+                glyph=Image.new('RGBA',(32,32),(80,96,72,0) if disabled else (16,28,24,0));glyph.putalpha(mask)
+                button=Image.alpha_composite(sphere,glyph)
+                if disabled:button.putalpha(button.getchannel('A').point(lambda value:round(value*0.55)))
+                out=io.BytesIO();button.save(out,format='PNG')
+                entries['prompt/'+letter+('-disabled' if disabled else '')+'.png']=out.getvalue()
     # Additional menu icons that were absent from shrdres.xzp.
     icon_paths={
         (0,0):'marketplace/game store.png',(0,1):'marketplace/video store.png',(0,2):'marketplace/account management.png',

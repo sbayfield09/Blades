@@ -1,11 +1,11 @@
-# Blades 0.8 navigation walkthrough
+# Blades 0.9 navigation walkthrough
 
-[Watch or download the MP4](../dist/Blades-v0.8-walkthrough.mp4)
+[Watch or download the MP4](../dist/Blades-v0.9-walkthrough.mp4)
 
 63 seconds, 1280x720 at 30 fps, with the application's navigation sounds.
 This is a scripted desktop capture of the shared renderer and navigation code,
-using the published v0.8 premade artwork pack and glyphs recovered from the
-user's Convection font resources. The opening idle view also shows the reused
+using the published v0.9 premade artwork pack and glyphs recovered from the
+user's Convection font resources, including the revised ABXY prompt sprites. The opening idle view also shows the reused
 DashX360 background animation in motion.
 
 - 00:00 Idle Games view and moving background

@@ -1,4 +1,4 @@
-# Local DashX360 skin (Blades 0.8.0)
+# Local DashX360 skin (Blades 0.9.0)
 
 The optional skin imports the separated blade artwork, runners, header/footer
 masks, tray masks and menu icons from the repository supplied by the user:
@@ -46,7 +46,7 @@ The shared archive is optional. Missing images use embedded fallbacks.
 Copy both files to the console:
 
 ```text
-Hdd1:\Blades\default.xex           # version 0.8.0
+Hdd1:\Blades\default.xex           # version 0.9.0
 Hdd1:\Blades\Assets\blades.xzp    # premade pack download
 ```
 
@@ -58,7 +58,7 @@ be opened. An explicit `BLADES_RESOURCE_PACK` overrides both on the desktop.
 The public XEX embeds no upstream media. At the user's request, a separate
 premade artwork ZIP is provided alongside it, including source attribution and
 installation instructions. This ZIP contains the converted blade artwork and
-shared images described here; it includes no dashboard firmware, font or sound
+shared images described here; it includes no dashboard firmware, raw font containers or sound
 recordings. The conversion script reads a local checkout and does not download
 or publish artwork itself. The upstream repository has no root formal licence,
 and its README explicitly retains third-party ownership of original Xbox
@@ -85,7 +85,7 @@ still need physical-console testing.
 
 ## What remains approximate
 
-Version 0.8.0 uses a glyph atlas recovered from the user's Convection font
+Version 0.9.0 uses a glyph atlas recovered from the user's Convection font
 resources when the matching pack is present. The XEX retains Open Sans as a
 fallback. See [CONVECTION-FONT.md](CONVECTION-FONT.md) for verified source and
 loading details. Segoe Xbox Symbol was not used as a menu font.
@@ -100,4 +100,6 @@ Version 0.6.0 preserves icon canvas padding and aspect ratios, reduces frame opa
 
 Version 0.7.0 retints the frame/tray art to DashX360's blade palette for the continuous background animation. BSK2 geometry and the 195-entry resource set remain identical. No background video file is required.
 
-The 0.8 pack has 198 entries: all previous 195 resources unchanged, plus font atlas, metrics and notice. Font containers and raw TTF files are not distributed.
+The 0.9 pack has 206 entries: all previous 198 resources unchanged, plus eight enabled/disabled ABXY prompt sprites. The earlier 0.8 pack added the font atlas, metrics and notice to the original 195 resources. Font containers and raw TTF files are not distributed.
+
+Version 0.9.0 gives the button letters a compact, heavier treatment, centres their visible ink and softens disabled prompts. See [BUTTON-PROMPTS.md](BUTTON-PROMPTS.md).
