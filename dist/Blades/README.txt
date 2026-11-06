@@ -1,25 +1,30 @@
-Blades 0.35.0 - top-edge alignment and FTP spacing/animation hardware test build
+Blades 0.36.0 - Live shadows, reference colours and branding hardware test build
 
-Extract Blades-v0.35-USB.zip onto USB and launch Blades/default.xex. The ZIP
+Extract Blades-v0.36-USB.zip onto USB and launch Blades/default.xex. The ZIP
 includes the complete Assets folder and notices. It excludes local library
 paths, FTP settings/login details and logs, preserving those on an update.
 Separate matching XEX/artwork/video downloads remain available.
 
-Version 0.35 visual corrections:
-- The highlighted row's top and mirrored upper shadow now meet the divider
-  above it, two pixels above the old row origin. The fill extends downward
-  to the same existing lower edge. Text/icon positions are unchanged.
-- Animated cursor coordinates round to pixels instead of truncating, avoiding
-  a permanent one-pixel error when the highlight approaches its target.
-- FTP uses that animated cursor for its highlight and both shadows instead of
-  snapping directly to the selected button index. Fixed grooves stay covered
-  while the focus passes across them.
-- FTP status/IP/username/password/device groups use the same spacing: 86px
-  for single-line groups, 36px label-to-value and 50px value-to-next-label.
-  All values share the same font size. Long login values wrap and advance
-  following groups, using a common smaller value size to stay above the footer.
-- Matching upper/lower shadow profiles, first-row guard, top-divider positions,
-  curved profile-card shadow and native actions/settings are retained.
+Version 0.36 Xbox Live corrections:
+- Xbox Live now uses the same rounded upward/downward side edges as the other
+  blades, replacing its old flat horizontal-shadow override.
+- The downward line ends at the bottom button divider, above the logo tile.
+  It no longer continues behind that tile toward the tray.
+- With Chat and IM selected, the lower group has zero height: show the full
+  bottom divider only, with no downward curve. Its upper group remains.
+- Keep that bottom divider full-width for every Live selection. Preserve the
+  raised logo tile's own face/bevel and the existing info-text gutter.
+- Retains 0.35 top-divider alignment, nearest-pixel cursor positioning, equal
+  FTP status spacing and smooth FTP button-selection animation.
+
+Colour/branding refinements:
+- Reference-matched tint chroma for all five blades, with matching retinted
+  cap/tray masks. The supplied animation geometry/clock/lighting are retained.
+- Gamerscore G icon main-ink bottom aligns with the adjacent word, using the
+  original PNG/size. It is raised six pixels; no account data is changed.
+- Xbox360 branding now has a soft drop shadow derived from its original alpha.
+  The original logo is unchanged; the shadow is a cached artwork asset.
+- The matching premade pack has 235 entries and is included in this USB ZIP.
 
 Profile fixes:
 - Signed-out profile count reads public profile-package headers on available
@@ -131,7 +136,7 @@ metadata errors, content-mount results and SDK launch failures.
 
 21 host suites and 290 desktop GPU comparisons pass, alongside profile
 memory checks and native XEX validation. Library storage and real title handoff
-still need physical-console testing. This release includes a fresh 78-second
+still need physical-console testing. This release includes a fresh 84-second
 720p30 desktop GPU walkthrough with simulated profiles, achievements, FTP,
 storage and native Guide/keyboard requests. It demonstrates the actual shared
 UI but cannot prove console authentication, networking, keyboard or audio-driver

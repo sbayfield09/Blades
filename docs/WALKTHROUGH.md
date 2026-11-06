@@ -1,8 +1,8 @@
-# Blades 0.35 top-edge alignment and FTP spacing/motion walkthrough
+# Blades 0.36 Xbox Live side edges walkthrough
 
-[Watch/download the MP4](../dist/Blades-v0.35-walkthrough.mp4)
+[Watch/download the MP4](../dist/Blades-v0.36-walkthrough.mp4)
 
-Fresh 78-second 1280×720 desktop GPU capture at 30 fps with 48 kHz stereo AAC
+Fresh 84-second 1280×720 desktop GPU capture at 30 fps with 48 kHz stereo AAC
 and the matching artwork pack. Its label identifies profiles, achievements,
 FTP, storage and native Guide/keyboard requests as simulations. The synthetic
 profile picture and login details are preview fixtures. Native Guide/keyboard
@@ -29,7 +29,7 @@ and on/off persistence are checked with the actual C FTP server in loopback
 integration tests. See PROFILE-INTEGRATION.md, ACHIEVEMENTS.md and FTP.md.
 Artwork/audio credit: zivvoz / DashX360 and respective rights holders.
 
-The capture uses the final 0.35 renderer: upper-bar shading is inside the
+The capture uses the final 0.36 renderer: upper-bar shading is inside the
 header and fades upward from its bottom edge; footer shading fades downward
 from its upper edge. Unselected root/submenu rows retain their thin divider grooves.
 
@@ -43,6 +43,16 @@ and lower System selections at 00:35–00:39, FTP controls at 00:40–00:55 and
 Played Games at 01:01. Lower selections have matching upward/downward edges;
 the first row has only its existing lower shadow.
 
-The0.35 capture shows FTP focus sliding between the toggle, username and
-password controls at00:42,00:47 and00:51–00:52, with equally spaced status
+The 0.35 capture shows FTP focus sliding between the toggle, username and
+password controls at 00:42,00:47 and 00:51–00:52, with equally spaced status
 fields. Menu fill/upper-shadow edges meet the dividers above their buttons.
+
+Version 0.36 shows Live Messages at 01:12–01:14, Friends at 01:14–01:15 and
+Chat and IM at 01:15–01:18. The downward line ends at the bottom divider;
+Chat has only that divider below it, with its upper group still visible.
+
+The final0.36 capture includes the colour/GScore/logo refinements. Marketplace
+is shown at 01:19–01:24 so all five updated backgrounds appear. The signed-in
+card at 00:06 shows the corrected GScore baseline; non-Live roots show the
+original 360 logo with its cached shadow. Live Messages/Friends/Chat retain
+the new bounded edges and last-row divider-only behavior.

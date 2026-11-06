@@ -1,54 +1,36 @@
-# Top-edge alignment and FTP motion — 0.35
+# Xbox Live upper/lower group edges — 0.36
 
-The original dashboard reference at 04:37 (Played Games selected) shows two
-closing group edges: the area above the selected row curves upward at the
-right, while the area below curves downward. At 04:28–04:29 (first-row
-Achievements) there is no upper group. These frames, Media at 05:09 and the
-supplied System/Xbox Live stills were checked for the first-button divider.
-The top divider sits just above the first row; it was missing in 0.33.
+Xbox Live had a root-only flat-shadow override. It generated only a short
+horizontal underside, so the vertical right-hand lines were absent even though
+other blades used the rounded group geometry. Version 0.36 removes that
+exception and uses the existing matching rounded upper/lower shadow routine.
 
-Version 0.34 reflects the existing downward shadow routine vertically to
-render the upper one. The two share the same opacity, penumbra, contact fade,
-right-hand contour and bevel. The existing flat Xbox Live root style is
-reflected as flat too; rounded menu styles retain matching rounded corners.
-The upper group is clipped between the first visible row and the top of the
-selection. It is absent on the first row, including a scrolled library whose
-selected row is the first visible entry. During movement its height follows
-the actual animated highlight position.
+The downward Live group ends at the final button divider: y395 in the current
+three-button layout. The endpoint is calculated from the visible list, not the
+tray position or promotional tile. The divider remains full-width and visible.
+When Chat and IM is selected, its lower shadow starts at that same endpoint,
+so there is no downward curve at all—only the divider. Its upper closing group
+remains, and the first row still has no upper group.
 
-![First and lower selected rows using the final renderer, desktop simulations](images/upper-shadow-comparison-v0.35.png)
+![Messages, Friends and Chat selections, final desktop simulations](images/live-selections-v0.36.png)
 
-A two-pixel dark/one-pixel light divider is restored four pixels above the
-first button. Roots, ordinary submenus, FTP controls and nonempty library/File
-Manager lists use the same placement. Grooves inside the upper/lower groups
-stop before their right-hand side shadows; the contacts replace the grooves
-immediately beside the selected row, avoiding hard lines through the shadows.
+The raised Xbox Live tile previously covered the continuation of a shadow
+painted toward the tray. The group now stops before that tile, avoiding this
+occlusion while retaining the tile's original face, bevel and outer shadow.
+Menu bounds include the whole button column; no GPU scissor expansion or
+painting across the logo is needed. Reference checks include the supplied
+Xbox Live still and the original recording around2184–2190 seconds, alongside
+the explicit requested bottom-divider behavior.
 
-![Matched upper/lower edges in Computers, simulated FTP values](images/ftp-computers-v0.35.png)
+The 0.35 top alignment, rounded profile-card shadow, fonts, field layout and
+cursor motion are retained. This includes FTP's equal86px field pitch and
+interpolated selection. The shared shadow profiles are retained. The matching235-entry pack also
+refines blade tints and adds a cached shadow for the 360 logo; see
+COLOUR-AND-BRANDING.md.
 
-The 0.33 selected fill/lower-shadow join, curved profile-card shadow, other
-menu spacing, fonts/tint and original artwork payload are retained. Header/
-footer cap shading is unchanged. The upper implementation reflects solid spans
-synchronously into the existing foreground command cache, without new image
-allocations or changes to the GPU shaders.
-
-Tests compare every upper-shadow pixel with the reflected lower output for
-both existing styles, check first-row absence and upper-group clipping, and
-verify the top divider on all five roots and FTP. Existing row/card checks
-remain. CPU/GPU comparisons add six animated highlight positions. Reference
-camera exposure and console display appearance are separate from pixel parity;
-the desktop simulation is not a console capture.
-
-Version 0.35 moves the selected fill's top and the reflected upper-shadow
-anchor up two pixels onto the preceding divider location. It extends the fill
-height by two pixels so the lower edge remains at its 0.33/0.34 position. The
-first row now meets the light edge of the top divider without a blank gap.
-Labels, icons, row pitch and both shadow opacity profiles remain unchanged.
-Animated row positions use nearest-pixel rounding, so asymptotic interpolation
-cannot leave them a pixel short of the actual divider.
-
-FTP now renders the shared interpolated highlight rather than the target child
-index. Its upper/lower contacts and groove coverage follow that position too;
-a fixed divider is not painted through the moving sheen. The status column
-uses equal spacing and common value-font size, with wrapped login text moving
-following fields by complete extra lines. No FTP protocol/settings changes.
+Actual-pack pixel tests cover Messages/Friends downward rails, Friends/Chat
+upward rails, the full-width bottom divider and the clear area immediately
+beneath it, including the last selection. A logo-face sample must remain
+unchanged. The saved0.35 renderer fails the missing-side-edge check. Existing
+row/card/mirror/FTP spacing and motion checks remain, with CPU/GPU parity and
+sanitizers. Desktop captures do not demonstrate console display appearance.

@@ -62,3 +62,8 @@ their existing limitations.
 Version 0.14 caches horizontally expanded source rows and filters vertically with SIMD (Xbox VMX / desktop SSE2). The source equations, 384x216 grid and sampling clock remain the same; separable-rounding changes are at most one RGB level in the compared frames. See [BACKGROUND-PERFORMANCE.md](BACKGROUND-PERFORMANCE.md).
 
 Version 0.15 evaluates the supplied equations in a 384x216 pixel shader on the Xbox, then performs the 720p interpolation on the GPU. The palette and 30 Hz clock are retained; the scalar/SIMD renderer remains the desktop software reference. See [GPU-RENDERER.md](GPU-RENDERER.md).
+
+Version 0.36 refines the five default-theme tint chromas against supplied
+reference images/video, retaining the upstream motion and lighting equations.
+The 25 derived cap/tray masks are retinted to match, with alpha/layout unchanged.
+See COLOUR-AND-BRANDING.md for sources, RGB values and camera/phase scope.

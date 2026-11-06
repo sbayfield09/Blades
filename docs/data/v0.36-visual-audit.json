@@ -1,0 +1,575 @@
+{
+  "release": "0.36.0",
+  "recorded_utc": "2026-11-06T20:08:21.518028+00:00",
+  "changes": [
+    "Restore rounded upper/lower Xbox Live menu rails",
+    "End Live lower line at final button divider; Chat has only the full divider underneath",
+    "Align GScore main ink bottom with text bottom",
+    "Fit all five blade chroma values from supplied references, retaining intensity/motion equations",
+    "Add cached alpha-derived drop shadow behind unchanged stock Xbox360 logo"
+  ],
+  "live_geometry": {
+    "menu_pitch": 53,
+    "last_divider_y": 395,
+    "final_divider_full_width": [
+      208,
+      608
+    ],
+    "lower_curve_under_chat": false,
+    "logo_tile_face_unchanged": true
+  },
+  "gamerscore": {
+    "label_y": 146,
+    "label_ink_bottom_offset": 25,
+    "icon_y": 142,
+    "icon_alpha_bottom_offset": 29,
+    "both_bottoms": 171,
+    "icon_size": [
+      32,
+      32
+    ],
+    "original_icon_bytes_unchanged": true
+  },
+  "colour_fit": {
+    "method": "reference neutral-chrome relative channel balance; match unoccluded body chroma at original renderer dominant intensity, retaining original motion/light range",
+    "palette": [
+      [
+        222,
+        128,
+        90
+      ],
+      [
+        218,
+        174,
+        69
+      ],
+      [
+        74,
+        178,
+        57
+      ],
+      [
+        63,
+        145,
+        220
+      ],
+      [
+        144,
+        110,
+        212
+      ]
+    ],
+    "target_medians": [
+      [
+        255.0,
+        162.95857988165682,
+        104.11242603550296
+      ],
+      [
+        157.0,
+        126.20569136745608,
+        48.86224489795918
+      ],
+      [
+        53.43733474352194,
+        129.0,
+        41.10028050490884
+      ],
+      [
+        52.77290448343079,
+        119.1646230271018,
+        175.0
+      ],
+      [
+        151.44230769230768,
+        121.15384615384615,
+        210.0
+      ]
+    ],
+    "final_medians": [
+      [
+        255.0,
+        163.0,
+        104.0
+      ],
+      [
+        157.0,
+        126.0,
+        49.0
+      ],
+      [
+        54.0,
+        129.0,
+        41.0
+      ],
+      [
+        53.0,
+        119.0,
+        175.0
+      ],
+      [
+        151.0,
+        121.0,
+        210.0
+      ]
+    ],
+    "max_channel_error": 0.5626652564780628,
+    "references": [
+      {
+        "blade": 0,
+        "reference": "marketplace-reference.png",
+        "roi": [
+          970,
+          100,
+          991,
+          575
+        ],
+        "reference_median": [
+          169.0,
+          108.0,
+          69.0
+        ],
+        "reference_white": [
+          221.0,
+          221.0,
+          221.0
+        ],
+        "render_white": [
+          229.0,
+          229.0,
+          229.0
+        ],
+        "gain": [
+          1.0361990950226245,
+          1.0361990950226245,
+          1.0361990950226245
+        ],
+        "normalized_target": [
+          175.11764705882354,
+          111.90950226244345,
+          71.49773755656109
+        ],
+        "render_median": [
+          255.0,
+          121.0,
+          20.0
+        ],
+        "old": [
+          222.0,
+          91.0,
+          15.0
+        ],
+        "candidate": [
+          152,
+          84,
+          54
+        ]
+      },
+      {
+        "blade": 1,
+        "reference": "5.jpg",
+        "roi": [
+          700,
+          430,
+          1000,
+          515
+        ],
+        "reference_median": [
+          196.0,
+          161.0,
+          61.0
+        ],
+        "reference_white": [
+          183.0,
+          187.0,
+          183.0
+        ],
+        "render_white": [
+          223.0,
+          223.0,
+          223.0
+        ],
+        "gain": [
+          1.2185792349726776,
+          1.1925133689839573,
+          1.2185792349726776
+        ],
+        "normalized_target": [
+          238.8415300546448,
+          191.99465240641712,
+          74.33333333333333
+        ],
+        "render_median": [
+          157.0,
+          109.0,
+          41.0
+        ],
+        "old": [
+          218.0,
+          151.0,
+          57.0
+        ],
+        "candidate": [
+          255,
+          255,
+          103
+        ]
+      },
+      {
+        "blade": 2,
+        "reference": "video-games.jpg",
+        "roi": [
+          700,
+          350,
+          1000,
+          515
+        ],
+        "reference_median": [
+          75.0,
+          186.0,
+          58.0
+        ],
+        "reference_white": [
+          183.0,
+          188.0,
+          184.0
+        ],
+        "render_white": [
+          225.0,
+          225.0,
+          225.0
+        ],
+        "gain": [
+          1.2295081967213115,
+          1.196808510638298,
+          1.2228260869565217
+        ],
+        "normalized_target": [
+          92.21311475409836,
+          222.60638297872342,
+          70.92391304347827
+        ],
+        "render_median": [
+          35.0,
+          129.0,
+          34.0
+        ],
+        "old": [
+          47.0,
+          178.0,
+          47.0
+        ],
+        "candidate": [
+          124,
+          255,
+          98
+        ]
+      },
+      {
+        "blade": 3,
+        "reference": "309.png",
+        "roi": [
+          745,
+          350,
+          1050,
+          515
+        ],
+        "reference_median": [
+          51.0,
+          119.0,
+          171.0
+        ],
+        "reference_white": [
+          180.0,
+          186.0,
+          182.0
+        ],
+        "render_white": [
+          226.0,
+          226.0,
+          226.0
+        ],
+        "gain": [
+          1.2555555555555555,
+          1.2150537634408602,
+          1.2417582417582418
+        ],
+        "normalized_target": [
+          64.03333333333333,
+          144.59139784946237,
+          212.34065934065936
+        ],
+        "render_median": [
+          32.0,
+          123.0,
+          175.0
+        ],
+        "old": [
+          37.0,
+          150.0,
+          220.0
+        ],
+        "candidate": [
+          74,
+          176,
+          255
+        ]
+      },
+      {
+        "blade": 4,
+        "reference": "7.jpg",
+        "roi": [
+          800,
+          410,
+          1100,
+          570
+        ],
+        "reference_median": [
+          150.0,
+          120.0,
+          208.0
+        ],
+        "reference_white": [
+          222.0,
+          222.0,
+          222.0
+        ],
+        "render_white": [
+          226.0,
+          226.0,
+          226.0
+        ],
+        "gain": [
+          1.018018018018018,
+          1.018018018018018,
+          1.018018018018018
+        ],
+        "normalized_target": [
+          152.7027027027027,
+          122.16216216216216,
+          211.74774774774775
+        ],
+        "render_median": [
+          151.0,
+          102.0,
+          210.0
+        ],
+        "old": [
+          144.0,
+          91.0,
+          212.0
+        ],
+        "candidate": [
+          146,
+          109,
+          214
+        ]
+      }
+    ]
+  },
+  "logo_shadow": {
+    "original_logo_unchanged": true,
+    "pack_entry": "branding/360-shadow.png",
+    "size": [
+      202,
+      130
+    ],
+    "blur_sigma_pixels": 1.5,
+    "offset": [
+      2,
+      3
+    ],
+    "opacity": 120,
+    "runtime_blur": false
+  },
+  "retained": [
+    "0.35 top-divider/highlight alignment",
+    "mirrored upper/lower group shadows",
+    "FTP equal86px field pitch and shared animated cursor",
+    "profile-card corner shadows",
+    "achievement geometry",
+    "header/footer shading",
+    "FTP protocol/persistence"
+  ],
+  "validation": {
+    "ctest_passed": 6,
+    "ctest_total": 6,
+    "suites": [
+      "resources",
+      "skin",
+      "ambient",
+      "draw-list",
+      "startup",
+      "gpu"
+    ],
+    "row_edge_checks": 20,
+    "mirror_pixel_comparisons": 256000,
+    "draw_list_command_states": 74,
+    "gpu_comparisons": 304,
+    "gpu_worst_mean": 0.494941,
+    "gpu_peak": 5,
+    "sanitizers": [
+      "resources: loaded local XUIZ archive (235 entries)",
+      "font: loaded local glyph atlas",
+      "PASS: 20 row-edge checks, selected divider covered by shadow, including rounded bevel; card fill/frame join and both curved shadow ends",
+      "PASS: upper shadow exactly mirrors lower pixels in both styles; no upper on first row, clipped upper group and top dividers on five roots/FTP",
+      "PASS: FTP equal86px value pitch/common font, interpolated cursor/cache updates and exact final row alignment",
+      "PASS: Xbox Live side rails, full bottom divider and no downward curve under Chat",
+      "PASS: actual Gamerscore icon/text ink bottoms match; cached original-logo shadow extends softly outside original silhouette",
+      "PASS: 74 command states, static pixel equivalence, cache reuse/invalidation, bounded batches and canvas guards",
+      "PASS: supplied animation samples, visible motion, shared clock, invalid times and render bounds"
+    ],
+    "xex_verification": [
+      "PASS: XEX2 PowerPC-BE, Xbox subsystem, entry 0x820dc9e0",
+      "PASS: 21 verified image pages; header/image/import digest chains valid",
+      "PASS: xam.xex: 92 import slots",
+      "PASS: xboxkrnl.exe: 122 import slots",
+      "PASS: mutation rejected: image digest mismatch at page 19"
+    ],
+    "native_pages": 21,
+    "xam_slots": 92,
+    "kernel_slots": 122,
+    "animation_goldens": "Independent double-precision samples; reproduced old goldens first"
+  },
+  "usb_zip": {
+    "members": [
+      "Blades/default.xex",
+      "Blades/README.txt",
+      "Blades/build-info.txt",
+      "Blades/SHA256SUMS",
+      "Blades/LICENSE",
+      "Blades/XSDK-LICENSE.txt",
+      "Blades/THIRD_PARTY_NOTICES.md",
+      "Blades/Config/README.txt",
+      "Blades/Assets/ARTWORK-README.txt",
+      "Blades/Assets/ARTWORK-SHA256SUMS.txt",
+      "Blades/Assets/AUDIO-NOTICE.txt",
+      "Blades/Assets/DASHX360-NOTICE.txt",
+      "Blades/Assets/FONT-LICENSE.txt",
+      "Blades/Assets/FONT-NOTICE.txt",
+      "Blades/Assets/README.txt",
+      "Blades/Assets/blades.xzp",
+      "Blades/licenses/CONVECTION-NOTICE.txt",
+      "Blades/licenses/DASHX360-NOTICE.txt",
+      "Blades/licenses/GCC-RUNTIME-EXCEPTION.txt",
+      "Blades/licenses/GPL-3.0.txt",
+      "Blades/licenses/NEWLIB.txt",
+      "Blades/licenses/STB-LICENSE.txt"
+    ],
+    "crc": "passed",
+    "xex_matches_standalone": true,
+    "artwork_matches_pack": true,
+    "personal_scan_paths_ftp_settings_credentials_and_logs_excluded": true,
+    "unversioned_alias_identical": true
+  },
+  "artwork": {
+    "entries": 235,
+    "payload_sha256": "71f676da9fffdab86ccd2b51c03c3466560d5db531d4dd230f0f3b0ee1da9d5b",
+    "previous_entries": 234,
+    "pack_changes": [
+      "Assets/blades.xzp",
+      "ARTWORK-README.txt",
+      "ARTWORK-SHA256SUMS.txt"
+    ],
+    "modified_existing_entries": [
+      "skin/0/10.png",
+      "skin/0/11.png",
+      "skin/0/7.png",
+      "skin/0/8.png",
+      "skin/0/9.png",
+      "skin/1/10.png",
+      "skin/1/11.png",
+      "skin/1/7.png",
+      "skin/1/8.png",
+      "skin/1/9.png",
+      "skin/2/10.png",
+      "skin/2/11.png",
+      "skin/2/7.png",
+      "skin/2/8.png",
+      "skin/2/9.png",
+      "skin/3/10.png",
+      "skin/3/11.png",
+      "skin/3/7.png",
+      "skin/3/8.png",
+      "skin/3/9.png",
+      "skin/4/10.png",
+      "skin/4/11.png",
+      "skin/4/7.png",
+      "skin/4/8.png",
+      "skin/4/9.png"
+    ],
+    "added": [
+      "branding/360-shadow.png"
+    ],
+    "all_other_entries_identical": true,
+    "mask_alpha_and_dimensions_unchanged": true,
+    "notices_unchanged": true
+  },
+  "video": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 1280,
+        "height": 720,
+        "r_frame_rate": "30/1"
+      },
+      {
+        "codec_name": "aac",
+        "sample_rate": "48000",
+        "channels": 2,
+        "r_frame_rate": "0/0"
+      }
+    ],
+    "format": {
+      "duration": "84.000000",
+      "size": "9110338"
+    }
+  },
+  "video_full_decode": "passed",
+  "video_scope": "Fresh final0.36 shared-renderer desktop GPU capture; profiles, achievements, FTP, storage, Guide and keyboard requests explicitly simulated. Shows all five blades and Live first/middle/last selection.",
+  "sdk_commit": "5f6dc726f65f6d171493a3628c2415c03551f27b",
+  "xex_version": "0.0.36.0",
+  "artifacts": {
+    "dist/Blades-v0.36-USB.zip": {
+      "bytes": 2483156,
+      "sha256": "72733c6bedbb5c59200f883affb33c90a643e856b2481fe25033eb5390496748"
+    },
+    "dist/Blades/default.xex": {
+      "bytes": 1187840,
+      "sha256": "fc0f317d51a65b0626dc2b0aa129088cc8e6496cb05998da70e795e1d329d4f9"
+    },
+    "dist/Blades-artwork-pack.zip": {
+      "bytes": 2041951,
+      "sha256": "e74b50cce7dc5d9b24a27bbb0e50897b598437c5fc5298598112b2050b5b2fa2"
+    },
+    "dist/Blades-v0.36-walkthrough.mp4": {
+      "bytes": 9110338,
+      "sha256": "7358749f75f60d94fd0e5279ddb8ac8e4bc7aa9d3a873a21630de65c389787f1"
+    }
+  },
+  "preview_images": {
+    "docs/images/signin-highlight-v0.36.png": "20e8f438d90c55d3763cb6180d08ad08c1a481c8e226b6a7ee10a88bd54f68f4",
+    "docs/images/profile-card-v0.36.png": "ed179bdbbfb44bf6f09f0913ad3bf440b7051a98384d34134a64fcf69b1fbcc6",
+    "docs/images/ftp-computers-v0.36.png": "4cdc4572d4aae49b4d2c553fd3374d5b187d6d64c4e7f2a5adef77b4cf8d4a9c",
+    "docs/images/live-messages-v0.36.png": "1c58449a10f2d618a9aacae47db44ec637372cf1469febe5daaefd288053e6da",
+    "docs/images/live-friends-v0.36.png": "d763dbadc803caba29c7a15a030f7740152b0ce895932fca1b86f8cdf60e9331",
+    "docs/images/live-chat-v0.36.png": "29374e2b73451e1a14c9caf5e78fd216494381da402c4b9ac8be590b1261c14e",
+    "docs/images/live-selections-v0.36.png": "d0b0b3f98c3ccb79d64fc18aae7dc58589a9d49c29c776f4336c27f3a2ba9853",
+    "docs/images/blade-colours-v0.36.png": "68da1930f2fc12a3c2649900a3394fc3e33b5e93bcfadce9039e99ca28f0476e",
+    "docs/images/logo-shadow-v0.36.png": "9172895f42738c7e91e280224c716304dbb2e55561ddebe76f69d4587a107dc7"
+  },
+  "source_sha256": {
+    "src/render/theme.c": "7cb98bb8bfc47bc889cbd7809024bdcf9106836fd8e33a466f11b9cef67fc1a5",
+    "src/render/dashboard_render.c": "fa473b8afc357ff77908709954f0eb38fbfecbaf78cd74e26006ff986fa185ed",
+    "tests/test_draw_list.c": "4665b6e97c2d70b2febff1d28868fef8a6070460cd354010ee5d1a3aaebb5b97",
+    "tests/test_ambient.c": "785893330e63bc1799f3fc3f2b86c9e509727d1bee1df84e4638cf5152c7e98f",
+    "tools/refine-blades-pack.py": "609af56e4062509dc5baf1b41380b74ac70fe4cdf93acec57f49946f28fac1e4",
+    "tools/import-dashx360-skin.py": "186c268003a52412cafa68a8f8bc1204d8cbafa5440d93f9e1b453dbd09e2f6d",
+    "tools/render-walkthrough.c": "5fa660533b06d31006b3512461623cc8e4d6b7c7bc39f445589a51e4aafecbfa",
+    "tools/build-xbox.sh": "f35a87a57243e0b5f11f05737541ace27701df0033c767874d77869928be94df",
+    "tools/package-usb.py": "4f4f9f5ccf074a1945f0573c01d433d5b65ad589c9293bc69586a72a1de19e63"
+  },
+  "physical_validation": "Host renderer parity and reference chroma fitting do not verify native console appearance or camera-pixel identity."
+}

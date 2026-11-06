@@ -364,7 +364,7 @@ still requires comparison on an Xbox 360.
 
 Five relevant suites pass: resources, skin, draw-list, startup and GPU.
 The row-edge checks include the newly filled upper two pixels, while the
-existing lower shadow/card contracts and256000 mirrored pixels remain.
+existing lower shadow/card contracts and 256000 mirrored pixels remain.
 First-row tests now require the fill to meet the top divider rather than
 leaving an unpainted gap. Static row positions round to their exact targets.
 
@@ -377,4 +377,36 @@ motion; selecting the button still requests the correct edit immediately.
 The GPU suite adds six FTP cursor positions and retains maximum-length login
 coverage. Native digest/mutation, renderer sanitizers, archive checks and a
 fresh fully decoded78-second walkthrough are recorded in the release audit.
-Physical console display and perceived animation smoothness remain a360 check.
+Physical console display and perceived animation smoothness remain a 360 check.
+
+## Version 0.36 Xbox Live side edges and bottom-divider termination
+
+Five relevant suites pass: resources, skin, draw-list, startup and GPU.
+New actual-pack pixel checks exercise all three Live selections. Messages/
+Friends show a vertical lower rail beyond the former 15px horizontal shadow;
+Friends/Chat show the upper rail. The complete bottom divider and adjacent
+clear space remain equal to the no-focus baseline, including the right end.
+Chat has no downward curve; the raised logo face remains unchanged.
+The saved0.35 root renderer fails the new side-edge regression check.
+
+The shared upper/lower shadow function, previous 20 row-edge checks,256000
+mirror pixels and FTP spacing/motion/cache tests remain.304 CPU/GPU comparisons
+cover the final renderer. Native digests/mutation, sanitizer output, ZIP checks
+and the fresh 78-second labeled desktop walkthrough are captured in the audit.
+Actual console screen appearance remains a hardware comparison.
+
+## Version 0.36 reference-colour, GScore and logo-shadow refinements
+
+The final check set also includes ambient: six relevant suites now pass.
+Independent double-precision source-equation calculations reproduced the old
+palette's golden pixels within the existing tolerance before producing the
+new 30 field/four bright-ribbon samples. The shader uses the same refined
+palette as the CPU renderer, while the motion equations remain unchanged.
+
+Actual draw-list mask/image alpha bounds require the GScore icon and main
+Gamerscore word to end on the same visible row. The logo-shadow fixture compares
+against the original logo on a flat background: pixels may darken, never
+lighten, and visible shadow must extend outside the original silhouette.
+The new mask is precomputed; all non-tint/non-shadow pack entries must match
+0.35 byte-for-byte and every retinted mask keeps its original alpha/dimensions.
+See COLOUR-AND-BRANDING.md and the final release audit for fitting scope/hashes.

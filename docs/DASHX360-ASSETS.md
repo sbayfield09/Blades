@@ -157,3 +157,8 @@ Version 0.28 keeps the identical 234-entry payload. The thin achievement game
 strip separators are translucent renderer lines measured against the supplied
 photo and video near 05:20. Native Guide achievement views use the system UI;
 the former custom gray panels are removed. No per-user pictures are packaged.
+
+Version 0.36 has 235 entries:25 derived cap/tray masks are colour-refined and
+a 202x130 shadow is generated from the unchanged retail5766 splash_360.png
+alpha. Original logo, font, audio and layout bytes are retained. The shadow
+uses the existing image cache. See COLOUR-AND-BRANDING.md and the final audit.

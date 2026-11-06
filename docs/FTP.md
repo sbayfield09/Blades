@@ -1,4 +1,4 @@
-# FTP server — Blades 0.35
+# FTP server — Blades 0.36
 
 FTP starts when the startup animation finishes and Blades reaches the main
 menu. It runs across every blade and submenu, including while the Xbox Guide
@@ -85,7 +85,7 @@ The fresh walkthrough is desktop GPU playback with explicitly simulated FTP
 status, devices and storage. It demonstrates the screen/toggle/navigation,
 not an actual console FTP transfer.
 
-![Computers FTP controls and login details, simulated](images/ftp-computers-v0.35.png)
+![Computers FTP controls and login details, simulated](images/ftp-computers-v0.36.png)
 
 Credential editing uses the native Xbox keyboard. Confirm 1–63 printable ASCII
 characters to apply a field; cancellation leaves it unchanged. Login changes
@@ -118,8 +118,10 @@ button immediately; cursor motion does not delay an edit or toggle request.
 
 Single-line status groups now have identical 86px pitch: label positions 94,
 180,266,352,438 and value positions 130,216,302,388,474. Every label/value pair
-has a36px gap and each value/next-label pair a50px gap, matching the original
+has a 36px gap and each value/next-label pair a 50px gap, matching the original
 Server status/IP pair. Values share27px type for ordinary text. If login text
 needs wrapping, all values share20px type; each extra26px line moves following
-fields down while retaining the same50px gap after the last value line. The
+fields down while retaining the same 50px gap after the last value line. The
 maximum supported login strings remain inside the status column and footer.
+
+Version 0.36 retains the 0.35 field spacing and cursor-animation fixes.
