@@ -1,0 +1,213 @@
+{
+  "release": "0.32.0",
+  "recorded_utc": "2026-11-06T18:20:43.692921+00:00",
+  "changes": [
+    "Move FTP Username/Password values to right status column after IP and before Connected devices",
+    "Broaden and warm menu/account focus sheen against supplied reference footage",
+    "Keep darker account name band above focus and extend focus to rounded inner frame",
+    "Add inset upper/lower bar shading using original cap contours; upper shadow fades upward inside lower edge, footer shadow fades downward inside upper edge"
+  ],
+  "references": [
+    {
+      "source": "uploaded original dashboard reference-video.mp4",
+      "seconds": [
+        263,
+        268,
+        269,
+        277,
+        309
+      ],
+      "subjects": [
+        "Sign In card",
+        "Games selected rows",
+        "Media selected Music and top/bottom bars"
+      ]
+    },
+    {
+      "source": "uploaded achievements-video.mp4",
+      "seconds": [
+        1325
+      ],
+      "subject": "clear selected signed-out Sign In card"
+    },
+    {
+      "source": "supplied System still 4.jpg",
+      "subject": "purple blade row highlight, curved header and footer shading"
+    }
+  ],
+  "comparison_scope": "Visual fitting, not recovered retail XUI constants. Camera exposure, moving swirls and compression affect reference brightness; final console display appearance remains a physical check.",
+  "focus": {
+    "prior": "132*sin(pi*t)^2, pure white",
+    "current": "150*sin(pi*t)^1.6, RGB(226,234,223)",
+    "t": "(column+0.5)/width",
+    "rows": "Broader shoulders, transparent endpoints, softened top/bottom edges",
+    "card": "Same horizontal profile; rounded inner frame bounds (x+4,y80,w392,h140); darker name band composited after focus",
+    "dividers": "All thin row dividers retained",
+    "achievement_geometry": "Unchanged corrected 0.31 icon size/spacing/grid/header and focus inset"
+  },
+  "ftp_layout": {
+    "column_x": 710,
+    "order": [
+      "Server status",
+      "IP address",
+      "Username",
+      "Password",
+      "Connected devices"
+    ],
+    "username_y": 266,
+    "value_width": 400,
+    "value_font_size": 20,
+    "line_pitch": 24,
+    "long_values": "63-character W strings verified visually; dynamic following labels keep Connected devices above footer",
+    "left_column": "Turn FTP On/Off, Change Username, Change Password only",
+    "protocol_settings_and_keyboard": "Unchanged from 0.31"
+  },
+  "caps": {
+    "source": "existing skin/<blade>/7.png and 8.png alpha contours",
+    "header": "Inside lower edge, fades upward",
+    "footer": "Inside upper edge, fades downward",
+    "profile_alpha": [
+      48,
+      37,
+      27,
+      19,
+      12,
+      7,
+      3,
+      1
+    ],
+    "animation": "Follows original scaled cap geometry on roots, expanded submenus and startup opacity",
+    "cache": "Resource-generation keyed column edges; temporary PNG decode freed; idle foreground draw lists retained",
+    "new_per_frame_image_allocations": 0,
+    "original_payload_unchanged": true
+  },
+  "validation": {
+    "ctest_passed": 5,
+    "ctest_total": 5,
+    "suites": [
+      "resources",
+      "skin",
+      "draw-list",
+      "startup",
+      "gpu"
+    ],
+    "gpu_comparisons": 292,
+    "gpu_worst_mean": 0.484779,
+    "gpu_peak": 5,
+    "gpu_extra_coverage": "Maximum-length wide FTP login values and both edit-button highlights",
+    "skin": "Header upward/footer downward inset direction, bounded soft tails, resource reload/cache invalidation, expanded shell and corrupt masks",
+    "draw_list": "74 command states, exact static pixel equivalence and idle-cache reuse",
+    "sanitizers": "Actual-pack draw-list and synthetic skin fixture pass ASan/UBSan/LSan",
+    "xex_verification": [
+      "XEX2 PowerPC-BE, Xbox subsystem, entry 0x820dc528",
+      "21 verified image pages; header/image/import digest chains valid",
+      "xam.xex: 92 import slots",
+      "xboxkrnl.exe: 122 import slots",
+      "PASS: deliberate image mutation rejected: image digest mismatch at page 19"
+    ],
+    "native_pages": 21,
+    "xam_slots": 92,
+    "kernel_slots": 122
+  },
+  "usb_zip": {
+    "members": [
+      "Blades/default.xex",
+      "Blades/README.txt",
+      "Blades/build-info.txt",
+      "Blades/SHA256SUMS",
+      "Blades/LICENSE",
+      "Blades/XSDK-LICENSE.txt",
+      "Blades/THIRD_PARTY_NOTICES.md",
+      "Blades/Config/README.txt",
+      "Blades/Assets/ARTWORK-README.txt",
+      "Blades/Assets/ARTWORK-SHA256SUMS.txt",
+      "Blades/Assets/AUDIO-NOTICE.txt",
+      "Blades/Assets/DASHX360-NOTICE.txt",
+      "Blades/Assets/FONT-LICENSE.txt",
+      "Blades/Assets/FONT-NOTICE.txt",
+      "Blades/Assets/README.txt",
+      "Blades/Assets/blades.xzp",
+      "Blades/licenses/CONVECTION-NOTICE.txt",
+      "Blades/licenses/DASHX360-NOTICE.txt",
+      "Blades/licenses/GCC-RUNTIME-EXCEPTION.txt",
+      "Blades/licenses/GPL-3.0.txt",
+      "Blades/licenses/NEWLIB.txt",
+      "Blades/licenses/STB-LICENSE.txt"
+    ],
+    "crc": "passed",
+    "xex_matches_standalone": true,
+    "artwork_matches_pack": true,
+    "personal_scan_paths_ftp_settings_credentials_and_logs_excluded": true,
+    "unversioned_alias_identical": true
+  },
+  "artwork": {
+    "entries": 234,
+    "payload_sha256": "c6470ec2ab422e1f5f2984bd244a79173269fd40fa157714be98af8dd183c55c",
+    "unchanged_from": "0.31",
+    "pack_changes": [
+      "ARTWORK-README.txt"
+    ]
+  },
+  "video": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 1280,
+        "height": 720,
+        "r_frame_rate": "30/1"
+      },
+      {
+        "codec_name": "aac",
+        "sample_rate": "48000",
+        "channels": 2,
+        "r_frame_rate": "0/0"
+      }
+    ],
+    "format": {
+      "duration": "78.000000",
+      "size": "8572250"
+    }
+  },
+  "video_full_decode": "passed",
+  "video_scope": "Fresh final 0.32 shared-renderer desktop GPU capture with matching artwork. Profiles/achievements/FTP/storage/Guide/keyboard requests explicitly simulated; no console verification claimed.",
+  "sdk_commit": "5f6dc726f65f6d171493a3628c2415c03551f27b",
+  "xex_version": "0.0.32.0",
+  "artifacts": {
+    "dist/Blades-v0.32-USB.zip": {
+      "bytes": 2470436,
+      "sha256": "337e3b806fb943df973c177780550d4de99b8bb7c4e3f7864a0231c54232ad25"
+    },
+    "dist/Blades/default.xex": {
+      "bytes": 1187840,
+      "sha256": "4eba9863ca47e7f5d915277e0128f0c127c5f852552b40190397678ba22d0c07"
+    },
+    "dist/Blades-artwork-pack.zip": {
+      "bytes": 2030418,
+      "sha256": "1cc14e656d060eed385a42ae6da5d6c857e1b93428cb4d7a4b612c97f5628596"
+    },
+    "dist/Blades-v0.32-walkthrough.mp4": {
+      "bytes": 8572250,
+      "sha256": "0ebd56f6cb2d7a982d8ce7215c4a65b4b5b14c18c04a481a5d078fe21c6e9f2f"
+    }
+  },
+  "preview_images": {
+    "docs/images/signin-highlight-v0.32.png": "0ad5dd047e251964805b1497123ba5f713e23be3b25f3b0ab56fee5222da0d57",
+    "docs/images/profile-card-v0.32.png": "cb18d40afe66afc5ad1da541dcdaa858484ec75bc894ae424f11a80fbb4f0021",
+    "docs/images/menu-highlight-v0.32.png": "708305c6b6e33c15b8e9ea798571bc2cbdb900ccbc4c24a94ca593eef126ba2c",
+    "docs/images/system-highlight-v0.32.png": "a2ff9889aedd7dae48a3993f5ad211368d19c06c1ad7583b2c88ca509ec6463f",
+    "docs/images/ftp-computers-v0.32.png": "c0a5cb12697c6fd936e825c912c34faff530ac2e707c7882c1e98fad4baf2a5a"
+  },
+  "source_sha256": {
+    "src/render/dashboard_render.c": "3fbc2e8b4f2bee0e80c160eeb9175f1db883b0b68d1224d9b9387ceb33960d75",
+    "src/render/skin.c": "b5e991c245167fa9be086075bfa8753fd82a74c986f5cd1cd38cdea5a2715d7d",
+    "tests/test_skin.c": "748d8d0484b42ef68341be1a7eb14e25781b23399ef90bfe43b590994715da83",
+    "tests/test_gpu.c": "0da1f3b695f179da9d28bf4a9ec19437aea4b18f86ff41510f1278327e3a1f77",
+    "CMakeLists.txt": "2eb67724a07195e2699398ae4122cd49661716027fb5ed48b8f1b6499a317a1c",
+    "tools/build-xbox.sh": "f8c4317c017836b75d0a76258d47d1c93d82e4f7ee2cb7d09848b4fc3e4d3007",
+    "tools/package-usb.py": "4f4f9f5ccf074a1945f0573c01d433d5b65ad589c9293bc69586a72a1de19e63",
+    "tools/render-walkthrough.c": "f98d8d8e2b0fa4a4d9d648ae1c846c7e108fb3800c8b2e85c8ab4da4e76a1162"
+  },
+  "physical_validation": "Compare actual console highlights and cap shading to references on the Xbox 360 display. Native/profile/FTP/audio behavior retains the 0.31 hardware verification boundaries."
+}

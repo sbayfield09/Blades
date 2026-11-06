@@ -34,7 +34,7 @@ branch holds the public downloadable files. Use a temporary Git index to add
 only release artifacts and their instructions/notices, preserving the current
 working tree. Do not replace the public branch with unrelated local changes.
 
-The v0.31.0 pack contains 234 XUIZ entries: five blade states, additional menu
+The v0.32.0 pack contains 234 XUIZ entries: five blade states, additional menu
 icons, the BSK2 root/expanded layout manifest, retail 5766 shared images and the local font atlas/metrics/notice, plus eight precomposed ABXY prompt sprites, six transition WAVs and an audio notice, the baked Xbox Live panel background, and four startup shutter/reveal/layout entries, plus sixteen disc-reading indicator frames. Original project by
 zivvoz / DashX360, inspired by Microsoft's Xbox 360 Dashboard interfaces.
 Asset ownership remains with the respective rights holders. See
@@ -116,3 +116,11 @@ Xbox Live text bounds. FTP moves to System/Computers and gains displayed,
 editable/persistent login fields. Add audio lifecycle priming/fade/drain.
 The 234-entry payload is unchanged. Ship a fresh labeled walkthrough and
 exclude personal FTP settings, credentials, scan paths and logs from archives.
+
+Version 0.32 moves the FTP login display to the right status column and refits
+menu/account focus sheen and inset cap shadows from the supplied videos.
+The upper-bar shadow fades upward inside the bar; the footer shadow fades
+downward inside its upper edge. Both use cached column edges from the existing
+artwork, including curved ends and animated cap positions. Keep the original
+achievement spacing and all button dividers. The 234-entry payload is unchanged;
+record a fresh labeled walkthrough and publish the four matching downloads.

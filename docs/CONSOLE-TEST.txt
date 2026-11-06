@@ -1,9 +1,18 @@
-Blades 0.31.0 - profile, achievement, FTP and audio hardware test build
+Blades 0.32.0 - FTP layout, focus sheen and bar-shadow hardware test build
 
-Extract Blades-v0.31-USB.zip onto USB and launch Blades/default.xex. The ZIP
+Extract Blades-v0.32-USB.zip onto USB and launch Blades/default.xex. The ZIP
 includes the complete Assets folder and notices. It excludes local library
 paths, FTP settings/login details and logs, preserving those on an update.
 Separate matching XEX/artwork/video downloads remain available.
+
+Version 0.32 visual changes:
+- FTP Username/Password are now in the right column, after IP and before
+  Connected devices. Controls remain on the left; long login values wrap.
+- Broader, slightly warm reference-fitted focus sheen on menu rows and the
+  Sign In/Profile card. The card name band stays darker over the sheen.
+- Top-bar shadow is inside its lower edge, fading upward. Bottom-bar shadow
+  is inside its upper edge, fading downward. Both follow the supplied curves.
+- Thin button dividers and the original achievement icon spacing are retained.
 
 Profile fixes:
 - Signed-out profile count reads public profile-package headers on available
@@ -17,7 +26,7 @@ Profile fixes:
 - Card focus survives sign-in, and identity changes invalidate its draw cache.
 - The card/menu highlight is brightest at the centre and fades toward both
   edges, using the clearer uploaded sign-in video reference near 22:00.
-  The name band and lower shadow replace the former hard inner separator.
+  The name band stays above the sheen and fades without a hard inner separator.
   Thin button dividers remain, including the selected row and FTP controls.
 - The Gamerscore G icon and real totals remain. Xbox Live's information text
   has its own bounded/wrapped column clear of the button separator.
@@ -181,4 +190,3 @@ Licences, attribution, build information and checksums are included. This
 standalone app only changes the active sign-in session when requested; it does not edit
 console configuration, account credentials, profile files, saved games,
 NAND, or the configured default dashboard.
-

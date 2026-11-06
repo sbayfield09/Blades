@@ -290,3 +290,31 @@ decodes fully. XEX digest/mutation, ZIP CRC, payload compatibility and exclusion
 of personal settings/logs are verified. Native Guide/profile/keyboard behavior,
 profile package availability, actual storage transfers and launch/exit audio
 still require a physical Xbox 360 check.
+
+## Version 0.32 FTP layout, highlights and inset cap shadows
+
+The FTP status column now reads status, IP, username, password, connected
+devices. Login values wrap at 400 pixels using 20-pixel text; following fields
+move down for long values. Synthetic maximum-length wide-character inputs
+remain above the footer. No protocol or persistent-settings changes.
+
+References inspected: original uploaded dashboard video 04:23, 04:28–04:29,
+04:37 and 05:09, plus the uploaded achievement video 22:05 and the supplied
+System still. The menu sheen has broader shoulders and a slightly warm tint.
+Card focus uses the same shape and reaches its rounded inner edge; the darker
+name band is drawn above it. All row dividers remain. Achievement geometry is
+unchanged from the corrected 0.31 build.
+
+Cap shadow contours are cached from existing top/bottom artwork alpha masks.
+The header shadow is inside its lower edge, fading upward; footer shading is
+inside its upper edge, fading downward. Both follow cap animation and curved
+ends. Only small edge arrays persist; the decode scratch is released, no
+per-frame image allocation is added, and foreground commands remain cached.
+
+Five relevant suites pass: resources, skin, draw-list, startup, GPU. The skin
+fixture checks shading on the correct side of each cap and cache invalidation;
+292 CPU/desktop GPU comparisons include maximum-length FTP credentials with
+both edit buttons selected. Final native XEX digests/mutation, ZIP integrity,
+unchanged artwork payload and a fresh fully decoded 78-second labeled desktop
+walkthrough are checked in the release audit. Physical screen appearance on
+an Xbox 360 remains the final visual check.

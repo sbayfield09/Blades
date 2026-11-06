@@ -1,11 +1,13 @@
-# FTP server — Blades 0.31
+# FTP server — Blades 0.32
 
 FTP starts when the startup animation finishes and Blades reaches the main
 menu. It runs across every blade and submenu, including while the Xbox Guide
 is open. Opening Computers is not required for a computer to connect.
 The default is on. System → Computers has Turn FTP Off / Turn FTP On,
 Change Username and Change Password buttons. It displays the current username
-and password, plus server status, console IP and connected-device count.
+and password in the right-hand column, between IP address and Connected
+devices. The left column contains the three controls. Long saved values wrap
+inside the status column and push the following field down, above the footer.
 FTP is no longer under Media Center; it continues running across all blades.
 
 Connect from a computer on the console's network:
@@ -68,7 +70,7 @@ The native SDK uses signed 32-bit seek offsets, so resume is limited to
 2 GiB − 1. Large-file sequential transfer and native storage throughput still
 need a physical-console check; loopback tests use smaller files.
 
-Validation: 21 host suites, 290 CPU/desktop GPU comparisons and an actual
+The v0.31 behavior was validated by 21 host suites, 290 CPU/desktop GPU comparisons and an actual
 loopback FTP integration fixture. The fixture uses Python's ftplib against the
 production C server and actual temporary storage, covering authentication,
 root drives, passive listings, binary transfers/resume/append, metadata,
@@ -83,7 +85,7 @@ The fresh walkthrough is desktop GPU playback with explicitly simulated FTP
 status, devices and storage. It demonstrates the screen/toggle/navigation,
 not an actual console FTP transfer.
 
-![Computers FTP controls and login details, simulated](images/ftp-computers-v0.31.png)
+![Computers FTP controls and login details, simulated](images/ftp-computers-v0.32.png)
 
 Credential editing uses the native Xbox keyboard. Confirm 1–63 printable ASCII
 characters to apply a field; cancellation leaves it unchanged. Login changes
@@ -94,3 +96,7 @@ temporary file are excluded from every release ZIP. The UI displays the full
 current values, wrapping long values as needed. The protocol integration test
 changes credentials, verifies new logins after a server restart and checks the
 v0.30 setting upgrade. Native keyboard cancellation/input requires a console check.
+
+Version 0.32 changes presentation only. The five relevant renderer/resource/skin/
+startup suites pass, including 292 CPU/desktop GPU comparisons and long login
+values with both edit controls selected. The server and settings format are unchanged.

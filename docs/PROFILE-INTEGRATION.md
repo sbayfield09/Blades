@@ -1,4 +1,4 @@
-# Profile integration — 0.31
+# Profile integration — 0.32
 
 The account card is selectable on Xbox Live, Games and Media whether signed
 in or signed out. Up from the first menu item selects it; Down returns to the
@@ -39,14 +39,21 @@ the renderer. Transient picture failures preserve the last valid picture for
 the same identity; changing identity clears it. Missing pictures use the
 neutral default tile, not a canned picture presented as the user's choice.
 
-The card name band and lower shadow now fade without a hard inner separator.
-Thin row dividers remain visible, including below selected rows.
-The selection sheen peaks at the centre and fades toward both sides, sharing
-the menu-row highlight shape. Reference: uploaded achievement video near 22:00
-(1320 seconds), a clear Sign In / 10 Profiles Found frame. Its row-100 RGB
-samples go from (87,160,77) at x110 to (182,204,178) near x210, then
-(86,171,67) at x305. The supplied video-games.jpg remains the signed-in card and
-Gamerscore G alignment reference. The original GScore PNG and centring are
+The card name band fades without a hard inner separator, and its lower shadow
+remains. Thin row dividers stay visible, including below selected rows.
+Version 0.32 compares the original reference recording at 04:23 (highlighted
+Sign In), 04:28–04:29 / 04:37 (Games rows), 05:09 (Media) and the uploaded
+achievement recording at 22:05 (Sign In). The sheen now has broader shoulders
+and a slightly warm tint, fading to transparent at either side. Rows and cards
+share alpha=150*sin(pi*(column+0.5)/width)^1.6 with RGB (226,234,223).
+These are fitted rendering values, not recovered retail XUI constants; source
+footage has camera exposure, compression and moving-background differences.
+
+Card focus reaches the rounded inner frame rather than leaving an inset
+rectangle. Its name band is drawn over the focus, preserving the reference's
+darker name area for both signed-out and signed-in cards. The supplied
+video-games.jpg remains the signed-in card and Gamerscore alignment reference.
+The original GScore PNG and centring are
 unchanged. Xbox Live information now has a 28-pixel gutter past the button
 column and word-wraps inside its own panel.
 
@@ -58,6 +65,6 @@ checks package counting, cross-device duplicates and invalid/common exclusions.
 The walkthrough's accounts/pictures/counts are explicit simulations; check
 actual Guide actions, profile pictures/counts and account changes on a 360.
 
-![Signed-out highlighted card, simulated profile count](images/signin-highlight-v0.31.png)
+![Signed-out highlighted card, simulated profile count](images/signin-highlight-v0.32.png)
 
-![Signed-in selectable card, simulated profile/picture](images/profile-card-v0.31.png)
+![Signed-in selectable card, simulated profile/picture](images/profile-card-v0.32.png)
