@@ -1,4 +1,4 @@
-# Profile integration — 0.25
+# Profile integration — 0.26
 
 At a blade root, X opens the native Xbox Guide sign-in menu when signed out.
 The signed-out Sign In card shows the original green default tile and a
@@ -72,3 +72,13 @@ The signed-in card uses the stock GScore.png icon in place of the label's
 leading G, as in the second reference. The score value contains digits only.
 Numeric columns shrink as needed to keep large totals clear of their labels.
 Both PNGs already exist in the compatible 234-entry artwork payload.
+
+Version 0.26 centres the GScore icon using the visible artwork and text bounds.
+The supplied video-games.jpg shows a roughly 28 px visible circle at
+355..384 / 150..178, extending about 4 px left of the Games label. Its suffix
+begins around x387. The source GScore.png has symmetric 2..30 alpha bounds in
+a 32 px canvas. At font size 28, the Convection suffix ink spans y+11..25.
+Use a 32 px canvas at label_y+2 so both centres are label_y+18; the previous
+24 px canvas at the same y was centred 4 px too high. The icon moves 4 px left,
+its suffix moves 4 px right, and the numeric-column budget includes the new
+spacing. The original PNG is unchanged. Games, Live and Media share this layout.

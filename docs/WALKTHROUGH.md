@@ -1,6 +1,6 @@
-# Blades 0.25 profile integration walkthrough
+# Blades 0.26 profile integration walkthrough
 
-[Watch or download the MP4](../dist/Blades-v0.25-walkthrough.mp4)
+[Watch or download the MP4](../dist/Blades-v0.26-walkthrough.mp4)
 
 117 seconds, 1280×720 at 30 fps with 48 kHz stereo audio. This is fresh desktop
 GPU playback of the release navigation/renderer using the matching artwork
@@ -10,7 +10,7 @@ actual CD/DVD playback. Optical states in the final section are simulated too.
 
 - 00:00 Startup and the reference-style Sign In card with green tile and example 2 Profiles Found
 - 00:02 Highlight the account card; A requests Guide sign-in (simulation notice)
-- 00:05 Example signed-in profile with name, games, circular G Gamerscore label and achievements
+- 00:05 Example signed-in profile with name, games, correctly centred circular G Gamerscore label and achievements
 - 00:08 Card statistics refresh without restarting
 - 00:10 X opens sign-out confirmation; select Sign out
 - 00:12 Signed-out card clears all account data
@@ -35,7 +35,7 @@ See [LIBRARY.md](LIBRARY.md) for controls, formats and physical-console checks.
 Artwork/sounds: zivvoz / DashX360, inspired by Microsoft's Xbox 360 Dashboard.
 The compatible 234-entry artwork payload is unchanged from v0.23.
 
-This is a newly rendered v0.25 capture. Optical launch traces target the
+This is a newly rendered v0.26 capture. Optical launch traces target the
 corrected /Device/Flash/dash.xex device path. The successful XAM alias/data
 preparation is covered by the real-SDK host regression, not by physical
 playback in this desktop capture.

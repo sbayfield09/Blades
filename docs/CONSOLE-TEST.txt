@@ -1,20 +1,21 @@
-Blades 0.25.0 - profile integration hardware test build
+Blades 0.26.0 - profile integration hardware test build
 
-Download Blades-v0.25-USB.zip and extract it onto your USB drive. It contains
+Download Blades-v0.26-USB.zip and extract it onto your USB drive. It contains
 Blades/default.xex and the complete Blades/Assets folder, with notices and
 installation notes. Launch Blades/default.xex. No separate artwork extraction
 or conversion is required. The ZIP excludes machine-specific scan settings and
 logs, so extracting over an existing Blades folder preserves its scan paths.
 Separate XEX/artwork downloads remain available.
 
-Version 0.25 integrates the console's active profile and Guide sign-in menu.
+Version 0.26 integrates the console's active profile and Guide sign-in menu.
 When signed out, the account card shows Sign In, the original green default
 picture and the available profile count, matching the supplied reference.
 There is no previous gamertag or personal statistics. The count comes from
 public content metadata; if unavailable, the card says Choose a Profile. Navigate up from the first menu item to highlight it,
 then press A to open the real Xbox Guide sign-in menu. X at a blade root also
 opens sign-in. A profile already signed in is picked up automatically.
-The Gamerscore label uses the original circular G icon; its value has no
+The Gamerscore label uses the original circular G icon, sized and centered
+against the reference text; its value has no
 trailing text G. The card displays the active controller user's gamertag, gamer picture, games
 played, gamerscore and achievement count. Local/offline profiles are supported.
 Card fields refresh after returning from the Guide and periodically while

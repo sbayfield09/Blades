@@ -142,3 +142,7 @@ and separate premade pack retain these notices and source attribution.
 Version 0.25 uses the existing retail ico_64x_DefaultPicture.png for the
 signed-out card and GScore.png for the Gamerscore label. Neither is redrawn or
 replaced with a font glyph. The same 234-entry payload and notices are included.
+
+Version 0.26 renders the original GScore.png at its 32 px canvas size, aligning
+its visible centre to the surrounding Convection text as in video-games.jpg.
+The asset bytes and 234-entry payload are unchanged.

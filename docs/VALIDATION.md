@@ -142,3 +142,18 @@ DefaultPicture and GScore PNGs were already present. The new 117-second 720p30
 stereo walkthrough is freshly rendered and labels profile/count/Guide events
 as simulated. Console public-content enumeration and Guide/account behavior
 still need physical-console validation. See the v0.25 audit JSON.
+
+## Version 0.26 GScore alignment
+
+Measured the supplied video-games.jpg and the original PNG/Convection ink
+bounds to correct the circle's size, vertical centre and left overhang. The
+32 px icon canvas aligns its centre with the suffix's visible ink; its previous
+24 px box placed that centre 4 px too high. The suffix/numeric budget follows
+the corrected spacing. The original asset is preserved.
+
+16/16 host suites and 267 CPU/GPU comparisons pass (worst mean 0.478439,
+peak 4), including all profile-bearing blades and large card totals. Native
+XEX 0.0.26.0 has 20 verified pages and 86 XAM/122 kernel slots. ZIP and XEX
+integrity checks pass. The fresh 117-second 720p30 stereo walkthrough shows
+the corrected card and retains its simulation label. The profile backend is
+unchanged; its real-console count/Guide verification remains outstanding.

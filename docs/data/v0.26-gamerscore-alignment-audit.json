@@ -1,0 +1,186 @@
+{
+  "release": "0.26.0",
+  "recorded_utc": "2026-11-06T10:42:58.078553+00:00",
+  "features": [
+    "Original GScore artwork at reference 32 px canvas size",
+    "Circle centre matches visible Convection suffix ink; 4 px left overhang and corrected suffix spacing",
+    "Numeric column budget includes the corrected icon spacing; profile backend and artwork payload unchanged"
+  ],
+  "tests": {
+    "ctest_passed": 16,
+    "ctest_total": 16,
+    "gpu_comparisons": 267,
+    "gpu_worst_mean": 0.478439,
+    "gpu_peak": 4,
+    "profile_asan_ubsan_lsan": "unchanged backend; passed in v0.25 (not rerun for this layout-only change)",
+    "xex_digest_and_imports": "passed",
+    "xex_mutation_fixture": "passed",
+    "native_pages": 20,
+    "xam_slots": 86,
+    "kernel_slots": 122
+  },
+  "usb_zip": {
+    "members": [
+      "Blades/default.xex",
+      "Blades/README.txt",
+      "Blades/build-info.txt",
+      "Blades/SHA256SUMS",
+      "Blades/LICENSE",
+      "Blades/XSDK-LICENSE.txt",
+      "Blades/THIRD_PARTY_NOTICES.md",
+      "Blades/Config/README.txt",
+      "Blades/Assets/ARTWORK-README.txt",
+      "Blades/Assets/ARTWORK-SHA256SUMS.txt",
+      "Blades/Assets/AUDIO-NOTICE.txt",
+      "Blades/Assets/DASHX360-NOTICE.txt",
+      "Blades/Assets/FONT-LICENSE.txt",
+      "Blades/Assets/FONT-NOTICE.txt",
+      "Blades/Assets/README.txt",
+      "Blades/Assets/blades.xzp",
+      "Blades/licenses/CONVECTION-NOTICE.txt",
+      "Blades/licenses/DASHX360-NOTICE.txt",
+      "Blades/licenses/GCC-RUNTIME-EXCEPTION.txt",
+      "Blades/licenses/GPL-3.0.txt",
+      "Blades/licenses/NEWLIB.txt",
+      "Blades/licenses/STB-LICENSE.txt"
+    ],
+    "crc": "passed",
+    "xex_matches_standalone": true,
+    "artwork_matches_pack": true,
+    "saved_paths_and_logs_excluded": true,
+    "contains_no_real_profile_data": true
+  },
+  "artwork": {
+    "entries": 234,
+    "payload_sha256": "c6470ec2ab422e1f5f2984bd244a79173269fd40fa157714be98af8dd183c55c",
+    "unchanged_from": "0.25",
+    "uses_existing_pngs": [
+      "ico_64x_DefaultPicture.png",
+      "GScore.png"
+    ]
+  },
+  "video": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 1280,
+        "height": 720,
+        "r_frame_rate": "30/1"
+      },
+      {
+        "codec_name": "aac",
+        "sample_rate": "48000",
+        "channels": 2,
+        "r_frame_rate": "0/0"
+      }
+    ],
+    "format": {
+      "duration": "117.000000",
+      "size": "13978032"
+    }
+  },
+  "video_full_decode": "passed",
+  "video_scope": "Fresh desktop GPU render with simulated profile/Guide requests, storage/disc states and handoffs; visible simulation label throughout",
+  "sdk_commit": "5f6dc726f65f6d171493a3628c2415c03551f27b",
+  "xex_system_flags": "00000021",
+  "xex_version": "0.0.26.0",
+  "artifacts": {
+    "dist/Blades-v0.26-USB.zip": {
+      "bytes": 2429838,
+      "sha256": "f96cb63da64737f7144acd8c66a2a73a0a7d3856101ea77c096c714ee031b8fd"
+    },
+    "dist/Blades/default.xex": {
+      "bytes": 1114112,
+      "sha256": "18bbe7894e2289ebda61988b63f1e9f6010bc6d9ea7d4931b64ffe24d2ab2446"
+    },
+    "dist/Blades-artwork-pack.zip": {
+      "bytes": 2030345,
+      "sha256": "dcd68431595230cf91cf8f037fddb66318604e8fe960ca0574d22e9cd4eafda2"
+    },
+    "dist/Blades-v0.26-walkthrough.mp4": {
+      "bytes": 13978032,
+      "sha256": "e2b728faf765aacaf6b71eaf1828e2984aa809412e08143e32cfe92cf9e4824d"
+    }
+  },
+  "source_sha256": {
+    "include/profile.h": "ac4973f130222a2a53dbb5640bb3f248e0efecb58183aef8e7ee9c5c24f3b5a9",
+    "src/core/profile.c": "cc053c68cf55a8a1055bec1f8bcf017e4f223fc8ddb9c86834e4c3492b65933e",
+    "include/xbox_profile.h": "a615aef56afccde97445ace84c7d925fd382adf62261a2ff7b88538dafea30eb",
+    "src/platform/xbox_profile.c": "5fc174c4cc4e5017664257cfbd7b92727279a20f35be2d2ac7a4f9379236745f",
+    "include/blades.h": "bc7bceb1bb4bc7b08f7c91c42a4a3639742003dfb40a234ffb2f8f471a71c1b6",
+    "src/core/dashboard.c": "e839c5ba52fc9f25127778045abd4f34d0f16e1b159c3be56e549e8467ca4a17",
+    "src/render/dashboard_render.c": "b3121a09cab2f4252ed7ad912e004bc64439a0b596eb4d855c6d13187757a4dc",
+    "src/render/draw_list.c": "eaeeae716386117bf01db9e91fd10bda492d1ce3d6507fbbf48f133050775110",
+    "src/platform/xbox360.c": "66932247777f8824ae2880a9b202fe27281668d75d23ff6e5dfa5ebd33198c09",
+    "src/platform/linux.c": "f19eaccc946fd97427e8af0285ffacedd05805d17e79cdc878978d0038ed1453",
+    "tests/test_profile.c": "9f034cc1be56db1d7607f41c6e1ba1e681e4bf68eea086dd45b0cd4fb6045195",
+    "tests/test_gpu.c": "fbdd3e1f4a65708ac9043f8b73d211e8a2b51559b5d98d1e5062a0a735cdd68f",
+    "tests/test_draw_list.c": "8929bca18e0819ab66352fbdceddab270bc4aa54ed859d31471163adead2f4f3",
+    "tests/test_dashboard.c": "21717215b7704516b67cbd62b13af7148ab50e3e897e69ebac74819ac3847e53",
+    "tools/render-walkthrough.c": "ac9ef506a6c7a2b7e4483a8ef9b1a716a8e5a0bd309ea65b54990b19f48bd30a",
+    "tools/build-xbox.sh": "9805dfcc17866f8f7c61ba653f8993a7663700d64d44fcf215795fcfc8279b4a",
+    "tools/package-usb.py": "12730ac9c823e7b9a306fe48e63810dbaef2e73f6f17716e3712ee15efab14b5",
+    "CMakeLists.txt": "323a68a7299e8be4740602f59c9e7f4ae338a7ca9cc0e2ddbf8f391ec405f25b"
+  },
+  "physical_validation": "Available profile counts from XAM public content enumeration, Guide selection, totals, gamer-picture API and confirmed session sign-out require a physical Xbox 360 check; video profiles/counts are simulated",
+  "alignment": {
+    "reference": "user-provided video-games.jpg",
+    "reference_sha256": "ae3da49576f0fdbb7c820b25b75c4cdb5aa8a867a9e2df4844e810928b281150",
+    "reference_circle_dark_bbox": [
+      355,
+      150,
+      384,
+      178
+    ],
+    "reference_suffix_dark_bbox": [
+      387,
+      158,
+      516,
+      173
+    ],
+    "reference_games_dark_bbox": [
+      359,
+      119,
+      441,
+      139
+    ],
+    "reference_mask_rgb_max_exclusive": [
+      65,
+      115,
+      70
+    ],
+    "original_png_canvas": [
+      32,
+      32
+    ],
+    "original_png_alpha_bbox": [
+      2,
+      2,
+      30,
+      30
+    ],
+    "convection_suffix_ink_y_at_28px": [
+      11,
+      25
+    ],
+    "old_icon_canvas_relative_to_card_x": [
+      108,
+      148,
+      24,
+      24
+    ],
+    "new_icon_canvas_relative_to_card_x": [
+      104,
+      148,
+      32,
+      32
+    ],
+    "label_y": 146,
+    "old_visible_center_y": 160,
+    "new_visible_center_y": 164,
+    "suffix_visible_center_y": 164,
+    "validation": "visually inspected freshly rendered desktop GPU video at 00:08 against reference; original PNG preserved"
+  }
+}
