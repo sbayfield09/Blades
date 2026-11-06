@@ -34,13 +34,28 @@ folders and partial scans are reported in the right-hand details panel and conso
 ## File Manager
 
 Open **Games → Played Games → File Manager**, directly below Homebrew. Choose
-storage and enter folders with A. The list shows directories first, followed by
-eligible plain `.xex` files. Select a file and press A to launch; no scan path or
-Title ID is required. The file is validated on the worker at selection time,
-then handed to the same native path launcher. B goes to the parent folder or
-back to Played Games from the storage list; X refreshes the current listing.
-This browser does not copy, delete, rename or modify files. Y: Remove affects
-saved scan paths on the separate Scan Folders page, never storage folders.
+HDD/USB and navigate folders with A; B goes to the parent and X refreshes.
+Version 0.29 lists all regular files regardless of extension, including images,
+text, configuration files, archives, extensionless and hidden files. Folders
+appear first, followed by files; each group is sorted alphabetically without
+case sensitivity. The right panel shows the selected path and whether it is a
+folder, Xbox executable or ordinary file.
+
+Only plain `.xex` names (case insensitive) can launch with A, including homebrew
+without a Title ID. Other files remain visible with an inactive A prompt;
+pressing A does nothing and does not try to enter the file as a folder.
+The earlier `file.dll.xex`, `file.exe.xex` and other compound-name exclusions
+remain: those files are visible, but cannot launch. Executables are revalidated
+before launch; file contents cannot make a different extension launchable.
+Downloaded packages still launch through the game library, not this explorer.
+
+No scan folder or Title ID is required. The Add Folder picker continues to
+show only directories. This browser does not copy, delete, rename, edit or
+preview file contents. Y: Remove affects saved scan paths on Scan Folders only.
+
+Desktop preview (filesystem and launch requests explicitly simulated):
+
+![All-file explorer with a non-executable file selected](images/file-explorer-v0.29.png)
 
 ## Executables and downloaded packages
 

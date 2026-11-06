@@ -214,3 +214,22 @@ Real Xbox Guide handoffs to the exact game/achievement, closing back to the
 same selected icon, sign-in continuation and account changes need a physical
 Xbox 360 check. Console API behavior and cached artwork availability cannot be
 proved by desktop fixtures.
+
+
+## Version 0.29 all-file explorer
+
+18/18 host suites and 283 CPU/desktop GPU comparisons pass (worst mean
+0.478439, peak channel error 4). Real temporary-directory fixtures list plain
+XEX, compound module names, images, text/config files, archives, extensionless
+and hidden files. They verify folder/file distinction, directories-first and
+case-insensitive sorting, a folder with .xex in its name, ordinary-file A no-op,
+plain-XEX launch preparation, rejection of a non-XEX direct launch, and the
+unchanged directories-only scan-folder picker. GPU checks cover executable,
+ordinary-file and compound-XEX selections and their disabled/enabled A prompts.
+
+The native XEX is rebuilt and its header/image/import digests checked, including
+a deliberately corrupted image fixture. ZIP CRCs, standalone XEX/payload matches,
+artwork compatibility and exclusion of scan paths/logs are checked. The fresh
+50-second 720p30 stereo desktop walkthrough labels filesystem/profile/launch
+requests as simulated; actual storage and XEX handoff need console verification.
+See the v0.29 file-explorer audit for hashes and exact artifact properties.

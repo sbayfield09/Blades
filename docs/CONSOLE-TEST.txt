@@ -1,13 +1,13 @@
-Blades 0.28.0 - achievement browser hardware test build
+Blades 0.29.0 - all-file explorer hardware test build
 
-Download Blades-v0.28-USB.zip and extract it onto your USB drive. It contains
+Download Blades-v0.29-USB.zip and extract it onto your USB drive. It contains
 Blades/default.xex and the complete Blades/Assets folder, with notices and
 installation notes. Launch Blades/default.xex. No separate artwork extraction
 or conversion is required. The ZIP excludes machine-specific scan settings and
 logs, so extracting over an existing Blades folder preserves its scan paths.
 Separate XEX/artwork downloads remain available.
 
-Version 0.28 implements Games -> Achievements using the supplied photo and
+Version 0.29 implements Games -> Achievements using the supplied photo and
 achievement video. Selecting it while signed out opens the real Xbox Guide
 sign-in menu. Successful sign-in resumes the achievement browser; cancelling
 returns to the dashboard. Switching/signing out profiles closes the browser
@@ -41,7 +41,7 @@ history and a game/app with no achievements: loading must finish. Send
 Blades/default.log for read errors or missing data. Profile/GPD files are not
 opened or written directly; only public XAM metadata is used.
 
-Version 0.28 integrates the console's active profile and Guide sign-in menu.
+Version 0.29 integrates the console's active profile and Guide sign-in menu.
 When signed out, the account card shows Sign In, the original green default
 picture and the available profile count, matching the supplied reference.
 There is no previous gamertag or personal statistics. The count comes from
@@ -92,13 +92,19 @@ waits for the current storage read to return. Adding/scanning never launches any
 changing blades cancels an in-flight launch. Guide/modal guards still apply.
 
 File Manager is directly below Homebrew under Played Games. It lists folders
-and plain .xex files. A opens a folder or manually launches an executable,
-including zero/missing-Title-ID homebrew, without a configured scan folder.
-B goes to the parent folder; X refreshes. No storage files are deleted.
+and all regular file types, including hidden and extensionless files. Folders
+sort first, then files alphabetically. A enters folders or manually launches
+plain .xex executables, including zero/missing-Title-ID homebrew. Other files
+show their path with an inactive A prompt; pressing A does nothing.
+Compound file.dll.xex / file.exe.xex entries are visible but cannot launch.
+B goes to the parent folder; X refreshes. Add Folder remains directories only.
+No file is deleted, changed or previewed. Test a folder containing text, images,
+archives, config files, plain XEXs and compound module names. Confirm only a
+valid plain XEX launches and other files cannot be entered as folders.
 
 Only plain names such as Utility.xex or default.XEX are eligible. Compound
-file.dll.xex / file.exe.xex / file.any.xex names are skipped before reading
-file contents. Supported downloaded package formats remain supported.
+file.dll.xex / file.exe.xex / file.any.xex names are excluded from launch/scanning before reading
+file contents, but are visible in File Manager. Supported downloaded package formats remain supported.
 
 Supported: extracted .xex games/apps/homebrew, Xbox Live Arcade, Games on
 Demand, demos and XNA packages. Keep downloaded packages and accompanying
@@ -115,10 +121,12 @@ removal and rescanning; verify your files remain. Send default.log if browsing,
 scanning or launching fails. The log includes library commands, scan counts,
 metadata errors, content-mount results and SDK launch failures.
 
-18 host suites and 280 desktop GPU comparisons pass, alongside profile
+18 host suites and 283 desktop GPU comparisons pass, alongside profile
 memory checks and native XEX validation. Library storage and real title handoff
-still need physical-console testing. This release includes a fresh 54-second
-720p30 desktop GPU walkthrough with simulated profiles, Guide requests, achievement/profile data and storage. It shows request notices, not the actual Guide.
+still need physical-console testing. This release includes a fresh 50-second
+720p30 desktop GPU walkthrough with simulated profiles, storage and launch
+requests. It demonstrates browsing all file types and inactive A on non-XEX
+files, then blade/submenu navigation; it does not prove console title launches.
 Please verify the real Guide handoffs and return selection on a physical 360.
 
 Controls: D-pad/left stick navigate, LB/RB change blades, A select, B back.

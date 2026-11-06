@@ -1,0 +1,148 @@
+{
+  "release": "0.29.0",
+  "recorded_utc": "2026-11-06T14:07:27.379362+00:00",
+  "features": [
+    "All regular file types visible in File Manager, including hidden and extensionless files",
+    "Directories first; case-insensitive name sorting within directories/files",
+    "Only plain XEX names launchable; compound module filenames visible but excluded",
+    "A disabled and no-op for ordinary files; no folder request or launch",
+    "Direct launch extension gate and existing XEX validation retained",
+    "Scan folder picker remains directories-only"
+  ],
+  "tests": {
+    "ctest_passed": 18,
+    "ctest_total": 18,
+    "gpu_comparisons": 283,
+    "gpu_worst_mean": 0.478439,
+    "gpu_peak": 4,
+    "filesystem_fixture": "Actual temporary directory with 15 entries: a directory named Z Folder.xex, valid Utility.XEX, five compound/invalid XEX names, eight other file types including hidden and extensionless",
+    "navigation_fixture": [
+      "XEX creates direct launch command",
+      "notes.txt and file.dll.xex A create no command or busy state",
+      "folder still opens",
+      "refresh and parent navigation",
+      "directories-only folder picker"
+    ],
+    "launch_fixture": "Valid plain XEX prepares; direct request for a package with .bin extension is rejected without prepare/handoff",
+    "xex_verification": [
+      "XEX2 PowerPC-BE, Xbox subsystem, entry 0x820d5390",
+      "20 verified image pages; header/image/import digest chains valid",
+      "xam.xex: 86 import slots",
+      "xboxkrnl.exe: 122 import slots",
+      "PASS: deliberate image mutation rejected: image digest mismatch at page 18"
+    ],
+    "native_pages": 20,
+    "xam_slots": 86,
+    "kernel_slots": 122
+  },
+  "usb_zip": {
+    "members": [
+      "Blades/default.xex",
+      "Blades/README.txt",
+      "Blades/build-info.txt",
+      "Blades/SHA256SUMS",
+      "Blades/LICENSE",
+      "Blades/XSDK-LICENSE.txt",
+      "Blades/THIRD_PARTY_NOTICES.md",
+      "Blades/Config/README.txt",
+      "Blades/Assets/ARTWORK-README.txt",
+      "Blades/Assets/ARTWORK-SHA256SUMS.txt",
+      "Blades/Assets/AUDIO-NOTICE.txt",
+      "Blades/Assets/DASHX360-NOTICE.txt",
+      "Blades/Assets/FONT-LICENSE.txt",
+      "Blades/Assets/FONT-NOTICE.txt",
+      "Blades/Assets/README.txt",
+      "Blades/Assets/blades.xzp",
+      "Blades/licenses/CONVECTION-NOTICE.txt",
+      "Blades/licenses/DASHX360-NOTICE.txt",
+      "Blades/licenses/GCC-RUNTIME-EXCEPTION.txt",
+      "Blades/licenses/GPL-3.0.txt",
+      "Blades/licenses/NEWLIB.txt",
+      "Blades/licenses/STB-LICENSE.txt"
+    ],
+    "crc": "passed",
+    "xex_matches_standalone": true,
+    "artwork_matches_pack": true,
+    "saved_paths_and_logs_excluded": true,
+    "no_real_profile_history_or_pictures_included": true
+  },
+  "artwork": {
+    "entries": 234,
+    "payload_sha256": "c6470ec2ab422e1f5f2984bd244a79173269fd40fa157714be98af8dd183c55c",
+    "unchanged_from": "0.28",
+    "pack_changes": [
+      "ARTWORK-README.txt"
+    ]
+  },
+  "video": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 1280,
+        "height": 720,
+        "r_frame_rate": "30/1"
+      },
+      {
+        "codec_name": "aac",
+        "sample_rate": "48000",
+        "channels": 2,
+        "r_frame_rate": "0/0"
+      }
+    ],
+    "format": {
+      "duration": "50.000000",
+      "size": "6139896"
+    }
+  },
+  "video_full_decode": "passed",
+  "video_scope": "Fresh desktop GPU capture; filesystem snapshots/profile count/launch requests explicitly simulated. No real console storage I/O or title launch.",
+  "capture_checks": {
+    "plain_xex_requests": 1,
+    "non_executable_file_noops": [
+      "cover.png at 00:23",
+      "file.dll.xex at 00:25",
+      "notes.txt at 00:27",
+      "README at 00:29"
+    ]
+  },
+  "sdk_commit": "5f6dc726f65f6d171493a3628c2415c03551f27b",
+  "xex_version": "0.0.29.0",
+  "artifacts": {
+    "dist/Blades-v0.29-USB.zip": {
+      "bytes": 2448912,
+      "sha256": "ed5aca5239b2bca55e5cb249e3c489fe75e07dd755b13024950a89dada9f3bbd"
+    },
+    "dist/Blades/default.xex": {
+      "bytes": 1150976,
+      "sha256": "a7caf0c57949b631cddaa3b5df418cf6103b61a170ddcdf3b97227b8ff99aac9"
+    },
+    "dist/Blades-artwork-pack.zip": {
+      "bytes": 2030416,
+      "sha256": "4be5531dea94b10ba8c161bd3a52e2e59130edebc8d4a4b535f8c4c3f2d04174"
+    },
+    "dist/Blades-v0.29-walkthrough.mp4": {
+      "bytes": 6139896,
+      "sha256": "9db428e4e981f7afcdca4a902ab226c2e70feb64d5fdfae12af1822a8a0333e3"
+    }
+  },
+  "preview_images": {
+    "docs/images/file-explorer-v0.29.png": "cfd70eb792e413a15a9f38d8b24eceb494c27590f779f7632c7a3274abd809d3"
+  },
+  "source_sha256": {
+    "include/library.h": "af59c06b354a2543fa7c937caf216c7f875cce4e3d9a1868a5220595898d149a",
+    "src/core/library.c": "b1d1b7a6380bd5ebc853682f00b7773755e61b6f8e3bb905a814616fabadc34f",
+    "src/core/library_ui.c": "587b585abf64fd39f20c244987960904e7da3029eb07c7c0831b6895daf28304",
+    "src/render/dashboard_render.c": "80586d1d4c21f9132ae825bb05b1c6eaff983522621dbbb740c05c4faea75c9d",
+    "tests/test_library.c": "d3ef071ff5b62a10600270c07f28dcfce30449caacb6acfa9e38980a02524b7e",
+    "tests/test_gpu.c": "6262cb3ed6f95b2d168bffa0527596bb6a3297a2168c04eeedd0aaf71c3a95a1",
+    "tools/render-walkthrough.c": "62fa10955f991335993ea8a5eae97ac8c6be76537c8ea8e6500ec5f8c27a4e1b",
+    "CMakeLists.txt": "f80c9f5774bd2be2106293354b2aba65206492d662532bd775b2abffc6b58ef1",
+    "tools/build-xbox.sh": "055c583a560d70955134eaa478193b4129c269b64b18dcc7012e390aff9b2f1d",
+    "tools/package-usb.py": "12730ac9c823e7b9a306fe48e63810dbaef2e73f6f17716e3712ee15efab14b5",
+    "src/core/dashboard.c": "4a6326c7b9a66bc98771ad4d22a93383c2eee561dba885b3ef14205f9338eefd",
+    "src/platform/xbox360.c": "6aefb71014fc8e35b647dd93a22be3f074a1b91b69ac41398c4c033fda407d7b"
+  },
+  "physical_validation": "Requires physical Xbox 360 check of actual HDD/USB mixed-file listing, XEX launch/return and non-XEX selection. Host fixtures exercise real temporary files and shared navigation, not Xbox storage/launch APIs."
+}

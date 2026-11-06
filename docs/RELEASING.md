@@ -34,7 +34,7 @@ branch holds the public downloadable files. Use a temporary Git index to add
 only release artifacts and their instructions/notices, preserving the current
 working tree. Do not replace the public branch with unrelated local changes.
 
-The v0.28.0 pack contains 234 XUIZ entries: five blade states, additional menu
+The v0.29.0 pack contains 234 XUIZ entries: five blade states, additional menu
 icons, the BSK2 root/expanded layout manifest, retail 5766 shared images and the local font atlas/metrics/notice, plus eight precomposed ABXY prompt sprites, six transition WAVs and an audio notice, the baked Xbox Live panel background, and four startup shutter/reveal/layout entries, plus sixteen disc-reading indicator frames. Original project by
 zivvoz / DashX360, inspired by Microsoft's Xbox 360 Dashboard interfaces.
 Asset ownership remains with the respective rights holders. See
@@ -96,3 +96,9 @@ handoffs and adds thin game-icon separators. Its 234-entry payload is unchanged.
 The fresh 54-second walkthrough must label Guide requests as simulated and
 show request notices; it cannot capture the real console Guide on desktop.
 Publish the matching USB ZIP, separate XEX/pack/video and Guide API audit.
+
+Version 0.29 lists all regular files in File Manager, while keeping only plain
+XEXs launchable. Folder selection for scan paths remains directories only.
+The 234-entry payload is unchanged. Include a fresh walkthrough demonstrating
+ordinary-file no-op selection and XEX launch requests with simulated storage,
+plus the matching XEX, premade pack and USB ZIP.
