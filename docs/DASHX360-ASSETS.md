@@ -130,3 +130,6 @@ controls use existing menu and font resources.
 
 Version 0.22 reuses the same 234-entry payload for the file browser, scan
 controls and retained completion panel. No new artwork conversion is needed.
+
+Version 0.23 keeps the compatible 234-entry payload unchanged while correcting
+the media-player launch path in the executable.

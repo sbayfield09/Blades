@@ -1,4 +1,4 @@
-# Games, apps and homebrew — Blades 0.22
+# Games, apps and homebrew — Blades 0.23
 
 Configure locations under **Games → Played Games → Scan Folders**.
 
@@ -149,8 +149,17 @@ dashboard command 0 for a data disc. No insertion triggers a launch.
 The DVD command/user bytes and 0x3FC-byte buffer match FreeStyle's pinned
 `Freestyle/Scenes/Main/ScnMain.cpp` DVD launch branch; the audio/default command
 numbers are listed in the public `XDASHLAUNCHDATA_COMMAND` header. SDK launch
-performs normal cleanup and explicitly hands off to `flash:/dash.xex`. The
+performs normal cleanup and explicitly hands off to `/Device/Flash/dash.xex`. The
 retail player still controls actual playback; physical-console verification is
 required. The media type mapping comes from FreeStyle's `MEDIA_TYPES` and
 DVDMonitor code. DVD-Audio, Video CD, HD-DVD and original Xbox playback are not
 added by this change.
+
+Version 0.23 corrects the media-launch device path. Flash: is not one of the
+SDK's built-in drive mappings and Blades does not create it; a missing alias
+made stat fail before XAM received the player command. The absolute Flash
+device path lets xsdk_launch verify the file and create launch: for XAM. A
+host regression compiles the pinned SDK's actual resolver/stat prefix and
+launch.c: an NT-call fixture reproduces the old missing-alias failure, then
+checks the new path, alias target, unchanged 1020-byte player data and guarded
+failures. This tests launch preparation, not real Xbox playback.

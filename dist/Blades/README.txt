@@ -1,11 +1,18 @@
-Blades 0.22.0 - games, apps and homebrew hardware test build
+Blades 0.23.0 - games, apps and homebrew hardware test build
 
-Download Blades-v0.22-USB.zip and extract it onto your USB drive. It contains
+Download Blades-v0.23-USB.zip and extract it onto your USB drive. It contains
 Blades/default.xex and the complete Blades/Assets folder, with notices and
 installation notes. Launch Blades/default.xex. No separate artwork extraction
 or conversion is required. The ZIP excludes machine-specific scan settings and
 logs, so extracting over an existing Blades folder preserves its scan paths.
 Separate XEX/artwork downloads remain available.
+
+Version 0.23 fixes the CD/DVD player handoff shown in the supplied photo.
+The previous build relied on an unmounted Flash: alias. The new build opens
+/Device/Flash/dash.xex and lets the SDK prepare the drive alias required by
+XAM. DVD command 7 and the existing launch data are preserved. If preflight
+still fails, the dialog and default.log now include the actual error code.
+Please test Play DVD again; actual playback requires console verification.
 
 Library setup:
 Open Games -> Played Games -> Scan Folders -> Add Folder. Select a storage
@@ -51,7 +58,7 @@ removal and rescanning; verify your files remain. Send default.log if browsing,
 scanning or launching fails. The log includes library commands, scan counts,
 metadata errors, content-mount results and SDK launch failures.
 
-14 host suites and 248 desktop GPU comparisons pass, alongside library/disc
+15 host suites and 248 desktop GPU comparisons pass, alongside library/disc
 memory checks and native XEX validation. Library storage and real title handoff
 still need physical-console testing. This release includes a fresh 97-second
 720p30 desktop GPU walkthrough with simulated storage/launch preparation.

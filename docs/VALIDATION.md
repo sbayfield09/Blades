@@ -94,3 +94,12 @@ mean 0.478396 and peak channel error 4. Native XEX validates 20 pages with
 includes the matching XEX and unchanged 234-entry artwork payload, plus notices;
 local scan settings and logs are excluded. Actual CD/DVD playback and new file
 manager handoffs still require physical-console verification.
+
+Version 0.23: 15 suites pass, adding a regression against the pinned SDK's real
+resolver/stat and launch preflight. It reproduces the missing Flash: ENOENT
+condition and verifies native-device resolution, the generated XAM alias,
+preserved DVD/music/data launch bytes and failure guards. Existing 248 GPU
+comparisons pass; disc ASan/UBSan/LeakSanitizer passes. Native XEX digest/import
+and mutation checks, compatible artwork and combined ZIP checks pass. Fresh
+97-second 720p30 stereo video is labelled as simulated desktop playback.
+Hardware DVD/CD playback remains unverified for this correction.

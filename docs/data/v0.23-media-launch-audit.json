@@ -1,0 +1,124 @@
+{
+  "release": "0.23.0",
+  "recorded_utc": "2026-11-06T09:06:48.202063+00:00",
+  "problem": "Media recognition succeeds, but player launch preflight returns while Flash: is unmapped",
+  "old_target": "flash:/dash.xex",
+  "new_target": "/Device/Flash/dash.xex",
+  "fix": "Let the SDK resolve the device path and create launch: for XAM; preserve player launch data and normal cleanup; include errno in failure dialog/log",
+  "regression": {
+    "implementation": "Pinned SDK path.c prefix through resolver/stat and complete launch.c, with host NT-call fixtures",
+    "old_behavior": "Missing Flash: returns ENOENT before launch-data setup or terminal handoff",
+    "corrected_behavior": "Native-device lookup succeeds; alias target is Device\\Flash; XAM path launch:\\dash.xex; 1020-byte DVD/music/data payload preserved",
+    "guard_cases": [
+      "Missing native dashboard",
+      "Symbolic link failure",
+      "XAM launch-data failure"
+    ],
+    "scope": "Launch preparation only; no real NAND, XAM player execution or optical playback"
+  },
+  "tests": {
+    "ctest_passed": 15,
+    "ctest_total": 15,
+    "gpu_comparisons": 248,
+    "gpu_worst_mean": 0.478396,
+    "gpu_peak": 4,
+    "disc_asan_ubsan_lsan": "passed",
+    "xex_digest_and_imports": "passed",
+    "xex_mutation_fixture": "passed",
+    "native_pages": 20,
+    "xam_slots": 72,
+    "kernel_slots": 122
+  },
+  "usb_zip": {
+    "members": [
+      "Blades/default.xex",
+      "Blades/README.txt",
+      "Blades/build-info.txt",
+      "Blades/SHA256SUMS",
+      "Blades/LICENSE",
+      "Blades/XSDK-LICENSE.txt",
+      "Blades/THIRD_PARTY_NOTICES.md",
+      "Blades/Config/README.txt",
+      "Blades/Assets/ARTWORK-README.txt",
+      "Blades/Assets/ARTWORK-SHA256SUMS.txt",
+      "Blades/Assets/AUDIO-NOTICE.txt",
+      "Blades/Assets/DASHX360-NOTICE.txt",
+      "Blades/Assets/FONT-LICENSE.txt",
+      "Blades/Assets/FONT-NOTICE.txt",
+      "Blades/Assets/README.txt",
+      "Blades/Assets/blades.xzp",
+      "Blades/licenses/CONVECTION-NOTICE.txt",
+      "Blades/licenses/DASHX360-NOTICE.txt",
+      "Blades/licenses/GCC-RUNTIME-EXCEPTION.txt",
+      "Blades/licenses/GPL-3.0.txt",
+      "Blades/licenses/NEWLIB.txt",
+      "Blades/licenses/STB-LICENSE.txt"
+    ],
+    "crc": "passed",
+    "xex_matches_standalone": true,
+    "artwork_matches_pack": true,
+    "saved_paths_and_logs_excluded": true
+  },
+  "artwork": {
+    "entries": 234,
+    "payload_sha256": "c6470ec2ab422e1f5f2984bd244a79173269fd40fa157714be98af8dd183c55c",
+    "unchanged_from": "0.18\u20130.22"
+  },
+  "video": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 1280,
+        "height": 720,
+        "r_frame_rate": "30/1"
+      },
+      {
+        "codec_name": "aac",
+        "sample_rate": "48000",
+        "channels": 2,
+        "r_frame_rate": "0/0"
+      }
+    ],
+    "format": {
+      "duration": "97.000000",
+      "size": "12327958"
+    }
+  },
+  "video_full_decode": "passed",
+  "video_scope": "Fresh desktop GPU render with simulated storage/discs/handoffs; event trace uses corrected device target",
+  "sdk_commit": "5f6dc726f65f6d171493a3628c2415c03551f27b",
+  "sdk_path_sha256": "754edc7c985365d02f73a738fb33ab4234aa60106494d8272daf873342c97d24",
+  "sdk_launch_sha256": "57c4d7ca0d61885b705ef5e6c371fc1d19057f76aff9d5e1e9deab690cc57e44",
+  "xex_system_flags": "00000021",
+  "xex_version": "0.0.23.0",
+  "artifacts": {
+    "dist/Blades-v0.23-USB.zip": {
+      "bytes": 2421640,
+      "sha256": "cc117a87f22a64b8c13cacebdce411afa6eb1dcf49f85eedad5a8e8a4edb4d4a"
+    },
+    "dist/Blades/default.xex": {
+      "bytes": 1101824,
+      "sha256": "3a7f8fad6576fe2e9f74c5e0123a97abc16bd9874a932ab6ab26d895af167a6d"
+    },
+    "dist/Blades-artwork-pack.zip": {
+      "bytes": 2030254,
+      "sha256": "7b476e79744d5d963ae78bab2a374a1852f17953d9e5bdf6efa769f38a9b140d"
+    },
+    "dist/Blades-v0.23-walkthrough.mp4": {
+      "bytes": 12327958,
+      "sha256": "c2050092edd29890a8babd14278740b9a39914e7b4fec655f1b7dd46b49222f6"
+    }
+  },
+  "source_sha256": {
+    "include/disc.h": "9476985607236b715e2ee6f239bde6ee91fede21a85521bd859f66171d7bc888",
+    "src/core/disc.c": "7a7814f635dbdda35cb95af09fb3db652f1f76e66bfe95c9d3da5b64933e1fc7",
+    "src/platform/xbox360.c": "ae1750aa6b054a78acecc796f32d1771e25430437ea66b62a54eb1da042d7154",
+    "tests/test_media_launch.c": "0213368d1a727157c30f0132f2d5f061377878eaa64e9527942ccdcaa84169ab",
+    "tests/sdk-host/sys/utime.h": "cbdd4a32f2f391377dca7cd17c0aca5c942458913d54b9f02e6fc36cbfd743da",
+    "tools/render-walkthrough.c": "487a01c0206b758a233c27970eaf5cde9947edc0bb22f0056377060ad8ab3c15",
+    "CMakeLists.txt": "2d5c1e6bcb6135ffdd0f89080313cfb4212c8774baf8987a3c299cb0b9c79b5b"
+  },
+  "physical_validation": "Requires console retest of Play DVD/CD; screenshot establishes returned preflight failure but did not provide errno/log"
+}

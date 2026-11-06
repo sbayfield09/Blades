@@ -134,3 +134,21 @@ launch-data bytes, physical eject invalidation and stale-generation refusal.
 The native system-player handoffs require console testing; the walkthrough
 uses simulated optical states. DVD-Audio, Video CD, HD-DVD and original Xbox
 playback are outside this change.
+
+## Version 0.23: missing Flash: mapping during player launch
+
+The supplied photo shows DVD recognition and a returned launch-preflight
+error, before the dashboard exits. v0.22 requested flash:/dash.xex, but xsdk's
+drive table does not map Flash: and Blades does not mount it. The corrected
+path is /Device/Flash/dash.xex, matching FreeStyle's Flash drive target. The
+SDK verifies the native file and creates its own launch: link before calling
+XAM. Command 7/user FF and the 0x3FC-byte DVD launch-data layout are unchanged.
+
+The new media-launch host test executes the pinned SDK's real path resolver,
+stat and launch preflight with simulated NT object/filesystem calls. Missing
+Flash: reproduces ENOENT before launch-data setup. The corrected device path
+prepares launch:\dash.xex and preserves DVD/audio/data command bytes. Missing
+files, failed link creation and failed launch-data setup return without a
+terminal handoff. The native failure dialog now includes errno/description,
+and the log records media, target path and error together. Physical playback
+still needs a console test.
