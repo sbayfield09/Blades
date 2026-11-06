@@ -34,7 +34,7 @@ branch holds the public downloadable files. Use a temporary Git index to add
 only release artifacts and their instructions/notices, preserving the current
 working tree. Do not replace the public branch with unrelated local changes.
 
-The v0.24.0 pack contains 234 XUIZ entries: five blade states, additional menu
+The v0.25.0 pack contains 234 XUIZ entries: five blade states, additional menu
 icons, the BSK2 root/expanded layout manifest, retail 5766 shared images and the local font atlas/metrics/notice, plus eight precomposed ABXY prompt sprites, six transition WAVs and an audio notice, the baked Xbox Live panel background, and four startup shutter/reveal/layout entries, plus sixteen disc-reading indicator frames. Original project by
 zivvoz / DashX360, inspired by Microsoft's Xbox 360 Dashboard interfaces.
 Asset ownership remains with the respective rights holders. See
@@ -73,3 +73,8 @@ snapshots, gamer pictures or credentials. See PROFILE-INTEGRATION.md.
 The matching fresh walkthrough labels its profile/Guide events as simulations;
 it cannot demonstrate real console authentication. The 234-entry artwork
 payload is unchanged.
+
+Version 0.25 corrects the signed-out account card to use the supplied reference's
+green default tile and Profiles Found count, and uses stock GScore.png for the
+Gamerscore label. Both resources were already in the pack; the 234-entry
+payload is unchanged. Publish a fresh matching walkthrough and combined USB ZIP.

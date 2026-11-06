@@ -138,3 +138,7 @@ Version 0.24 reuses the same 234-entry payload for the native profile card and
 adds no account data to the pack. The signed-in gamer picture is read from XAM
 into RAM; a neutral existing tile remains the fallback. The combined USB ZIP
 and separate premade pack retain these notices and source attribution.
+
+Version 0.25 uses the existing retail ico_64x_DefaultPicture.png for the
+signed-out card and GScore.png for the Gamerscore label. Neither is redrawn or
+replaced with a font glyph. The same 234-entry payload and notices are included.

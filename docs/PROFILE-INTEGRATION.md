@@ -1,7 +1,8 @@
-# Profile integration — 0.24
+# Profile integration — 0.25
 
 At a blade root, X opens the native Xbox Guide sign-in menu when signed out.
-The signed-out Sign In card contains no old account data or statistics; press
+The signed-out Sign In card shows the original green default tile and a
+Profiles Found count, with no old account data or statistics; press
 Up from the first menu row to highlight it, then A to sign in. This uses
 XamShowSigninUI(1, 0), so the Guide manages profile selection and authentication.
 The desktop preview explains that this requires the console.
@@ -56,3 +57,18 @@ public FreeStyle dashboard session and gamer-picture API usage (commit
 df89a42edf055370e3383576c93199a3713c41e9), and Xenia's profile-setting layout.
 The release uses the unchanged 234-entry premade artwork payload and retains
 its attribution; no user account data is included in the release ZIP.
+
+Version 0.25 follows the supplied signed-out screenshot: Sign In heading,
+square green ico_64x_DefaultPicture.png tile and a Profiles Found line. The
+console worker counts public profile content metadata with content type
+0x10000, user NONE and all storage devices. Enumeration is bounded, the handle
+is always closed, and failed/incomplete counts display Choose a Profile.
+It never calls the account enumerator that exposes account credentials.
+Counts refresh while signed out, without delaying signed-in card metadata.
+The walkthrough uses two simulated available profiles; this is not a fixed
+number in the console build. Zero and singular counts have their own text.
+
+The signed-in card uses the stock GScore.png icon in place of the label's
+leading G, as in the second reference. The score value contains digits only.
+Numeric columns shrink as needed to keep large totals clear of their labels.
+Both PNGs already exist in the compatible 234-entry artwork payload.

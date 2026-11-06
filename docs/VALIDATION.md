@@ -127,3 +127,18 @@ local scan settings and logs. The new 117-second 720p30 walkthrough has stereo
 48 kHz AAC audio and decodes completely. Profile/Guide/storage events are
 explicitly simulated; native Guide UI and real profile reads/sign-out need a
 physical-console check. See PROFILE-INTEGRATION.md and the v0.24 audit JSON.
+
+## Version 0.25 sign-in card and gamerscore icon
+
+16/16 host suites pass. Profile count refresh tests distinguish a real zero
+from an unavailable result and exercise refresh while signed out. 267 CPU/GPU
+comparisons pass (worst mean 0.478421, peak 4), including plural/singular/zero
+profile counts, the signed-out tile, signed-in GScore icon and long totals.
+Profile AddressSanitizer/UndefinedBehaviorSanitizer/LeakSanitizer checks pass.
+
+The native build uses XEX 0.0.25.0 with 20 verified pages and 86 XAM/122 kernel
+import slots. The artwork remains the same 234-entry payload; the original
+DefaultPicture and GScore PNGs were already present. The new 117-second 720p30
+stereo walkthrough is freshly rendered and labels profile/count/Guide events
+as simulated. Console public-content enumeration and Guide/account behavior
+still need physical-console validation. See the v0.25 audit JSON.

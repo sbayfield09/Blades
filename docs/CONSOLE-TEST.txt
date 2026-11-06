@@ -1,18 +1,21 @@
-Blades 0.24.0 - profile integration hardware test build
+Blades 0.25.0 - profile integration hardware test build
 
-Download Blades-v0.24-USB.zip and extract it onto your USB drive. It contains
+Download Blades-v0.25-USB.zip and extract it onto your USB drive. It contains
 Blades/default.xex and the complete Blades/Assets folder, with notices and
 installation notes. Launch Blades/default.xex. No separate artwork extraction
 or conversion is required. The ZIP excludes machine-specific scan settings and
 logs, so extracting over an existing Blades folder preserves its scan paths.
 Separate XEX/artwork downloads remain available.
 
-Version 0.24 integrates the console's active profile and Guide sign-in menu.
-When signed out, the account card shows Sign In with no gamertag, gamer picture
-or made-up statistics. Navigate up from the first menu item to highlight it,
+Version 0.25 integrates the console's active profile and Guide sign-in menu.
+When signed out, the account card shows Sign In, the original green default
+picture and the available profile count, matching the supplied reference.
+There is no previous gamertag or personal statistics. The count comes from
+public content metadata; if unavailable, the card says Choose a Profile. Navigate up from the first menu item to highlight it,
 then press A to open the real Xbox Guide sign-in menu. X at a blade root also
 opens sign-in. A profile already signed in is picked up automatically.
-The card displays the active controller user's gamertag, gamer picture, games
+The Gamerscore label uses the original circular G icon; its value has no
+trailing text G. The card displays the active controller user's gamertag, gamer picture, games
 played, gamerscore and achievement count. Local/offline profiles are supported.
 Card fields refresh after returning from the Guide and periodically while
 Blades stays open. Unknown totals show --, not an invented zero. No account
@@ -77,7 +80,7 @@ removal and rescanning; verify your files remain. Send default.log if browsing,
 scanning or launching fails. The log includes library commands, scan counts,
 metadata errors, content-mount results and SDK launch failures.
 
-16 host suites and 264 desktop GPU comparisons pass, alongside profile
+16 host suites and 267 desktop GPU comparisons pass, alongside profile
 memory checks and native XEX validation. Library storage and real title handoff
 still need physical-console testing. This release includes a fresh 117-second
 720p30 desktop GPU walkthrough with simulated profiles, Guide requests, storage and launch preparation.
