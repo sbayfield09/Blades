@@ -340,3 +340,22 @@ the fully decoded fresh 78-second video are recorded in the release audit.
 Source comparisons use original reference footage around 04:28–04:29, 04:37,
 05:09 and Sign In at 04:23 / 22:05, plus the signed-in Games reference still.
 The final console display appearance remains a physical check.
+
+## Version 0.34 mirrored upper group and first-button divider
+
+Five relevant suites pass: resources, skin, draw-list, startup and GPU.
+Pixel checks compare the complete upper shadow with a reflected downward
+shadow for both existing rounded and flat styles. First-row calls produce no
+shadow; samples at the upper group's first/selected boundaries stay untouched
+outside its bounds. The rounded edge curves upward away from the selection.
+All five blade roots and FTP are checked for the restored top divider and its
+clear gap before the first row. Existing 0.33 row/card pixel checks remain.
+
+The GPU suite adds six positions from first to third row while the foreground
+cache follows the animated highlight. Full CPU/GPU comparisons, sanitizer
+results, native XEX digests/mutation, archive exclusions/checksums and fresh
+walkthrough decode are recorded in the 0.34 release audit. The 234-entry artwork
+payload and lower-shadow function are unchanged. Reference frames checked:
+Games 04:28–04:29 vs 04:37, Media 05:09, supplied System/Xbox Live stills.
+Desktop tests establish shared-renderer parity; physical screen appearance
+still requires comparison on an Xbox 360.

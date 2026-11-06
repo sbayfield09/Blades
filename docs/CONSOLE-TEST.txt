@@ -1,21 +1,22 @@
-Blades 0.33.0 - highlight/divider join and curved card-shadow hardware test build
+Blades 0.34.0 - mirrored upper menu shadow and top-divider hardware test build
 
-Extract Blades-v0.33-USB.zip onto USB and launch Blades/default.xex. The ZIP
+Extract Blades-v0.34-USB.zip onto USB and launch Blades/default.xex. The ZIP
 includes the complete Assets folder and notices. It excludes local library
 paths, FTP settings/login details and logs, preserving those on an update.
 Separate matching XEX/artwork/video downloads remain available.
 
-Version 0.33 visual corrections:
-- Row highlight reaches the divider location. The shadow covers and replaces
-  that selected rule, with no separate hard bar painted over the penumbra.
-  Other rows keep their divider grooves; the selected bevel is above the lip.
-- The Sign In/Profile sheen reaches its inner bottom frame. The frame remains
-  visible; the card shadow follows both rounded lower corners and fades at
-  the sides, replacing the rectangular shadow strip.
-- Root menus, expanded submenus, library/File Manager and FTP use the same
-  row edge. Unselected thin divider grooves and 53px row spacing are retained.
-- FTP login fields stay in the right column. Top/bottom bar shading, menu tint,
-  font sizes, achievement icon spacing and all native actions are unchanged.
+Version 0.34 visual corrections:
+- A lower selected row now has an upward closing shadow/curve for the group
+  above it, matching its downward shadow's strength, penumbra and corner.
+  It reflects the same drawing routine rather than a separately tuned shape.
+- The first visible row has no upper shadow. The upper edge follows selection
+  movement and stops at the top of the visible button list.
+- A thin dark/light divider is restored above the first button on main menus,
+  ordinary submenus, FTP and nonempty library/File Manager lists.
+- Divider grooves end at both recessed group edges. The adjacent divider is
+  covered by each contact shadow; other grooves remain, as in the references.
+- The lower shadow, curved profile-card shadow, menu layout/fonts, achievement
+  spacing, FTP layout/settings and native actions are retained.
 
 Profile fixes:
 - Signed-out profile count reads public profile-package headers on available

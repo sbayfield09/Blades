@@ -1,0 +1,195 @@
+{
+  "release": "0.34.0",
+  "recorded_utc": "2026-11-06T19:09:01.467880+00:00",
+  "changes": [
+    "Add an upward closing group shadow for lower visible selections",
+    "Match upper and lower strength, penumbra, bevel and corner by reflecting the same existing drawing routine",
+    "Restore the divider above the first button on roots, ordinary submenus, FTP and nonempty library/File Manager lists",
+    "Cover the immediately adjacent groove with each contact shadow and end other grooves before the recessed side edge"
+  ],
+  "references": {
+    "original_dashboard_video_seconds": [
+      268,
+      269,
+      277,
+      309
+    ],
+    "supplied_stills": [
+      "System4.jpg",
+      "XboxLive1.jpg"
+    ],
+    "subjects": "First versus second Games selection: upward closing edge above Played Games and downward edge below; first-button divider on Games/Media/System/XboxLive",
+    "scope": "Visual reference comparison; equal upper/lower style is additionally enforced by exact shared-renderer pixel checks"
+  },
+  "upper_shadow": {
+    "implementation": "Reflect existing theme_menu_shadow solid spans vertically at selected_top; no separately tuned opacity/profile",
+    "bounds": "Between first visible button and actual animated highlight top",
+    "first_row": "No shadow when selected_top<=first; scrolled library uses first visible row",
+    "styles": "Mirror existing rounded and flat styles respectively",
+    "new_image_allocations": 0,
+    "foreground_cache": "Reflected spans recorded synchronously into existing cached foreground commands",
+    "lower_shadow_unchanged_proof": [
+      "PASS: lower-shadow function unchanged from0.33",
+      "SHA256 b639a4e921b55587e53f3a77bec080812456a5b68b1a1c34f3a3a437b7a48de0"
+    ]
+  },
+  "top_divider": {
+    "placement": "Two dark pixels at first_button_y-4 and -3, light pixel at -2; one-pixel gap before first button",
+    "roots_first_y": {
+      "profile_blades": 238,
+      "other_blades": 96
+    },
+    "submenu_ftp_library_first_y": 87,
+    "empty_library": "No button-divider when there are no rows"
+  },
+  "retained": [
+    "0.33 selected fill/lower-shadow join",
+    "curved profile-card shadow and account/Guide behavior",
+    "header/footer cap shading",
+    "menu spacing/tint/fonts and achievement geometry",
+    "FTP layout/protocol/settings",
+    "234-entry artwork payload"
+  ],
+  "validation": {
+    "ctest_passed": 5,
+    "ctest_total": 5,
+    "suites": [
+      "resources",
+      "skin",
+      "draw-list",
+      "startup",
+      "gpu"
+    ],
+    "mirror_pixel_comparisons": 256000,
+    "mirror_styles": [
+      "rounded",
+      "flat"
+    ],
+    "first_row_guard": "Output unchanged when first==selected_top",
+    "upper_bounds": "No drawing before first row or at/inside selected row",
+    "top_divider": "All five roots and FTP checked for dark rule and clear following gap",
+    "existing_row_edge_checks": 20,
+    "draw_list_command_states": 74,
+    "gpu_comparisons": 298,
+    "gpu_worst_mean": 0.485981,
+    "gpu_peak": 5,
+    "new_gpu_coverage": "Six animated highlight positions from first to third System row",
+    "sanitizers": "ASan/UBSan/LSan pass real-pack draw-list, row/card and mirror/top-divider fixtures",
+    "xex_verification": [
+      "XEX2 PowerPC-BE, Xbox subsystem, entry 0x820dcc08",
+      "21 verified image pages; header/image/import digest chains valid",
+      "xam.xex: 92 import slots",
+      "xboxkrnl.exe: 122 import slots",
+      "PASS: deliberate image mutation rejected: image digest mismatch at page 19"
+    ],
+    "native_pages": 21,
+    "xam_slots": 92,
+    "kernel_slots": 122
+  },
+  "usb_zip": {
+    "members": [
+      "Blades/default.xex",
+      "Blades/README.txt",
+      "Blades/build-info.txt",
+      "Blades/SHA256SUMS",
+      "Blades/LICENSE",
+      "Blades/XSDK-LICENSE.txt",
+      "Blades/THIRD_PARTY_NOTICES.md",
+      "Blades/Config/README.txt",
+      "Blades/Assets/ARTWORK-README.txt",
+      "Blades/Assets/ARTWORK-SHA256SUMS.txt",
+      "Blades/Assets/AUDIO-NOTICE.txt",
+      "Blades/Assets/DASHX360-NOTICE.txt",
+      "Blades/Assets/FONT-LICENSE.txt",
+      "Blades/Assets/FONT-NOTICE.txt",
+      "Blades/Assets/README.txt",
+      "Blades/Assets/blades.xzp",
+      "Blades/licenses/CONVECTION-NOTICE.txt",
+      "Blades/licenses/DASHX360-NOTICE.txt",
+      "Blades/licenses/GCC-RUNTIME-EXCEPTION.txt",
+      "Blades/licenses/GPL-3.0.txt",
+      "Blades/licenses/NEWLIB.txt",
+      "Blades/licenses/STB-LICENSE.txt"
+    ],
+    "crc": "passed",
+    "xex_matches_standalone": true,
+    "artwork_matches_pack": true,
+    "personal_scan_paths_ftp_settings_credentials_and_logs_excluded": true,
+    "unversioned_alias_identical": true
+  },
+  "artwork": {
+    "entries": 234,
+    "payload_sha256": "c6470ec2ab422e1f5f2984bd244a79173269fd40fa157714be98af8dd183c55c",
+    "unchanged_from": "0.33",
+    "pack_changes": [
+      "ARTWORK-README.txt"
+    ]
+  },
+  "video": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 1280,
+        "height": 720,
+        "r_frame_rate": "30/1"
+      },
+      {
+        "codec_name": "aac",
+        "sample_rate": "48000",
+        "channels": 2,
+        "r_frame_rate": "0/0"
+      }
+    ],
+    "format": {
+      "duration": "78.000000",
+      "size": "8561592"
+    }
+  },
+  "video_full_decode": "passed",
+  "video_scope": "Fresh final0.34 shared-renderer desktop GPU capture with matching artwork. Profile/achievement/FTP/storage/Guide/keyboard events explicitly simulated. First/lower-row comparison uses final System capture.",
+  "sdk_commit": "5f6dc726f65f6d171493a3628c2415c03551f27b",
+  "xex_version": "0.0.34.0",
+  "artifacts": {
+    "dist/Blades-v0.34-USB.zip": {
+      "bytes": 2471486,
+      "sha256": "68c01aad3b5fb23b47bcad2985134804b9bda9de25304bea9a78b428d135916b"
+    },
+    "dist/Blades/default.xex": {
+      "bytes": 1187840,
+      "sha256": "aefccd56319b79ba2626267861ef9b6ff6253820c7c028d8e1b7c244fe658e1e"
+    },
+    "dist/Blades-artwork-pack.zip": {
+      "bytes": 2030417,
+      "sha256": "15408ec7523a6f13373ada97cd90fb8057edd0579916e3aae0c218bc92132f56"
+    },
+    "dist/Blades-v0.34-walkthrough.mp4": {
+      "bytes": 8561592,
+      "sha256": "d1c1d4bb91032140c51419868817eb4a7aa25de7ca464bb1c77960d5468f56ae"
+    }
+  },
+  "preview_images": {
+    "docs/images/signin-highlight-v0.34.png": "205b4996bff1f11251f3cb468c12aeda0503fe7d53148f7f226c5fbd22f6ced8",
+    "docs/images/profile-card-v0.34.png": "d9cb4262df4b82e95cbb05e6950bf913b3de61b44b49a5d284511fea566ced71",
+    "docs/images/menu-highlight-v0.34.png": "25046a92ad2a75c6bc567509635a70c3030f1d734d3fb802b18dae1406c5f7f0",
+    "docs/images/system-highlight-v0.34.png": "8cc0a53a3112f069d8e69e7d23b0e97eb99a51c8d7421500d670d8a455c64f7f",
+    "docs/images/ftp-computers-v0.34.png": "f036bf61b027de916a33063725f93e2c4c77661b39193c5d7596f62f2af1dce7",
+    "docs/images/system-first-v0.34.png": "fb2c99593fbb0a816a1a15228672c755d55832fe678eea9ec93802c0e0e965c6",
+    "docs/images/upper-shadow-comparison-v0.34.png": "0f71f7a5ad525dbf28ee6cda062bc43e329b8a23507f9edad8a865ea44a95251"
+  },
+  "source_sha256": {
+    "include/theme.h": "c0e21f631467d124c17e94dbc250a39f148e66a813c8a9de1622efd15e22a792",
+    "src/render/theme.c": "218bd779bfcf8cc90093838f76280c11e53fe6b028904411ed0298bee4c6580f",
+    "tests/test_draw_list.c": "f5883fcb65c6012258c30031077d5a2228a54402492f4cec6cbb2c3393282f41",
+    "src/render/dashboard_render.c": "8e8ef2ffc714eaea26309d848cf1d0376b86980b388ae9563f9bcdbb6874c1ff",
+    "src/render/skin.c": "b5e991c245167fa9be086075bfa8753fd82a74c986f5cd1cd38cdea5a2715d7d",
+    "tests/test_skin.c": "748d8d0484b42ef68341be1a7eb14e25781b23399ef90bfe43b590994715da83",
+    "tests/test_gpu.c": "9fd4e5e7bb59a880df9af0bed3393c22be3b938c7feca0cafccdbc905bc47d6d",
+    "CMakeLists.txt": "e0c7c96c4567d93b8c7610e6867984c32cb2ac5b009d21da73da13c38cbb67cc",
+    "tools/build-xbox.sh": "694a358b649b7b62d21c8fa9b148d029c98c5808669c728fa1cc0d3a2438fdb9",
+    "tools/package-usb.py": "4f4f9f5ccf074a1945f0573c01d433d5b65ad589c9293bc69586a72a1de19e63",
+    "tools/render-walkthrough.c": "f98d8d8e2b0fa4a4d9d648ae1c846c7e108fb3800c8b2e85c8ab4da4e76a1162"
+  },
+  "physical_validation": "Final appearance on a physical Xbox360 display remains a console check; host tests establish renderer parity, not console-native UI/networking behavior."
+}

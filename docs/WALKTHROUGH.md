@@ -1,6 +1,6 @@
-# Blades 0.33 row-edge and curved-card-shadow walkthrough
+# Blades 0.34 upper menu shadow and top-divider walkthrough
 
-[Watch/download the MP4](../dist/Blades-v0.33-walkthrough.mp4)
+[Watch/download the MP4](../dist/Blades-v0.34-walkthrough.mp4)
 
 Fresh 78-second 1280×720 desktop GPU capture at 30 fps with 48 kHz stereo AAC
 and the matching artwork pack. Its label identifies profiles, achievements,
@@ -29,7 +29,7 @@ and on/off persistence are checked with the actual C FTP server in loopback
 integration tests. See PROFILE-INTEGRATION.md, ACHIEVEMENTS.md and FTP.md.
 Artwork/audio credit: zivvoz / DashX360 and respective rights holders.
 
-The capture uses the final 0.33 renderer: upper-bar shading is inside the
+The capture uses the final 0.34 renderer: upper-bar shading is inside the
 header and fades upward from its bottom edge; footer shading fades downward
 from its upper edge. Unselected root/submenu rows retain their thin divider grooves.
 
@@ -37,3 +37,8 @@ Look at the selected lower edge on Games around 00:18 and System around
 00:36–00:39, then each FTP control at 00:40–00:55. The highlight now reaches the
 divider location and its continuous shadow covers that selected rule. The signed-out/signed-in card at
 00:02 / 00:06 shows its new curved shadow ends; no console profile data appears.
+
+The 0.34 capture adds the top divider and mirrored upper group. Compare first
+and lower System selections at 00:35–00:39, FTP controls at 00:40–00:55 and
+Played Games at 01:01. Lower selections have matching upward/downward edges;
+the first row has only its existing lower shadow.

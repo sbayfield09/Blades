@@ -1,46 +1,40 @@
-# Highlight/divider join and card shadow — 0.33
+# Upper menu group and top divider — 0.34
 
-The original reference recording was checked at 04:28–04:29 (Achievements),
-04:37 (Played Games) and 05:09 (Media/Music), including the selected lower edge
-and its join with the right-hand curve. Sign In footage at 04:23 and 22:05 in
-the uploaded achievement recording, plus video-games.jpg, was checked for the
-card's frame and both lower shadow corners. Camera exposure/compression and
-the animated background affect brightness; these are geometric fits rather
-than recovered retail XUI constants.
+The original dashboard reference at 04:37 (Played Games selected) shows two
+closing group edges: the area above the selected row curves upward at the
+right, while the area below curves downward. At 04:28–04:29 (first-row
+Achievements) there is no upper group. These frames, Media at 05:09 and the
+supplied System/Xbox Live stills were checked for the first-button divider.
+The top divider sits just above the first row; it was missing in 0.33.
 
-In 0.32 the row sheen stopped at offset 48 and the shadow began at 49, while
-the dark divider was at 51–52 and another light line at 53. That placed a line
-inside an already-started shadow and made the lower edge appear doubled.
-Version 0.33 fills through offset 50 and starts the shadow at the divider
-location, offset 51. The shadow covers and effectively replaces the selected
-row's divider; that dark/light rule is not painted over the penumbra again.
-The selected lip's light bevel is above the contact edge, not a separate bright
-rule through the underside. Other rows retain their normal dark/light groove.
-During movement, a divider crossed by the shadow's contact band is covered too.
-The 53-pixel row pitch, fonts,
-icons, sheen tint/width and existing right-side/lower-left shadow taper remain.
-Roots, ordinary submenus, library/File Manager and FTP use the same boundary.
+Version 0.34 reflects the existing downward shadow routine vertically to
+render the upper one. The two share the same opacity, penumbra, contact fade,
+right-hand contour and bevel. The existing flat Xbox Live root style is
+reflected as flat too; rounded menu styles retain matching rounded corners.
+The upper group is clipped between the first visible row and the top of the
+selection. It is absent on the first row, including a scrolled library whose
+selected row is the first visible entry. During movement its height follows
+the actual animated highlight position.
 
-![Actual 0.32/0.33 renderer edge comparison, desktop simulations](images/row-edge-comparison-v0.33.png)
+![First and lower selected rows using the final renderer, desktop simulations](images/upper-shadow-comparison-v0.34.png)
 
-The account card had a rectangular shadow strip. It is replaced with a soft
-shadow following the rounded frame's lower contour. At either corner the
-shadow rises with the curve and fades toward the side, so its tail finishes
-sooner there than at the flat centre. It is drawn behind the frame, and both
-frame outlines remain above the focus fill. The focus reaches the inner lower
-border without painting over it. This applies signed in and signed out.
+A two-pixel dark/one-pixel light divider is restored four pixels above the
+first button. Roots, ordinary submenus, FTP controls and nonempty library/File
+Manager lists use the same placement. Grooves inside the upper/lower groups
+stop before their right-hand side shadows; the contacts replace the grooves
+immediately beside the selected row, avoiding hard lines through the shadows.
 
-![Actual 0.32/0.33 card-shadow comparison, desktop simulations](images/card-shadow-comparison-v0.33.png)
+![Matched upper/lower edges in Computers, simulated FTP values](images/ftp-computers-v0.34.png)
 
-The 0.32 top/bottom cap shading is retained: header shading is inset and fades
-upward from its lower edge; footer shading fades downward from its upper edge.
-Its cached original-artwork contours, cap animation and startup opacity are
-unchanged. Achievement geometry, FTP status layout, native account/Guide
-behavior and the 234-entry artwork payload are unchanged.
+The 0.33 selected fill/lower-shadow join, curved profile-card shadow, other
+menu spacing, fonts/tint and original artwork payload are retained. Header/
+footer cap shading is unchanged. The upper implementation reflects solid spans
+synchronously into the existing foreground command cache, without new image
+allocations or changes to the GPU shaders.
 
-The renderer tests compare real pixels with and without focus, checking that
-the last fill rows are bright and the selected divider is covered by one
-continuous penumbra, without a separate bright stripe through it. They also check both curved card ends
-and the clean tail boundaries. Captures use the final renderer and real pack,
-with explicit simulated profile/storage/FTP/Guide labels. Physical display
-appearance still needs comparison on a 360.
+Tests compare every upper-shadow pixel with the reflected lower output for
+both existing styles, check first-row absence and upper-group clipping, and
+verify the top divider on all five roots and FTP. Existing row/card checks
+remain. CPU/GPU comparisons add six animated highlight positions. Reference
+camera exposure and console display appearance are separate from pixel parity;
+the desktop simulation is not a console capture.

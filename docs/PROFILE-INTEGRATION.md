@@ -1,4 +1,4 @@
-# Profile integration — 0.33
+# Profile integration — 0.34
 
 The account card is selectable on Xbox Live, Games and Media whether signed
 in or signed out. Up from the first menu item selects it; Down returns to the
@@ -72,6 +72,10 @@ checks package counting, cross-device duplicates and invalid/common exclusions.
 The walkthrough's accounts/pictures/counts are explicit simulations; check
 actual Guide actions, profile pictures/counts and account changes on a 360.
 
-![Signed-out highlighted card, simulated profile count](images/signin-highlight-v0.33.png)
+![Signed-out highlighted card, simulated profile count](images/signin-highlight-v0.34.png)
 
-![Signed-in selectable card, simulated profile/picture](images/profile-card-v0.33.png)
+![Signed-in selectable card, simulated profile/picture](images/profile-card-v0.34.png)
+
+Version 0.34 adds the button-list top divider beneath the card and a matching
+upward group shadow for lower menu selections. The card's own frame, focus,
+rounded shadow and all native profile actions are retained.
