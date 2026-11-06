@@ -1,22 +1,25 @@
-Blades 0.34.0 - mirrored upper menu shadow and top-divider hardware test build
+Blades 0.35.0 - top-edge alignment and FTP spacing/animation hardware test build
 
-Extract Blades-v0.34-USB.zip onto USB and launch Blades/default.xex. The ZIP
+Extract Blades-v0.35-USB.zip onto USB and launch Blades/default.xex. The ZIP
 includes the complete Assets folder and notices. It excludes local library
 paths, FTP settings/login details and logs, preserving those on an update.
 Separate matching XEX/artwork/video downloads remain available.
 
-Version 0.34 visual corrections:
-- A lower selected row now has an upward closing shadow/curve for the group
-  above it, matching its downward shadow's strength, penumbra and corner.
-  It reflects the same drawing routine rather than a separately tuned shape.
-- The first visible row has no upper shadow. The upper edge follows selection
-  movement and stops at the top of the visible button list.
-- A thin dark/light divider is restored above the first button on main menus,
-  ordinary submenus, FTP and nonempty library/File Manager lists.
-- Divider grooves end at both recessed group edges. The adjacent divider is
-  covered by each contact shadow; other grooves remain, as in the references.
-- The lower shadow, curved profile-card shadow, menu layout/fonts, achievement
-  spacing, FTP layout/settings and native actions are retained.
+Version 0.35 visual corrections:
+- The highlighted row's top and mirrored upper shadow now meet the divider
+  above it, two pixels above the old row origin. The fill extends downward
+  to the same existing lower edge. Text/icon positions are unchanged.
+- Animated cursor coordinates round to pixels instead of truncating, avoiding
+  a permanent one-pixel error when the highlight approaches its target.
+- FTP uses that animated cursor for its highlight and both shadows instead of
+  snapping directly to the selected button index. Fixed grooves stay covered
+  while the focus passes across them.
+- FTP status/IP/username/password/device groups use the same spacing: 86px
+  for single-line groups, 36px label-to-value and 50px value-to-next-label.
+  All values share the same font size. Long login values wrap and advance
+  following groups, using a common smaller value size to stay above the footer.
+- Matching upper/lower shadow profiles, first-row guard, top-divider positions,
+  curved profile-card shadow and native actions/settings are retained.
 
 Profile fixes:
 - Signed-out profile count reads public profile-package headers on available

@@ -34,7 +34,7 @@ branch holds the public downloadable files. Use a temporary Git index to add
 only release artifacts and their instructions/notices, preserving the current
 working tree. Do not replace the public branch with unrelated local changes.
 
-The v0.34.0 pack contains 234 XUIZ entries: five blade states, additional menu
+The v0.35.0 pack contains 234 XUIZ entries: five blade states, additional menu
 icons, the BSK2 root/expanded layout manifest, retail 5766 shared images and the local font atlas/metrics/notice, plus eight precomposed ABXY prompt sprites, six transition WAVs and an audio notice, the baked Xbox Live panel background, and four startup shutter/reveal/layout entries, plus sixteen disc-reading indicator frames. Original project by
 zivvoz / DashX360, inspired by Microsoft's Xbox 360 Dashboard interfaces.
 Asset ownership remains with the respective rights holders. See
@@ -134,3 +134,8 @@ Version 0.34 adds the reflected matching upper group shadow for non-first
 visible selections and restores the divider above the first button. Retain the
 0.33 lower/card shadows and artwork payload. Ship a fresh labeled walkthrough,
 XEX, USB ZIP, premade pack and first/lower-row comparison captures.
+
+Version 0.35 aligns the top of menu focus/upper shadow with the preceding rule,
+rounds interpolated cursor pixels, restores FTP cursor animation and equalizes
+FTP status-field spacing. Retain the lower/card shadows and234-entry payload.
+Ship a fresh labeled walkthrough and all four matching downloads.

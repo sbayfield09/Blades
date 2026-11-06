@@ -1,4 +1,4 @@
-# Upper menu group and top divider — 0.34
+# Top-edge alignment and FTP motion — 0.35
 
 The original dashboard reference at 04:37 (Played Games selected) shows two
 closing group edges: the area above the selected row curves upward at the
@@ -16,7 +16,7 @@ selection. It is absent on the first row, including a scrolled library whose
 selected row is the first visible entry. During movement its height follows
 the actual animated highlight position.
 
-![First and lower selected rows using the final renderer, desktop simulations](images/upper-shadow-comparison-v0.34.png)
+![First and lower selected rows using the final renderer, desktop simulations](images/upper-shadow-comparison-v0.35.png)
 
 A two-pixel dark/one-pixel light divider is restored four pixels above the
 first button. Roots, ordinary submenus, FTP controls and nonempty library/File
@@ -24,7 +24,7 @@ Manager lists use the same placement. Grooves inside the upper/lower groups
 stop before their right-hand side shadows; the contacts replace the grooves
 immediately beside the selected row, avoiding hard lines through the shadows.
 
-![Matched upper/lower edges in Computers, simulated FTP values](images/ftp-computers-v0.34.png)
+![Matched upper/lower edges in Computers, simulated FTP values](images/ftp-computers-v0.35.png)
 
 The 0.33 selected fill/lower-shadow join, curved profile-card shadow, other
 menu spacing, fonts/tint and original artwork payload are retained. Header/
@@ -38,3 +38,17 @@ verify the top divider on all five roots and FTP. Existing row/card checks
 remain. CPU/GPU comparisons add six animated highlight positions. Reference
 camera exposure and console display appearance are separate from pixel parity;
 the desktop simulation is not a console capture.
+
+Version 0.35 moves the selected fill's top and the reflected upper-shadow
+anchor up two pixels onto the preceding divider location. It extends the fill
+height by two pixels so the lower edge remains at its 0.33/0.34 position. The
+first row now meets the light edge of the top divider without a blank gap.
+Labels, icons, row pitch and both shadow opacity profiles remain unchanged.
+Animated row positions use nearest-pixel rounding, so asymptotic interpolation
+cannot leave them a pixel short of the actual divider.
+
+FTP now renders the shared interpolated highlight rather than the target child
+index. Its upper/lower contacts and groove coverage follow that position too;
+a fixed divider is not painted through the moving sheen. The status column
+uses equal spacing and common value-font size, with wrapped login text moving
+following fields by complete extra lines. No FTP protocol/settings changes.

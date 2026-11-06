@@ -359,3 +359,22 @@ payload and lower-shadow function are unchanged. Reference frames checked:
 Games 04:28–04:29 vs 04:37, Media 05:09, supplied System/Xbox Live stills.
 Desktop tests establish shared-renderer parity; physical screen appearance
 still requires comparison on an Xbox 360.
+
+## Version 0.35 top-edge alignment and FTP spacing/motion
+
+Five relevant suites pass: resources, skin, draw-list, startup and GPU.
+The row-edge checks include the newly filled upper two pixels, while the
+existing lower shadow/card contracts and256000 mirrored pixels remain.
+First-row tests now require the fill to meet the top divider rather than
+leaving an unpainted gap. Static row positions round to their exact targets.
+
+The actual draw-list fixture renders four identical FTP value strings and
+checks matching glyph/font geometry at equal86px intervals. A real dashboard
+input sequence verifies that Down changes the target without jumping the
+painted cursor, subsequent frame updates pass through an intermediate position
+and the settled cursor moves exactly one53px row. Cache rebuilds follow that
+motion; selecting the button still requests the correct edit immediately.
+The GPU suite adds six FTP cursor positions and retains maximum-length login
+coverage. Native digest/mutation, renderer sanitizers, archive checks and a
+fresh fully decoded78-second walkthrough are recorded in the release audit.
+Physical console display and perceived animation smoothness remain a360 check.

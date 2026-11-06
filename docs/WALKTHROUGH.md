@@ -1,6 +1,6 @@
-# Blades 0.34 upper menu shadow and top-divider walkthrough
+# Blades 0.35 top-edge alignment and FTP spacing/motion walkthrough
 
-[Watch/download the MP4](../dist/Blades-v0.34-walkthrough.mp4)
+[Watch/download the MP4](../dist/Blades-v0.35-walkthrough.mp4)
 
 Fresh 78-second 1280×720 desktop GPU capture at 30 fps with 48 kHz stereo AAC
 and the matching artwork pack. Its label identifies profiles, achievements,
@@ -29,7 +29,7 @@ and on/off persistence are checked with the actual C FTP server in loopback
 integration tests. See PROFILE-INTEGRATION.md, ACHIEVEMENTS.md and FTP.md.
 Artwork/audio credit: zivvoz / DashX360 and respective rights holders.
 
-The capture uses the final 0.34 renderer: upper-bar shading is inside the
+The capture uses the final 0.35 renderer: upper-bar shading is inside the
 header and fades upward from its bottom edge; footer shading fades downward
 from its upper edge. Unselected root/submenu rows retain their thin divider grooves.
 
@@ -42,3 +42,7 @@ The 0.34 capture adds the top divider and mirrored upper group. Compare first
 and lower System selections at 00:35–00:39, FTP controls at 00:40–00:55 and
 Played Games at 01:01. Lower selections have matching upward/downward edges;
 the first row has only its existing lower shadow.
+
+The0.35 capture shows FTP focus sliding between the toggle, username and
+password controls at00:42,00:47 and00:51–00:52, with equally spaced status
+fields. Menu fill/upper-shadow edges meet the dividers above their buttons.

@@ -1,0 +1,204 @@
+{
+  "release": "0.35.0",
+  "recorded_utc": "2026-11-06T19:27:26.059001+00:00",
+  "changes": [
+    "Align menu highlight/upper-shadow top with the divider above by extending fill two pixels upward",
+    "Round interpolated cursor pixel positions to avoid a permanent one-pixel truncation error",
+    "FTP renders the existing shared interpolated cursor instead of snapping to the child index",
+    "Equalize all five FTP status groups to the original Server status/IP spacing and common value-font size",
+    "Keep fixed grooves covered across the moving sheen and both contact shadows"
+  ],
+  "top_alignment": {
+    "top_offset": "MENU_DIVIDER_OFFSET-MENU_ROW_PITCH = -2",
+    "first_row": "Fill meets the light edge of the existing top divider, leaving its two dark pixels intact",
+    "other_rows": "Fill/upper-shadow top meets preceding divider start",
+    "lower_edge": "Unchanged at nominal row offset51; highlight height extends upward by2",
+    "rounding": "lroundf(highlight*53), not truncation",
+    "retained": "label/icon positions, row pitch, shared mirrored shadow profile and card geometry"
+  },
+  "ftp_spacing": {
+    "labels": [
+      94,
+      180,
+      266,
+      352,
+      438
+    ],
+    "values": [
+      130,
+      216,
+      302,
+      388,
+      474
+    ],
+    "single_line_pitch": 86,
+    "label_to_value": 36,
+    "last_value_to_next_label": 50,
+    "normal_value_font": 27,
+    "wrapped_value_font": 20,
+    "all_values_same_font": true,
+    "wrapped_line_pitch": 26,
+    "column_width": 400,
+    "max_login_length": 63,
+    "max_63_ascii_value_width_at20px": 1110,
+    "widest_character": "W",
+    "max_lines": 3,
+    "maximum_device_value_baseline": 578,
+    "wrapping": "Each extra line moves following groups while preserving50px after the last baseline"
+  },
+  "ftp_motion": {
+    "source": "Dashboard.highlight already interpolated; FTP renderer now uses it",
+    "position": "87+round(highlight*53)",
+    "shadows_and_grooves": "Both follow painted cursor, including transit between rows",
+    "actions": "Target child still drives immediate edit/toggle request",
+    "cache": "Foreground invalidates through interpolated motion and retains idle reuse"
+  },
+  "retained": [
+    "exact upper/lower mirror profile and first-row upper guard",
+    "lower selected shadow covering its divider",
+    "rounded profile-card shadow",
+    "header/footer shading",
+    "achievement geometry",
+    "FTP protocol/login persistence",
+    "234-entry artwork payload"
+  ],
+  "validation": {
+    "ctest_passed": 5,
+    "ctest_total": 5,
+    "suites": [
+      "resources",
+      "skin",
+      "draw-list",
+      "startup",
+      "gpu"
+    ],
+    "row_edge_checks": 20,
+    "upper_fill_coverage": "Offsets-2,-1,0 now bright; existing lower edge checks pass",
+    "mirror_pixel_comparisons": 256000,
+    "draw_list_command_states": 74,
+    "ftp_spacing": "Four identical value strings produce same-font glyphs at86px intervals",
+    "ftp_motion": "Real dashboard Down preserves first cursor frame, then yields intermediate position/cache rebuild and settles exactly53px later; Select still emits username edit",
+    "gpu_comparisons": 304,
+    "gpu_worst_mean": 0.485981,
+    "gpu_peak": 5,
+    "new_gpu_coverage": "Six FTP interpolation positions plus retained maximum-length credentials",
+    "sanitizers": "ASan/UBSan/LSan pass renderer/row/card/mirror/FTP-spacing/motion fixtures",
+    "xex_verification": [
+      "XEX2 PowerPC-BE, Xbox subsystem, entry 0x820dc858",
+      "21 verified image pages; header/image/import digest chains valid",
+      "xam.xex: 92 import slots",
+      "xboxkrnl.exe: 122 import slots",
+      "PASS: deliberate image mutation rejected: image digest mismatch at page 19"
+    ],
+    "native_pages": 21,
+    "xam_slots": 92,
+    "kernel_slots": 122
+  },
+  "usb_zip": {
+    "members": [
+      "Blades/default.xex",
+      "Blades/README.txt",
+      "Blades/build-info.txt",
+      "Blades/SHA256SUMS",
+      "Blades/LICENSE",
+      "Blades/XSDK-LICENSE.txt",
+      "Blades/THIRD_PARTY_NOTICES.md",
+      "Blades/Config/README.txt",
+      "Blades/Assets/ARTWORK-README.txt",
+      "Blades/Assets/ARTWORK-SHA256SUMS.txt",
+      "Blades/Assets/AUDIO-NOTICE.txt",
+      "Blades/Assets/DASHX360-NOTICE.txt",
+      "Blades/Assets/FONT-LICENSE.txt",
+      "Blades/Assets/FONT-NOTICE.txt",
+      "Blades/Assets/README.txt",
+      "Blades/Assets/blades.xzp",
+      "Blades/licenses/CONVECTION-NOTICE.txt",
+      "Blades/licenses/DASHX360-NOTICE.txt",
+      "Blades/licenses/GCC-RUNTIME-EXCEPTION.txt",
+      "Blades/licenses/GPL-3.0.txt",
+      "Blades/licenses/NEWLIB.txt",
+      "Blades/licenses/STB-LICENSE.txt"
+    ],
+    "crc": "passed",
+    "xex_matches_standalone": true,
+    "artwork_matches_pack": true,
+    "personal_scan_paths_ftp_settings_credentials_and_logs_excluded": true,
+    "unversioned_alias_identical": true
+  },
+  "artwork": {
+    "entries": 234,
+    "payload_sha256": "c6470ec2ab422e1f5f2984bd244a79173269fd40fa157714be98af8dd183c55c",
+    "unchanged_from": "0.34",
+    "pack_changes": [
+      "ARTWORK-README.txt"
+    ]
+  },
+  "video": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 1280,
+        "height": 720,
+        "r_frame_rate": "30/1"
+      },
+      {
+        "codec_name": "aac",
+        "sample_rate": "48000",
+        "channels": 2,
+        "r_frame_rate": "0/0"
+      }
+    ],
+    "format": {
+      "duration": "78.000000",
+      "size": "8573397"
+    }
+  },
+  "video_full_decode": "passed",
+  "video_scope": "Fresh final0.35 shared-renderer desktop GPU capture; profile/achievement/FTP/storage/Guide/keyboard events explicitly simulated. FTP motion crop at42+1/30 seconds shows an intermediate cursor position.",
+  "sdk_commit": "5f6dc726f65f6d171493a3628c2415c03551f27b",
+  "xex_version": "0.0.35.0",
+  "artifacts": {
+    "dist/Blades-v0.35-USB.zip": {
+      "bytes": 2471114,
+      "sha256": "c9cbc64a74bee9a82aa6c93c2b012944ac8bb63e9325b761af050dc4149f9a0f"
+    },
+    "dist/Blades/default.xex": {
+      "bytes": 1187840,
+      "sha256": "9a2c6402f52712bc27e71d9bf20c651f5604cb1c8e1ec63a5b8f49d4d523fcfd"
+    },
+    "dist/Blades-artwork-pack.zip": {
+      "bytes": 2030418,
+      "sha256": "426655551905ff6c59f38eaf20a1b934153f6c45fa130fcd8a1f3d70e25272c1"
+    },
+    "dist/Blades-v0.35-walkthrough.mp4": {
+      "bytes": 8573397,
+      "sha256": "75b579f2c39f1b35ebe665c328d2e2a24ee780c07a1e861289e9ebc041352730"
+    }
+  },
+  "preview_images": {
+    "docs/images/signin-highlight-v0.35.png": "e71595de5a16c6800b974bd7e6c8fbb2db9227dc5578b4c359ba1bc26f33ead4",
+    "docs/images/profile-card-v0.35.png": "d9cb4262df4b82e95cbb05e6950bf913b3de61b44b49a5d284511fea566ced71",
+    "docs/images/menu-highlight-v0.35.png": "d97f6f0de38c173a65a0482ee6d5525b0be3788081d278eb293689be10c4e5f1",
+    "docs/images/system-highlight-v0.35.png": "4cedf60d571c55354f9f9bb1a67af6da9c71fd5547b8ac15d7a9d943c8be7620",
+    "docs/images/ftp-computers-v0.35.png": "a7f4d1c43394a5aca7ad9c38228506558d4d6427bac9774e7233eb92e8b2876a",
+    "docs/images/system-first-v0.35.png": "00e98517a2d59af61baf9b98fdbdf7faec64d54dc87bb928e4b3389e6654a19b",
+    "docs/images/upper-shadow-comparison-v0.35.png": "4d114f8c3bfe836fb5411f733096b9dec1b9884c6c5cbd2df7c6fab2aef8f2f5",
+    "docs/images/ftp-motion-v0.35.png": "f7a09d8599460c19ef3ba3f4247c37ff53458ebb914f86f6b230621f3cb84198"
+  },
+  "source_sha256": {
+    "include/theme.h": "c0e21f631467d124c17e94dbc250a39f148e66a813c8a9de1622efd15e22a792",
+    "src/render/theme.c": "218bd779bfcf8cc90093838f76280c11e53fe6b028904411ed0298bee4c6580f",
+    "tests/test_draw_list.c": "7bf0f7a0bb430894e414a0134ff0ead0c86bda6323fa8a72f9e001d2dfe697a5",
+    "src/render/dashboard_render.c": "085cf24b794920bed6d8274f6921ce3ee90ac9b3b3d46f9d482a12ebca10ddeb",
+    "src/render/skin.c": "b5e991c245167fa9be086075bfa8753fd82a74c986f5cd1cd38cdea5a2715d7d",
+    "tests/test_skin.c": "748d8d0484b42ef68341be1a7eb14e25781b23399ef90bfe43b590994715da83",
+    "tests/test_gpu.c": "f66fa141606f43335b8654a3d0d146ae2fa4e33f94a131f8fd60622f218a5890",
+    "CMakeLists.txt": "7bd9f7be6b90cabd344323d2c00c312971de22f73ef081256f00b3f45ea0f7e7",
+    "tools/build-xbox.sh": "cd8c8080b5a3a424f66d95a05e496b51f234eb463807d012ba5538ffedca9210",
+    "tools/package-usb.py": "4f4f9f5ccf074a1945f0573c01d433d5b65ad589c9293bc69586a72a1de19e63",
+    "tools/render-walkthrough.c": "f98d8d8e2b0fa4a4d9d648ae1c846c7e108fb3800c8b2e85c8ab4da4e76a1162"
+  },
+  "physical_validation": "Native screen appearance and perceived cursor smoothness require comparison on an Xbox360. Host renderer parity is not console capture."
+}
