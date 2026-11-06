@@ -1,41 +1,32 @@
-# Blades 0.26 profile integration walkthrough
+# Blades 0.27 achievement-browser walkthrough
 
-[Watch or download the MP4](../dist/Blades-v0.26-walkthrough.mp4)
+[Watch/download the MP4](../dist/Blades-v0.27-walkthrough.mp4)
 
-117 seconds, 1280×720 at 30 fps with 48 kHz stereo audio. This is fresh desktop
-GPU playback of the release navigation/renderer using the matching artwork
-pack. Profiles, Guide sign-in requests, storage listings and launch preparation are explicitly simulated. It is
-not a physical Xbox recording or evidence of a real XAM title handoff or
-actual CD/DVD playback. Optical states in the final section are simulated too.
+Fresh 86-second 1280×720 desktop GPU capture at 30 fps, with 48 kHz stereo AAC
+audio and the matching premade pack. A visible label states that achievements,
+profiles and storage are simulated. The real Xbox build reads XAM data; this
+capture cannot authenticate an account or prove console API/picture availability.
+Example achievement counts, names and scores are preview data. Missing artwork
+uses the original pack's controller/trophy/locked/secret assets.
 
-- 00:00 Startup and the reference-style Sign In card with green tile and example 2 Profiles Found
-- 00:02 Highlight the account card; A requests Guide sign-in (simulation notice)
-- 00:05 Example signed-in profile with name, games, correctly centred circular G Gamerscore label and achievements
-- 00:08 Card statistics refresh without restarting
-- 00:10 X opens sign-out confirmation; select Sign out
-- 00:12 Signed-out card clears all account data
-- 00:14 A on the card requests the Guide again; example local sign-in at 00:17
-- 00:22 Media blade and Music submenu
-- 00:27 Games → Played Games; File Manager below Homebrew
-- 00:32 Storage navigation and a manual Utility.xex launch request
-- 00:43 Scan Folders; add a path and set depth (Unlimited is first)
-- 00:56 Live right-panel scan progress, completion and retained results
-- 01:13 Remove a saved scan path with Y
-- 01:22 Other blades and submenus, including Console Settings
-- 01:43 Audio CD, DVD and data-disc labels/manual handoff requests
-- 01:55 Eject request
+- 00:00 Blade startup
+- 00:02 Select Achievements while signed out: request Guide sign-in
+- 00:04 Simulated sign-in succeeds; resume Achievements automatically
+- 00:05 Left game strip, summary, 47 earned achievements and six-by-three grid
+- 00:06 A game with zero unlocks; return to the first game at 00:08
+- 00:10 Enter the grid; arrows navigate and page beyond 18 icons
+- 00:15 Achievement Description and Back
+- 00:19 All-achievement list; scroll, sort by gamerscore, and open a description
+- 00:28 A game with locked achievements and its description
+- 00:35 A game/app with no achievements; loading has finished
+- 00:37 Return to Games; Media/Music and System/Console Settings navigation
+- 00:50 Played Games → Game Library and Apps, then return
+- 01:01 Xbox Live and Marketplace submenus
+- 01:13 Reopen Achievements, then return
+- 01:17 Confirm sign-out; the account card clears
+- 01:21 Select Achievements signed out again; cancel sign-in at 01:23
 
-The example Apps/Homebrew paths were configured before capture. The simulator
-keeps recording after manual launch requests; native code validates the selected
-plain XEX and hands its path to XAM. Compound-XEX exclusion is verified against
-real host filesystem fixtures, including checks that excluded files never reach
-the metadata reader.
-
-See [LIBRARY.md](LIBRARY.md) for controls, formats and physical-console checks.
-Artwork/sounds: zivvoz / DashX360, inspired by Microsoft's Xbox 360 Dashboard.
-The compatible 234-entry artwork payload is unchanged from v0.23.
-
-This is a newly rendered v0.26 capture. Optical launch traces target the
-corrected /Device/Flash/dash.xex device path. The successful XAM alias/data
-preparation is covered by the real-SDK host regression, not by physical
-playback in this desktop capture.
+The source video supplied for reference is separate from this capture. Its
+green earned-achievement grid appears around 05:20–05:25 and its gray list and
+description around 04:30–04:45. See ACHIEVEMENTS.md for behavior and validation.
+Artwork/audio credit: zivvoz / DashX360 and respective rights holders.

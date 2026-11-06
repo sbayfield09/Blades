@@ -1,13 +1,46 @@
-Blades 0.26.0 - profile integration hardware test build
+Blades 0.27.0 - achievement browser hardware test build
 
-Download Blades-v0.26-USB.zip and extract it onto your USB drive. It contains
+Download Blades-v0.27-USB.zip and extract it onto your USB drive. It contains
 Blades/default.xex and the complete Blades/Assets folder, with notices and
 installation notes. Launch Blades/default.xex. No separate artwork extraction
 or conversion is required. The ZIP excludes machine-specific scan settings and
 logs, so extracting over an existing Blades folder preserves its scan paths.
 Separate XEX/artwork downloads remain available.
 
-Version 0.26 integrates the console's active profile and Guide sign-in menu.
+Version 0.27 implements Games -> Achievements using the supplied photo and
+achievement video. Selecting it while signed out opens the real Xbox Guide
+sign-in menu. Successful sign-in resumes the achievement browser; cancelling
+returns to the dashboard. Switching/signing out profiles closes the browser
+and clears its cached user data.
+
+Use Up/Down in the left game-icon strip to select a played game. The header
+shows its name, last-played date, unlocked achievement count and earned/possible
+gamerscore. The green six-column, three-row grid shows unlocked achievements,
+as in the reference. Right enters the grid; arrows move between its icons and
+pages; A opens a description. A on a game opens a gray Guide-style list of all
+its achievements, including locked and secret entries. Up/Down scroll, Y
+switches recent/gamerscore order, and A opens Achievement Description. These
+read-only panels are rendered inside Blades. B returns one level. X refreshes
+the green browser. Y retains eject outside the gray list; inside that list it
+sorts, matching the reference. No achievements are unlocked or modified.
+
+The native build reads the active local profile's history/progress using XAM,
+including offline profiles. Game and achievement pictures are requested from
+the console's tile/cache APIs. Missing artwork uses the existing trophy,
+locked/secret or controller assets. Missing metadata is shown honestly; there
+are no built-in example games or fixed progress totals in the console build.
+A worker reads metadata/pictures while the renderer keeps presenting. There
+is no direct download service in Blades; complete artwork availability depends
+on the game/profile/cache data the console has available.
+
+Please test a profile with played games, compare progress and pictures against
+the stock dashboard, open locked/unlocked/secret descriptions, sort and scroll,
+and switch profiles while the browser is loading. Check a profile with no
+history and a game/app with no achievements: loading must finish. Send
+Blades/default.log for read errors or missing data. Profile/GPD files are not
+opened or written directly; only public XAM metadata is used.
+
+Version 0.27 integrates the console's active profile and Guide sign-in menu.
 When signed out, the account card shows Sign In, the original green default
 picture and the available profile count, matching the supplied reference.
 There is no previous gamertag or personal statistics. The count comes from
@@ -81,10 +114,10 @@ removal and rescanning; verify your files remain. Send default.log if browsing,
 scanning or launching fails. The log includes library commands, scan counts,
 metadata errors, content-mount results and SDK launch failures.
 
-16 host suites and 267 desktop GPU comparisons pass, alongside profile
+18 host suites and 284 desktop GPU comparisons pass, alongside profile
 memory checks and native XEX validation. Library storage and real title handoff
-still need physical-console testing. This release includes a fresh 117-second
-720p30 desktop GPU walkthrough with simulated profiles, Guide requests, storage and launch preparation.
+still need physical-console testing. This release includes a fresh 86-second
+720p30 desktop GPU walkthrough with simulated profiles, Guide requests, achievement/profile data and storage.
 
 Controls: D-pad/left stick navigate, LB/RB change blades, A select, B back.
 X rescans in libraries or selects the current folder in the folder picker.

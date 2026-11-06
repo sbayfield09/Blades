@@ -146,3 +146,9 @@ replaced with a font glyph. The same 234-entry payload and notices are included.
 Version 0.26 renders the original GScore.png at its 32 px canvas size, aligning
 its visible centre to the surrounding Convection text as in video-games.jpg.
 The asset bytes and 234-entry payload are unchanged.
+
+Version 0.27 uses the existing secretAchievement.png, unearnedAchievement.png,
+controller/trophy, scroll.png and GScore.png resources for the achievement
+browser and fallbacks. Real per-game images are queried from XAM at runtime,
+kept in RAM and excluded from the release pack. The compatible payload remains
+234 entries with its original SHA-256; no new game images are redistributed.

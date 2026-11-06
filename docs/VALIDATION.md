@@ -157,3 +157,29 @@ XEX 0.0.26.0 has 20 verified pages and 86 XAM/122 kernel slots. ZIP and XEX
 integrity checks pass. The fresh 117-second 720p30 stereo walkthrough shows
 the corrected card and retains its simulation label. The profile backend is
 unchanged; its real-console count/Guide verification remains outstanding.
+
+## Version 0.27 achievements
+
+18/18 host suites and 284 CPU/desktop GPU comparisons pass (worst mean
+0.478439, peak channel error 4). New coverage includes signed-out Guide gating
+and continuation, earned-only grid filtering, grid/list paging, recent/score
+ordering, secret/locked/unlocked descriptions, scope invalidation, cancelled
+workers, empty histories and error completion. The actual Xbox adapter is
+compiled into a host fixture against the pinned SDK headers to verify local
+requestee mode, dynamic ordinals/parameters, BE buffers and handle cleanup.
+Shared achievement and adapter fixtures pass ASan/UBSan/LSan outside tracing.
+
+Native XEX 0.0.27.0 has 20 verified image pages and 86 XAM/122 kernel import
+slots. Header/image/import digests and a deliberately mutated image are checked.
+The USB ZIP contains the matching XEX and complete Assets folder, excluding
+scan paths/logs. Its compatible artwork payload is unchanged at 234 entries.
+
+Reference: the supplied Forza Horizon grid photo and the newly uploaded
+22-minute video, including the earned grid around 05:20–05:25 and gray list and
+description around 04:30–04:45. The gray panel's spacing, brightness and footer
+positions were measured from those frames. The fresh 86-second 720p30 stereo
+walkthrough labels all profile/achievement/history/storage data as simulated.
+The in-app gray panels reproduce the browser presentation; only sign-in invokes
+the actual system Guide. Real profile reads, cached pictures and continuation
+still require physical-console verification. See ACHIEVEMENTS.md and the
+v0.27 data audit for feature boundaries and artifact/source hashes.

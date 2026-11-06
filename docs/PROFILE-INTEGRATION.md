@@ -82,3 +82,9 @@ Use a 32 px canvas at label_y+2 so both centres are label_y+18; the previous
 24 px canvas at the same y was centred 4 px too high. The icon moves 4 px left,
 its suffix moves 4 px right, and the numeric-column budget includes the new
 spacing. The original PNG is unchanged. Games, Live and Media share this layout.
+
+Version 0.27 gates Achievements through the real Guide sign-in picker, resumes
+on successful sign-in and cancels continuation when the picker is dismissed
+signed out. Achievement snapshots are scoped to the active user/XUID and are
+cleared on account changes. See ACHIEVEMENTS.md; the in-app achievement list
+and description are read-only Guide-style panels, not authentication dialogs.

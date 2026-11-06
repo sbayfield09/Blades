@@ -1,0 +1,175 @@
+{
+  "release": "0.27.0",
+  "recorded_utc": "2026-11-06T12:23:55.937128+00:00",
+  "features": [
+    "Real Guide sign-in gate; resume on success and cancel safely",
+    "Read-only local-user XAM history and achievement enumeration; before/after identity validation",
+    "Earned-only 6x3 grid, game strip, header totals/date, grid paging",
+    "In-app Guide-style full list, recent/gamerscore sorting, locked/secret descriptions and artwork fallbacks",
+    "Background I/O, bounded memory, cancellation and normal empty/error completion; no unlock/stat writes"
+  ],
+  "references": {
+    "user_photo": "Forza Horizon, 47 achievements and 920/1500, supplied in conversation",
+    "uploaded_video": {
+      "bytes": 103446989,
+      "sha256": "d50896016449a2e1422c0ada8e83906943becaedbfec975d57dc645192398107",
+      "duration_seconds": 1337.562268,
+      "grid_seconds_approx": [
+        320,
+        325
+      ],
+      "list_and_description_seconds_approx": [
+        270,
+        285
+      ]
+    },
+    "observations": [
+      "Green grid shows only earned icons; gray list includes full progress/status/details",
+      "Gray row stride about 63 native pixels, count around y496",
+      "Guide footer centres: Y110/592, B856/592, A872/620; brightness sampled from reference"
+    ]
+  },
+  "tests": {
+    "ctest_passed": 18,
+    "ctest_total": 18,
+    "gpu_comparisons": 284,
+    "gpu_worst_mean": 0.478439,
+    "gpu_peak": 4,
+    "shared_achievement_asan_ubsan_lsan": "passed",
+    "native_adapter_asan_ubsan_lsan": "passed",
+    "native_adapter_host_fixture": "actual Xbox adapter compiled with pinned SDK declarations; XAM functions supplied by fixtures",
+    "filetime_fixture": "low/high DWORDs with big-endian bytes, decoded to 01/01/2020",
+    "xex_digest_and_imports": "passed",
+    "xex_mutation_fixture": "passed",
+    "native_pages": 20,
+    "xam_slots": 86,
+    "kernel_slots": 122
+  },
+  "usb_zip": {
+    "members": [
+      "Blades/default.xex",
+      "Blades/README.txt",
+      "Blades/build-info.txt",
+      "Blades/SHA256SUMS",
+      "Blades/LICENSE",
+      "Blades/XSDK-LICENSE.txt",
+      "Blades/THIRD_PARTY_NOTICES.md",
+      "Blades/Config/README.txt",
+      "Blades/Assets/ARTWORK-README.txt",
+      "Blades/Assets/ARTWORK-SHA256SUMS.txt",
+      "Blades/Assets/AUDIO-NOTICE.txt",
+      "Blades/Assets/DASHX360-NOTICE.txt",
+      "Blades/Assets/FONT-LICENSE.txt",
+      "Blades/Assets/FONT-NOTICE.txt",
+      "Blades/Assets/README.txt",
+      "Blades/Assets/blades.xzp",
+      "Blades/licenses/CONVECTION-NOTICE.txt",
+      "Blades/licenses/DASHX360-NOTICE.txt",
+      "Blades/licenses/GCC-RUNTIME-EXCEPTION.txt",
+      "Blades/licenses/GPL-3.0.txt",
+      "Blades/licenses/NEWLIB.txt",
+      "Blades/licenses/STB-LICENSE.txt"
+    ],
+    "crc": "passed",
+    "xex_matches_standalone": true,
+    "artwork_matches_pack": true,
+    "saved_paths_and_logs_excluded": true,
+    "no_real_profile_history_or_pictures_included": true
+  },
+  "artwork": {
+    "entries": 234,
+    "payload_sha256": "c6470ec2ab422e1f5f2984bd244a79173269fd40fa157714be98af8dd183c55c",
+    "unchanged_from": "0.26",
+    "existing_assets_reused": [
+      "secretAchievement.png",
+      "unearnedAchievement.png",
+      "ico_64x_trophy.png",
+      "ico_64x_controller.png",
+      "scroll.png",
+      "GScore.png"
+    ]
+  },
+  "video": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 1280,
+        "height": 720,
+        "r_frame_rate": "30/1"
+      },
+      {
+        "codec_name": "aac",
+        "sample_rate": "48000",
+        "channels": 2,
+        "r_frame_rate": "0/0"
+      }
+    ],
+    "format": {
+      "duration": "86.000000",
+      "size": "10199498"
+    }
+  },
+  "video_full_decode": "passed",
+  "video_scope": "Fresh desktop GPU capture; profile, achievements, images/fallbacks and storage are explicitly simulated; not a real Xbox/XAM API capture",
+  "sdk_commit": "5f6dc726f65f6d171493a3628c2415c03551f27b",
+  "xex_system_flags": "00000021",
+  "xex_version": "0.0.27.0",
+  "limits": {
+    "history_titles": 1024,
+    "achievements_per_title": 512,
+    "pictures_in_memory": 27,
+    "dates": "stored FILETIME shown as DD/MM/YYYY UTC",
+    "gray_panels": "in-app Guide-style read-only browser; not a replacement authentication Guide"
+  },
+  "artifacts": {
+    "dist/Blades-v0.27-USB.zip": {
+      "bytes": 2450708,
+      "sha256": "a287a8b9e0d3e26c5800d9128b74969f0e32ca7aba81cda7e0ee5592e1cddbe0"
+    },
+    "dist/Blades/default.xex": {
+      "bytes": 1150976,
+      "sha256": "92b93c0044687507c305282497e794ab48bffb815e40238333acadbb9d9c7787"
+    },
+    "dist/Blades-artwork-pack.zip": {
+      "bytes": 2030417,
+      "sha256": "24b2bb8eea51cbed0511b5535290b249d51b7367b365ac80c94c46a8a1a3fc5e"
+    },
+    "dist/Blades-v0.27-walkthrough.mp4": {
+      "bytes": 10199498,
+      "sha256": "af7c0dba3ccabccc02e21715e25a5cb33c605a05983746cf8d56787a3a0232c6"
+    }
+  },
+  "preview_images": {
+    "docs/images/achievements-grid-v0.27.png": "be7c4eb5e943a448f317cf0d0028e392471739eeb23829317fbaa0ba622b5a99",
+    "docs/images/achievements-list-v0.27.png": "c85fed0de2ec3ed160cd5fe21b1773ee54d0f914b0ede6bb92641ee8c2a23f93",
+    "docs/images/achievements-detail-v0.27.png": "43715d5faed5c31b54ad06031c9c5074da5629524ea7fb50a83149c309bea6e2"
+  },
+  "source_sha256": {
+    "include/achievements.h": "dd1c4ec3951c6b7ba12ec4cca5cf44c151df52bdf2da34ccf7840db1e5d936a5",
+    "src/core/achievements.c": "3b61c5b430fcaa69d823caba3f4105866e9698c9add69a5a0c68df569c57415a",
+    "src/core/achievements_ui.c": "3e6c23f31d3e0239d88048fb83b087b2ab64612e1695c1d15a9dee381633dcc8",
+    "include/xbox_achievements.h": "da9b227740269a5277f2f81d019ee92c5703c4cc40a1304ac071c31dd5adade3",
+    "src/platform/xbox_achievements.c": "5de67b3a4a84df606231275c656861888bf2620a77f22442cc73517ac2a5085c",
+    "include/blades.h": "662c744f9e2bc9b7129da81647eab03a460a86b8f52a86312fec7a1835025c82",
+    "src/core/dashboard.c": "aeeee0a8e5c16d642504df14162880a9583d6a2f488a5c6d82772e255aa3a565",
+    "src/render/dashboard_render.c": "fe34f06ad83340bc9d8a706c8629280b4c49edaeae317f7065e20d0295f6be85",
+    "src/render/draw_list.c": "dc633a4fa08afc1b4fb91b352464f70d88b8d04d7b3446984cd754d82bb6bc36",
+    "src/platform/xbox360.c": "126867e265576734f8b2fdadc6659dabd18afa029d3a4a6c0372fe4643c4f5f5",
+    "src/platform/linux.c": "5e90aa608b36c7de578b750a58c75997eae4e1aa12888464d5b8f7d58e2cc4c2",
+    "tests/test_achievements.c": "e8a45825ef330225b489cc68cadb3d9497265053894e6701a8b211fbf3af2a49",
+    "tests/test_achievement_backend.c": "a8c9106a6448683cdb363237f87a136f3461d1e52fd336f4f6cbef0d75004578",
+    "tests/test_gpu.c": "6941b5a16c44916dbfde744e47178bd554786d51638df3d1ae8a7be77973d04c",
+    "tests/test_dashboard.c": "2704b9168174052ec22b18c7ad5c2f260b97ce6ab997c0f218690d8591f87c3b",
+    "tests/test_audio.c": "10176091c37feedf320cbff9fad9b9532079c1cac31dd08cfbe44e60de74d2b1",
+    "tests/test_startup.c": "56913c0f9be7874c4f510b8d8d6786f954e71ee5a6d1df072345115d9dc86c8b",
+    "tests/test_animation.c": "437bf059daf7212e6a66083d37a99ddefd3a04e8885ec4e75387dfc2e7263937",
+    "tests/test_draw_list.c": "c3d036350f7f469f471014932ad9cec780e0ce621027251a80464e8570162a6b",
+    "tools/render-walkthrough.c": "71bc40976f30b094304e75d32f9c764f28391b974acc71affceb863251e67bb6",
+    "tools/build-xbox.sh": "542ce437fddf7ff00eb83018c5eaa485e80e8a5e32870561ba923c1456ca8fff",
+    "tools/package-usb.py": "12730ac9c823e7b9a306fe48e63810dbaef2e73f6f17716e3712ee15efab14b5",
+    "CMakeLists.txt": "78e5c63d0d0994c4ebde535701d26a7f72bae674be09c3f3ac21cd5b0b3e7213"
+  },
+  "physical_validation": "Requires a physical Xbox 360 check of local-profile history, unlock flags/totals, cached game/achievement pictures, Guide sign-in continuation and account switches. Host fixtures validate preparation/parsing/UI behavior, not actual console XAM responses."
+}
