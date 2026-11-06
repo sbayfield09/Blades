@@ -133,3 +133,8 @@ controls and retained completion panel. No new artwork conversion is needed.
 
 Version 0.23 keeps the compatible 234-entry payload unchanged while correcting
 the media-player launch path in the executable.
+
+Version 0.24 reuses the same 234-entry payload for the native profile card and
+adds no account data to the pack. The signed-in gamer picture is read from XAM
+into RAM; a neutral existing tile remains the fallback. The combined USB ZIP
+and separate premade pack retain these notices and source attribution.

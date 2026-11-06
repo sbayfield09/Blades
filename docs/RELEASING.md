@@ -34,7 +34,7 @@ branch holds the public downloadable files. Use a temporary Git index to add
 only release artifacts and their instructions/notices, preserving the current
 working tree. Do not replace the public branch with unrelated local changes.
 
-The v0.23.0 pack contains 234 XUIZ entries: five blade states, additional menu
+The v0.24.0 pack contains 234 XUIZ entries: five blade states, additional menu
 icons, the BSK2 root/expanded layout manifest, retail 5766 shared images and the local font atlas/metrics/notice, plus eight precomposed ABXY prompt sprites, six transition WAVs and an audio notice, the baked Xbox Live panel background, and four startup shutter/reveal/layout entries, plus sixteen disc-reading indicator frames. Original project by
 zivvoz / DashX360, inspired by Microsoft's Xbox 360 Dashboard interfaces.
 Asset ownership remains with the respective rights holders. See
@@ -64,3 +64,12 @@ and premade pack, and is called by the native build script.
 Version 0.23 fixes media-player preflight on titles without a Flash: mapping,
 using the native Flash device path and the SDK-created XAM launch alias.
 The compatible 234-entry artwork payload is unchanged.
+
+Version 0.24 adds native Guide sign-in, a selectable signed-out account card,
+and active-controller profile names, gamer pictures and real card totals.
+Metadata/picture reads and confirmed sign-out run on a worker; the renderer
+keeps presenting through the Guide. Do not package or persist user profile
+snapshots, gamer pictures or credentials. See PROFILE-INTEGRATION.md.
+The matching fresh walkthrough labels its profile/Guide events as simulations;
+it cannot demonstrate real console authentication. The 234-entry artwork
+payload is unchanged.

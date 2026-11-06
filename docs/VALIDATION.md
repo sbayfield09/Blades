@@ -103,3 +103,27 @@ comparisons pass; disc ASan/UBSan/LeakSanitizer passes. Native XEX digest/import
 and mutation checks, compatible artwork and combined ZIP checks pass. Fresh
 97-second 720p30 stereo video is labelled as simulated desktop playback.
 Hardware DVD/CD playback remains unverified for this correction.
+
+## Version 0.24 profile integration
+
+16/16 host suites pass, including bounded XAM settings and gamer-picture
+readers, asynchronous card refresh/identity replacement, controller-slot
+switches, stale sign-out rejection, other-slot preservation, confirmation
+cancellation and selectable signed-out card navigation. The profile suite also
+passes AddressSanitizer, UndefinedBehaviorSanitizer and LeakSanitizer outside
+the tracing sandbox (LSan cannot operate under ptrace).
+
+264 CPU/desktop GPU comparisons pass, worst mean 0.478482, peak channel error
+4. New cases cover local/Live/signed-out cards, long names/large totals, unknown
+statistics, picture replacement and confirmation overlays. Foreground cache
+checks verify profile revisions trigger redraw and idle frames still reuse the
+cached list. No swirl/GPU behavior is changed.
+
+Native GCC 15.3 build: XEX 0.0.24.0, 20 image pages, 82 XAM/122 kernel import
+slots, verified header/image/import digest chains. The compatible artwork has
+234 entries and unchanged payload SHA-256 c6470ec2ab422e1f5f2984bd244a79173269fd40fa157714be98af8dd183c55c.
+The USB ZIP contains the verified XEX and complete Assets folder, excluding
+local scan settings and logs. The new 117-second 720p30 walkthrough has stereo
+48 kHz AAC audio and decodes completely. Profile/Guide/storage events are
+explicitly simulated; native Guide UI and real profile reads/sign-out need a
+physical-console check. See PROFILE-INTEGRATION.md and the v0.24 audit JSON.

@@ -1,0 +1,126 @@
+{
+  "release": "0.24.0",
+  "recorded_utc": "2026-11-06T10:10:31.133010+00:00",
+  "features": [
+    "Native Guide sign-in from X at root or A on highlighted signed-out card",
+    "Blank account data while signed out; real gamertag, gamer picture, games played, gamerscore, achievements while signed in",
+    "Active-controller slot and in-Guide account changes; periodic/read-after-Guide refresh",
+    "Confirmed single-account sign-out preserving other signed-in slots",
+    "No score writes, automatic sign-in/sign-out or credential/profile-file access"
+  ],
+  "tests": {
+    "ctest_passed": 16,
+    "ctest_total": 16,
+    "gpu_comparisons": 264,
+    "gpu_worst_mean": 0.478482,
+    "gpu_peak": 4,
+    "profile_asan_ubsan_lsan": "passed outside ptrace sandbox",
+    "xex_digest_and_imports": "passed",
+    "xex_mutation_fixture": "passed",
+    "native_pages": 20,
+    "xam_slots": 82,
+    "kernel_slots": 122
+  },
+  "usb_zip": {
+    "members": [
+      "Blades/default.xex",
+      "Blades/README.txt",
+      "Blades/build-info.txt",
+      "Blades/SHA256SUMS",
+      "Blades/LICENSE",
+      "Blades/XSDK-LICENSE.txt",
+      "Blades/THIRD_PARTY_NOTICES.md",
+      "Blades/Config/README.txt",
+      "Blades/Assets/ARTWORK-README.txt",
+      "Blades/Assets/ARTWORK-SHA256SUMS.txt",
+      "Blades/Assets/AUDIO-NOTICE.txt",
+      "Blades/Assets/DASHX360-NOTICE.txt",
+      "Blades/Assets/FONT-LICENSE.txt",
+      "Blades/Assets/FONT-NOTICE.txt",
+      "Blades/Assets/README.txt",
+      "Blades/Assets/blades.xzp",
+      "Blades/licenses/CONVECTION-NOTICE.txt",
+      "Blades/licenses/DASHX360-NOTICE.txt",
+      "Blades/licenses/GCC-RUNTIME-EXCEPTION.txt",
+      "Blades/licenses/GPL-3.0.txt",
+      "Blades/licenses/NEWLIB.txt",
+      "Blades/licenses/STB-LICENSE.txt"
+    ],
+    "crc": "passed",
+    "xex_matches_standalone": true,
+    "artwork_matches_pack": true,
+    "saved_paths_and_logs_excluded": true,
+    "contains_no_real_profile_data": true
+  },
+  "artwork": {
+    "entries": 234,
+    "payload_sha256": "c6470ec2ab422e1f5f2984bd244a79173269fd40fa157714be98af8dd183c55c",
+    "unchanged_from": "0.23"
+  },
+  "video": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 1280,
+        "height": 720,
+        "r_frame_rate": "30/1"
+      },
+      {
+        "codec_name": "aac",
+        "sample_rate": "48000",
+        "channels": 2,
+        "r_frame_rate": "0/0"
+      }
+    ],
+    "format": {
+      "duration": "117.000000",
+      "size": "13987123"
+    }
+  },
+  "video_full_decode": "passed",
+  "video_scope": "Fresh desktop GPU render with simulated profile/Guide requests, storage/disc states and handoffs; visible simulation label throughout",
+  "sdk_commit": "5f6dc726f65f6d171493a3628c2415c03551f27b",
+  "xex_system_flags": "00000021",
+  "xex_version": "0.0.24.0",
+  "artifacts": {
+    "dist/Blades-v0.24-USB.zip": {
+      "bytes": 2428790,
+      "sha256": "e7a3f37268cfc4b929e9631b81b41952278fb5d0ea30fafbd46ffe777d9c8ebe"
+    },
+    "dist/Blades/default.xex": {
+      "bytes": 1114112,
+      "sha256": "8c0b276b802c8da473e9726f001158caab7cbc455ab4d830657a9c45e9b11ff9"
+    },
+    "dist/Blades-artwork-pack.zip": {
+      "bytes": 2030306,
+      "sha256": "167b3dd3703059a81199a1dd3bfa226ef668d97fcf500ffab448ce988a00047c"
+    },
+    "dist/Blades-v0.24-walkthrough.mp4": {
+      "bytes": 13987123,
+      "sha256": "76ae53212c5babc9bb75910f24421c2376ee10cfb7a5d59f8cfb395ba4c012c4"
+    }
+  },
+  "source_sha256": {
+    "include/profile.h": "3b40ee34abc5b3e5accfefc0a39227aa5f0652677df1e240707ce12ca1284ee4",
+    "src/core/profile.c": "7b68d8ca522e5c00178638f9e950fca253f1b2ce5a825977925d56bdf0dc43de",
+    "include/xbox_profile.h": "a615aef56afccde97445ace84c7d925fd382adf62261a2ff7b88538dafea30eb",
+    "src/platform/xbox_profile.c": "aebd49123162362fde9bfb9b5beb98009f4bcd5e1e26c66f5933bebbf22337c5",
+    "include/blades.h": "bc7bceb1bb4bc7b08f7c91c42a4a3639742003dfb40a234ffb2f8f471a71c1b6",
+    "src/core/dashboard.c": "21f0abc1fd3689c4d38b75371352f7a8cdc48ac3f79f07fb121f28dd071f5553",
+    "src/render/dashboard_render.c": "32553edaa4ca11c9c08824bd7e5fe59d9af95e475343961953c6fa95f2f1004f",
+    "src/render/draw_list.c": "eaeeae716386117bf01db9e91fd10bda492d1ce3d6507fbbf48f133050775110",
+    "src/platform/xbox360.c": "a9dfec2f0001978310883c129e5fcd34cfafc84b3156d02537f808851f6799ce",
+    "src/platform/linux.c": "f19eaccc946fd97427e8af0285ffacedd05805d17e79cdc878978d0038ed1453",
+    "tests/test_profile.c": "e0b22290cc1c1f84ae5603d3a9896c565bb2109af0d4afa65a3a3e0d8b62cf5f",
+    "tests/test_gpu.c": "a5111508c21e80e920b69062624b3f60d8a6cb790917e64efbf94ce71d624172",
+    "tests/test_draw_list.c": "8929bca18e0819ab66352fbdceddab270bc4aa54ed859d31471163adead2f4f3",
+    "tests/test_dashboard.c": "21717215b7704516b67cbd62b13af7148ab50e3e897e69ebac74819ac3847e53",
+    "tools/render-walkthrough.c": "7c9850cd2ad723a76e3ed5afe3a6bc83b007d49c77cefdfdb7e05f8d4b44e190",
+    "tools/build-xbox.sh": "de0b41d6180f1fe72524ebf2c3e705806b5566fd5213f4864ac813633ed0791d",
+    "tools/package-usb.py": "12730ac9c823e7b9a306fe48e63810dbaef2e73f6f17716e3712ee15efab14b5",
+    "CMakeLists.txt": "326c648867616978a0b4121eaf11600aa2b11f471b25bce38a8c549634a22e74"
+  },
+  "physical_validation": "Native Guide selection, totals, gamer-picture API and confirmed session sign-out require a physical Xbox 360 check; desktop tests cannot authenticate Xbox accounts"
+}
