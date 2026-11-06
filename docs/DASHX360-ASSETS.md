@@ -121,3 +121,6 @@ Version 0.17 adds the two original curved startup shutters, their layout and the
 Version 0.18 adds sixteen transparent disc-reading frames adapted from the pinned repository's BladesLoadingIndicator.cs, with its console silhouette and orbiting dots. The premade pack has 234 entries, retaining all 218 previous payloads byte for byte. See [DISC-READING.md](DISC-READING.md) for source credit, native behavior and hardware validation limits.
 
 Version 0.19 retains the complete 234-entry artwork payload unchanged. Its XEX corrects pending/no-media classification and nonzero title-ID returns.
+
+Version 0.20 reuses the compatible 234-entry pack unchanged. The library and
+folder picker use the shared expanded-menu chrome and existing Convection atlas.

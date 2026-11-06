@@ -30,7 +30,7 @@ branch holds the public downloadable files. Use a temporary Git index to add
 only release artifacts and their instructions/notices, preserving the current
 working tree. Do not replace the public branch with unrelated local changes.
 
-The v0.19.0 pack contains 234 XUIZ entries: five blade states, additional menu
+The v0.20.0 pack contains 234 XUIZ entries: five blade states, additional menu
 icons, the BSK2 root/expanded layout manifest, retail 5766 shared images and the local font atlas/metrics/notice, plus eight precomposed ABXY prompt sprites, six transition WAVs and an audio notice, the baked Xbox Live panel background, and four startup shutter/reveal/layout entries, plus sixteen disc-reading indicator frames. Original project by
 zivvoz / DashX360, inspired by Microsoft's Xbox 360 Dashboard interfaces.
 Asset ownership remains with the respective rights holders. See
@@ -38,3 +38,8 @@ Asset ownership remains with the respective rights holders. See
 differences.
 
 Version 0.15 also provides headless desktop GPU playback: configure with BLADES_GPU_CHECKS=ON and build blades-gpu-walkthrough. Its drawing plan and GLSL sources are shared with the Xbox GPU renderer. Label that capture as desktop GPU playback.
+
+Version 0.20 adds configurable library folders and title launching; its 234-entry
+artwork payload is unchanged and compatible with the new library views. See
+LIBRARY.md for setup and hardware-validation scope. Never package a local
+Config/library-paths.txt containing machine-specific locations.

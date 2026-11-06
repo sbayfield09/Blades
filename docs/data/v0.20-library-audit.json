@@ -1,0 +1,105 @@
+{
+  "release": "0.20.0",
+  "xex_version": "0.0.20.0",
+  "recorded_utc": "2026-11-06T00:10:22.594651+00:00",
+  "feature": "User-selected Games, Apps and Homebrew folders; recursive scan and manual title launching",
+  "scan_depth_limit": null,
+  "scan_roots_limit": 32,
+  "host_nested_folder_test": 180,
+  "supported_launch_formats": [
+    "loose XEX2",
+    "STFS/SVOD Games on Demand 00007000",
+    "Arcade 000D0000",
+    "Demo 00080000",
+    "XNA 000E0000"
+  ],
+  "settings_path": "game:/Config/library-paths.txt",
+  "tests": {
+    "ctest": {
+      "passed": 14,
+      "total": 14
+    },
+    "desktop_gpu": {
+      "comparisons": 236,
+      "peak_channel_error": 4,
+      "worst_mean_error": 0.478396
+    },
+    "library_filesystem_and_async": "pass",
+    "library_asan_ubsan_lsan": "pass",
+    "disc_asan_ubsan_lsan": "pass",
+    "xex_digest_and_imports": "pass",
+    "xex_verifier_mutation_fixture": "pass",
+    "native_pages": 19,
+    "xam_import_slots": 72,
+    "kernel_import_slots": 122
+  },
+  "video": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 1280,
+        "height": 720,
+        "r_frame_rate": "30/1"
+      },
+      {
+        "codec_name": "aac",
+        "sample_rate": "48000",
+        "channels": 2,
+        "r_frame_rate": "0/0"
+      }
+    ],
+    "format": {
+      "duration": "75.000000",
+      "size": "10386491"
+    }
+  },
+  "video_decode": "full decode pass",
+  "video_scope": "Desktop GPU using release navigation and renderer; simulated storage and launch preparation, no physical Xbox launch",
+  "artwork": {
+    "zip_integrity": "pass",
+    "payload_entries": 234,
+    "payload_sha256": "c6470ec2ab422e1f5f2984bd244a79173269fd40fa157714be98af8dd183c55c",
+    "unchanged_from": "0.18/0.19",
+    "unchanged_notices": true
+  },
+  "xex_system_flags": "00000021",
+  "runtime_sdk_commit": "5f6dc726f65f6d171493a3628c2415c03551f27b",
+  "reference_fsd_commit": "df89a42edf055370e3383576c93199a3713c41e9",
+  "artifacts": {
+    "dist/Blades/default.xex": {
+      "bytes": 1081344,
+      "sha256": "4f355bd7eff6d2fd86fe863400d1d4cc12a987ba08b944db03af72b1e4c28857"
+    },
+    "dist/Blades-artwork-pack.zip": {
+      "bytes": 2030117,
+      "sha256": "f1cabb36ab6220b910f9875ecea18627c8f9dc890c972b4b2cb09b3300b5541a"
+    },
+    "dist/Blades-v0.20-walkthrough.mp4": {
+      "bytes": 10386491,
+      "sha256": "f113b104152f1663203bd6e0782b4442f6b5497e28c94894ff2d7202b4cc5bd5"
+    }
+  },
+  "source_sha256": {
+    "include/library.h": "1ba805a4a6cfd094665e6cb2e1c4c0dc5633aa52cb14dab69ce41d167eb0b8b8",
+    "include/blades.h": "06bd19e0c21b2e05a46d92ab8fca90f0423196de8ef3defe5e496a1cda022ff8",
+    "include/xbox_library.h": "9a0f500482e2d3202ddc0e7a5988eb20eddf7f589f93acef96a8f6ab4746f879",
+    "include/xbox_disc.h": "0085e81c04d4769da08f8c4291c5f4b2c209343d5e97fedc8a530aec0aca0ad0",
+    "src/core/library.c": "06de512cb121a81c250c2126edc915b67cbe727971690030322d788bea9cb5af",
+    "src/core/library_ui.c": "e65f0b31bfd47efa96a5011146b4f35e74d68d2ab363b01183a51373d880ff05",
+    "src/core/dashboard.c": "b9c03a1ef083e7ddb6fd91b4fb68925aa4d15823d8bf384d583ce34087cd72ee",
+    "src/core/menu.c": "61eb7c5355deeb6bf9542475b8e9679598d27fda9878595fb5bc0918d66756f4",
+    "src/platform/xbox_library.c": "0e8e56a76bd9e68b3587ec654b00c4ed98c260afc3538e0acf6847f2b259429a",
+    "src/platform/xbox_disc.c": "12b57952573386f0ed20597632e8e7cfffb702e1bc556e8628ef80c63e6807e2",
+    "src/platform/xbox360.c": "838e8671e9cf62dd93193cd3e434a7144f277f5e8f0fc605748a7a7cca2cc6a6",
+    "src/platform/linux.c": "a051996f79e407f28965f6e88b361301d2a80139b9d51905a770bf862e001075",
+    "src/render/dashboard_render.c": "6d987fdfc6eada14618e1ad2393274e34857c111ad9dd06d09099d9ebea8a5e1",
+    "src/render/draw_list.c": "009bedd9e2571e0b47ca8d56eae146108be6d90f10c1643f9e1771eed91d4d6b",
+    "tools/render-walkthrough.c": "4e0561b9e521232f11df9d56cc651b44c5efa3b1d2cebd261f9029bc9de2dc2f",
+    "tests/test_library.c": "d88d390e88c80c537ba153eb8e00981bf2df8d382ef23da45102e1fb6ef10438",
+    "tests/test_gpu.c": "6ff6ab57fcca22760dbfd1a57faa6d4a4e01121976c70a8e78e2de80f610a7a7",
+    "CMakeLists.txt": "b0f1df06a3ba95ff10a0bc133d2fa109b0a818d0ab2e9515049e9c7bdb68db15"
+  },
+  "console_validation": "User confirmed previous dashboard/disc build; new storage, package mount and game/app/homebrew handoff require console testing"
+}
