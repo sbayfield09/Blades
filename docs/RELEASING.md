@@ -6,6 +6,10 @@ links for all three.
 
 Publish these together in `sbayfield09/Blades`:
 
+- `dist/Blades-v<version>-USB.zip`: a complete USB-ready `Blades/` folder with
+  default.xex, the artwork payload in Assets/, licences and installation notes.
+  Exclude local Config/library-paths.txt and logs. Lead the download links with
+  this combined ZIP so installation requires one extraction.
 - `dist/Blades/default.xex`
 - `dist/Blades-artwork-pack.zip`, containing `Assets/blades.xzp`, installation
   instructions, source attribution and the artwork payload's SHA-256 checksum.
@@ -30,7 +34,7 @@ branch holds the public downloadable files. Use a temporary Git index to add
 only release artifacts and their instructions/notices, preserving the current
 working tree. Do not replace the public branch with unrelated local changes.
 
-The v0.21.0 pack contains 234 XUIZ entries: five blade states, additional menu
+The v0.22.0 pack contains 234 XUIZ entries: five blade states, additional menu
 icons, the BSK2 root/expanded layout manifest, retail 5766 shared images and the local font atlas/metrics/notice, plus eight precomposed ABXY prompt sprites, six transition WAVs and an audio notice, the baked Xbox Live panel background, and four startup shutter/reveal/layout entries, plus sixteen disc-reading indicator frames. Original project by
 zivvoz / DashX360, inspired by Microsoft's Xbox 360 Dashboard interfaces.
 Asset ownership remains with the respective rights holders. See
@@ -47,3 +51,12 @@ Config/library-paths.txt containing machine-specific locations.
 Version 0.21 adds per-folder scan depth, live current-path progress and stop,
 explicit empty-scan completion, display-label cleanup and ID-less XEX discovery.
 The artwork payload remains unchanged.
+
+Version 0.22 filters compound XEX names before reading their contents, adds the
+File Manager below Homebrew and Y to remove saved scan paths, puts Unlimited
+first, retains Scan Now results while focused, and removes footer status text.
+The 234-entry artwork payload is unchanged.
+
+The v0.22 release also adds CD/DVD/data-disc recognition and explicit manual
+system-player handoffs. `tools/package-usb.py` verifies and combines the XEX
+and premade pack, and is called by the native build script.

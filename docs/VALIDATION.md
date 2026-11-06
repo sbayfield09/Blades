@@ -81,3 +81,16 @@ worst mean 0.478396 and peak error 4. Native XEX and mutation fixtures pass
 unchanged and its ZIP/checksum is verified. A fresh labelled 102-second 720p30
 stereo H.264/AAC walkthrough decodes fully. Native storage/handoff and the
 reported scan problem still need retesting on the user's console.
+
+Version 0.22: 14 suites pass, including strict filename filtering before XEX
+content/metadata reads, case-insensitive plain XEX names in dotted parent
+directories, File Manager browsing/direct launch, Y scan-path removal and
+Scan Now completion retention until focus moves away. CD/DVD/data regressions
+cover stable identification, no autoplay, launch data and stale/eject behavior.
+Library and disc ASan/UBSan/LeakSanitizer pass. 248 GPU comparisons pass, worst
+mean 0.478396 and peak channel error 4. Native XEX validates 20 pages with
+72 XAM/122 kernel imports; verifier mutation fixtures pass. Fresh labelled
+97-second 720p30 stereo H.264/AAC video decodes fully. The combined USB ZIP
+includes the matching XEX and unchanged 234-entry artwork payload, plus notices;
+local scan settings and logs are excluded. Actual CD/DVD playback and new file
+manager handoffs still require physical-console verification.

@@ -114,3 +114,23 @@ an empty close. Native disc operation needs another console test; the v0.18
 log's working tray commands and 59.8–60 FPS do not establish v0.19 game launch.
 
 [Version 0.19 audit](data/v0.19-disc-fix-audit.json).
+
+## Version 0.22: audio CD, DVD video and data discs
+
+Media words 5, 7 and 8 now identify DVD video, audio CD and data discs. Three
+stable samples after the existing settling window produce Play DVD, Play CD
+or Open Data Disc, without trying to read default.xex or automatically
+launching anything. Existing pending/empty/game/unknown policies remain.
+
+A manually revalidates the raw type and generation, then uses normal SDK
+cleanup and a 0x3FC-byte dashboard launch-data buffer to open flash:/dash.xex.
+DVD uses command 7 and user FF, matching the pinned FreeStyle main-scene DVD
+branch; audio uses the documented music-player command 6; data uses default
+command 0. A media-player preflight failure keeps the recognized media type
+and displays a launch error rather than reclassifying a valid disc as unreadable.
+
+Host tests cover the three labels, settling, no autoplay, explicit launch,
+launch-data bytes, physical eject invalidation and stale-generation refusal.
+The native system-player handoffs require console testing; the walkthrough
+uses simulated optical states. DVD-Audio, Video CD, HD-DVD and original Xbox
+playback are outside this change.

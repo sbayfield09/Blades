@@ -1,0 +1,150 @@
+{
+  "release": "0.22.0",
+  "recorded_utc": "2026-11-06T06:59:07.968678+00:00",
+  "changes": [
+    "Plain single-extension XEX names only, before content/metadata reads",
+    "Unlimited first in depth picker",
+    "No footer status/choose-folder/titles-found text",
+    "Scan Now retains completion panel until focus moves away",
+    "File Manager below Homebrew; direct path validation/launch",
+    "Y removes a saved scan path, leaving storage files intact",
+    "Audio CD, DVD video and data-disc recognition with manual system-player/dashboard handoff",
+    "USB-ready combined executable/artwork ZIP"
+  ],
+  "tests": {
+    "ctest_passed": 14,
+    "ctest_total": 14,
+    "gpu_comparisons": 248,
+    "gpu_worst_mean": 0.478396,
+    "gpu_peak": 4,
+    "library_asan_ubsan_lsan": "passed",
+    "disc_asan_ubsan_lsan": "passed",
+    "xex_digest_and_imports": "passed",
+    "xex_mutation_fixture": "passed",
+    "native_pages": 20,
+    "xam_slots": 72,
+    "kernel_slots": 122
+  },
+  "optical_media": {
+    "raw_types": {
+      "5": "DVD video",
+      "7": "audio CD",
+      "8": "data disc"
+    },
+    "stable_samples": 3,
+    "minimum_reading_seconds": 3,
+    "autoplay": false,
+    "manual_handoff": "flash:/dash.xex via SDK cleanup",
+    "launch_data_bytes": 1020,
+    "commands": {
+      "dvd": 7,
+      "music": 6,
+      "data_default": 0
+    },
+    "dvd_version": 0,
+    "dvd_user": 255,
+    "source": "FreeStyle df89a42edf055370e3383576c93199a3713c41e9 Main/ScnMain.cpp and MEDIA_TYPES; public XDASHLAUNCHDATA command header",
+    "physical_playback_verified": false
+  },
+  "usb_zip": {
+    "members": [
+      "Blades/default.xex",
+      "Blades/README.txt",
+      "Blades/build-info.txt",
+      "Blades/SHA256SUMS",
+      "Blades/LICENSE",
+      "Blades/XSDK-LICENSE.txt",
+      "Blades/THIRD_PARTY_NOTICES.md",
+      "Blades/Config/README.txt",
+      "Blades/Assets/ARTWORK-README.txt",
+      "Blades/Assets/ARTWORK-SHA256SUMS.txt",
+      "Blades/Assets/AUDIO-NOTICE.txt",
+      "Blades/Assets/DASHX360-NOTICE.txt",
+      "Blades/Assets/FONT-LICENSE.txt",
+      "Blades/Assets/FONT-NOTICE.txt",
+      "Blades/Assets/README.txt",
+      "Blades/Assets/blades.xzp",
+      "Blades/licenses/CONVECTION-NOTICE.txt",
+      "Blades/licenses/DASHX360-NOTICE.txt",
+      "Blades/licenses/GCC-RUNTIME-EXCEPTION.txt",
+      "Blades/licenses/GPL-3.0.txt",
+      "Blades/licenses/NEWLIB.txt",
+      "Blades/licenses/STB-LICENSE.txt"
+    ],
+    "crc": "passed",
+    "xex_matches_standalone": true,
+    "payload_matches_separate_pack": true,
+    "scan_settings_and_logs_excluded": true
+  },
+  "artwork": {
+    "entries": 234,
+    "payload_sha256": "c6470ec2ab422e1f5f2984bd244a79173269fd40fa157714be98af8dd183c55c",
+    "unchanged_from": "0.18\u20130.21",
+    "zip_integrity": "passed"
+  },
+  "video": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 1280,
+        "height": 720,
+        "r_frame_rate": "30/1"
+      },
+      {
+        "codec_name": "aac",
+        "sample_rate": "48000",
+        "channels": 2,
+        "r_frame_rate": "0/0"
+      }
+    ],
+    "format": {
+      "duration": "97.000000",
+      "size": "12327958"
+    }
+  },
+  "video_full_decode": "passed",
+  "video_scope": "Fresh desktop GPU with explicitly simulated storage, optical media and launch preparation",
+  "xex_system_flags": "00000021",
+  "xex_version": "0.0.22.0",
+  "artifacts": {
+    "dist/Blades-v0.22-USB.zip": {
+      "bytes": 2419884,
+      "sha256": "8dc9db3f1feeb57ac80e0359a9994579e6cb1f46b40a2625fc3004d883bbb887"
+    },
+    "dist/Blades/default.xex": {
+      "bytes": 1097728,
+      "sha256": "e391a8416f80518b25d028e6a0b22b129787e2926ed6c633475ae3184cae5340"
+    },
+    "dist/Blades-artwork-pack.zip": {
+      "bytes": 2030192,
+      "sha256": "e2bcf9f432252a96cdfafc061625494f1853df06bfddee71db1d3f8618f87ef0"
+    },
+    "dist/Blades-v0.22-walkthrough.mp4": {
+      "bytes": 12327958,
+      "sha256": "c2050092edd29890a8babd14278740b9a39914e7b4fec655f1b7dd46b49222f6"
+    }
+  },
+  "source_sha256": {
+    "include/library.h": "6a109678d7a659cd726233640eaa554a23a8b28581e63e93c98f1d389f1d93c3",
+    "include/blades.h": "9d65f7de276e3ae8c26b99d7dfa1bcfa9974ada5ea064e59e2fb914cc8479121",
+    "include/disc.h": "56b164154eb4fa2cc94733b176a7d9053856b53e47ed0c7251881a00aeccbd6c",
+    "src/core/library.c": "e1aa9299737c227eede8f9bbe504bd61f13d790941bff17ed8f49073dbd092d6",
+    "src/core/library_ui.c": "dbe95e9bb48d5bc9643235bb0b0fcc4bb1913e15021be0ac3508ef5691b16d66",
+    "src/core/dashboard.c": "bf6bfdcd0b13b2f834f46f7eca2ef3e4644c6e032bc4fa0ac0bf695e95dd5874",
+    "src/core/menu.c": "34853bca7e67e77283a3592768d434d53b56405c9d59cc97f13964e5fd95fb3a",
+    "src/core/disc.c": "684389e6c5ce9bee4f85b70bccadb5f8e284dbc4e49d08fc611f99469e92eda0",
+    "src/render/dashboard_render.c": "4203bdd32da9b9f798218f7b76baddb736d89f11af393f2d6950c18bba36cb89",
+    "src/render/draw_list.c": "038f29d8f53ee6a08e000c1a6a35b591aafc1fffe1229454435bed9b3c95eda9",
+    "src/platform/xbox360.c": "f92b073f6dfe7ee8ce9b897253080a8342970c02531e49a3094903bbd7ca7732",
+    "src/platform/xbox_disc.c": "b6790a8325ffbe349c9a5c9f12548886014a1b5b112e806e0d9fd0c948fa5531",
+    "tests/test_library.c": "55e49b599dd393265a4541e322de0b4890fb5f2eed18933e83dcfa393e4c4094",
+    "tests/test_disc.c": "531e40a686aadaf6f6f41ac3faef443eba80bd1153e14ceb043063d2f89b1082",
+    "tests/test_gpu.c": "157a69b8e71f59d5cd4317ea4f21b7b2e5371948fda56e86663ccfa2c3c63ee4",
+    "tools/render-walkthrough.c": "77cd5086e65116fa7793f0ee6c91cdebffb359f0f63069bd90f19608f307c990",
+    "tools/package-usb.py": "12730ac9c823e7b9a306fe48e63810dbaef2e73f6f17716e3712ee15efab14b5",
+    "CMakeLists.txt": "fbc4fe43ed45a90113486cf8bc045177b86b2dfcf08f80313fb4bbc38101d4cb"
+  },
+  "physical_validation": "Requires console retesting of media-player handoffs, scan behavior and file-manager launch; host checks do not establish actual playback or storage driver recovery"
+}

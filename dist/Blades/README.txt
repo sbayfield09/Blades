@@ -1,26 +1,40 @@
-Blades 0.21.0 - games, apps and homebrew hardware test build
+Blades 0.22.0 - games, apps and homebrew hardware test build
 
-Copy default.xex into your Blades folder and extract the matching premade
-Blades-artwork-pack.zip there so Assets/blades.xzp is present. No conversion
-is required. The pack contains 234 entries; all 218 previous entries remain
-unchanged, with sixteen small disc-reading indicator frames added.
+Download Blades-v0.22-USB.zip and extract it onto your USB drive. It contains
+Blades/default.xex and the complete Blades/Assets folder, with notices and
+installation notes. Launch Blades/default.xex. No separate artwork extraction
+or conversion is required. The ZIP excludes machine-specific scan settings and
+logs, so extracting over an existing Blades folder preserves its scan paths.
+Separate XEX/artwork downloads remain available.
 
 Library setup:
 Open Games -> Played Games -> Scan Folders -> Add Folder. Select a storage
 device, use A to enter folders, then X to use the current folder. Choose Games,
-Apps or Homebrew, then select a depth from 0 to 32 or Unlimited. Depth 0
+Apps or Homebrew, then select Unlimited (first option) or a depth from 0 to 32. Depth 0
 checks the selected folder only; depth 1 includes its children. Default: 3.
 Existing v0.20 paths are retained with depth 3 until you change them. Repeat for additional locations; up to 32 are saved in the local
 Config/library-paths.txt file and rescanned when Blades starts. B goes up in
-the picker. Select a saved path to change its depth or remove it without deleting files.
+the picker. Select a saved path to change its depth, or press Y on the path
+to remove that scan location. Storage folders and their files are not deleted.
 
 Game Library, Apps and Homebrew are under Played Games; Arcade and Demos also
 use their Games blade entries. Lists scroll. A manually launches the selected
 title. X or Scan Now rescans; X changes to Stop Scan while scanning.
-The current folder/file, counts and depth are shown live. Empty scans explicitly
+The current folder/file, counts and depth are shown in the right panel.
+Completed results stay there until Scan Now is unhighlighted. No choose-folder,
+scanning or titles-found status text is drawn at the bottom left. Empty scans explicitly
 finish and re-enable controls even when no runnable titles are found. Stopping
 waits for the current storage read to return. Adding/scanning never launches anything. B or
 changing blades cancels an in-flight launch. Guide/modal guards still apply.
+
+File Manager is directly below Homebrew under Played Games. It lists folders
+and plain .xex files. A opens a folder or manually launches an executable,
+including zero/missing-Title-ID homebrew, without a configured scan folder.
+B goes to the parent folder; X refreshes. No storage files are deleted.
+
+Only plain names such as Utility.xex or default.XEX are eligible. Compound
+file.dll.xex / file.exe.xex / file.any.xex names are skipped before reading
+file contents. Supported downloaded package formats remain supported.
 
 Supported: extracted .xex games/apps/homebrew, Xbox Live Arcade, Games on
 Demand, demos and XNA packages. Keep downloaded packages and accompanying
@@ -37,15 +51,16 @@ removal and rescanning; verify your files remain. Send default.log if browsing,
 scanning or launching fails. The log includes library commands, scan counts,
 metadata errors, content-mount results and SDK launch failures.
 
-14 host suites and 240 desktop GPU comparisons pass, alongside library/disc
+14 host suites and 248 desktop GPU comparisons pass, alongside library/disc
 memory checks and native XEX validation. Library storage and real title handoff
-still need physical-console testing. This release includes a fresh 102-second
+still need physical-console testing. This release includes a fresh 97-second
 720p30 desktop GPU walkthrough with simulated storage/launch preparation.
 
 Controls: D-pad/left stick navigate, LB/RB change blades, A select, B back.
 X rescans in libraries or selects the current folder in the folder picker.
 Outside library pages it opens the existing profile placeholder. Back opens the confirmed exit menu.
-Y ejects a loaded/reading disc from ordinary menus, including submenus. Release
+Y removes a highlighted saved scan path on Scan Folders. Elsewhere it ejects
+a loaded/reading disc from ordinary menus, including submenus. Release
 it before another press. The physical eject button is monitored independently.
 
 Select the disc row on Games, Media or Xbox Live:
@@ -56,10 +71,17 @@ Busy states cannot be selected as games or submenus. Labels follow hardware
 state, with no fixed artificial reading duration. An empty close returns to
 Open Tray. Original modal/startup input guards still apply.
 
-This release targets Xbox 360 game DVDs with default.xex. Titles come from
-nxeart or the executable's XDBF metadata. Missing/invalid metadata uses Play
-Xbox 360 Game; long titles are shortened to fit. Other disc formats are not
-played by this build. Unsupported/unreadable discs can be ejected and replaced.
+Xbox 360 games launch their disc XEX. Audio CDs and DVD videos are recognized
+separately after stable media detection, with Play CD / Play DVD labels. A
+requests the Xbox system music/DVD player via the retail dashboard. Data CDs
+and DVDs display Open Data Disc; A opens the Xbox system dashboard to browse
+supported media. No media type autoplays. Y and the physical eject button
+continue to work. The system player handles its usual format/region/parental
+restrictions. These new media handoffs need hardware testing.
+
+Game titles come from nxeart or executable XDBF metadata, with Play Xbox 360
+Game as fallback. DVD-Audio, Video CD, HD-DVD and original Xbox disc launching
+are outside this release's media-player support.
 
 Check on your 360:
 - Start with no disc, and separately with a game already inside.
@@ -70,6 +92,8 @@ Check on your 360:
 - Open/close using the physical button, including during title detection.
 - Replace a game and confirm the old title clears immediately.
 - Try an empty close and an unreadable/unsupported disc; verify recovery.
+- Insert an audio CD, a DVD movie and a data disc. Verify their labels and
+  manual A handoffs, Y/physical eject and no autoplay.
 - Check Guide, reconnect, normal navigation and confirmed exit.
 
 default.log records API availability, tray state, media type, title ID, state

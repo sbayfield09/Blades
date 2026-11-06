@@ -127,3 +127,6 @@ folder picker use the shared expanded-menu chrome and existing Convection atlas.
 
 Version 0.21 uses the same 234-entry artwork payload; scan progress and depth
 controls use existing menu and font resources.
+
+Version 0.22 reuses the same 234-entry payload for the file browser, scan
+controls and retained completion panel. No new artwork conversion is needed.
