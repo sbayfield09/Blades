@@ -1,4 +1,4 @@
-# Profile integration — 0.32
+# Profile integration — 0.33
 
 The account card is selectable on Xbox Live, Games and Media whether signed
 in or signed out. Up from the first menu item selects it; Down returns to the
@@ -40,7 +40,8 @@ the same identity; changing identity clears it. Missing pictures use the
 neutral default tile, not a canned picture presented as the user's choice.
 
 The card name band fades without a hard inner separator, and its lower shadow
-remains. Thin row dividers stay visible, including below selected rows.
+remains. Dividers remain between the other rows; the selected lower rule is covered
+by its continuous shadow in 0.33.
 Version 0.32 compares the original reference recording at 04:23 (highlighted
 Sign In), 04:28–04:29 / 04:37 (Games rows), 05:09 (Media) and the uploaded
 achievement recording at 22:05 (Sign In). The sheen now has broader shoulders
@@ -53,6 +54,12 @@ Card focus reaches the rounded inner frame rather than leaving an inset
 rectangle. Its name band is drawn over the focus, preserving the reference's
 darker name area for both signed-out and signed-in cards. The supplied
 video-games.jpg remains the signed-in card and Gamerscore alignment reference.
+Version 0.33 extends the focus to the inner lower border, keeps both frame
+outlines above the fill, and replaces the rectangular shadow strip. The shadow
+now follows both actual 10-pixel lower frame corners and fades out at either
+side; its centre starts immediately below the outer bottom frame. The card
+position, picture/stat geometry and horizontal sheen shape remain unchanged.
+See FOCUS-AND-CAPS.md for the shared menu edge correction.
 The original GScore PNG and centring are
 unchanged. Xbox Live information now has a 28-pixel gutter past the button
 column and word-wraps inside its own panel.
@@ -65,6 +72,6 @@ checks package counting, cross-device duplicates and invalid/common exclusions.
 The walkthrough's accounts/pictures/counts are explicit simulations; check
 actual Guide actions, profile pictures/counts and account changes on a 360.
 
-![Signed-out highlighted card, simulated profile count](images/signin-highlight-v0.32.png)
+![Signed-out highlighted card, simulated profile count](images/signin-highlight-v0.33.png)
 
-![Signed-in selectable card, simulated profile/picture](images/profile-card-v0.32.png)
+![Signed-in selectable card, simulated profile/picture](images/profile-card-v0.33.png)

@@ -318,3 +318,25 @@ both edit buttons selected. Final native XEX digests/mutation, ZIP integrity,
 unchanged artwork payload and a fresh fully decoded 78-second labeled desktop
 walkthrough are checked in the release audit. Physical screen appearance on
 an Xbox 360 remains the final visual check.
+
+## Version 0.33 row edge and rounded card-shadow corrections
+
+Five relevant suites pass: resources, skin, draw-list, startup and GPU,
+including 292 CPU/desktop GPU comparisons. New actual-pack pixel checks cover
+20 selected row boundaries across all five blade roots, available ordinary
+submenus and all three FTP controls. They verify positive focus fill through
+offset 50 and a continuous shadow from 51 replacing the selected divider.
+The tests reject a bright divider stripe cutting through that shadow. A
+full-width check includes the rounded bevel and both shadow styles, ensuring
+neither starts above the selected edge.
+These would fail the former fill/shadow boundary. Both lower card corners
+are checked for shadow following the curve and ending before the centre tail;
+the focus reaches the inner border while the frame remains visible.
+
+The draw-list fixture still verifies 74 static/transition/profile command
+states and cached/direct pixel equivalence. ASan/UBSan/LSan checks the real-pack
+renderer fixture. Native XEX digests/mutation, ZIP CRC, unchanged artwork and
+the fully decoded fresh 78-second video are recorded in the release audit.
+Source comparisons use original reference footage around 04:28–04:29, 04:37,
+05:09 and Sign In at 04:23 / 22:05, plus the signed-in Games reference still.
+The final console display appearance remains a physical check.

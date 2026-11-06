@@ -1,31 +1,46 @@
-# Focus and bar shading — 0.32
+# Highlight/divider join and card shadow — 0.33
 
-Compared the original dashboard recording at 04:23 (Sign In), 04:28–04:29
-(Achievements), 04:37 (Played Games) and 05:09 (Media/Music), together with
-the uploaded achievement recording at 22:05 (Sign In) and the System still.
-The sheen is fitted from the footage; camera exposure, encoding and the moving
-background prevent claiming recovered retail opacity constants.
+The original reference recording was checked at 04:28–04:29 (Achievements),
+04:37 (Played Games) and 05:09 (Media/Music), including the selected lower edge
+and its join with the right-hand curve. Sign In footage at 04:23 and 22:05 in
+the uploaded achievement recording, plus video-games.jpg, was checked for the
+card's frame and both lower shadow corners. Camera exposure/compression and
+the animated background affect brightness; these are geometric fits rather
+than recovered retail XUI constants.
 
-The 0.31 pure-white sine-squared highlight was too concentrated. The new
-slightly warm sheen has broader shoulders and soft top/bottom edges, while
-still fading to transparent at either end. Menu rows and the account card use
-the same horizontal shape. The card's focus extends to its rounded inner frame,
-and its darker name band is composited over the sheen. No hard inner separator
-is added. The thin dividing lines between buttons remain visible.
+In 0.32 the row sheen stopped at offset 48 and the shadow began at 49, while
+the dark divider was at 51–52 and another light line at 53. That placed a line
+inside an already-started shadow and made the lower edge appear doubled.
+Version 0.33 fills through offset 50 and starts the shadow at the divider
+location, offset 51. The shadow covers and effectively replaces the selected
+row's divider; that dark/light rule is not painted over the penumbra again.
+The selected lip's light bevel is above the contact edge, not a separate bright
+rule through the underside. Other rows retain their normal dark/light groove.
+During movement, a divider crossed by the shadow's contact band is covered too.
+The 53-pixel row pitch, fonts,
+icons, sheen tint/width and existing right-side/lower-left shadow taper remain.
+Roots, ordinary submenus, library/File Manager and FTP use the same boundary.
 
-The top bar's shadow sits inside its lower edge and fades upward. The bottom
-bar's shadow sits inside its upper edge and fades downward. Their contours
-follow the existing artwork's curved edges and animated positions, including
-expanded submenus and startup. Small edge arrays are cached on resource load;
-PNG decode scratch is freed and idle foreground commands are reused. The
-original artwork payload, shader pipeline, audio and achievement spacing are
-unchanged.
+![Actual 0.32/0.33 renderer edge comparison, desktop simulations](images/row-edge-comparison-v0.33.png)
 
-Final release captures below are desktop simulations using the actual pack.
-Physical display contrast/brightness should be compared on a 360.
+The account card had a rectangular shadow strip. It is replaced with a soft
+shadow following the rounded frame's lower contour. At either corner the
+shadow rises with the curve and fades toward the side, so its tail finishes
+sooner there than at the flat centre. It is drawn behind the frame, and both
+frame outlines remain above the focus fill. The focus reaches the inner lower
+border without painting over it. This applies signed in and signed out.
 
-![Menu sheen and inset header/footer shadows](images/menu-highlight-v0.32.png)
+![Actual 0.32/0.33 card-shadow comparison, desktop simulations](images/card-shadow-comparison-v0.33.png)
 
-![Highlighted signed-out card](images/signin-highlight-v0.32.png)
+The 0.32 top/bottom cap shading is retained: header shading is inset and fades
+upward from its lower edge; footer shading fades downward from its upper edge.
+Its cached original-artwork contours, cap animation and startup opacity are
+unchanged. Achievement geometry, FTP status layout, native account/Guide
+behavior and the 234-entry artwork payload are unchanged.
 
-![System menu sheen and cap contours](images/system-highlight-v0.32.png)
+The renderer tests compare real pixels with and without focus, checking that
+the last fill rows are bright and the selected divider is covered by one
+continuous penumbra, without a separate bright stripe through it. They also check both curved card ends
+and the clean tail boundaries. Captures use the final renderer and real pack,
+with explicit simulated profile/storage/FTP/Guide labels. Physical display
+appearance still needs comparison on a 360.

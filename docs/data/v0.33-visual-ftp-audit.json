@@ -1,0 +1,208 @@
+{
+  "release": "0.33.0",
+  "recorded_utc": "2026-11-06T18:47:30.535710+00:00",
+  "changes": [
+    "Highlight reaches divider location; continuous shadow covers/replaces the selected divider instead of drawing a separate rule over its penumbra",
+    "Preserve normal dividers on other rows; cover a divider crossed by the shadow contact band during motion",
+    "Card focus reaches its inner lower border; frame outlines stay above the fill",
+    "Profile-card shadow follows both lower rounded corners, fades at the sides and ends earlier there than at the flat centre"
+  ],
+  "references": {
+    "original_dashboard_video_seconds": [
+      263,
+      268,
+      269,
+      277,
+      309
+    ],
+    "uploaded_achievement_video_seconds": [
+      1325
+    ],
+    "signed_in_card": "supplied video-games.jpg",
+    "subjects": "Games/Media selected lower lip and right join; signed-out and signed-in card lower frame/shadow corners",
+    "scope": "Visual geometric comparison; no claim of recovered retail opacity constants or identical camera exposure"
+  },
+  "selected_edge": {
+    "before": "0.32 fill stopped at offset48; shadow started49; separate divider at51-53 split the penumbra",
+    "now": {
+      "last_fill_pixel": 50,
+      "light_lip_bevel": 50,
+      "shadow_start_and_former_divider_location": 51,
+      "selected_divider": "Covered/replaced by shadow; not redrawn over it",
+      "unselected_dividers": "Normal dark/light grooves retained",
+      "moving_selection": "Divider within first15px of contact band is covered",
+      "row_pitch": 53
+    },
+    "scope": [
+      "all five roots",
+      "ordinary expanded submenus",
+      "library/File Manager",
+      "FTP controls"
+    ],
+    "unchanged": "row positions, icon/font sizes, horizontal sheen tint/shape and existing shadow taper"
+  },
+  "card_shadow": {
+    "frame": [
+      400,
+      148,
+      10
+    ],
+    "frame_y": 76,
+    "focus_last_flat_pixel": 220,
+    "inner_lower_border": 221,
+    "outer_lower_border": 223,
+    "centre_shadow_start": 224,
+    "tail_samples": 11,
+    "peak_alpha": 36,
+    "corners": "Actual lower contour of both 10px rounded corners; side fade to near-zero instead of rectangular ends",
+    "composition": "Shadow behind frame; frame outlines above focus fill",
+    "profile_states": [
+      "signed out",
+      "signed in"
+    ],
+    "per_frame_image_allocations_added": 0
+  },
+  "unchanged": [
+    "FTP status layout/server/settings/native keyboard",
+    "profile native Guide actions and actual pictures/counts",
+    "achievement icon/grid/header spacing",
+    "0.32 inset header/footer shading",
+    "original navigation/startup PCM",
+    "234-entry artwork payload"
+  ],
+  "validation": {
+    "ctest_passed": 5,
+    "ctest_total": 5,
+    "suites": [
+      "resources",
+      "skin",
+      "draw-list",
+      "startup",
+      "gpu"
+    ],
+    "row_edge_pixel_checks": 20,
+    "edge_contract": "Fill bright through50; continuous shadow from51; no bright rule crossing underside; rounded/flat helper never paints above selected edge",
+    "card_contract": "Both corners shadow higher and finish sooner than centre; inner/outer frame remains visible",
+    "draw_list_command_states": 74,
+    "gpu_comparisons": 292,
+    "gpu_worst_mean": 0.485981,
+    "gpu_peak": 5,
+    "sanitizers": "ASan/UBSan/LSan passed real-pack draw-list/edge/corner fixture",
+    "negative_regression": "Saved0.32 row renderer fails the positive-fill-at49 contract against current core; not a full0.32 binary rerun",
+    "xex_verification": [
+      "XEX2 PowerPC-BE, Xbox subsystem, entry 0x820dca30",
+      "21 verified image pages; header/image/import digest chains valid",
+      "xam.xex: 92 import slots",
+      "xboxkrnl.exe: 122 import slots",
+      "PASS: deliberate image mutation rejected: image digest mismatch at page 19"
+    ],
+    "native_pages": 21,
+    "xam_slots": 92,
+    "kernel_slots": 122
+  },
+  "usb_zip": {
+    "members": [
+      "Blades/default.xex",
+      "Blades/README.txt",
+      "Blades/build-info.txt",
+      "Blades/SHA256SUMS",
+      "Blades/LICENSE",
+      "Blades/XSDK-LICENSE.txt",
+      "Blades/THIRD_PARTY_NOTICES.md",
+      "Blades/Config/README.txt",
+      "Blades/Assets/ARTWORK-README.txt",
+      "Blades/Assets/ARTWORK-SHA256SUMS.txt",
+      "Blades/Assets/AUDIO-NOTICE.txt",
+      "Blades/Assets/DASHX360-NOTICE.txt",
+      "Blades/Assets/FONT-LICENSE.txt",
+      "Blades/Assets/FONT-NOTICE.txt",
+      "Blades/Assets/README.txt",
+      "Blades/Assets/blades.xzp",
+      "Blades/licenses/CONVECTION-NOTICE.txt",
+      "Blades/licenses/DASHX360-NOTICE.txt",
+      "Blades/licenses/GCC-RUNTIME-EXCEPTION.txt",
+      "Blades/licenses/GPL-3.0.txt",
+      "Blades/licenses/NEWLIB.txt",
+      "Blades/licenses/STB-LICENSE.txt"
+    ],
+    "crc": "passed",
+    "xex_matches_standalone": true,
+    "artwork_matches_pack": true,
+    "personal_scan_paths_ftp_settings_credentials_and_logs_excluded": true,
+    "unversioned_alias_identical": true
+  },
+  "artwork": {
+    "entries": 234,
+    "payload_sha256": "c6470ec2ab422e1f5f2984bd244a79173269fd40fa157714be98af8dd183c55c",
+    "unchanged_from": "0.32",
+    "pack_changes": [
+      "ARTWORK-README.txt"
+    ]
+  },
+  "video": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 1280,
+        "height": 720,
+        "r_frame_rate": "30/1"
+      },
+      {
+        "codec_name": "aac",
+        "sample_rate": "48000",
+        "channels": 2,
+        "r_frame_rate": "0/0"
+      }
+    ],
+    "format": {
+      "duration": "78.000000",
+      "size": "8583947"
+    }
+  },
+  "video_full_decode": "passed",
+  "video_scope": "Fresh final0.33 desktop GPU capture using shared renderer/matching pack; profiles, achievements, FTP, storage and Guide/keyboard requests explicitly simulated. Comparison crops use matching0.32/0.33 desktop captures, not console footage.",
+  "sdk_commit": "5f6dc726f65f6d171493a3628c2415c03551f27b",
+  "xex_version": "0.0.33.0",
+  "artifacts": {
+    "dist/Blades-v0.33-USB.zip": {
+      "bytes": 2471346,
+      "sha256": "dff837f3b79159fa5353de0183826ba6bd7cfc803231246104764d2fa0b9cd76"
+    },
+    "dist/Blades/default.xex": {
+      "bytes": 1187840,
+      "sha256": "7735f0c923f2c4a8be781320f0283ff348d7abd86a28a8f4307fe347c4bc478b"
+    },
+    "dist/Blades-artwork-pack.zip": {
+      "bytes": 2030418,
+      "sha256": "e04d0c2bda72bc21cb5a13c990512be39c015cc66e9972cb2cb462ae215034fd"
+    },
+    "dist/Blades-v0.33-walkthrough.mp4": {
+      "bytes": 8583947,
+      "sha256": "3afae373e2e53c477050b96cbc0f589020d45c1d1e27a90a03ede23384b15f36"
+    }
+  },
+  "preview_images": {
+    "docs/images/signin-highlight-v0.33.png": "7a93208cf925bb697a2e459efb79055ab06783e9984232bd8800af0935e19705",
+    "docs/images/profile-card-v0.33.png": "a4a6fa1f514327877d065fbc3c6148d31ed1603cf148d99100b064320f82aacf",
+    "docs/images/menu-highlight-v0.33.png": "3ccfa2628d6a20ca849cb39898a1e519b15a311bcb127d0ba20e5cacbbb1e276",
+    "docs/images/system-highlight-v0.33.png": "6c98eaf7f7cb8d36456a9469688be2055854cbe0ebd64f1a52b54a9402aa8d30",
+    "docs/images/ftp-computers-v0.33.png": "0f74255027d381aac3c0e0add0da36dc4557d8f9b35d4ff68af8ef8ea1fe09cc",
+    "docs/images/row-edge-comparison-v0.33.png": "f052f98c752b66e459e09a7908c4de18a02321232e3a3fa19345c2f55cc06c7c",
+    "docs/images/card-shadow-comparison-v0.33.png": "e4d154dd37d4b75c098d874a649b1e0a0d7c42adb05d63b5e051b44cbaf98711"
+  },
+  "source_sha256": {
+    "src/render/theme.c": "f5b7c79ec0c16097898a29e3140ee9a64b72251f0acacfdac5792cf519cd3c17",
+    "tests/test_draw_list.c": "33e19d3446c4e6f48cfd43c10bee37d2d65fd00b1014452b8200cade499f48ca",
+    "src/render/dashboard_render.c": "81978d3a38127b4e2571399fd007b3f7105e4e669fd29e7b089aa7081c916e62",
+    "src/render/skin.c": "b5e991c245167fa9be086075bfa8753fd82a74c986f5cd1cd38cdea5a2715d7d",
+    "tests/test_skin.c": "748d8d0484b42ef68341be1a7eb14e25781b23399ef90bfe43b590994715da83",
+    "tests/test_gpu.c": "0da1f3b695f179da9d28bf4a9ec19437aea4b18f86ff41510f1278327e3a1f77",
+    "CMakeLists.txt": "65c5173d2bb125327aa33afddc93c848833f925b3a33ea5ef542432498540c79",
+    "tools/build-xbox.sh": "61eb0a36770f22433d8dcfbb8677b1dce988a7f434c9b1d5765f8c624c0ed886",
+    "tools/package-usb.py": "4f4f9f5ccf074a1945f0573c01d433d5b65ad589c9293bc69586a72a1de19e63",
+    "tools/render-walkthrough.c": "f98d8d8e2b0fa4a4d9d648ae1c846c7e108fb3800c8b2e85c8ab4da4e76a1162"
+  },
+  "physical_validation": "Final highlight/shadow appearance requires comparison on Xbox360 display; desktop tests cannot prove hardware appearance or native Guide/profile/FTP behavior."
+}

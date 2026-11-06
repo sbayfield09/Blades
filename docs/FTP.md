@@ -1,4 +1,4 @@
-# FTP server — Blades 0.32
+# FTP server — Blades 0.33
 
 FTP starts when the startup animation finishes and Blades reaches the main
 menu. It runs across every blade and submenu, including while the Xbox Guide
@@ -85,7 +85,7 @@ The fresh walkthrough is desktop GPU playback with explicitly simulated FTP
 status, devices and storage. It demonstrates the screen/toggle/navigation,
 not an actual console FTP transfer.
 
-![Computers FTP controls and login details, simulated](images/ftp-computers-v0.32.png)
+![Computers FTP controls and login details, simulated](images/ftp-computers-v0.33.png)
 
 Credential editing uses the native Xbox keyboard. Confirm 1–63 printable ASCII
 characters to apply a field; cancellation leaves it unchanged. Login changes
@@ -100,3 +100,9 @@ v0.30 setting upgrade. Native keyboard cancellation/input requires a console che
 Version 0.32 changes presentation only. The five relevant renderer/resource/skin/
 startup suites pass, including 292 CPU/desktop GPU comparisons and long login
 values with both edit controls selected. The server and settings format are unchanged.
+
+Version 0.33 aligns the selected control fill, divider and underside: fill
+through row offset 50; shadow from 51 covers/replaces the selected divider.
+Other controls retain their grooves. The selected bevel is above the lip.
+The shadow adds no independent horizontal glint. The status layout, credentials,
+network behavior and persistent settings remain unchanged.

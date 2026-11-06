@@ -1,18 +1,21 @@
-Blades 0.32.0 - FTP layout, focus sheen and bar-shadow hardware test build
+Blades 0.33.0 - highlight/divider join and curved card-shadow hardware test build
 
-Extract Blades-v0.32-USB.zip onto USB and launch Blades/default.xex. The ZIP
+Extract Blades-v0.33-USB.zip onto USB and launch Blades/default.xex. The ZIP
 includes the complete Assets folder and notices. It excludes local library
 paths, FTP settings/login details and logs, preserving those on an update.
 Separate matching XEX/artwork/video downloads remain available.
 
-Version 0.32 visual changes:
-- FTP Username/Password are now in the right column, after IP and before
-  Connected devices. Controls remain on the left; long login values wrap.
-- Broader, slightly warm reference-fitted focus sheen on menu rows and the
-  Sign In/Profile card. The card name band stays darker over the sheen.
-- Top-bar shadow is inside its lower edge, fading upward. Bottom-bar shadow
-  is inside its upper edge, fading downward. Both follow the supplied curves.
-- Thin button dividers and the original achievement icon spacing are retained.
+Version 0.33 visual corrections:
+- Row highlight reaches the divider location. The shadow covers and replaces
+  that selected rule, with no separate hard bar painted over the penumbra.
+  Other rows keep their divider grooves; the selected bevel is above the lip.
+- The Sign In/Profile sheen reaches its inner bottom frame. The frame remains
+  visible; the card shadow follows both rounded lower corners and fades at
+  the sides, replacing the rectangular shadow strip.
+- Root menus, expanded submenus, library/File Manager and FTP use the same
+  row edge. Unselected thin divider grooves and 53px row spacing are retained.
+- FTP login fields stay in the right column. Top/bottom bar shading, menu tint,
+  font sizes, achievement icon spacing and all native actions are unchanged.
 
 Profile fixes:
 - Signed-out profile count reads public profile-package headers on available
@@ -27,7 +30,8 @@ Profile fixes:
 - The card/menu highlight is brightest at the centre and fades toward both
   edges, using the clearer uploaded sign-in video reference near 22:00.
   The name band stays above the sheen and fades without a hard inner separator.
-  Thin button dividers remain, including the selected row and FTP controls.
+  Other button dividers remain; the selected lower groove is covered by its
+  shadow, including in the FTP controls.
 - The Gamerscore G icon and real totals remain. Xbox Live's information text
   has its own bounded/wrapped column clear of the button separator.
 
