@@ -86,5 +86,6 @@ spacing. The original PNG is unchanged. Games, Live and Media share this layout.
 Version 0.27 gates Achievements through the real Guide sign-in picker, resumes
 on successful sign-in and cancels continuation when the picker is dismissed
 signed out. Achievement snapshots are scoped to the active user/XUID and are
-cleared on account changes. See ACHIEVEMENTS.md; the in-app achievement list
-and description are read-only Guide-style panels, not authentication dialogs.
+cleared on account changes. See ACHIEVEMENTS.md. Version 0.28 routes game and achievement selections to
+the real Xbox Guide (ordinals 709/736), retaining the same sign-in gate and
+identity checks. The old in-app gray list and description are removed.

@@ -1,28 +1,29 @@
-Blades 0.27.0 - achievement browser hardware test build
+Blades 0.28.0 - achievement browser hardware test build
 
-Download Blades-v0.27-USB.zip and extract it onto your USB drive. It contains
+Download Blades-v0.28-USB.zip and extract it onto your USB drive. It contains
 Blades/default.xex and the complete Blades/Assets folder, with notices and
 installation notes. Launch Blades/default.xex. No separate artwork extraction
 or conversion is required. The ZIP excludes machine-specific scan settings and
 logs, so extracting over an existing Blades folder preserves its scan paths.
 Separate XEX/artwork downloads remain available.
 
-Version 0.27 implements Games -> Achievements using the supplied photo and
+Version 0.28 implements Games -> Achievements using the supplied photo and
 achievement video. Selecting it while signed out opens the real Xbox Guide
 sign-in menu. Successful sign-in resumes the achievement browser; cancelling
 returns to the dashboard. Switching/signing out profiles closes the browser
 and clears its cached user data.
 
-Use Up/Down in the left game-icon strip to select a played game. The header
-shows its name, last-played date, unlocked achievement count and earned/possible
-gamerscore. The green six-column, three-row grid shows unlocked achievements,
-as in the reference. Right enters the grid; arrows move between its icons and
-pages; A opens a description. A on a game opens a gray Guide-style list of all
-its achievements, including locked and secret entries. Up/Down scroll, Y
-switches recent/gamerscore order, and A opens Achievement Description. These
-read-only panels are rendered inside Blades. B returns one level. X refreshes
-the green browser. Y retains eject outside the gray list; inside that list it
-sorts, matching the reference. No achievements are unlocked or modified.
+Use Up/Down in the left game-icon strip to select a played game. Thin beveled
+lines divide adjacent game icons, matching the references. The header shows
+name, last-played date, unlocked count and earned/possible gamerscore.
+Right enters the earned six-by-three grid; arrows navigate and page.
+A on an achievement opens that exact achievement in the real Xbox Guide.
+A on a game opens its achievements in the real Xbox Guide. The previous custom
+gray panels have been removed. The Guide handles its own details and controls.
+Close it to return to the same game/grid selection. B leaves the green grid,
+then returns from the game strip to Games. X refreshes; Y retains eject.
+Missing Guide exports or a rejected request show an error, with no custom menu
+fallback. No achievement or gamerscore writes are performed.
 
 The native build reads the active local profile's history/progress using XAM,
 including offline profiles. Game and achievement pictures are requested from
@@ -34,13 +35,13 @@ is no direct download service in Blades; complete artwork availability depends
 on the game/profile/cache data the console has available.
 
 Please test a profile with played games, compare progress and pictures against
-the stock dashboard, open locked/unlocked/secret descriptions, sort and scroll,
+the stock dashboard, press A on games and individual achievements, close the Guide,
 and switch profiles while the browser is loading. Check a profile with no
 history and a game/app with no achievements: loading must finish. Send
 Blades/default.log for read errors or missing data. Profile/GPD files are not
 opened or written directly; only public XAM metadata is used.
 
-Version 0.27 integrates the console's active profile and Guide sign-in menu.
+Version 0.28 integrates the console's active profile and Guide sign-in menu.
 When signed out, the account card shows Sign In, the original green default
 picture and the available profile count, matching the supplied reference.
 There is no previous gamertag or personal statistics. The count comes from
@@ -114,10 +115,11 @@ removal and rescanning; verify your files remain. Send default.log if browsing,
 scanning or launching fails. The log includes library commands, scan counts,
 metadata errors, content-mount results and SDK launch failures.
 
-18 host suites and 284 desktop GPU comparisons pass, alongside profile
+18 host suites and 280 desktop GPU comparisons pass, alongside profile
 memory checks and native XEX validation. Library storage and real title handoff
-still need physical-console testing. This release includes a fresh 86-second
-720p30 desktop GPU walkthrough with simulated profiles, Guide requests, achievement/profile data and storage.
+still need physical-console testing. This release includes a fresh 54-second
+720p30 desktop GPU walkthrough with simulated profiles, Guide requests, achievement/profile data and storage. It shows request notices, not the actual Guide.
+Please verify the real Guide handoffs and return selection on a physical 360.
 
 Controls: D-pad/left stick navigate, LB/RB change blades, A select, B back.
 X rescans in libraries or selects the current folder in the folder picker.

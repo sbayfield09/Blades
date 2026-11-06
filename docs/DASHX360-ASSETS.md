@@ -152,3 +152,8 @@ controller/trophy, scroll.png and GScore.png resources for the achievement
 browser and fallbacks. Real per-game images are queried from XAM at runtime,
 kept in RAM and excluded from the release pack. The compatible payload remains
 234 entries with its original SHA-256; no new game images are redistributed.
+
+Version 0.28 keeps the identical 234-entry payload. The thin achievement game
+strip separators are translucent renderer lines measured against the supplied
+photo and video near 05:20. Native Guide achievement views use the system UI;
+the former custom gray panels are removed. No per-user pictures are packaged.

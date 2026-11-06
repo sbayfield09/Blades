@@ -183,3 +183,34 @@ The in-app gray panels reproduce the browser presentation; only sign-in invokes
 the actual system Guide. Real profile reads, cached pictures and continuation
 still require physical-console verification. See ACHIEVEMENTS.md and the
 v0.27 data audit for feature boundaries and artifact/source hashes.
+
+
+## Version 0.28 native achievement Guide and game separators
+
+18/18 host suites and 280 CPU/desktop GPU comparisons pass (worst mean
+0.478439, peak channel error 4). The native-adapter host fixture checks
+XamShowAchievementsUI (709) and XamShowAchievementDetailsUI (736), exact
+user/title/achievement parameters, success/pending/error codes, busy and stale
+identity guards, and absent exports. Shared navigation verifies the actual
+achievement ID after paging and preserves the selected game/grid/icon.
+Both achievement fixtures pass ASan/UBSan/LSan outside tracing.
+
+The original retail 5766 dashboard's call sites confirm the two-/three-argument
+Guide signatures. See ACHIEVEMENTS.md and the v0.28 audit for source hashes,
+call addresses and register arguments. These static checks and host fixtures
+do not execute the real Guide. The custom gray achievement panels are removed.
+The green game strip has translucent dark/light separators between icons,
+checked against the uploaded reference near 05:20 and the supplied photo.
+
+Native XEX 0.0.28.0 has 20 verified image pages and 86 XAM/122 kernel import
+slots. Header/image/import digest and deliberate-mutation checks pass.
+The 234-entry artwork payload is unchanged. USB ZIP CRC and matching XEX/pack
+checks pass; local scan paths, profile data and logs are excluded.
+
+The fresh 54-second 720p30 stereo desktop GPU walkthrough decodes fully.
+Its label identifies simulated profile/achievement/storage/Guide events, and
+it shows Guide-request notices, not an actual system Guide capture.
+Real Xbox Guide handoffs to the exact game/achievement, closing back to the
+same selected icon, sign-in continuation and account changes need a physical
+Xbox 360 check. Console API behavior and cached artwork availability cannot be
+proved by desktop fixtures.

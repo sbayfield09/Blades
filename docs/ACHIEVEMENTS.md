@@ -1,4 +1,4 @@
-# Achievements — 0.27
+# Achievements — 0.28
 
 Games → Achievements opens a profile-backed browser. When signed out it first
 requests XamShowSigninUI(1,0), the real Xbox Guide sign-in menu. After successful
@@ -17,19 +17,37 @@ images used earlier were not achievement-menu references.
 
 Controls:
 
-- Up/Down in the left strip select a played game; its history is ordered by
-  last played. A opens the all-achievement list. Right enters the earned grid.
-- Arrows move within the six-column grid; it pages in groups of 18. A opens a
-  selected achievement description. Left from the first column returns to games.
-- The gray list shows six rows with labels, status, dates, score and pictures.
-  Up/Down scroll; Y switches recent/gamerscore order; A opens the description.
-- B returns one level through descriptions, lists/grid, games and dashboard.
-- X refreshes the green browser. It does not perform profile sign-out in this
-  submenu. The library and root profile shortcuts keep their existing functions.
+- Up/Down in the left strip select a played game, ordered by last played.
+  A opens that game's achievements in the real Xbox Guide. Right enters the grid.
+- Arrows move within the six-column earned grid, paging in groups of 18.
+  A opens the selected achievement in the real Xbox Guide, using its actual ID.
+  Left from the first column returns to the game strip.
+- The Guide handles its own achievement list, descriptions and controls.
+  Closing it returns to the same green page, game and icon selection.
+- B leaves the grid for the game strip, then returns to Games.
+- X refreshes the green browser. Y retains ordinary disc eject here.
 
-These gray views are in-app Guide-style read-only panels, based on the video.
-The sign-in picker is the actual system Guide. Native account authentication
-is never reimplemented by the preview or the achievement browser.
+Version 0.28 removes the in-app gray list/description panels. Native Guide
+requests run on the main thread and use XamShowAchievementsUI (ordinal 709,
+user slot and game Title ID) or XamShowAchievementDetailsUI (ordinal 736,
+user slot, game Title ID and achievement ID). The selected profile identity is
+checked again before calling. Blades keeps presenting and blocks its own input
+while the Guide is active; closing it rearms input and refreshes cached pictures.
+Unavailable exports or rejected requests show an error rather than substituting
+a custom achievement menu.
+
+The signatures were checked against the original retail 5766 dash.xex from
+[the referenced archive](https://github.com/thedev0ps/Xbox-360-Dashboard-Archive/tree/0938397d60975630db108fded069bc04d52740b1/Blades/Retail/5766).
+Its SHA-256 is 8ac65275d67fe8f5447276bfc606f796a76a1c20f68b097bc126dfeed6618f4b.
+At 0x92213754, the call to ordinal 736's thunk (0x92705d34) supplies r3=user,
+r4=Title ID, r5=achievement ID. At 0x922137d0, ordinal 709's thunk
+(0x92705304) receives r3=user and r4=Title ID. Xenia Canary's public
+XamShowAchievementsUI implementation also confirms the two-argument game view.
+No stock executable or decoded dashboard image is included in this release.
+
+The game strip now has a thin dividing line between each pair of visible game
+icons, matching the supplied photo and uploaded video near 05:20. A translucent
+dark line with a faint lower highlight reproduces the reference's beveled edge.
 
 The Xbox adapter optionally resolves XamUserCreateTitlesPlayedEnumerator
 (755), XamUserCreateAchievementEnumerator (750), and XamReadTileToTexture (757).
@@ -62,22 +80,18 @@ No profile files, progress, achievement flags or gamerscore are written.
 
 Validation includes shared parser/navigation/worker tests and a host fixture
 that compiles the actual Xbox adapter against the pinned SDK declarations.
-Fixtures verify local-requestee mode, optional ordinals, parameters, title/entry
-sizes, checked strings, pictures, sorting, empty/error completion and handle
-cleanup. Memory sanitizer checks cover both test programs. CPU/GPU comparisons
-cover loading, missing/empty data, the grid, paging, lists, sorting, descriptions,
-secret entries, profile cards and the earlier dashboard features. They do not
-prove the real console APIs return the expected profile data. Please verify
-those reads, cached pictures and sign-in continuation on a physical Xbox 360.
+Fixtures check the selected user, Title ID and actual achievement ID, Guide
+return codes, busy/stale-profile guards and absent-export errors, as well as
+local metadata parsing, pictures, empty/error completion and handle cleanup.
+Both fixtures pass ASan/UBSan/LSan. CPU/GPU comparisons cover the green grid,
+paging, game separators, loading/empty/error data and prior dashboard features.
+These checks do not execute the native Guide. Please verify opening an exact
+achievement, returning to the same selection, and account changes on a 360.
 
-The matching walkthrough clearly labels its profile/history/progress/artwork
-and storage data as desktop simulations. Its example counts are not present in
-the native adapter. See WALKTHROUGH.md for times and the data audit for hashes.
+The fresh walkthrough labels profile/history/progress/artwork and storage as
+desktop simulations. On A it shows an explicit Guide-request notice; it cannot
+capture the actual console Guide. See WALKTHROUGH.md and the release data audit.
 
-Desktop preview captures from this release (all data explicitly simulated):
+Desktop preview from this release (all profile/achievement data simulated):
 
-![Earned achievement grid](images/achievements-grid-v0.27.png)
-
-![All-achievement list](images/achievements-list-v0.27.png)
-
-![Achievement description](images/achievements-detail-v0.27.png)
+![Earned achievement grid and game-icon separators](images/achievements-grid-v0.28.png)

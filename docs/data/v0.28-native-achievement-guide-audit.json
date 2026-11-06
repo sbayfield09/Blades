@@ -1,0 +1,213 @@
+{
+  "release": "0.28.0",
+  "recorded_utc": "2026-11-06T13:43:31.184644+00:00",
+  "features": [
+    "A on earned icon opens exact achievement in native Guide",
+    "A on game opens native Guide game achievements",
+    "Custom gray list/description views removed",
+    "Thin beveled dividers between game icons",
+    "Retain game/grid selection; block dashboard input during Guide; reload cached pictures on close"
+  ],
+  "guide_api_verification": {
+    "stock_source": "https://github.com/thedev0ps/Xbox-360-Dashboard-Archive/blob/0938397d60975630db108fded069bc04d52740b1/Blades/Retail/5766/dash.xex",
+    "stock_sha256": "8ac65275d67fe8f5447276bfc606f796a76a1c20f68b097bc126dfeed6618f4b",
+    "XamShowAchievementDetailsUI": {
+      "ordinal": 736,
+      "thunk": "0x92705d34",
+      "call_sites": [
+        "0x921f6c0c",
+        "0x921f7c14",
+        "0x92213754"
+      ],
+      "verified_arguments": [
+        "r3: local user index",
+        "r4: game Title ID",
+        "r5: actual achievement ID"
+      ]
+    },
+    "XamShowAchievementsUI": {
+      "ordinal": 709,
+      "thunk": "0x92705304",
+      "call_site": "0x922137d0",
+      "verified_arguments": [
+        "r3: local user index",
+        "r4: game Title ID"
+      ]
+    },
+    "public_cross_check": "https://github.com/xenia-canary/xenia-canary/blob/master/src/xenia/kernel/xam/xam_ui.cc#L1121",
+    "public_cross_check_sha256": "86dd9bec04684dee4b71c16500cfc4bc57865e159d5f2122f5bd36e3beb8b782",
+    "scope": "Static inspection of original call sites and host adapter fixtures, not execution of actual console Guide. Stock/decoded executable not redistributed."
+  },
+  "references": {
+    "user_photo": "Forza Horizon, 47 achievements and 920/1500, supplied in conversation",
+    "uploaded_video": {
+      "bytes": 103446989,
+      "sha256": "d50896016449a2e1422c0ada8e83906943becaedbfec975d57dc645192398107",
+      "duration_seconds": 1337.562268,
+      "grid_seconds_approx": [
+        320,
+        325
+      ],
+      "list_and_description_seconds_approx": [
+        270,
+        285
+      ]
+    },
+    "observations": [
+      "Green grid shows only earned icons; gray list includes full progress/status/details",
+      "Gray row stride about 63 native pixels, count around y496",
+      "Guide footer centres: Y110/592, B856/592, A872/620; brightness sampled from reference"
+    ],
+    "new_observation": "Thin horizontal grooves between game icons, dark edge with faint lower highlight; photo and video near 05:20."
+  },
+  "tests": {
+    "ctest_passed": 18,
+    "ctest_total": 18,
+    "gpu_comparisons": 280,
+    "gpu_worst_mean": 0.478439,
+    "gpu_peak": 4,
+    "shared_achievement_asan_ubsan_lsan": "passed",
+    "native_adapter_asan_ubsan_lsan": "passed",
+    "guide_fixtures": [
+      "actual user/title/achievement values",
+      "nonsequential grid selection uses achievement ID",
+      "success 0 / pending 997",
+      "busy 170",
+      "stale identity 1317",
+      "invalid target 87",
+      "missing export 50",
+      "Guide commands rejected by metadata worker",
+      "selection preserved through command and following update"
+    ],
+    "xex_digest_and_imports": "passed",
+    "xex_mutation_fixture": "rejected image mutation on page 18",
+    "native_pages": 20,
+    "xam_slots": 86,
+    "kernel_slots": 122
+  },
+  "usb_zip": {
+    "members": [
+      "Blades/default.xex",
+      "Blades/README.txt",
+      "Blades/build-info.txt",
+      "Blades/SHA256SUMS",
+      "Blades/LICENSE",
+      "Blades/XSDK-LICENSE.txt",
+      "Blades/THIRD_PARTY_NOTICES.md",
+      "Blades/Config/README.txt",
+      "Blades/Assets/ARTWORK-README.txt",
+      "Blades/Assets/ARTWORK-SHA256SUMS.txt",
+      "Blades/Assets/AUDIO-NOTICE.txt",
+      "Blades/Assets/DASHX360-NOTICE.txt",
+      "Blades/Assets/FONT-LICENSE.txt",
+      "Blades/Assets/FONT-NOTICE.txt",
+      "Blades/Assets/README.txt",
+      "Blades/Assets/blades.xzp",
+      "Blades/licenses/CONVECTION-NOTICE.txt",
+      "Blades/licenses/DASHX360-NOTICE.txt",
+      "Blades/licenses/GCC-RUNTIME-EXCEPTION.txt",
+      "Blades/licenses/GPL-3.0.txt",
+      "Blades/licenses/NEWLIB.txt",
+      "Blades/licenses/STB-LICENSE.txt"
+    ],
+    "crc": "passed",
+    "xex_matches_standalone": true,
+    "artwork_matches_pack": true,
+    "saved_paths_and_logs_excluded": true,
+    "no_real_profile_history_or_pictures_included": true
+  },
+  "artwork": {
+    "entries": 234,
+    "payload_sha256": "c6470ec2ab422e1f5f2984bd244a79173269fd40fa157714be98af8dd183c55c",
+    "unchanged_from": "0.27",
+    "pack_changes": [
+      "ARTWORK-README.txt"
+    ]
+  },
+  "video": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 1280,
+        "height": 720,
+        "r_frame_rate": "30/1"
+      },
+      {
+        "codec_name": "aac",
+        "sample_rate": "48000",
+        "channels": 2,
+        "r_frame_rate": "0/0"
+      }
+    ],
+    "format": {
+      "duration": "54.000000",
+      "size": "6349046"
+    }
+  },
+  "video_full_decode": "passed",
+  "video_scope": "Fresh desktop GPU capture; profiles, achievements, pictures and storage simulated. A shows explicit native-Guide-request notices; no simulated Guide list/detail UI.",
+  "video_handoffs": [
+    "00:15 user 0 / title 123 / achievement 20",
+    "00:20 user 0 / title 123 game view",
+    "00:24 user 0 / title 124 game view",
+    "00:28 user 0 / title 125 zero-achievement game view"
+  ],
+  "sdk_commit": "5f6dc726f65f6d171493a3628c2415c03551f27b",
+  "xex_system_flags": "00000021",
+  "xex_version": "0.0.28.0",
+  "limits": {
+    "history_titles": 1024,
+    "achievements_per_title": 512,
+    "pictures_in_memory": 21,
+    "dates": "DD/MM/YYYY UTC"
+  },
+  "artifacts": {
+    "dist/Blades-v0.28-USB.zip": {
+      "bytes": 2448472,
+      "sha256": "06698f74bfbc3aec151e13c6e2b36932ede21eb777d1c7fb23d939dc2cd6173c"
+    },
+    "dist/Blades/default.xex": {
+      "bytes": 1150976,
+      "sha256": "6739d078e2af439246494dfb72b27b0ff84492b72ca09ef551591db04922a033"
+    },
+    "dist/Blades-artwork-pack.zip": {
+      "bytes": 2030416,
+      "sha256": "37adc216a2446b0a72b58c6f794183b09ef75abdb762ee8eea36c291f47e2c5e"
+    },
+    "dist/Blades-v0.28-walkthrough.mp4": {
+      "bytes": 6349046,
+      "sha256": "b8927d381402d2e0c8f8eccd56412b15ea0ccda9318bcb9832c62f642490eb27"
+    }
+  },
+  "preview_images": {
+    "docs/images/achievements-grid-v0.28.png": "864df6ddb105106baa996347578f45a2a16b82689970777661cc0f3cf685e0a3"
+  },
+  "source_sha256": {
+    "include/achievements.h": "e6256aa1d79e13a5096ee2d46e86237ce6aea6ccd18c4326807e870ac0090944",
+    "src/core/achievements.c": "3b61c5b430fcaa69d823caba3f4105866e9698c9add69a5a0c68df569c57415a",
+    "src/core/achievements_ui.c": "55a8eb0730a6a2672015c7b0fcc2dafa7f70dc7802571f0f12276cccd0a20acb",
+    "include/xbox_achievements.h": "14ede3050805d4b93763e6aed8d7c554afb5100e0773c9eb96346afe5ad3ad81",
+    "src/platform/xbox_achievements.c": "8eef15148622396fa077784661204f7355db09b4201689a009ad613622d612da",
+    "include/blades.h": "a8a2aa8632ad5feec253a46c41829fdec4fbf32073e8e66663f7243e21fb3b25",
+    "src/core/dashboard.c": "db91ef85e5dda6a7d01b61c2f6ed246a2b19430feb35259d7bf531bdc0170e98",
+    "src/render/dashboard_render.c": "96fc3935162b799b8ee5c940ca9c8803dedac17f38a55d10f42b0cb8398432ea",
+    "src/render/draw_list.c": "b1a90099cb9fe1801be90a73cda395f6343a256b7dbfdfbec4707a6f13e1398e",
+    "src/platform/xbox360.c": "7dfe8a4f6ace5f9a8c4d25d50badf4e74121a709519e6b894933af562a705f5f",
+    "src/platform/linux.c": "5f76567de59e8251b291853f6f612bc74a3921d8c768f16b5194108cf629e9d5",
+    "tests/test_achievements.c": "89b92bb462815fd700699d2ef9eb0a835c65ca769ab36f81c42f3903670ae29f",
+    "tests/test_achievement_backend.c": "5d6775a0e9aa3def07bb5473f5414373c303dc9f8d34098b63e28a1ad447966f",
+    "tests/test_gpu.c": "44253a900ca5b92a2152bf3939336b596af14a29935254cfa1fd585ed644dc4d",
+    "tests/test_dashboard.c": "2704b9168174052ec22b18c7ad5c2f260b97ce6ab997c0f218690d8591f87c3b",
+    "tests/test_audio.c": "10176091c37feedf320cbff9fad9b9532079c1cac31dd08cfbe44e60de74d2b1",
+    "tests/test_startup.c": "56913c0f9be7874c4f510b8d8d6786f954e71ee5a6d1df072345115d9dc86c8b",
+    "tests/test_animation.c": "437bf059daf7212e6a66083d37a99ddefd3a04e8885ec4e75387dfc2e7263937",
+    "tests/test_draw_list.c": "c3d036350f7f469f471014932ad9cec780e0ce621027251a80464e8570162a6b",
+    "tools/render-walkthrough.c": "77634f5acef132fee6e5e155eebf4a1dc05f4cb9af853cc77762e3cb478828c8",
+    "tools/build-xbox.sh": "a2930aa511ef517abd3ab4d0ef78a5ab679c695ba5a1a8cedb95b522032064a0",
+    "tools/package-usb.py": "12730ac9c823e7b9a306fe48e63810dbaef2e73f6f17716e3712ee15efab14b5",
+    "CMakeLists.txt": "834432ea2b43620c376fcaefbefcb2b7098443edac9be9f2aa225a22038e22e3"
+  },
+  "physical_validation": "Requires Xbox 360 test: A opens exact selected achievement and game in real Guide, close restores same grid selection, input rearms, sign-in continuation/account switches and cached images behave correctly."
+}
