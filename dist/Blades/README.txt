@@ -1,96 +1,66 @@
-Blades 0.30.0 - FTP server hardware test build
+Blades 0.31.0 - profile, achievement, FTP and audio hardware test build
 
-Download Blades-v0.30-USB.zip and extract it onto your USB drive. It contains
-Blades/default.xex and the complete Blades/Assets folder, with notices and
-installation notes. Launch Blades/default.xex. No separate artwork extraction
-or conversion is required. The ZIP excludes machine-specific scan settings and
-logs, so extracting over an existing Blades folder preserves its scan paths.
-Separate XEX/artwork downloads remain available.
+Extract Blades-v0.31-USB.zip onto USB and launch Blades/default.xex. The ZIP
+includes the complete Assets folder and notices. It excludes local library
+paths, FTP settings/login details and logs, preserving those on an update.
+Separate matching XEX/artwork/video downloads remain available.
 
-Version 0.30 adds plain, unencrypted FTP on port 21. It starts automatically
-when the main menu loads, across all blades and submenus. Connect using your
-console's IP and username blades / password blades (both lowercase).
-In FileZilla choose FTP, Only use plain FTP, and passive mode. The initial /
-folder lists available HDD, USB0, USB1, USB2 and memory devices. Enter a drive
-to browse/upload/download. There is no SFTP or TLS.
+Profile fixes:
+- Signed-out profile count reads public profile-package headers on available
+  HDD/USB/memory storage, deduplicating copies. No account/GPD payload is read.
+- The card uses the active user's actual local/normal gamer picture. Temporary
+  read failures keep the last valid picture until the account changes.
+- Up from the first menu item selects the card signed in or out. A requests
+  native Guide sign-in or the user's native profile/gamer-card menu.
+- X at a blade root requests the Guide's sign-out-enabled interface. The old
+  custom confirmation/direct background sign-out has been removed.
+- Card focus survives sign-in, and identity changes invalidate its draw cache.
+- The card/menu highlight is brightest at the centre and fades toward both
+  edges, using the clearer uploaded sign-in video reference near 22:00.
+  The name band and lower shadow replace the former hard inner separator.
+  Thin button dividers remain, including the selected row and FTP controls.
+- The Gamerscore G icon and real totals remain. Xbox Live's information text
+  has its own bounded/wrapped column clear of the button separator.
 
-Media -> Media Center shows one on/off button, server status, IP address and
-number of connected devices. Multiple sessions from one computer count as one
-device. Turn it off to disconnect clients and stop listening. The IP remains
-visible while off. Its state is saved in Config/ftp-settings.txt: default on;
-if turned off it stays off after restarting Blades. Updates exclude that file.
-A failed setting read/save is reported in the status. Network and disk work
-run on lower-priority workers; no full files are buffered in RAM.
+Achievements:
+Games -> Achievements asks for Guide sign-in first when needed and resumes on
+success. The unlock flags are now decoded as 0x10000/0x20000, fixing the case
+where real earned totals were shown but the icon grid said details unavailable.
+The existing icon spacing is retained; only the selected game highlight is
+inset so it no longer touches the dividing line above. Right enters the earned grid; A opens the exact
+achievement in the real Guide. A on the game strip opens that game's Guide
+achievements. B returns through grid, game strip and Games; X refreshes.
+Changing accounts clears prior-account achievement data. Reads run on a worker;
+no achievements or gamerscore are modified.
 
-Please test a real HDD/USB upload/download, multiple sessions from one PC,
-off/on, restart while off and while on, Ethernet reconnect and animation
-smoothness during transfers. Native FTP/network/storage throughput needs this
-physical Xbox check. Resume offsets are limited to 2 GiB - 1 by SDK seeking.
-The server stops on exit or successful game/app handoff. See docs/FTP.md.
+FTP is now in System -> Computers. It runs across all blades/submenus once the
+main menu loads, unless previously turned off. The screen shows on/off, current
+username/password (initially blades / blades), status, IP and connected devices.
+Change Username/Password opens the Xbox keyboard; confirm 1-63 printable
+characters, or cancel unchanged. Login changes disconnect existing clients.
+The enabled state and both login fields persist in Config/ftp-settings.txt;
+v0.30 files keep their saved on/off choice. Failed reads/saves are reported.
+Connect to the displayed IP, port 21, plain unencrypted FTP, passive mode.
+The initial / directory lists available HDD, USB0, USB1, USB2 and memory drives.
+No SFTP/TLS. Transfers run on workers with bounded buffers; multiple sessions
+from the same IP count as one device. Resume offsets are limited to 2 GiB - 1.
+X in File Manager refreshes its current folder after uploads/removals.
 
-Version 0.30 implements Games -> Achievements using the supplied photo and
-achievement video. Selecting it while signed out opens the real Xbox Guide
-sign-in menu. Successful sign-in resumes the achievement browser; cancelling
-returns to the dashboard. Switching/signing out profiles closes the browser
-and clears its cached user data.
+Audio startup now primes silent frames and ramps device gain. Shutdown fades
+to zero, queues a silent tail and drains it before unregistering the driver.
+The original navigation/startup PCM and sound event timings are unchanged.
+This targets app-boundary clicks/static; listen on the console to confirm the
+reported launch/exit noise is gone. Host envelopes cannot reproduce that noise.
 
-Use Up/Down in the left game-icon strip to select a played game. Thin beveled
-lines divide adjacent game icons, matching the references. The header shows
-name, last-played date, unlocked count and earned/possible gamerscore.
-Right enters the earned six-by-three grid; arrows navigate and page.
-A on an achievement opens that exact achievement in the real Xbox Guide.
-A on a game opens its achievements in the real Xbox Guide. The previous custom
-gray panels have been removed. The Guide handles its own details and controls.
-Close it to return to the same game/grid selection. B leaves the green grid,
-then returns from the game strip to Games. X refreshes; Y retains eject.
-Missing Guide exports or a rejected request show an error, with no custom menu
-fallback. No achievement or gamerscore writes are performed.
-
-The native build reads the active local profile's history/progress using XAM,
-including offline profiles. Game and achievement pictures are requested from
-the console's tile/cache APIs. Missing artwork uses the existing trophy,
-locked/secret or controller assets. Missing metadata is shown honestly; there
-are no built-in example games or fixed progress totals in the console build.
-A worker reads metadata/pictures while the renderer keeps presenting. There
-is no direct download service in Blades; complete artwork availability depends
-on the game/profile/cache data the console has available.
-
-Please test a profile with played games, compare progress and pictures against
-the stock dashboard, press A on games and individual achievements, close the Guide,
-and switch profiles while the browser is loading. Check a profile with no
-history and a game/app with no achievements: loading must finish. Send
-Blades/default.log for read errors or missing data. Profile/GPD files are not
-opened or written directly; only public XAM metadata is used.
-
-Version 0.30 integrates the console's active profile and Guide sign-in menu.
-When signed out, the account card shows Sign In, the original green default
-picture and the available profile count, matching the supplied reference.
-There is no previous gamertag or personal statistics. The count comes from
-public content metadata; if unavailable, the card says Choose a Profile. Navigate up from the first menu item to highlight it,
-then press A to open the real Xbox Guide sign-in menu. X at a blade root also
-opens sign-in. A profile already signed in is picked up automatically.
-The Gamerscore label uses the original circular G icon, sized and centered
-against the reference text; its value has no
-trailing text G. The card displays the active controller user's gamertag, gamer picture, games
-played, gamerscore and achievement count. Local/offline profiles are supported.
-Card fields refresh after returning from the Guide and periodically while
-Blades stays open. Unknown totals show --, not an invented zero. No account
-passwords, PINs or profile files are read or stored by Blades.
-X at a blade root while signed in opens a sign-out confirmation (Cancel is
-selected first). Confirming signs out only that controller's account and
-preserves the other signed-in users. Library X shortcuts are preserved.
-No profile is signed in or out automatically at startup.
-
-Please check: start signed out; press A on the account card; choose a profile
-in the Guide; compare name, picture, gamerscore and achievements with the
-system dashboard; cancel and then confirm sign-out. Also try a local profile,
-changing accounts in the Guide and a second controller. Send default.log if
-any card field remains -- or Guide sign-in/sign-out fails. The profile log
-records slot/state/field availability and operation errors, not gamertags,
-XUIDs or account credentials. Real console Guide/profile API behavior still
-needs hardware verification; desktop preview cannot authenticate Xbox users.
-
-The previous /Device/Flash/dash.xex media-player handoff fix is retained.
+Please verify on your 360: actual profile count/picture, signed-in card A,
+Guide X sign-out and cancellation, real earned achievement icons/Guide details,
+selected tab/divider alignment and centre-fading card highlight. Check the Xbox
+Live text gutter with Messages/Friends/Chat highlighted. In System -> Computers,
+change each FTP login field, cancel an edit, reconnect, restart while off/on,
+and verify both credentials persist. Try an HDD/USB transfer followed by X in
+File Manager. Listen at app launch and exit and check transfer-time animation
+performance. Send default.log if an API/read or save fails; it records result
+codes and availability, not profile credentials or FTP login text.
 
 Library setup:
 Open Games -> Played Games -> Scan Folders -> Add Folder. Select a storage
@@ -142,18 +112,18 @@ removal and rescanning; verify your files remain. Send default.log if browsing,
 scanning or launching fails. The log includes library commands, scan counts,
 metadata errors, content-mount results and SDK launch failures.
 
-19 host suites and 290 desktop GPU comparisons pass, alongside profile
+21 host suites and 290 desktop GPU comparisons pass, alongside profile
 memory checks and native XEX validation. Library storage and real title handoff
-still need physical-console testing. This release includes a fresh 52-second
-720p30 desktop GPU walkthrough with simulated FTP status, connected devices,
-profiles, storage and launch requests. It demonstrates Media Center on/off,
-status updates and blade/file-manager navigation. It cannot prove console FTP
-or title handoff. The FTP integration fixture passes ASan/UBSan/LSan.
+still need physical-console testing. This release includes a fresh 78-second
+720p30 desktop GPU walkthrough with simulated profiles, achievements, FTP,
+storage and native Guide/keyboard requests. It demonstrates the actual shared
+UI but cannot prove console authentication, networking, keyboard or audio-driver
+behavior. Native-adapter/count/achievement/FTP/audio sanitizer fixtures pass.
 Please verify the real Guide handoffs and return selection on a physical 360.
 
 Controls: D-pad/left stick navigate, LB/RB change blades, A select, B back.
 X rescans in libraries or selects the current folder in the folder picker.
-At a blade root X opens Guide sign-in, or confirms sign-out when signed in. Back opens the confirmed exit menu.
+At a blade root X opens Guide sign-in, or opens Guide sign-out when signed in. Back opens the confirmed exit menu.
 Y removes a highlighted saved scan path on Scan Folders. Elsewhere it ejects
 a loaded/reading disc from ordinary menus, including submenus. Release
 it before another press. The physical eject button is monitored independently.

@@ -1,4 +1,4 @@
-# Achievements — 0.28
+# Achievements — 0.31
 
 Games → Achievements opens a profile-backed browser. When signed out it first
 requests XamShowSigninUI(1,0), the real Xbox Guide sign-in menu. After successful
@@ -94,4 +94,18 @@ capture the actual console Guide. See WALKTHROUGH.md and the release data audit.
 
 Desktop preview from this release (all profile/achievement data simulated):
 
-![Earned achievement grid and game-icon separators](images/achievements-grid-v0.28.png)
+![Earned achievement grid and game-icon separators](images/achievements-grid-v0.31.png)
+
+Version 0.31 corrects the unlock-bit mask to 0x00030000: 0x00010000 is an
+online unlock and 0x00020000 an earned achievement. The prior 0x30000000 mask
+mistook real earned records for locked ones, producing the user's Blur case:
+5 achievements / 50 gamerscore in the title header but an empty earned grid.
+Fixtures now cover both real low-bit flags and reject the old high-bit mask.
+The public Xenia Canary gpd_info.h / AchievementFlags definitions corroborate
+these values. This changes only decoding/display, never achievement progress.
+
+The existing game-icon size, 116-pixel row pitch, header and grid positions
+are retained. Only the game-strip selection box is adjusted: its top moves
+from row_y-8 to row_y-4 and its height becomes 108, leaving space below the
+preceding divider and above the following one. The 88-pixel game artwork stays
+at x182 / row_y+4; no icon rescaling or re-spacing is introduced.

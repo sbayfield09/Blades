@@ -1,0 +1,239 @@
+{
+  "release": "0.31.0",
+  "recorded_utc": "2026-11-06T17:59:24.081458+00:00",
+  "features": [
+    "Correct installed-profile count and current-user gamer picture",
+    "Native Guide sign-in, sign-out and profile-card actions",
+    "Correct earned-achievement flags; preserve original achievement spacing and only inset selection highlight below divider",
+    "Retain thin menu dividers; center-peaked account/menu highlights and bounded Xbox Live info text",
+    "FTP moved to System/Computers with displayed editable persistent username/password",
+    "Audio device priming, startup fade and exit fade/silent drain"
+  ],
+  "profile": {
+    "count": "Only standard public STFS package magic/content-type header, deduplicate nonzero profile IDs across mounted devices; no Account/GPD payload or credentials read. Unknown stays unknown.",
+    "gamer_picture": "Current-user LocalGamerTile type4, GamerTile type2, keyed type9 fallback. Preserve last good picture on transient read failure; clear on identity change.",
+    "guide": {
+      "sign_in": "XamShowSigninUI(1,0)",
+      "sign_out": "XamShowSigninUIp ordinal702(user,1,4); ALLOW_SIGNOUT=4",
+      "profile": "XamShowGamerCardUI ordinal708(user)",
+      "guards": "Captured active user/XUID rechecked; busy and stale identity rejected. No custom sign-out or profile fallback."
+    },
+    "cache": "Dashboard-owned monotonic profile revision tracks identity/snapshot changes while retaining card focus"
+  },
+  "achievements": {
+    "earned_mask": "0x00030000",
+    "online_flag": "0x00010000",
+    "earned_flag": "0x00020000",
+    "old_wrong_mask": "0x30000000",
+    "progress_writes": false,
+    "layout": {
+      "row_origin_y": 202,
+      "row_pitch": 116,
+      "icon_x": 182,
+      "icon_size": 88,
+      "icon_y": "row_y+4",
+      "divider_y": [
+        "row_y+108",
+        "row_y+109"
+      ],
+      "focus_rect": [
+        154,
+        "row_y-4",
+        144,
+        108
+      ],
+      "grid_origin": [
+        342,
+        202
+      ],
+      "grid_pitch": [
+        128,
+        116
+      ],
+      "grid_cell": 96,
+      "header": [
+        310,
+        92,
+        800,
+        88
+      ],
+      "scope": "Original icon size/spacing, grid, header and scroll arrows retained. Only focus rectangle inset; no tab rescaling/reflow."
+    }
+  },
+  "visuals": {
+    "highlight": "alpha=132*sin(pi*(column+0.5)/width)^2, brightest middle and fades both sides",
+    "reference": "Uploaded video frame 0265 near22:00 confirms central brightness; actual achievement photo/video used for geometry",
+    "dividers": "Normal and selected menu/library rows plus all three FTP controls retain thin dark/light dividers",
+    "account_inner_band": "Alpha scanline gradients replace inner hard line; rounded outside frame retained",
+    "live_text": "Word wrapped inside information column, 28px beyond button column and bounded before footer"
+  },
+  "ftp": {
+    "menu": "System / Computers",
+    "port": 21,
+    "protocol": "unencrypted passive IPv4 FTP",
+    "default_enabled": true,
+    "default_username": "blades",
+    "default_password": "blades",
+    "credentials": "Displayed and editable via native Xbox keyboard; 1..63 printable ASCII; changed credentials invalidate existing sessions",
+    "setting": "game:/Config/ftp-settings.txt",
+    "persistence": "Worker flush/temp/rename plus exit flush; legacy enabled-only file upgraded, saved off respected before listening",
+    "logs": "No passwords logged",
+    "capture_credentials": "Synthetic transfer_user/transfer_pass only"
+  },
+  "audio_boundary": {
+    "prime_silent_frames": 8,
+    "startup_fade_samples": 2048,
+    "exit_fade_samples": 2048,
+    "tail_silent_samples": 4096,
+    "drain_wait_ms_max": 250,
+    "unregister": "After feeder join, bounded queue drain and final silent-frame time",
+    "scope": "Lifecycle smoothing; original clips and event pitch/timing unchanged. Actual console static reduction requires listening on Xbox 360."
+  },
+  "tests": {
+    "ctest_passed": 21,
+    "ctest_total": 21,
+    "gpu_comparisons": 290,
+    "gpu_worst_mean": 0.479738,
+    "gpu_peak": 5,
+    "sanitizers": "ASan/UBSan/LSan pass: native profile adapter, public profile count, shared achievements, native achievements adapter, audio and FTP integration; FTP final rerun passes",
+    "ftp": "Real host ftplib transfers, credentials changes, restarts, legacy migration, invalid input, device counts, cancellation and shared navigation",
+    "xex_verification": [
+      "XEX2 PowerPC-BE, Xbox subsystem, entry 0x820db648",
+      "21 verified image pages; header/image/import digest chains valid",
+      "xam.xex: 92 import slots",
+      "xboxkrnl.exe: 122 import slots",
+      "PASS: deliberate image mutation rejected: image digest mismatch at page 19"
+    ],
+    "native_pages": 21,
+    "xam_slots": 92,
+    "kernel_slots": 122
+  },
+  "usb_zip": {
+    "members": [
+      "Blades/default.xex",
+      "Blades/README.txt",
+      "Blades/build-info.txt",
+      "Blades/SHA256SUMS",
+      "Blades/LICENSE",
+      "Blades/XSDK-LICENSE.txt",
+      "Blades/THIRD_PARTY_NOTICES.md",
+      "Blades/Config/README.txt",
+      "Blades/Assets/ARTWORK-README.txt",
+      "Blades/Assets/ARTWORK-SHA256SUMS.txt",
+      "Blades/Assets/AUDIO-NOTICE.txt",
+      "Blades/Assets/DASHX360-NOTICE.txt",
+      "Blades/Assets/FONT-LICENSE.txt",
+      "Blades/Assets/FONT-NOTICE.txt",
+      "Blades/Assets/README.txt",
+      "Blades/Assets/blades.xzp",
+      "Blades/licenses/CONVECTION-NOTICE.txt",
+      "Blades/licenses/DASHX360-NOTICE.txt",
+      "Blades/licenses/GCC-RUNTIME-EXCEPTION.txt",
+      "Blades/licenses/GPL-3.0.txt",
+      "Blades/licenses/NEWLIB.txt",
+      "Blades/licenses/STB-LICENSE.txt"
+    ],
+    "crc": "passed",
+    "xex_matches_standalone": true,
+    "artwork_matches_pack": true,
+    "saved_scan_paths_ftp_settings_credentials_and_logs_excluded": true,
+    "no_real_profile_history_or_pictures_included": true,
+    "unversioned_alias_identical": true
+  },
+  "artwork": {
+    "entries": 234,
+    "payload_sha256": "c6470ec2ab422e1f5f2984bd244a79173269fd40fa157714be98af8dd183c55c",
+    "unchanged_from": "0.30",
+    "pack_changes": [
+      "ARTWORK-README.txt"
+    ]
+  },
+  "video": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 1280,
+        "height": 720,
+        "r_frame_rate": "30/1"
+      },
+      {
+        "codec_name": "aac",
+        "sample_rate": "48000",
+        "channels": 2,
+        "r_frame_rate": "0/0"
+      }
+    ],
+    "format": {
+      "duration": "78.000000",
+      "size": "8597371"
+    }
+  },
+  "video_full_decode": "passed",
+  "video_scope": "Fresh final-renderer desktop GPU capture, 78 seconds. Profiles, achievements, FTP, storage and Guide/keyboard requests explicitly simulated. Native requests represented as notices, no fake Guide menu.",
+  "sdk_commit": "5f6dc726f65f6d171493a3628c2415c03551f27b",
+  "xex_version": "0.0.31.0",
+  "native_reference": {
+    "stock_dashboard": "Retail5766",
+    "archive_commit": "0938397d60975630db108fded069bc04d52740b1",
+    "stock_xex_sha256": "8ac65275d67fe8f5447276bfc606f796a76a1c20f68b097bc126dfeed6618f4b",
+    "inspection": "702 stock thunk0x92705194 has user/panes/flags; 708 thunk0x92706054 has user argument; Xenia Canary confirms achievement flags/tile types. Decoded stock executables are not published."
+  },
+  "artifacts": {
+    "dist/Blades-v0.31-USB.zip": {
+      "bytes": 2465709,
+      "sha256": "ce86fca21a7d3fadf22f9eba07472dfdc7d9fcd2e18629ac22ed2d819ebe42af"
+    },
+    "dist/Blades/default.xex": {
+      "bytes": 1179648,
+      "sha256": "c8935e9745601ab84cdf56230b27540a5937eba09f1bb8da6fd68409ec7d4423"
+    },
+    "dist/Blades-artwork-pack.zip": {
+      "bytes": 2030418,
+      "sha256": "4c86da93c31c61324702cd25dbd198282093bd2fdd450ada8c5214968b96be42"
+    },
+    "dist/Blades-v0.31-walkthrough.mp4": {
+      "bytes": 8597371,
+      "sha256": "b214661009cf088afeb55dc39bdeea2be4d26b3d38e3e2322df1b99c589e5ee2"
+    }
+  },
+  "preview_images": {
+    "docs/images/signin-highlight-v0.31.png": "adeea9fa51cacfb8ecd8db02e9668cf163a67b235f633883523342df4aae7f41",
+    "docs/images/profile-card-v0.31.png": "f037dd22be2fb9115ab0f59742f190a1be62cf8442e485863a56832bacab1d66",
+    "docs/images/achievements-grid-v0.31.png": "3b45998a2beefde3f954ecdcfeb0511fecadecd5d80c070484087d5cf004fa8c",
+    "docs/images/ftp-computers-v0.31.png": "02463a5edeeba0661b7acf1fe5a7a410c71128e8b58d1e49080a685804821ad2",
+    "docs/images/live-info-v0.31.png": "d02b99e318cedd17a1425b0c1a886e88808e648919f16f001cc4b4582b43fb7e"
+  },
+  "source_sha256": {
+    "CMakeLists.txt": "0fbf36c19c187ab28f95221466140f4264ea254f0bde989de99b93bbc50030e1",
+    "include/blades.h": "47173b783f1bef238182a3082af1af5bd9220bc54a866b4c3e47ca62dc7d81fe",
+    "include/profile.h": "1eeb8df95f931bd9f4af91d552781a30f0bd46aea981a00aa7273b4f73aa9edc",
+    "include/ftp.h": "cc20e5121919fabd05296ab3a169aa5d3906501fa6b47958a51848cdeb9433aa",
+    "include/audio_boundary.h": "d767ba053ae770c638d2fa945cd840179fe6e14e42fa41f04890c4ff5ec7c008",
+    "src/core/profile.c": "a6624909aed2f5b66604d442845b4772e98621c91719e1f7850b4497dfaccd68",
+    "src/core/profile_count.c": "3ef74121cf888f847e0f9207110ead3c243a0327f97cb3d3973fb0b397408f35",
+    "src/core/achievements.c": "00a3eeed981282b1875f862ae2eb3ebd60ff6919dc28bf257a02854e786f1f14",
+    "src/core/audio_boundary.c": "e5e6123cc3e780e2b102f9497d0c8604d0f04a8bc7d1c153cb54ac27e8074474",
+    "src/core/ftp.c": "1bf0394f238a51538a63ed6d58f56926141855f574f54fa7e4e026f27d2dcf8a",
+    "src/core/dashboard.c": "588975ea6f3ee440644813b197da833a5bb9081432a387c8ca858c67c7fadee4",
+    "src/core/menu.c": "0063f9de2322aff9ce36fc1e8940454a946f92697bad9eb48981c52cc5a2eabb",
+    "src/platform/xbox_profile.c": "91aac23acc1e9c46faf8eb433be487433568850a1456f96e581f38642a2af1ae",
+    "src/platform/xbox360.c": "51e96ab619bd6c0ed1cffe9c9cc9edcbbe7f062fbc95dbf13f1b9293b9ad6e48",
+    "src/render/dashboard_render.c": "c64b3b8fd58ec84b9809f7e5fef3c4c31bc4a0f9231948cc5db8db4a290b40d7",
+    "tests/test_profile.c": "8af467c5d7175fed0df2cc44b8e7f7fb0cafdfc1a8b6e89122047cba7112772c",
+    "tests/test_profile_backend.c": "bb9b77f5b5d2193bf2fab677bdeaa5f0bbc6c319448afa597033de39c55897a9",
+    "tests/test_profile_count.c": "62c0db16c2efaa4785fd8e48d503625424dc1d4ee34baa49c59dd96ceedfe8fc",
+    "tests/test_achievements.c": "d7c6cb06f0755723f7c27bab4f0a549363e43b03ebde60a104d97351602a3fa7",
+    "tests/test_achievement_backend.c": "36f5a97c92f0595862758784c979d4805c9f7b60658b5046bdb22160227c6385",
+    "tests/test_audio.c": "526e7b71949424b436352edcfc65b94d0e2a6fc0b3912dc9ea624bde110ff1e2",
+    "tests/test_ftp.py": "0f11f63fc73feaee0331ebd8cae3d7e1cab093467b3f6ad293ec606e10500730",
+    "tests/ftp_fixture.c": "87e1ea1971c2380de8a9345e77629f5b9301d25cceea3e40c450db261b5a21c1",
+    "tests/test_dashboard.c": "ea3929c74d56663c2986db4d93c6715943c0bf8c038eeb351a14e25b8525c05f",
+    "tests/test_draw_list.c": "f0772fd56dc0d8f7e56f5660eb17c4be2d0d6d138a45506fef485dcaf320ac3a",
+    "tools/render-walkthrough.c": "f98d8d8e2b0fa4a4d9d648ae1c846c7e108fb3800c8b2e85c8ab4da4e76a1162",
+    "tools/build-xbox.sh": "8ae7a1c667daac612e3aabf217850ab71ef84fbe79bc5a22d844f9f2ab1f8402",
+    "tools/package-usb.py": "4f4f9f5ccf074a1945f0573c01d433d5b65ad589c9293bc69586a72a1de19e63"
+  },
+  "physical_validation": "Needs Xbox 360 verification of real profile count/picture, Guide account/achievement targets, native keyboard/persisted FTP login, LAN/storage transfers and startup/exit audio listening. Desktop and host adapter tests cannot demonstrate these physical behaviors."
+}

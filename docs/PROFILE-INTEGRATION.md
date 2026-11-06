@@ -1,91 +1,63 @@
-# Profile integration — 0.26
+# Profile integration — 0.31
 
-At a blade root, X opens the native Xbox Guide sign-in menu when signed out.
-The signed-out Sign In card shows the original green default tile and a
-Profiles Found count, with no old account data or statistics; press
-Up from the first menu row to highlight it, then A to sign in. This uses
-XamShowSigninUI(1, 0), so the Guide manages profile selection and authentication.
-The desktop preview explains that this requires the console.
+The account card is selectable on Xbox Live, Games and Media whether signed
+in or signed out. Up from the first menu item selects it; Down returns to the
+menu. A opens native Guide sign-in when signed out, or the current user's
+native Guide profile/gamer-card view when signed in. Focus remains on the card
+when sign-in completes, and its display cache follows identity/data changes.
+At a blade root, X requests the Guide sign-out interface when signed in.
+The previous custom sign-out confirmation has been removed. Blades does not
+perform a direct background sign-out; the user completes/cancels it in the Guide.
 
-The card uses the active controller's XAM user slot. An already signed-in local
-or Live profile is detected on launch; account changes in the Guide refresh the
-card. Read-only APIs supply the gamertag, games played, total gamerscore and
-achievements earned. Missing fields display --. These are the console profile's
-stored totals, not a separate Xbox network synchronization service. Offline
-users see the totals stored in their local profile. No achievements or score
-values are written or unlocked by this app.
+The main thread calls XamShowSigninUI(1,0), XamShowSigninUIp(user,1,4) for the
+sign-out-enabled picker, and XamShowGamerCardUI(user). Dynamic ordinals are 702
+and 708 for the latter two calls. Targeted actions validate the captured user
+slot and XUID immediately before opening; an existing system UI blocks another
+request. Rendering continues while Guide input is active, then input is rearmed
+on close and profile metadata refreshed. The original retail 5766 dashboard's
+calls confirm the user-index arguments for ordinals 702 and 708. The sign-out
+flag is XSSUI_FLAGS_ALLOW_SIGNOUT (4). Native appearance/actions still require
+physical-console verification; desktop previews show labeled request notices.
 
-The gamer picture is read via the profile's picture key and the XAM tile reader.
-If unavailable, the original neutral gamer tile is used. Picture changes and
-statistics invalidate the foreground cache without rebuilding it each frame.
-The active controller slot can change without showing another user's stale card.
-The same snapshot is displayed on Games, Xbox Live and Media.
+Signed-out profile count now checks the standard public package locations on
+available HDD, USB and memory devices:
+`Content/<profile ID>/FFFE07D1/00010000/<profile ID>`.
+Only the STFS magic and public content-type header are read. Account records,
+passwords, keys, PINs and GPD payloads are not decoded. Profile IDs are deduplicated
+across devices; common content/non-profile files are excluded. An unreadable or
+unavailable result remains unknown rather than becoming an invented zero.
+The earlier generic current-title content query could report zero for profiles
+belonging to the system dashboard. Counting runs on the profile worker and
+refreshes while signed out and after Guide activity.
 
-When signed in, X at a blade root opens a confirmation with Cancel selected.
-Explicit confirmation queues XamUserLogon with the selected slot cleared and
-all other signed-in slots preserved. The captured account is revalidated before
-sign-out. An account change cancels an open confirmation. Library X shortcuts
-retain their existing functions. Starting/exiting Blades never automatically
-signs anyone in or out.
+Signed-in cards read the active user's gamertag and real local games, gamerscore
+and achievement totals through XAM. Unknown fields show --. Gamer pictures first
+request the current user's local gamer tile (type 4), then normal gamer tile
+(type 2), independently of the profile's picture-key string. Keyed type 9 is a
+last fallback when a valid key exists. ARGB pixels are converted to RGBA for
+the renderer. Transient picture failures preserve the last valid picture for
+the same identity; changing identity clears it. Missing pictures use the
+neutral default tile, not a canned picture presented as the user's choice.
 
-The main thread continues presenting while the Guide is visible. Dashboard
-input is suppressed until it closes; held inputs must be released before they
-can activate a dashboard item. Profile metadata/picture I/O and sign-out use a
-worker on hardware thread 5, away from the render loop. Identity is checked
-again after slow metadata reads before publishing the result. No account files,
-passwords or PINs are read, logged or packaged; snapshots and pictures stay in RAM.
+The card name band and lower shadow now fade without a hard inner separator.
+Thin row dividers remain visible, including below selected rows.
+The selection sheen peaks at the centre and fades toward both sides, sharing
+the menu-row highlight shape. Reference: uploaded achievement video near 22:00
+(1320 seconds), a clear Sign In / 10 Profiles Found frame. Its row-100 RGB
+samples go from (87,160,77) at x110 to (182,204,178) near x210, then
+(86,171,67) at x305. The supplied video-games.jpg remains the signed-in card and
+Gamerscore G alignment reference. The original GScore PNG and centring are
+unchanged. Xbox Live information now has a 28-pixel gutter past the button
+column and word-wraps inside its own panel.
 
-Native API details: SigninState/SigninInfo/XUID identify the active slot;
-ReadProfileSettings uses keys 0x10040012 (titles played), 0x10040006 (gamerscore),
-0x10040013 (achievements), 0x4064000F (picture key). Bounded readers validate
-big-endian result counts, pointers, types, user indices and image sizes.
-Optional XamReadTileToTexture ordinal 757 reads the image; optional XamUserLogon
-ordinal 523 performs the confirmed session change using flags 0x23. Unavailable
-optional APIs leave metadata fallback available and produce a clear operation
-error when sign-out is requested. No kernel/profile patching is used.
+The profile worker revalidates identity after reading metadata/pictures.
+Snapshots and cached images stay in RAM and are not packaged in releases.
+Actual-adapter host fixtures verify current-user tile/stat arguments, picture
+retention, Guide targets/flags and stale/busy guards. A real-directory fixture
+checks package counting, cross-device duplicates and invalid/common exclusions.
+The walkthrough's accounts/pictures/counts are explicit simulations; check
+actual Guide actions, profile pictures/counts and account changes on a 360.
 
-Host checks cover parsing, zero versus unavailable statistics, malformed data,
-ARGB conversion, live profile replacement, slot switching, stale commands,
-other-user preservation, confirmation and card focus. CPU/GPU comparisons cover
-signed-out/local/Live cards, long names, large totals, unknown statistics,
-picture replacement and confirmation overlays. The walkthrough's account
-changes and Guide requests are explicitly simulated. Console Guide behavior,
-profile totals and picture API compatibility require a physical 360 test.
+![Signed-out highlighted card, simulated profile count](images/signin-highlight-v0.31.png)
 
-Source/API provenance: pinned xsdk 5f6dc726f65f6d171493a3628c2415c03551f27b,
-public FreeStyle dashboard session and gamer-picture API usage (commit
-df89a42edf055370e3383576c93199a3713c41e9), and Xenia's profile-setting layout.
-The release uses the unchanged 234-entry premade artwork payload and retains
-its attribution; no user account data is included in the release ZIP.
-
-Version 0.25 follows the supplied signed-out screenshot: Sign In heading,
-square green ico_64x_DefaultPicture.png tile and a Profiles Found line. The
-console worker counts public profile content metadata with content type
-0x10000, user NONE and all storage devices. Enumeration is bounded, the handle
-is always closed, and failed/incomplete counts display Choose a Profile.
-It never calls the account enumerator that exposes account credentials.
-Counts refresh while signed out, without delaying signed-in card metadata.
-The walkthrough uses two simulated available profiles; this is not a fixed
-number in the console build. Zero and singular counts have their own text.
-
-The signed-in card uses the stock GScore.png icon in place of the label's
-leading G, as in the second reference. The score value contains digits only.
-Numeric columns shrink as needed to keep large totals clear of their labels.
-Both PNGs already exist in the compatible 234-entry artwork payload.
-
-Version 0.26 centres the GScore icon using the visible artwork and text bounds.
-The supplied video-games.jpg shows a roughly 28 px visible circle at
-355..384 / 150..178, extending about 4 px left of the Games label. Its suffix
-begins around x387. The source GScore.png has symmetric 2..30 alpha bounds in
-a 32 px canvas. At font size 28, the Convection suffix ink spans y+11..25.
-Use a 32 px canvas at label_y+2 so both centres are label_y+18; the previous
-24 px canvas at the same y was centred 4 px too high. The icon moves 4 px left,
-its suffix moves 4 px right, and the numeric-column budget includes the new
-spacing. The original PNG is unchanged. Games, Live and Media share this layout.
-
-Version 0.27 gates Achievements through the real Guide sign-in picker, resumes
-on successful sign-in and cancels continuation when the picker is dismissed
-signed out. Achievement snapshots are scoped to the active user/XUID and are
-cleared on account changes. See ACHIEVEMENTS.md. Version 0.28 routes game and achievement selections to
-the real Xbox Guide (ordinals 709/736), retaining the same sign-in gate and
-identity checks. The old in-app gray list and description are removed.
+![Signed-in selectable card, simulated profile/picture](images/profile-card-v0.31.png)

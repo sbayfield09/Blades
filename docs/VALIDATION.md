@@ -260,3 +260,33 @@ See FTP.md and the v0.30 FTP audit for boundaries and hashes.
 File Manager X refresh is retained. An additional real-directory fixture adds
 and removes a file between refresh requests and verifies the updated listing;
 the existing navigation fixture checks X issues LIB_CMD_FILES for that folder.
+
+
+## Version 0.31 profile, achievement, FTP and audio fixes
+
+21/21 suites and 290 CPU/desktop GPU comparisons pass. The recorded final audit
+contains exact pixel-error bounds and native image/import counts. New actual
+Xbox-profile adapter fixtures validate current-user tile/stat parameters,
+transient-picture retention, native Guide sign-out/profile targets and stale/UI
+busy guards. A real filesystem fixture counts public profile-package headers,
+deduplicates devices and excludes non-profile/common entries. Achievement
+fixtures now use real 0x10000/0x20000 flags and reject the former high-bit mask.
+
+FTP integration changes credentials, reconnects after restart, rejects invalid
+login text and upgrades the v0.30 boolean setting. Shared navigation covers
+System/Computers, both keyboard requests and off/on controls. Native keyboard
+input/cancellation remains a hardware check. Audio tests verify a bounded,
+monotonic device fade and silent shutdown tail while original clip PCM tests
+remain unchanged. Native/profile-count/achievement/FTP/audio fixtures pass
+ASan/UBSan/LSan. These checks cannot demonstrate removal of console-only static.
+
+Visual references include the user's Blur error photo, the original achievement
+video near 05:20–05:25, clear Sign In footage near 22:00, and video-games.jpg.
+The selected card's reference brightness peaks centrally; its sampled RGB is
+recorded in PROFILE-INTEGRATION.md and the audit. The original achievement icon spacing is retained; only the focus box is
+inset below its divider. Xbox Live text has a 28-pixel gutter after the buttons.
+New generated previews are labeled simulations. The fresh 78-second walkthrough
+decodes fully. XEX digest/mutation, ZIP CRC, payload compatibility and exclusion
+of personal settings/logs are verified. Native Guide/profile/keyboard behavior,
+profile package availability, actual storage transfers and launch/exit audio
+still require a physical Xbox 360 check.

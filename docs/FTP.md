@@ -1,25 +1,25 @@
-# FTP server — Blades 0.30
+# FTP server — Blades 0.31
 
 FTP starts when the startup animation finishes and Blades reaches the main
 menu. It runs across every blade and submenu, including while the Xbox Guide
-is open. Opening Media Center is not required for a computer to connect.
-The default is on. Media → Media Center has one Turn FTP Off / Turn FTP On
-button and only three status fields: server status, console IP address and
-connected devices. The original Media Center label/icon and Media blade style
-are retained. There are no additional settings or transfer-progress panels.
+is open. Opening Computers is not required for a computer to connect.
+The default is on. System → Computers has Turn FTP Off / Turn FTP On,
+Change Username and Change Password buttons. It displays the current username
+and password, plus server status, console IP and connected-device count.
+FTP is no longer under Media Center; it continues running across all blades.
 
 Connect from a computer on the console's network:
 
 | FTP client field | Value |
 | --- | --- |
 | Protocol | FTP, plain/unencrypted; passive mode; IPv4 |
-| Host | The console IP shown in Media Center |
+| Host | The console IP shown in Computers |
 | Port | 21 |
-| Username | blades |
-| Password | blades |
+| Username | Current value in Computers (initially blades) |
+| Password | Current value in Computers (initially blades) |
 
 In FileZilla's Site Manager select FTP and “Only use plain FTP”. These are
-Blades' fixed FTP credentials, separate from Xbox profile credentials. There is
+Blades' initial FTP credentials, separate from Xbox profile credentials. There is
 no SSH, SFTP, TLS or encryption/decryption worker.
 
 The initial `/` directory lists available storage drives: HDD, USB0, USB1,
@@ -42,11 +42,12 @@ pending data connections/transfers. An interrupted upload can leave a partial
 file; the server does not report it as a completed transfer. The console IP
 continues to be displayed when FTP is off. With no address yet, the enabled
 server shows Waiting for network and retries. Bind/listen failures show
-Unavailable and are retried; default.log records the error number.
+Unavailable and are retried; default.log records the error number, never login text.
 
-The toggle is written on a worker to `Blades/Config/ftp-settings.txt`, using a
-flushed temporary file and rename. On the next launch it is read before opening
-the listening socket. A missing file defaults to on. An unreadable/invalid
+The toggle and current login details are written on a worker to `Blades/Config/ftp-settings.txt`, using a
+flushed temporary file and rename. On the next launch they are read before opening
+the listening socket. A missing file defaults to on with username/password blades. Existing v0.30
+boolean-only files retain their on/off choice and use the initial login. An unreadable/invalid
 setting or failed save is reported in the status. An off setting remains off
 until the user enables it. Final pending changes are saved during normal exit.
 Release ZIPs exclude this file and its temporary file, preserving local choices
@@ -56,7 +57,7 @@ Networking, directory enumeration, file transfers and settings I/O run on
 workers. Xbox workers use a lower scheduling priority on hardware thread 5;
 rendering exchanges only a small locked snapshot. Each connection uses a
 64 KiB streaming transfer buffer. There are no whole-file reads into RAM.
-The foreground draw cache only responds to FTP changes on the Media Center
+The foreground draw cache only responds to FTP changes on the Computers
 page. FTP stops and joins its workers when Blades exits or successfully hands
 off to another title; failed launch preflight leaves Blades and FTP running.
 
@@ -67,7 +68,7 @@ The native SDK uses signed 32-bit seek offsets, so resume is limited to
 2 GiB − 1. Large-file sequential transfer and native storage throughput still
 need a physical-console check; loopback tests use smaller files.
 
-Validation: 19 host suites, 290 CPU/desktop GPU comparisons and an actual
+Validation: 21 host suites, 290 CPU/desktop GPU comparisons and an actual
 loopback FTP integration fixture. The fixture uses Python's ftplib against the
 production C server and actual temporary storage, covering authentication,
 root drives, passive listings, binary transfers/resume/append, metadata,
@@ -82,4 +83,14 @@ The fresh walkthrough is desktop GPU playback with explicitly simulated FTP
 status, devices and storage. It demonstrates the screen/toggle/navigation,
 not an actual console FTP transfer.
 
-![Media Center FTP status](images/ftp-status-v0.30.png)
+![Computers FTP controls and login details, simulated](images/ftp-computers-v0.31.png)
+
+Credential editing uses the native Xbox keyboard. Confirm 1–63 printable ASCII
+characters to apply a field; cancellation leaves it unchanged. Login changes
+disconnect existing sessions so new connections must authenticate with the
+updated details. Both fields are saved together with enabled state. The file
+contains plain text fields `enabled`, `username`, `password`; its contents and
+temporary file are excluded from every release ZIP. The UI displays the full
+current values, wrapping long values as needed. The protocol integration test
+changes credentials, verifies new logins after a server restart and checks the
+v0.30 setting upgrade. Native keyboard cancellation/input requires a console check.
