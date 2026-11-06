@@ -70,3 +70,14 @@ and 122 kernel import slots; verifier mutation fixtures pass. The unchanged
 720p30 H.264/48kHz stereo AAC video decodes fully. Actual storage, content mounts
 and title handoff remain to be tested on a 360. See LIBRARY.md and
 data/v0.20-library-audit.json.
+
+Version 0.21: 14 host suites pass. Library regressions cover empty boot/manual
+scans, non-game-only folders, stop/retry, depth boundaries and legacy defaults,
+displayed question-mark cleanup and manual preparation of XEX files with zero
+or absent execution Title IDs. ASan/UBSan/LeakSanitizer pass for library/disc
+checks. 240 desktop GPU comparisons cover depth and progress/stopping pages;
+worst mean 0.478396 and peak error 4. Native XEX and mutation fixtures pass
+(19 pages, 72 XAM/122 kernel slots). The compatible 234-entry payload is
+unchanged and its ZIP/checksum is verified. A fresh labelled 102-second 720p30
+stereo H.264/AAC walkthrough decodes fully. Native storage/handoff and the
+reported scan problem still need retesting on the user's console.

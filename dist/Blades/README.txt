@@ -1,4 +1,4 @@
-Blades 0.20.0 - games, apps and homebrew hardware test build
+Blades 0.21.0 - games, apps and homebrew hardware test build
 
 Copy default.xex into your Blades folder and extract the matching premade
 Blades-artwork-pack.zip there so Assets/blades.xzp is present. No conversion
@@ -8,14 +8,18 @@ unchanged, with sixteen small disc-reading indicator frames added.
 Library setup:
 Open Games -> Played Games -> Scan Folders -> Add Folder. Select a storage
 device, use A to enter folders, then X to use the current folder. Choose Games,
-Apps or Homebrew. All descendant folders are scanned with no configured depth
-limit. Repeat for additional locations; up to 32 are saved in the local
+Apps or Homebrew, then select a depth from 0 to 32 or Unlimited. Depth 0
+checks the selected folder only; depth 1 includes its children. Default: 3.
+Existing v0.20 paths are retained with depth 3 until you change them. Repeat for additional locations; up to 32 are saved in the local
 Config/library-paths.txt file and rescanned when Blades starts. B goes up in
-the picker. Select a saved path to remove it without deleting its files.
+the picker. Select a saved path to change its depth or remove it without deleting files.
 
 Game Library, Apps and Homebrew are under Played Games; Arcade and Demos also
 use their Games blade entries. Lists scroll. A manually launches the selected
-title. X or Scan Now rescans. Adding/scanning never launches anything. B or
+title. X or Scan Now rescans; X changes to Stop Scan while scanning.
+The current folder/file, counts and depth are shown live. Empty scans explicitly
+finish and re-enable controls even when no runnable titles are found. Stopping
+waits for the current storage read to return. Adding/scanning never launches anything. B or
 changing blades cancels an in-flight launch. Guide/modal guards still apply.
 
 Supported: extracted .xex games/apps/homebrew, Xbox Live Arcade, Games on
@@ -23,7 +27,9 @@ Demand, demos and XNA packages. Keep downloaded packages and accompanying
 .data folders together. Saves, DLC, updates and profiles are excluded. XBE,
 disc-installed containers, compressed archives and incomplete packages are
 outside this release's launch support. Titles fall back to folder/file names
-when executable metadata is unavailable. Existing font coverage is ASCII.
+when executable metadata is unavailable. Displayed titles omit question marks and unsupported glyphs; file/launch paths
+are unchanged. XEX apps with zero or missing Title IDs launch by path, using a
+folder/filename label when title metadata is unavailable.
 
 Try one extracted game, one downloaded title, an app and homebrew on your 360.
 Check saved paths after restarting Blades. Test an unplugged drive, path
@@ -31,9 +37,9 @@ removal and rescanning; verify your files remain. Send default.log if browsing,
 scanning or launching fails. The log includes library commands, scan counts,
 metadata errors, content-mount results and SDK launch failures.
 
-14 host suites and 236 desktop GPU comparisons pass, alongside library/disc
+14 host suites and 240 desktop GPU comparisons pass, alongside library/disc
 memory checks and native XEX validation. Library storage and real title handoff
-still need physical-console testing. This release includes a fresh 75-second
+still need physical-console testing. This release includes a fresh 102-second
 720p30 desktop GPU walkthrough with simulated storage/launch preparation.
 
 Controls: D-pad/left stick navigate, LB/RB change blades, A select, B back.

@@ -1,0 +1,110 @@
+{
+  "release": "0.21.0",
+  "recorded_utc": "2026-11-06T01:02:18.328134+00:00",
+  "changes": [
+    "Explicit zero-result completion and busy/input clearing",
+    "Per-folder depth 0..32 or Unlimited, default 3",
+    "v1 path migration with default depth 3",
+    "Live progress in right panel only; cooperative stop",
+    "Literal question marks and unsupported font glyphs omitted from display titles",
+    "Zero/missing Title ID XEX launches by path",
+    "Additional XEX apps retained in Apps/Homebrew folders"
+  ],
+  "scan_progress": {
+    "source": "Fixed-size worker mailbox copied at most 10 Hz; no full catalog copy per file",
+    "before_io": true,
+    "redundant_bottom_left_text": false,
+    "stop": "Cooperative after current OS/metadata read returns"
+  },
+  "tests": {
+    "ctest_passed": 14,
+    "ctest_total": 14,
+    "gpu_comparisons": 240,
+    "gpu_worst_mean": 0.478396,
+    "gpu_peak": 4,
+    "library_asan_ubsan_lsan": "passed",
+    "disc_asan_ubsan_lsan": "passed",
+    "zero_result_regressions": [
+      "boot",
+      "three manual rescans",
+      "non-game files",
+      "stop and retry"
+    ],
+    "idless_manual_launch_regressions": [
+      "execution ID zero",
+      "execution header absent"
+    ],
+    "depth_regressions": [
+      "0..3 boundaries",
+      "180 nested directories in Unlimited mode",
+      "saved setting change",
+      "legacy config fallback",
+      "invalid depth rejection"
+    ],
+    "xex_pages": 19,
+    "xam_import_slots": 72,
+    "kernel_import_slots": 122,
+    "xex_digest_and_verifier_mutation": "passed"
+  },
+  "artwork": {
+    "entries": 234,
+    "payload_sha256": "c6470ec2ab422e1f5f2984bd244a79173269fd40fa157714be98af8dd183c55c",
+    "unchanged_from": "0.18\u20130.20",
+    "zip_integrity": "passed"
+  },
+  "xex_system_flags": "00000021",
+  "xex_version": "0.0.21.0",
+  "video": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 1280,
+        "height": 720,
+        "r_frame_rate": "30/1"
+      },
+      {
+        "codec_name": "aac",
+        "sample_rate": "48000",
+        "channels": 2,
+        "r_frame_rate": "0/0"
+      }
+    ],
+    "format": {
+      "duration": "102.000000",
+      "size": "13508430"
+    }
+  },
+  "video_full_decode": "passed",
+  "video_scope": "Fresh desktop GPU render; explicitly simulated storage and launch preparation",
+  "artifacts": {
+    "dist/Blades/default.xex": {
+      "bytes": 1089536,
+      "sha256": "f782e2a41f94f2ec3992db4cae25c246bcb745e0b337edd9204b1168ef9386da"
+    },
+    "dist/Blades-artwork-pack.zip": {
+      "bytes": 2030229,
+      "sha256": "19b9ae22c17ba1ad715bc31ccafa82f5b4a3053a3144357d04003b0fe1de3741"
+    },
+    "dist/Blades-v0.21-walkthrough.mp4": {
+      "bytes": 13508430,
+      "sha256": "6ff4371e9f496f8aee28e40e977b3f039066e887011bf96dabc0bd67c41fc8bf"
+    }
+  },
+  "source_sha256": {
+    "include/library.h": "731b7fc5a1eef3bb5dd6813071f3dd15a66d89fd2a1d8011b312277597d6aa77",
+    "include/blades.h": "7edbfec8a32fdc4344cfcbe527edcb23ae28867299be444fb3321de7b13be1dc",
+    "src/core/library.c": "dfc8df5820030809aee3c7e32e27841193ed6da461f2cae7e38642ec00bdc338",
+    "src/core/library_ui.c": "e45599a19eb174702e1ecdcc92b460a72e93238b32b8f428a8ee9704e075b515",
+    "src/render/dashboard_render.c": "594e14d2fd74665c067e7788d8ed4afed3568e1657fba56cf81d493fcd54ed64",
+    "src/render/draw_list.c": "aced99fc358b79c5f995e3079cd3bebf1bdcb77b3b1d2444db9c30329d4bd2ab",
+    "src/platform/xbox360.c": "70268539aec8a7af207b66c9101131407816c9d8e4f0152e7afe62bfbdda1ac7",
+    "src/platform/xbox_library.c": "0e8e56a76bd9e68b3587ec654b00c4ed98c260afc3538e0acf6847f2b259429a",
+    "tests/test_library.c": "e48f2a54b0cb59302de20334e354d9951d9065a9d568911d6c10aad055032e33",
+    "tests/test_gpu.c": "3d613fc455de0317ad7b9020c5f94e0400cf563c0d73dec879583a7ca15ba9c9",
+    "tools/render-walkthrough.c": "338de08fda9a9ad241aa1f091a2cd2519baabe1bdb1abadf80a1dfcca3858b20",
+    "CMakeLists.txt": "ecdf61f8f140cadc8d040e7a73bfbb877331a1103d9b15547907abf3e2684e87"
+  },
+  "physical_validation": "Requires console retest; does not establish native I/O timeout recovery or successful XAM handoff on hardware"
+}

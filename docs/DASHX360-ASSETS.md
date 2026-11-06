@@ -124,3 +124,6 @@ Version 0.19 retains the complete 234-entry artwork payload unchanged. Its XEX c
 
 Version 0.20 reuses the compatible 234-entry pack unchanged. The library and
 folder picker use the shared expanded-menu chrome and existing Convection atlas.
+
+Version 0.21 uses the same 234-entry artwork payload; scan progress and depth
+controls use existing menu and font resources.

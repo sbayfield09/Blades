@@ -30,7 +30,7 @@ branch holds the public downloadable files. Use a temporary Git index to add
 only release artifacts and their instructions/notices, preserving the current
 working tree. Do not replace the public branch with unrelated local changes.
 
-The v0.20.0 pack contains 234 XUIZ entries: five blade states, additional menu
+The v0.21.0 pack contains 234 XUIZ entries: five blade states, additional menu
 icons, the BSK2 root/expanded layout manifest, retail 5766 shared images and the local font atlas/metrics/notice, plus eight precomposed ABXY prompt sprites, six transition WAVs and an audio notice, the baked Xbox Live panel background, and four startup shutter/reveal/layout entries, plus sixteen disc-reading indicator frames. Original project by
 zivvoz / DashX360, inspired by Microsoft's Xbox 360 Dashboard interfaces.
 Asset ownership remains with the respective rights holders. See
@@ -43,3 +43,7 @@ Version 0.20 adds configurable library folders and title launching; its 234-entr
 artwork payload is unchanged and compatible with the new library views. See
 LIBRARY.md for setup and hardware-validation scope. Never package a local
 Config/library-paths.txt containing machine-specific locations.
+
+Version 0.21 adds per-folder scan depth, live current-path progress and stop,
+explicit empty-scan completion, display-label cleanup and ID-less XEX discovery.
+The artwork payload remains unchanged.
