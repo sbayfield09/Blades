@@ -1,27 +1,27 @@
-# Blades 0.29 all-file explorer walkthrough
+# Blades 0.30 FTP server walkthrough
 
-[Watch/download the MP4](../dist/Blades-v0.29-walkthrough.mp4)
+[Watch/download the MP4](../dist/Blades-v0.30-walkthrough.mp4)
 
-Fresh 50-second 1280×720 desktop GPU capture at 30 fps, with 48 kHz stereo AAC
+Fresh 52-second 1280×720 desktop GPU capture at 30 fps, with 48 kHz stereo AAC
 audio and the matching artwork pack. The visible label identifies simulated
-filesystem snapshots, profile information and XEX launch requests. This uses
-the release's shared renderer/navigation but cannot demonstrate real Xbox
-storage access or title handoff. No external app is launched in the capture.
+FTP status, IP/device counts, profile information and filesystem snapshots.
+It uses the release renderer/navigation and demonstrates the Media Center UI;
+it is not a console FTP/network or settings-persistence recording. Real disk
+transfers and persistence are exercised separately by the host integration test.
 
 - 00:00 Blade startup
-- 00:03 Played Games, then File Manager directly below Homebrew at 00:08
-- 00:10 Browse a simulated USB drive containing folders and mixed file types
-- 00:12 Enter Assets; an image is listed, then B returns at 00:14
-- 00:16 Select App.XEX; A requests launch at 00:18 (desktop notice)
-- 00:20 Dismiss the notice
-- 00:22 Highlight cover.png; A at 00:23 does nothing
-- 00:24 Highlight file.dll.xex; A at 00:25 does nothing
-- 00:26 Highlight notes.txt; A at 00:27 does nothing
-- 00:28 Highlight extensionless README; A at 00:29 does nothing
-- 00:30 Refresh, then B to devices and back to Played Games
-- 00:36 Return to Games; Media/Music and System/Console Settings navigation
+- 00:02 Media blade, then Media Center at 00:07
+- 00:09 / 00:12 Simulated connections change the device count to one, then two
+- 00:14 A turns FTP off; device count clears and the IP remains visible
+- 00:16 Back to Media; re-open Media Center at 00:18, still off
+- 00:20 A enables FTP; simulated device reconnect at 00:22
+- 00:24 Return to Media; Games → Played Games → File Manager
+- 00:35 Browse simulated USB files; X refreshes the folder at 00:36
+- 00:37 Select App.XEX and request launch at 00:38
+- 00:40 Dismiss the desktop launch notice and return through the menus
+- 00:46 Return to Media; open Media Center at 00:47, still running
 
-The right panel identifies ordinary files and their paths; the A prompt is
-inactive for files that cannot launch. Library storage/progress and actual
-launches still need a physical Xbox 360 check. See LIBRARY.md for controls.
+The console build reads/saves its toggle on a worker and serves actual storage.
+The walkthrough tool does not start a listening socket, write a user setting or
+launch an external app. See FTP.md for connection details and hardware checks.
 Artwork/audio credit: zivvoz / DashX360 and respective rights holders.

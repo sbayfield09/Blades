@@ -34,7 +34,7 @@ branch holds the public downloadable files. Use a temporary Git index to add
 only release artifacts and their instructions/notices, preserving the current
 working tree. Do not replace the public branch with unrelated local changes.
 
-The v0.29.0 pack contains 234 XUIZ entries: five blade states, additional menu
+The v0.30.0 pack contains 234 XUIZ entries: five blade states, additional menu
 icons, the BSK2 root/expanded layout manifest, retail 5766 shared images and the local font atlas/metrics/notice, plus eight precomposed ABXY prompt sprites, six transition WAVs and an audio notice, the baked Xbox Live panel background, and four startup shutter/reveal/layout entries, plus sixteen disc-reading indicator frames. Original project by
 zivvoz / DashX360, inspired by Microsoft's Xbox 360 Dashboard interfaces.
 Asset ownership remains with the respective rights holders. See
@@ -102,3 +102,10 @@ XEXs launchable. Folder selection for scan paths remains directories only.
 The 234-entry payload is unchanged. Include a fresh walkthrough demonstrating
 ordinary-file no-op selection and XEX launch requests with simulated storage,
 plus the matching XEX, premade pack and USB ZIP.
+
+Version 0.30 adds auto-start plain FTP and the Media Center status/on-off page.
+Preserve user Config/ftp-settings.txt and .tmp files by excluding them from
+all release archives. Default is on; a saved off value must be respected before
+listening. The 234-entry payload is unchanged. Include a fresh walkthrough
+labeling FTP status/device/IP values as simulations, plus the actual loopback
+integration/sanitizer results and the XEX/USB ZIP/premade pack.

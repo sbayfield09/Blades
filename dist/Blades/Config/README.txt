@@ -1,2 +1,3 @@
 Blades saves your chosen scan folders to Config/library-paths.txt.
-This file belongs to Blades; no console-wide settings are changed.
+FTP on/off is saved separately in Config/ftp-settings.txt (default: on).
+These files belong to Blades; no console-wide settings are changed.

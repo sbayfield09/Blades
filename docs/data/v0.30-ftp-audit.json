@@ -1,0 +1,167 @@
+{
+  "release": "0.30.0",
+  "recorded_utc": "2026-11-06T14:45:04.251130+00:00",
+  "features": [
+    "Plain unencrypted FTP server auto-starts at main menu, default on",
+    "Virtual / lists available HDD, USB0, USB1, USB2 and memory devices",
+    "Media Center contains on/off button plus status, IP and unique connected-device count only",
+    "On/off state saved on worker and restored before listening; excluded from updates",
+    "Bounded worker transfers; FTP stops on exit/title handoff",
+    "X refresh in File Manager retained and checked against actual added/removed files"
+  ],
+  "ftp": {
+    "port": 21,
+    "username": "blades",
+    "password": "blades",
+    "protocol": "plain FTP, IPv4, passive PASV/EPSV; no SFTP/SSH/TLS",
+    "control_sessions": 4,
+    "device_count": "unique IPs with authenticated control sessions",
+    "transfer_buffer_bytes_per_client": 65536,
+    "worker_stack_bytes": 131072,
+    "xbox_affinity": 5,
+    "xbox_priority": -2,
+    "setting": "game:/Config/ftp-settings.txt",
+    "default_enabled": true,
+    "save": "flushed temporary file plus rename; normal exit flushes pending toggle",
+    "resume_limit_native_bytes": 2147483647,
+    "virtual_drive_roots_protected": true,
+    "Flash_NAND_exported": false
+  },
+  "tests": {
+    "ctest_passed": 19,
+    "ctest_total": 19,
+    "gpu_comparisons": 290,
+    "gpu_worst_mean": 0.478439,
+    "gpu_peak": 4,
+    "ftp_integration": "PASS: real FTP login/root/listings, PASV/EPSV, binary upload/download/resume/append, Unicode, metadata, rename/delete, path boundaries, unique device counts, off cancellation, on/off restart persistence and shared status/toggle navigation",
+    "ftp_asan_ubsan_lsan": "passed production C server and shared navigation fixture through ftplib integration",
+    "save_failure_fixture": "unwritable/invalid config is surfaced via save_error; default on remains usable",
+    "settings_restarts": [
+      "missing setting defaults on",
+      "saved off restarts without listening",
+      "saved on restarts listening",
+      "immediate off/exit saves final value"
+    ],
+    "unique_devices": "two 127.0.0.1 sessions count once; 127.0.0.2 counts as second device",
+    "file_refresh": "actual directory file added/removed between LIB_CMD_FILES refreshes; counts and names update",
+    "loopback_scope": "all protocol transfers use real temporary files on localhost, not Xbox storage or XAM networking",
+    "xex_verification": [
+      "XEX2 PowerPC-BE, Xbox subsystem, entry 0x820d9ac0",
+      "20 verified image pages; header/image/import digest chains valid",
+      "xam.xex: 86 import slots",
+      "xboxkrnl.exe: 122 import slots",
+      "PASS: deliberate image mutation rejected: image digest mismatch at page 18"
+    ],
+    "native_pages": 20,
+    "xam_slots": 86,
+    "kernel_slots": 122
+  },
+  "usb_zip": {
+    "members": [
+      "Blades/default.xex",
+      "Blades/README.txt",
+      "Blades/build-info.txt",
+      "Blades/SHA256SUMS",
+      "Blades/LICENSE",
+      "Blades/XSDK-LICENSE.txt",
+      "Blades/THIRD_PARTY_NOTICES.md",
+      "Blades/Config/README.txt",
+      "Blades/Assets/ARTWORK-README.txt",
+      "Blades/Assets/ARTWORK-SHA256SUMS.txt",
+      "Blades/Assets/AUDIO-NOTICE.txt",
+      "Blades/Assets/DASHX360-NOTICE.txt",
+      "Blades/Assets/FONT-LICENSE.txt",
+      "Blades/Assets/FONT-NOTICE.txt",
+      "Blades/Assets/README.txt",
+      "Blades/Assets/blades.xzp",
+      "Blades/licenses/CONVECTION-NOTICE.txt",
+      "Blades/licenses/DASHX360-NOTICE.txt",
+      "Blades/licenses/GCC-RUNTIME-EXCEPTION.txt",
+      "Blades/licenses/GPL-3.0.txt",
+      "Blades/licenses/NEWLIB.txt",
+      "Blades/licenses/STB-LICENSE.txt"
+    ],
+    "crc": "passed",
+    "xex_matches_standalone": true,
+    "artwork_matches_pack": true,
+    "saved_scan_paths_ftp_settings_and_logs_excluded": true,
+    "no_real_profile_history_or_pictures_included": true
+  },
+  "artwork": {
+    "entries": 234,
+    "payload_sha256": "c6470ec2ab422e1f5f2984bd244a79173269fd40fa157714be98af8dd183c55c",
+    "unchanged_from": "0.29",
+    "pack_changes": [
+      "ARTWORK-README.txt"
+    ]
+  },
+  "video": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 1280,
+        "height": 720,
+        "r_frame_rate": "30/1"
+      },
+      {
+        "codec_name": "aac",
+        "sample_rate": "48000",
+        "channels": 2,
+        "r_frame_rate": "0/0"
+      }
+    ],
+    "format": {
+      "duration": "52.000000",
+      "size": "6394096"
+    }
+  },
+  "video_full_decode": "passed",
+  "video_scope": "Fresh desktop GPU capture; FTP state/IP/device counts, profile and filesystem snapshots explicitly simulated. No listening server or settings writes in capture tool. Real networking/persistence checked separately via host integration.",
+  "sdk_commit": "5f6dc726f65f6d171493a3628c2415c03551f27b",
+  "xex_version": "0.0.30.0",
+  "artifacts": {
+    "dist/Blades-v0.30-USB.zip": {
+      "bytes": 2461308,
+      "sha256": "42b741521c8fcde2eb1b197892b1e94baa65b2945cf3ef737332404d985084d0"
+    },
+    "dist/Blades/default.xex": {
+      "bytes": 1171456,
+      "sha256": "f2060ffd1c4db8823bc5a7ccd5fc8010388afc72b2eadfa5987d3dd70cdd0413"
+    },
+    "dist/Blades-artwork-pack.zip": {
+      "bytes": 2030418,
+      "sha256": "0311dbc54164b31f5c89547051eb13f95a0fb87261eb3f705c82d44fd28fb238"
+    },
+    "dist/Blades-v0.30-walkthrough.mp4": {
+      "bytes": 6394096,
+      "sha256": "b6144e9dc525a1fdd133aa8f55b24a890753688e61105275af8eaa4ce5ff6a3d"
+    }
+  },
+  "preview_images": {
+    "docs/images/ftp-status-v0.30.png": "bd86b190ec84ee949e9bc838a90bccbbcfd97b462f921c0cf04f63134209411e"
+  },
+  "source_sha256": {
+    "include/ftp.h": "df88fd1d01ab2981e8a7df9e51e68ce19d23290b158d92dd9f52194bad516504",
+    "src/core/ftp.c": "75a7f11325170eec508f1ac8c17563fad7c28fdaec9bd950807063d77553e6b7",
+    "include/xbox_ftp.h": "07db427b5134091068a4ed917e7e1f7225afa6f59d1cd2b51ecbb034e1c8cca5",
+    "src/platform/xbox_ftp.c": "7c27c2929bc77eb35b154b374185e1116dc1e31f3ac2609071391393110025d4",
+    "include/blades.h": "d582dae5ff7f1c20053a8de9355d127ed62e489b00e3dffad815cd4038dbf02e",
+    "src/core/dashboard.c": "160f849efc14e12f050bab89af77a61f37cfb42f803a7ea84cddb6e4c83d3d2b",
+    "src/core/menu.c": "f9f503e2999879bb760b210d67608c0cdd9c02fcb02ed62cf98fe9fd633a4e9e",
+    "src/render/dashboard_render.c": "5d932c12fecb39c18a2be3f6fe371ef2cc4ce665078f85cf63ee09ea160b8b8c",
+    "src/render/draw_list.c": "482a152c66cd4115677344b775ca9d238f1e4d134fd907573c51fe674204bb09",
+    "src/platform/xbox360.c": "5acf0a782b5524b55e0f7fe282d015b14642fb18d68dbd4e2d14fcba573fedd9",
+    "tests/ftp_fixture.c": "ccf9ae69bcd9bff19da2096e03628fad730ab16b23c35b420926d4cfe4b55ed5",
+    "tests/test_ftp.py": "c81b62e728809b965d6628292fc2a186303c977b96a456c835e18da7f1d321b4",
+    "tests/test_library.c": "38b794a1208a8e14ad70753d91fe7dc8b7e0543c3f7f25c2727b856d7d98bf0e",
+    "tests/test_dashboard.c": "068053c0c2e19f8113cec02dd404897095198fd9e3a2ed0e553687ccc2aa3357",
+    "tests/test_gpu.c": "6d819efdca78d95d5b6f7425eca1fb68d54f0376a027497a4ef71115a33d9327",
+    "tools/render-walkthrough.c": "0c7f4c29fb392e80145ab774aac6662fe45208cf62f69ee6ca3d123ea8972c77",
+    "CMakeLists.txt": "c8641cda23e8f9fe68d9c791aa505ccf3e908508133101fba4862c7792e175ef",
+    "tools/build-xbox.sh": "3e61c1481bbf01a6b0f8098f096dc617dfb0581bcc5bb4f67b073996ecb22f2a",
+    "tools/package-usb.py": "4f4f9f5ccf074a1945f0573c01d433d5b65ad589c9293bc69586a72a1de19e63"
+  },
+  "physical_validation": "Requires Xbox 360 check of actual LAN IP, XAM listen/passive sockets, HDD/USB upload/download/large-file streaming, saved off/on across app restart, unique-device count, Ethernet reconnect and animation performance during transfers. Host loopback tests cannot prove these console behaviors."
+}

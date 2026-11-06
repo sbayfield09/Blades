@@ -233,3 +233,30 @@ artwork compatibility and exclusion of scan paths/logs are checked. The fresh
 50-second 720p30 stereo desktop walkthrough labels filesystem/profile/launch
 requests as simulated; actual storage and XEX handoff need console verification.
 See the v0.29 file-explorer audit for hashes and exact artifact properties.
+
+
+## Version 0.30 plain FTP
+
+19/19 host suites and 290 CPU/desktop GPU comparisons pass (worst mean
+0.478439, peak channel error 4). A real loopback ftplib fixture exercises the
+production C server against temporary exported HDD/USB directories: bad/good
+login, virtual root, PASV/EPSV and directory formats, binary upload/download,
+resume/append, metadata, Unicode names, rename/delete, path boundaries, unique
+IP device counts, transfer cancellation, off/on persistence across new server
+instances, immediate-toggle/exit persistence and settings-save errors. It also
+checks status-page navigation/toggle and display-cache invalidation. The full
+integration fixture passes ASan/UBSan/LSan outside tracing. Loopback socket
+creation requires running outside the network sandbox.
+
+Native XEX, header/image/import digests, deliberate image corruption, ZIP CRC,
+matching XEX/payload and omission of local settings/logs are checked. The same
+234-entry artwork payload remains compatible. The fresh 52-second 720p30 stereo
+walkthrough labels its FTP status/devices/profile/storage values as simulated.
+It demonstrates the UI, not console FTP I/O. Native XAM socket behavior, HDD/USB
+transfers, link reconnect, actual IP/device display, saved-state restart and
+animation performance under transfer load require a physical Xbox 360 check.
+See FTP.md and the v0.30 FTP audit for boundaries and hashes.
+
+File Manager X refresh is retained. An additional real-directory fixture adds
+and removes a file between refresh requests and verifies the updated listing;
+the existing navigation fixture checks X issues LIB_CMD_FILES for that folder.

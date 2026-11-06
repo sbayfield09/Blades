@@ -1,13 +1,34 @@
-Blades 0.29.0 - all-file explorer hardware test build
+Blades 0.30.0 - FTP server hardware test build
 
-Download Blades-v0.29-USB.zip and extract it onto your USB drive. It contains
+Download Blades-v0.30-USB.zip and extract it onto your USB drive. It contains
 Blades/default.xex and the complete Blades/Assets folder, with notices and
 installation notes. Launch Blades/default.xex. No separate artwork extraction
 or conversion is required. The ZIP excludes machine-specific scan settings and
 logs, so extracting over an existing Blades folder preserves its scan paths.
 Separate XEX/artwork downloads remain available.
 
-Version 0.29 implements Games -> Achievements using the supplied photo and
+Version 0.30 adds plain, unencrypted FTP on port 21. It starts automatically
+when the main menu loads, across all blades and submenus. Connect using your
+console's IP and username blades / password blades (both lowercase).
+In FileZilla choose FTP, Only use plain FTP, and passive mode. The initial /
+folder lists available HDD, USB0, USB1, USB2 and memory devices. Enter a drive
+to browse/upload/download. There is no SFTP or TLS.
+
+Media -> Media Center shows one on/off button, server status, IP address and
+number of connected devices. Multiple sessions from one computer count as one
+device. Turn it off to disconnect clients and stop listening. The IP remains
+visible while off. Its state is saved in Config/ftp-settings.txt: default on;
+if turned off it stays off after restarting Blades. Updates exclude that file.
+A failed setting read/save is reported in the status. Network and disk work
+run on lower-priority workers; no full files are buffered in RAM.
+
+Please test a real HDD/USB upload/download, multiple sessions from one PC,
+off/on, restart while off and while on, Ethernet reconnect and animation
+smoothness during transfers. Native FTP/network/storage throughput needs this
+physical Xbox check. Resume offsets are limited to 2 GiB - 1 by SDK seeking.
+The server stops on exit or successful game/app handoff. See docs/FTP.md.
+
+Version 0.30 implements Games -> Achievements using the supplied photo and
 achievement video. Selecting it while signed out opens the real Xbox Guide
 sign-in menu. Successful sign-in resumes the achievement browser; cancelling
 returns to the dashboard. Switching/signing out profiles closes the browser
@@ -41,7 +62,7 @@ history and a game/app with no achievements: loading must finish. Send
 Blades/default.log for read errors or missing data. Profile/GPD files are not
 opened or written directly; only public XAM metadata is used.
 
-Version 0.29 integrates the console's active profile and Guide sign-in menu.
+Version 0.30 integrates the console's active profile and Guide sign-in menu.
 When signed out, the account card shows Sign In, the original green default
 picture and the available profile count, matching the supplied reference.
 There is no previous gamertag or personal statistics. The count comes from
@@ -121,12 +142,13 @@ removal and rescanning; verify your files remain. Send default.log if browsing,
 scanning or launching fails. The log includes library commands, scan counts,
 metadata errors, content-mount results and SDK launch failures.
 
-18 host suites and 283 desktop GPU comparisons pass, alongside profile
+19 host suites and 290 desktop GPU comparisons pass, alongside profile
 memory checks and native XEX validation. Library storage and real title handoff
-still need physical-console testing. This release includes a fresh 50-second
-720p30 desktop GPU walkthrough with simulated profiles, storage and launch
-requests. It demonstrates browsing all file types and inactive A on non-XEX
-files, then blade/submenu navigation; it does not prove console title launches.
+still need physical-console testing. This release includes a fresh 52-second
+720p30 desktop GPU walkthrough with simulated FTP status, connected devices,
+profiles, storage and launch requests. It demonstrates Media Center on/off,
+status updates and blade/file-manager navigation. It cannot prove console FTP
+or title handoff. The FTP integration fixture passes ASan/UBSan/LSan.
 Please verify the real Guide handoffs and return selection on a physical 360.
 
 Controls: D-pad/left stick navigate, LB/RB change blades, A select, B back.
