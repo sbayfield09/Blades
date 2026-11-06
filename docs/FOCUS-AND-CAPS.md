@@ -1,4 +1,21 @@
-# Xbox Live upper/lower group edges — 0.36
+# Chat shadow cache correction — 0.37
+
+Scrolling down to Chat could leave the last lower-shadow pixel cached.
+The renderer used lroundf(highlight*53), while draw-list cache equality used
+integer truncation. An asymptotic Down approach could build at 105.25px and
+never repaint at 105.75px: both truncate to 105, although the latter paints 106.
+An Up approach reached the opposite integer bucket and avoided the residue.
+
+Cache equality now uses the same lroundf conversion as row rendering. The
+existing smooth movement, clipped shadow and full bottom divider are retained.
+This fixes both directions without suppressing the moving group prematurely.
+A regression crosses that exact half-pixel boundary, then checks 60 actual
+Down and 60 Up frames against the direct renderer, plus settled idle reuse.
+GPU comparisons also cross the same boundary in both directions.
+
+![Live first/middle/last rows, desktop simulation](images/live-selections-v0.37.png)
+
+# Retained 0.36 group geometry
 
 Xbox Live had a root-only flat-shadow override. It generated only a short
 horizontal underside, so the vertical right-hand lines were absent even though

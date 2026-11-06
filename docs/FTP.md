@@ -85,7 +85,7 @@ The fresh walkthrough is desktop GPU playback with explicitly simulated FTP
 status, devices and storage. It demonstrates the screen/toggle/navigation,
 not an actual console FTP transfer.
 
-![Computers FTP controls and login details, simulated](images/ftp-computers-v0.36.png)
+![Computers FTP controls and login details, simulated](images/ftp-computers-v0.37.png)
 
 Credential editing uses the native Xbox keyboard. Confirm 1–63 printable ASCII
 characters to apply a field; cancellation leaves it unchanged. Login changes

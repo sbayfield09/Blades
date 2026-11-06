@@ -410,3 +410,15 @@ lighten, and visible shadow must extend outside the original silhouette.
 The new mask is precomputed; all non-tint/non-shadow pack entries must match
 0.35 byte-for-byte and every retinted mask keeps its original alpha/dimensions.
 See COLOUR-AND-BRANDING.md and the final release audit for fitting scope/hashes.
+
+## Version 0.37 tint feedback and Chat cache regression
+
+A renderer/cache rounding mismatch was reproduced with two cursor positions
+that both truncate to 105px but round to 105/106px. Cache equality must rebuild
+at that boundary, and cached/direct full frames must match over 60 actual Down
+and 60 Up updates onto Chat, then reuse idle foreground. Six additional GPU
+states cross the half-pixel boundary in both directions. The restored GScore
+box is verified through actual image/glyph ink bounds (the prior six-pixel
+placement difference). Independent animation expectations use the adjusted
+palette; prior 0.36 expectations are reproduced first. Mask alpha/dimensions
+and all unmodified pack entries must remain identical to 0.36.

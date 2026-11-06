@@ -34,7 +34,7 @@ branch holds the public downloadable files. Use a temporary Git index to add
 only release artifacts and their instructions/notices, preserving the current
 working tree. Do not replace the public branch with unrelated local changes.
 
-The v0.36.0 pack contains 235 XUIZ entries: five blade states, additional menu
+The v0.37.0 pack contains 235 XUIZ entries: five blade states, additional menu
 icons, the BSK2 root/expanded layout manifest, retail 5766 shared images and the local font atlas/metrics/notice, plus eight precomposed ABXY prompt sprites, six transition WAVs and an audio notice, the baked Xbox Live panel background, and four startup shutter/reveal/layout entries, plus sixteen disc-reading indicator frames. Original project by
 zivvoz / DashX360, inspired by Microsoft's Xbox 360 Dashboard interfaces.
 Asset ownership remains with the respective rights holders. See
@@ -146,3 +146,11 @@ refines all five tints from the supplied references. The 235-entry payload
 retints 25 derived masks and adds the original 360-logo alpha shadow. All other
 entries/notices remain unchanged. Publish the matching new pack/USB ZIP and
 fresh five-blade/Live/branding video; do not reuse the older 234-entry pack.
+
+Version 0.37 applies the user's tint feedback to Marketplace, Live and Media,
+retaining Games/System0.36. Restore the pre-0.36 GScore y148 placement and fix
+the cursor-cache rounding mismatch that retained a lower Chat shadow on Down.
+The 235-entry pack changes only 15 tint masks from 0.36; alpha/dimensions,
+stock logo/shadow and all other entries/notices remain unchanged. Publish a
+fresh 84-second video showing Down to Chat and Up from the tray, plus all four
+matching downloads and cache regression/asset audit evidence.

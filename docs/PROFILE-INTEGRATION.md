@@ -1,4 +1,4 @@
-# Profile integration — 0.36
+# Profile integration — 0.37
 
 The account card is selectable on Xbox Live, Games and Media whether signed
 in or signed out. Up from the first menu item selects it; Down returns to the
@@ -60,8 +60,9 @@ now follows both actual 10-pixel lower frame corners and fades out at either
 side; its centre starts immediately below the outer bottom frame. The card
 position, picture/stat geometry and horizontal sheen shape remain unchanged.
 See FOCUS-AND-CAPS.md for the shared menu edge correction.
-The original GScore PNG/size are retained;0.36 aligns its main-ink bottom
-with the adjacent word instead of vertical-centre placement. Xbox Live information now has a 28-pixel gutter past the button
+The original GScore PNG/size are retained. Version 0.37 restores its
+pre-0.36 y148 placement after the user reviewed the console comparison.
+Xbox Live information now has a 28-pixel gutter past the button
 column and word-wraps inside its own panel.
 
 The profile worker revalidates identity after reading metadata/pictures.
@@ -72,9 +73,9 @@ checks package counting, cross-device duplicates and invalid/common exclusions.
 The walkthrough's accounts/pictures/counts are explicit simulations; check
 actual Guide actions, profile pictures/counts and account changes on a 360.
 
-![Signed-out highlighted card, simulated profile count](images/signin-highlight-v0.36.png)
+![Signed-out highlighted card, simulated profile count](images/signin-highlight-v0.37.png)
 
-![Signed-in selectable card, simulated profile/picture](images/profile-card-v0.36.png)
+![Signed-in selectable card, simulated profile/picture](images/profile-card-v0.37.png)
 
 Version 0.34 adds the button-list top divider beneath the card and a matching
 upward group shadow for lower menu selections. The card's own frame, focus,
@@ -83,4 +84,4 @@ rounded shadow and all native profile actions are retained.
 Version 0.35 aligns menu-row upper edges with their dividers. The account card,
 its rounded shadow, profile data and native Guide actions are unchanged.
 
-See COLOUR-AND-BRANDING.md for the measured icon/main-text baseline.
+See COLOUR-AND-BRANDING.md for the restored icon placement.

@@ -1,30 +1,22 @@
-Blades 0.36.0 - Live shadows, reference colours and branding hardware test build
+Blades 0.37.0 - Tint feedback and direction-independent Chat shadow hardware test build
 
-Extract Blades-v0.36-USB.zip onto USB and launch Blades/default.xex. The ZIP
+Extract Blades-v0.37-USB.zip onto USB and launch Blades/default.xex. The ZIP
 includes the complete Assets folder and notices. It excludes local library
 paths, FTP settings/login details and logs, preserving those on an update.
 Separate matching XEX/artwork/video downloads remain available.
 
-Version 0.36 Xbox Live corrections:
-- Xbox Live now uses the same rounded upward/downward side edges as the other
-  blades, replacing its old flat horizontal-shadow override.
-- The downward line ends at the bottom button divider, above the logo tile.
-  It no longer continues behind that tile toward the tray.
-- With Chat and IM selected, the lower group has zero height: show the full
-  bottom divider only, with no downward curve. Its upper group remains.
-- Keep that bottom divider full-width for every Live selection. Preserve the
-  raised logo tile's own face/bevel and the existing info-text gutter.
-- Retains 0.35 top-divider alignment, nearest-pixel cursor positioning, equal
-  FTP status spacing and smooth FTP button-selection animation.
-
-Colour/branding refinements:
-- Reference-matched tint chroma for all five blades, with matching retinted
-  cap/tray masks. The supplied animation geometry/clock/lighting are retained.
-- Gamerscore G icon main-ink bottom aligns with the adjacent word, using the
-  original PNG/size. It is raised six pixels; no account data is changed.
-- Xbox360 branding now has a soft drop shadow derived from its original alpha.
-  The original logo is unchanged; the shadow is a cached artwork asset.
-- The matching premade pack has 235 entries and is included in this USB ZIP.
+Version 0.37 corrections:
+- Marketplace tint is halfway between 0.35 and 0.36. Xbox Live keeps the
+  0.35 hue with lower saturation. Media is about 7% darker than 0.36.
+  Games and System retain their 0.36 colours. Cap/tray masks match the tints.
+- Restore the pre-0.36 Gamerscore G box position (y148 instead of y142).
+  Keep the original icon pixels, size and horizontal alignment.
+- Fix a drawing-cache rounding mismatch that could retain a one-pixel lower
+  shadow when scrolling down to Chat and IM. The cache and renderer now both
+  round the cursor position. Test Down from Friends and Up from Open Tray.
+- Retain the full bottom Live divider and bounded rounded group edges,
+  stock 360-logo drop shadow, FTP spacing/cursor animation and card shadows.
+- The matching premade artwork pack has 235 entries and is included here.
 
 Profile fixes:
 - Signed-out profile count reads public profile-package headers on available

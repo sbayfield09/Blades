@@ -67,3 +67,8 @@ Version 0.36 refines the five default-theme tint chromas against supplied
 reference images/video, retaining the upstream motion and lighting equations.
 The 25 derived cap/tray masks are retinted to match, with alpha/layout unchanged.
 See COLOUR-AND-BRANDING.md for sources, RGB values and camera/phase scope.
+
+Version 0.37 follows console-comparison feedback: adjust Marketplace/Live/Media
+tints and their 15 cap/tray masks while retaining Games/System 0.36, all mask
+alpha/dimensions, animation/light equations and the cached stock logo shadow.
+See COLOUR-AND-BRANDING.md for the final palette.

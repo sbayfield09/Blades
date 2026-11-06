@@ -162,3 +162,8 @@ Version 0.36 has 235 entries:25 derived cap/tray masks are colour-refined and
 a 202x130 shadow is generated from the unchanged retail5766 splash_360.png
 alpha. Original logo, font, audio and layout bytes are retained. The shadow
 uses the existing image cache. See COLOUR-AND-BRANDING.md and the final audit.
+
+Version 0.37 follows console-comparison feedback: adjust Marketplace/Live/Media
+tints and their 15 cap/tray masks while retaining Games/System 0.36, all mask
+alpha/dimensions, animation/light equations and the cached stock logo shadow.
+See COLOUR-AND-BRANDING.md for the final palette.

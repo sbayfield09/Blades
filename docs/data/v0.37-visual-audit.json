@@ -1,0 +1,227 @@
+{
+  "release": "0.37.0",
+  "recorded_utc": "2026-11-06T20:23:24.359898+00:00",
+  "changes": [
+    "Marketplace: rounded midpoint of0.35/0.36",
+    "Xbox Live: keep0.35 hue/value with lower saturation",
+    "Media: about7% darker than0.36",
+    "Games/System: retain0.36",
+    "Restore pre-0.36 GScore y148 placement",
+    "Fix direction-dependent Chat shadow residue by rounding cursor cache keys exactly like rendering"
+  ],
+  "palette": {
+    "marketplace": "#DE6E35",
+    "xbox_live": "#DA9F4C",
+    "games": "#4AB239",
+    "media": "#3B87CD",
+    "system": "#906ED4",
+    "basis": "User review of real/0.35/0.36 comparison; not a claim of exact camera-frame matching"
+  },
+  "cache_fix": {
+    "prior_key": "(int)(highlight*53)",
+    "renderer_and_new_key": "lroundf(highlight*53)",
+    "regression_positions_pixels": [
+      105.25,
+      105.75
+    ],
+    "prior_failure": "Both truncate to105 but render to105/106; Down could retain penultimate lower lip indefinitely",
+    "negative_proof": [
+      "resources: loaded local XUIZ archive (235 entries)",
+      "font: loaded local glyph atlas",
+      "old-cache-tests: tests/test_draw_list.c:220: live_cursor_cache: Assertion `draw_list_update(&list,&d)' failed."
+    ],
+    "navigation_regression": "60 actual Down frames from Friends and60 Up frames from tray; cached/direct full-frame equality and settled idle reuse",
+    "gpu_boundary_states": 6
+  },
+  "gamerscore": {
+    "previous_y": 142,
+    "restored_y": 148,
+    "size": [
+      32,
+      32
+    ],
+    "x_offset": 104,
+    "original_png_unchanged": true
+  },
+  "retained": [
+    "0.36 full Live bottom divider/rounded group geometry",
+    "Games/System masks and tint values",
+    "stock360 logo and cached drop shadow",
+    "FTP equal spacing and interpolated cursor",
+    "profile-card corners and menu shadow profiles",
+    "lighting/motion equations and clock"
+  ],
+  "validation": {
+    "ctest_passed": 6,
+    "ctest_total": 6,
+    "suites": [
+      "resources",
+      "skin",
+      "ambient",
+      "draw-list",
+      "startup",
+      "gpu"
+    ],
+    "row_edge_checks": 20,
+    "mirror_pixel_comparisons": 256000,
+    "draw_list_command_states": 74,
+    "gpu_comparisons": 310,
+    "gpu_worst_mean": 0.494941,
+    "gpu_peak": 5,
+    "sanitizers": [
+      "resources: loaded local XUIZ archive (235 entries)",
+      "font: loaded local glyph atlas",
+      "PASS: 20 row-edge checks, selected divider covered by shadow, including rounded bevel; card fill/frame join and both curved shadow ends",
+      "PASS: upper shadow exactly mirrors lower pixels in both styles; no upper on first row, clipped upper group and top dividers on five roots/FTP",
+      "PASS: FTP equal86px value pitch/common font, interpolated cursor/cache updates and exact final row alignment",
+      "PASS: Xbox Live side rails, full bottom divider and no downward curve under Chat",
+      "PASS: Chat shadow clears through cached Down/Up animation and reuses settled foreground",
+      "PASS: Gamerscore icon restored to pre-0.36 position; cached original-logo shadow extends softly outside original silhouette",
+      "PASS: 74 command states, static pixel equivalence, cache reuse/invalidation, bounded batches and canvas guards",
+      "PASS: supplied animation samples, visible motion, shared clock, invalid times and render bounds"
+    ],
+    "xex_verification": [
+      "PASS: XEX2 PowerPC-BE, Xbox subsystem, entry 0x820dc9e8",
+      "PASS: 21 verified image pages; header/image/import digest chains valid",
+      "PASS: xam.xex: 92 import slots",
+      "PASS: xboxkrnl.exe: 122 import slots",
+      "PASS: mutation rejected: image digest mismatch at page 19"
+    ],
+    "native_pages": 21,
+    "xam_slots": 92,
+    "kernel_slots": 122,
+    "animation_goldens": "Independent double-precision samples; reproduced0.36 expectations before generating adjusted tint expectations"
+  },
+  "usb_zip": {
+    "members": [
+      "Blades/default.xex",
+      "Blades/README.txt",
+      "Blades/build-info.txt",
+      "Blades/SHA256SUMS",
+      "Blades/LICENSE",
+      "Blades/XSDK-LICENSE.txt",
+      "Blades/THIRD_PARTY_NOTICES.md",
+      "Blades/Config/README.txt",
+      "Blades/Assets/ARTWORK-README.txt",
+      "Blades/Assets/ARTWORK-SHA256SUMS.txt",
+      "Blades/Assets/AUDIO-NOTICE.txt",
+      "Blades/Assets/DASHX360-NOTICE.txt",
+      "Blades/Assets/FONT-LICENSE.txt",
+      "Blades/Assets/FONT-NOTICE.txt",
+      "Blades/Assets/README.txt",
+      "Blades/Assets/blades.xzp",
+      "Blades/licenses/CONVECTION-NOTICE.txt",
+      "Blades/licenses/DASHX360-NOTICE.txt",
+      "Blades/licenses/GCC-RUNTIME-EXCEPTION.txt",
+      "Blades/licenses/GPL-3.0.txt",
+      "Blades/licenses/NEWLIB.txt",
+      "Blades/licenses/STB-LICENSE.txt"
+    ],
+    "crc": "passed",
+    "xex_matches_standalone": true,
+    "artwork_matches_pack": true,
+    "personal_scan_paths_ftp_settings_credentials_and_logs_excluded": true,
+    "unversioned_alias_identical": true
+  },
+  "artwork": {
+    "entries": 235,
+    "payload_sha256": "e9a7eb2d2aedaf8997cdb7f581527707c29905854e8acb0472f579677787e9a1",
+    "previous_entries": 235,
+    "pack_changes": [
+      "Assets/blades.xzp",
+      "ARTWORK-README.txt",
+      "ARTWORK-SHA256SUMS.txt"
+    ],
+    "modified_existing_entries": [
+      "skin/0/10.png",
+      "skin/0/11.png",
+      "skin/0/7.png",
+      "skin/0/8.png",
+      "skin/0/9.png",
+      "skin/1/10.png",
+      "skin/1/11.png",
+      "skin/1/7.png",
+      "skin/1/8.png",
+      "skin/1/9.png",
+      "skin/3/10.png",
+      "skin/3/11.png",
+      "skin/3/7.png",
+      "skin/3/8.png",
+      "skin/3/9.png"
+    ],
+    "added": [],
+    "all_other_entries_identical": true,
+    "mask_alpha_and_dimensions_unchanged": true,
+    "notices_unchanged": true
+  },
+  "video": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 1280,
+        "height": 720,
+        "r_frame_rate": "30/1"
+      },
+      {
+        "codec_name": "aac",
+        "sample_rate": "48000",
+        "channels": 2,
+        "r_frame_rate": "0/0"
+      }
+    ],
+    "format": {
+      "duration": "84.000000",
+      "size": "9097074"
+    }
+  },
+  "video_full_decode": "passed",
+  "video_scope": "Fresh final0.37 shared-renderer desktop GPU capture; profiles, achievements, FTP, storage, Guide and keyboard requests explicitly simulated. Includes Chat approached by Down at75sec and Up at77sec.",
+  "sdk_commit": "5f6dc726f65f6d171493a3628c2415c03551f27b",
+  "xex_version": "0.0.37.0",
+  "artifacts": {
+    "dist/Blades-v0.37-USB.zip": {
+      "bytes": 2482944,
+      "sha256": "634fbd51c11ebe11c3a9054fd0f9236406f2245a12ab405e40595e64d01e9def"
+    },
+    "dist/Blades/default.xex": {
+      "bytes": 1187840,
+      "sha256": "52a2b3756d4e71358a7047b85e400dd55224b40dc38bee152926378b0b2d4502"
+    },
+    "dist/Blades-artwork-pack.zip": {
+      "bytes": 2041912,
+      "sha256": "7417accd71918a01d316ae20f8471af504969f35a19870ff70fc4edd060690bf"
+    },
+    "dist/Blades-v0.37-walkthrough.mp4": {
+      "bytes": 9097074,
+      "sha256": "47b116db5d8cbea14b15b5d56fa0721beb3ded6635aa6dddeb0e05717a61dc1e"
+    }
+  },
+  "preview_images": {
+    "docs/images/signin-highlight-v0.37.png": "d1145e5ca7fbabaf6e9509340b15397ef5bd159cc535f12378c292246385674a",
+    "docs/images/profile-card-v0.37.png": "451e4407c99325c5756514bb2bbb9717c784a36d212320295e22f0dea03610e1",
+    "docs/images/ftp-computers-v0.37.png": "d7037dad05922c9fcd962acaebf686884d3c562b58fde789c556b92a9ea0b163",
+    "docs/images/live-messages-v0.37.png": "5cd34911d3364b6ee1fc9ab158b59a07c400a4cfcd4aa4d8f3703adc20659330",
+    "docs/images/live-friends-v0.37.png": "d3a1346e49406fa26229eaa97fac5411c116b0e35f1f8980bb7efb3c8c8af333",
+    "docs/images/live-chat-v0.37.png": "33f87b7d4035a31071675a3b6ab84cb0729cac785309c5aa564a0250235b95a5",
+    "docs/images/live-chat-up-v0.37.png": "5c617f16eefa09f85a886859d9dfd89956bbe7b8a5917b238ca1bea6f1380635",
+    "docs/images/live-selections-v0.37.png": "331ae7761314ec65b7cb4eb9644d0e1482dd2c974f90348a695f79b0fcb1ee3b",
+    "docs/images/blade-colours-v0.37.png": "a47797e92b539f0baa1a0c1a1eda9212fafb39d41782106fc50acfc67671d32d",
+    "docs/images/logo-shadow-v0.37.png": "e2439096607a40d537060760e0794a3840b46b2a71f6088532c57be3b091ede2"
+  },
+  "source_sha256": {
+    "src/render/theme.c": "c5a96c9e1ab6ffd3e77a7cd468de008a692d75a2385b783f485f54b29c644026",
+    "src/render/dashboard_render.c": "f2f73be2a32888e14b953507f9018c7be01f9d42a1a90303d5429bbc208279a6",
+    "src/render/draw_list.c": "0fb5a490bad43e73c8786e9b8d7087027679c024f561c6765e0528549929e2c6",
+    "tests/test_draw_list.c": "4ea63d245a82b66e721ade5d905afa84f7c54536b181fbff09da74cfb7cc2a99",
+    "tests/test_gpu.c": "77399c72f9a200955637daf8ed8b5c19c6da73ff0e86f16f9bbb55c1ec683677",
+    "tests/test_ambient.c": "4cfc275bf1ab5229c3fd2e8eb7b5d0a8f10259558ef0e066868700520f521bff",
+    "tools/refine-blades-pack.py": "561d8015e0a8966be46df195f7d3bc0bbf0a5842c9d44b7e295643bb3a0413b8",
+    "tools/import-dashx360-skin.py": "d2ba433ee7c4188784e2bed8e48478ede0bc5fa0044704c06636fbba853c3da4",
+    "tools/render-walkthrough.c": "48fd7ea63138cf23fe555615765431d003f969dc7ca96ff85a6168b96a582e5e",
+    "tools/build-xbox.sh": "8a387ed27ad3ba7bbf4e699790f5cacbd5cdc5272bb5c5db910b73b0dbd20ef1",
+    "tools/package-usb.py": "4f4f9f5ccf074a1945f0573c01d433d5b65ad589c9293bc69586a72a1de19e63"
+  },
+  "physical_validation": "Visual tint preference and native console appearance require user review on hardware; host tests verify rendering/cache behavior."
+}
