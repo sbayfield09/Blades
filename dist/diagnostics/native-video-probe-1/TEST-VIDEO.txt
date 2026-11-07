@@ -1,0 +1,15 @@
+Generated native-player test video
+
+selected.wmv contains 12 seconds of original FFmpeg test patterns, a visible
+BLADES NATIVE VIDEO TEST label, elapsed time and quiet stereo tones.
+Video: Windows Media Video 8 (WMV2), 640x360, 30 fps, YUV420P, 1.5 Mbps target.
+Audio: Windows Media Audio 2, stereo, 44.1 kHz, 128 kbps. Container: ASF/WMV.
+No DRM. Fully decoded on the host without errors. Xbox playback is unverified.
+
+First try the video in the stock Xbox video player. If it plays, put it beside
+NativeVideoProbe/default.xex, preserving its selected.wmv filename, then run
+the diagnostic. This separates codec/file compatibility from the handoff test.
+
+The video-included USB ZIP contains the unchanged diagnostic-1 XEX/Assets
+and this sample. It is not a new Blades release. The usual Blades install is
+unaffected. Original generated test media: Blades project.

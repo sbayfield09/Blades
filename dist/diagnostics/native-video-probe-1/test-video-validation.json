@@ -1,0 +1,27 @@
+{
+  "media": "original generated test patterns and sine tones",
+  "duration_seconds": "12.092000",
+  "streams": [
+    {
+      "codec_name": "wmv2",
+      "codec_tag_string": "WMV2",
+      "width": 640,
+      "height": 360,
+      "pix_fmt": "yuv420p",
+      "r_frame_rate": "30/1"
+    },
+    {
+      "codec_name": "wmav2",
+      "codec_tag_string": "a[1][0][0]",
+      "sample_rate": "44100",
+      "channels": 2,
+      "r_frame_rate": "0/0",
+      "bit_rate": "128000"
+    }
+  ],
+  "sha256": "316b28a2a8aa82a213190a65c4ee61aca92a897938bca3fa7cc04866264c07f1",
+  "bytes": 2583365,
+  "host_full_decode": "passed without errors",
+  "console_playback": "unverified; test in stock player first",
+  "diagnostic_xex_unchanged": true
+}
