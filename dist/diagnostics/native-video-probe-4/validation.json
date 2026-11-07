@@ -1,0 +1,150 @@
+{
+  "diagnostic": "native-video-probe-4",
+  "not_a_blades_release": true,
+  "blades_release_unchanged": "0.37.0",
+  "recorded_utc": "2026-11-07T01:42:24.017563+00:00",
+  "xex_version": "0.0.4.0",
+  "title_id": "424C5052",
+  "target_kernel": "2.0.17559",
+  "sdk_commit": "5f6dc726f65f6d171493a3628c2415c03551f27b",
+  "native_playback_verified": false,
+  "prior_console_result": "Probe3 library control opens Video Library; selected-file request returned00000000 then stock Home. Uploaded log stays private.",
+  "correction": "Actual .lex XEX DLL with original Lua XUIZ resource instead of loose external .xzp; preflight loads/checks/unloads our DLL. Verified OnActivate(bool) and TransitionEnd share a once-only command guard; optional native text checkpoints.",
+  "loader_gate": {
+    "scope": "Bounded suffix gate only; host strcmp stub and precomputed BuiltIn predicate. Not a native loader/playback test.",
+    "image_sha256": "06a8446849184331dc1b513a894c08ad3f160dcec8473f70cdcae9f54b7c86f9",
+    "results": [
+      {
+        "module": "\\Device\\Mass0\\Probe\\Assets\\native-video.xzp",
+        "outcome": "80B04008",
+        "trace": [
+          "9291912C",
+          "92919130",
+          "92919134",
+          "92919138",
+          "9291913C",
+          "92919140",
+          "92919144",
+          "92919148",
+          "9291914C",
+          "92919150",
+          "92919154",
+          "92919158",
+          "9291915C",
+          "92919160",
+          "92919164",
+          "92919168",
+          "9291916C",
+          "92919170"
+        ]
+      },
+      {
+        "module": "\\Device\\Mass0\\Probe\\Assets\\native-video.lex",
+        "outcome": "accepted suffix",
+        "trace": [
+          "9291912C",
+          "92919130",
+          "92919134",
+          "92919138",
+          "9291913C",
+          "92919140",
+          "92919144",
+          "92919148",
+          "9291914C",
+          "92919150",
+          "92919154",
+          "92919158",
+          "9291915C"
+        ]
+      },
+      {
+        "module": "\\Device\\Mass0\\Probe\\Assets\\native-video.xex",
+        "outcome": "accepted suffix",
+        "trace": [
+          "9291912C",
+          "92919130",
+          "92919134",
+          "92919138",
+          "9291913C"
+        ]
+      },
+      {
+        "module": "BuiltIn.Example.xzp",
+        "outcome": "accepted suffix",
+        "trace": [
+          "9291912C",
+          "92919130",
+          "92919134",
+          "92919138",
+          "9291913C",
+          "92919140",
+          "92919144",
+          "92919148",
+          "9291914C",
+          "92919150",
+          "92919154",
+          "92919158",
+          "9291915C",
+          "92919160",
+          "92919164"
+        ]
+      }
+    ]
+  },
+  "sample_unchanged": true,
+  "sample_sha256": "316b28a2a8aa82a213190a65c4ee61aca92a897938bca3fa7cc04866264c07f1",
+  "control_and_default_identical": true,
+  "tests": {
+    "container-tests.txt": "PASS: resource DLL XUIZ and main.lub extracted, entry bounds, manifest and BE32 Lua round trip match original compiler output\nPASS: native-video.lex altered image rejected: image digest mismatch at page 0\nPASS: default.xex altered image rejected: image digest mismatch at page 0\n",
+    "main-tests.txt": "PASS: native URI main; signed-out/signed-in users; native errors stop; bounded wait on success; independent library control; preflight guards\n",
+    "native-route-tests.txt": "PASS: real native URI adapter; corrected internal/activation flags, fallback disabled, ordinal/prototype, exact arguments, user/size bounds, export failures and HRESULT propagation\n",
+    "path-tests.txt": "PASS: physical paths survive title handoff; exact WMV selection; bounded PAM data; unsafe/unresolved paths rejected\n",
+    "bridge-tests.txt": "PASS: exact selection; activation/transition ordering; no restart; optional checkpoint failure; command errors visible (Xbox services mocked)\n",
+    "bridge-extracted-tests.txt": "PASS: exact selection; activation/transition ordering; no restart; optional checkpoint failure; command errors visible (Xbox services mocked)\n",
+    "package-tests.txt": "PASS: actual DLL preflight adapter; exact path/ordinals/flags; export/load/resource failures; unload after every successful load\n"
+  },
+  "xex_verification": "PASS: XEX2 PowerPC-BE, Xbox subsystem, entry 0x82031148\nPASS: 9 verified image pages; header/image/import digest chains valid\nPASS: xam.xex: 60 import slots\nPASS: xboxkrnl.exe: 108 import slots\nConsole launch and Peer Pressure compatibility remain unverified.\n",
+  "lex_verification": "PASS: XEX2 PowerPC-BE, Xbox subsystem, entry 0x9b010000\nPASS: 3 verified image pages; header/image/import digest chains valid\nPASS: import-free resource DLL; lua XUIZ 1515 bytes; no TLS\nConsole launch and Peer Pressure compatibility remain unverified.\n",
+  "zip": "CRC/checksums/entry whitelist/payload equality passed; no personal logs or stock binaries/UI resources",
+  "source_sha256": {
+    "tools/native-player-probe/CMakeLists.txt": "334ebe368caf489ac3d59b819b3c24a9d0e321d519a2ef6017b4d32ffc2212b9",
+    "tools/native-player-probe/test_main.c": "e14701a3a7aa5a5f43f0dd0bc0af6080fbdd8011edee33ab692f542e42c0b675",
+    "tools/native-player-probe/probe.h": "136553aa4784a94507e9a4a52586982be4b731bbe3ca316bf395496076b8e9ff",
+    "tools/native-player-probe/build_lex.py": "cf90342fb58e79f37ed2e538a69c5e9499bd3b8eee2a4c422d170152e3561a8b",
+    "tools/native-player-probe/build_bridge.py": "8d6d62d0d2fa170903e32062fc423320832ed8bcca272dd492b631d8542035d4",
+    "tools/native-player-probe/main.c": "792fa43d25d4c1c89e2e9310770c329f81c246d1537906cae64dcb0d56037cc4",
+    "tools/native-player-probe/native_route.c": "238dc6d3966d8464eb8a970d9f408439d25a96f3f06435db6d5c49ee995cc7ac",
+    "tools/native-player-probe/test_package_check.c": "07309352989a7a73c49644366ff1b516972877086bfce44fa86146c22fc59524",
+    "tools/native-player-probe/test_probe.c": "205050ef31b1d4134e1e472f855200d53e70b18a24aa994dc9a42a37fa9af74d",
+    "tools/native-player-probe/README.txt": "7846a07007409aeafa7d99116ccc5b2f3eb189f161c137db164510fe62e5a5d7",
+    "tools/native-player-probe/native-video.lua": "a7f6135f0e6e5230b83a7ac28c7aa5a25bc9e0d2b13b4dc78a48f074c7044eb7",
+    "tools/native-player-probe/check_loader_gate.py": "7a09190005f0284807951941350a157077984073995d1be5d89217e6f3fae842",
+    "tools/native-player-probe/probe.c": "02c161032ef09b1dc10c7a72efa7a34055920902570bd2228706b9e480a3f5d9",
+    "tools/native-player-probe/package_check.c": "5721d6f4725c67e33009270d2838ef899cba00c171538e70a889e4312d9b70aa",
+    "tools/native-player-probe/test_bridge.lua": "d29f2d4a9072bc254c52867e3a33976a3808c178f932d1c1d502e045b693752a",
+    "tools/native-player-probe/test_native_route.c": "d79cf7d434d4666b7cf11347d8bc8a0f7bee479c80c18f614e8771896e4eb421",
+    "tools/verify_xex.py": "9bf470cf7f533eecb45b1680bb780b8da355d972bed0c45ffedc9553680a74e0"
+  },
+  "artifacts": {
+    "dist/diagnostics/native-video-probe-4/NativeVideoProbe-4-Assets.zip": {
+      "bytes": 1282,
+      "sha256": "7fb759ba2f9f8be6e41ae674074d02faf6f1535a9167a86c3dab0c531876f82d"
+    },
+    "dist/diagnostics/native-video-probe-4/NativeVideoProbe-4-USB.zip": {
+      "bytes": 2569710,
+      "sha256": "394c8c0eaa8d33c5b5c7fd750472c1f2cf48916d33bdda97c8d8059b146060be"
+    },
+    "dist/diagnostics/native-video-probe-4/README.txt": {
+      "bytes": 4335,
+      "sha256": "7846a07007409aeafa7d99116ccc5b2f3eb189f161c137db164510fe62e5a5d7"
+    },
+    "dist/diagnostics/native-video-probe-4/control.xex": {
+      "bytes": 401408,
+      "sha256": "868fb58536b0ee822f4fa7dfde9c6e3114aaadb1bc01c01fd8365d1e413e02ef"
+    },
+    "dist/diagnostics/native-video-probe-4/default.xex": {
+      "bytes": 401408,
+      "sha256": "868fb58536b0ee822f4fa7dfde9c6e3114aaadb1bc01c01fd8365d1e413e02ef"
+    }
+  }
+}
