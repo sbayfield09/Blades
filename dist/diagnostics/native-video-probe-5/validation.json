@@ -1,0 +1,72 @@
+{
+  "diagnostic": "native-video-probe-5",
+  "not_a_blades_release": true,
+  "blades_release_unchanged": "0.37.0",
+  "recorded_utc": "2026-11-07T01:51:59.419038+00:00",
+  "xex_version": "0.0.5.0",
+  "title_id": "424C5052",
+  "target_kernel": "2.0.17559",
+  "sdk_commit": "5f6dc726f65f6d171493a3628c2415c03551f27b",
+  "native_playback_verified": false,
+  "prior_console_result": "Probe4 selected test: XexLoadImage C000007B, null handle, STOP before native handoff, exit1. Aurora reported; control videolibrary00000000. Raw logs remain private.",
+  "correction": "Set resource DLL page size4096 and IMAGE_PAGE_SIZE_4KB for9B000000; regenerate33 descriptors covering135168 bytes. New verifier rejects old DLL heap/page mismatch. Lua package and sample WMV unchanged.",
+  "bridge_package_unchanged": true,
+  "bridge_package_sha256": "19492109025bfb69a015cdaac2ef5454995a25cf9488729d81651ec8dbb4527e",
+  "previous_dll_sha256": "b769f9e706b2127b988448b38f75f9c3b06cdf9c25c7e25e2d521dc2ea3dd3e2",
+  "sample_unchanged": true,
+  "sample_sha256": "316b28a2a8aa82a213190a65c4ee61aca92a897938bca3fa7cc04866264c07f1",
+  "control_and_default_identical": true,
+  "tests": {
+    "container-tests.txt": "PASS: 33 4 KB descriptors cover 135168 bytes; entry code page and complete Lua resource are covered\nLua package SHA256: 19492109025bfb69a015cdaac2ef5454995a25cf9488729d81651ec8dbb4527e\nPASS: previous diagnostic4 DLL rejected for wrong heap/page geometry\nPASS: embedded Lua package identical to diagnostic4; geometry correction isolated\nPASS: flag mutation rejected: XEX page size disagrees with image address range\nPASS: image mutation rejected: image digest mismatch at page 0\nPASS: Lua extracted from final DLL round-trips to original host compiler output\n",
+    "main-tests.txt": "PASS: native URI main; signed-out/signed-in users; native errors stop; bounded wait on success; independent library control; preflight guards\n",
+    "native-route-tests.txt": "PASS: real native URI adapter; corrected internal/activation flags, fallback disabled, ordinal/prototype, exact arguments, user/size bounds, export failures and HRESULT propagation\n",
+    "path-tests.txt": "PASS: physical paths survive title handoff; exact WMV selection; bounded PAM data; unsafe/unresolved paths rejected\n",
+    "bridge-extracted-tests.txt": "PASS: exact selection; activation/transition ordering; no restart; optional checkpoint failure; command errors visible (Xbox services mocked)\n",
+    "package-tests.txt": "PASS: actual DLL preflight adapter; exact path/ordinals/flags; export/load/resource failures; unload after every successful load\n"
+  },
+  "xex_verification": "PASS: XEX2 PowerPC-BE, Xbox subsystem, entry 0x82031148\nPASS: 9 verified 65536-byte image pages; header/image/import digest chains valid\nPASS: xam.xex: 60 import slots\nPASS: xboxkrnl.exe: 108 import slots\nConsole launch and Peer Pressure compatibility remain unverified.\n",
+  "lex_verification": "PASS: XEX2 PowerPC-BE, Xbox subsystem, entry 0x9b010000\nPASS: 33 verified 4096-byte image pages; header/image/import digest chains valid\nPASS: import-free resource DLL; lua XUIZ 1515 bytes; no TLS\nConsole launch and Peer Pressure compatibility remain unverified.\n",
+  "zip": "CRC/checksums/entry whitelist/payload equality passed; no personal logs or stock binaries/UI resources",
+  "source_sha256": {
+    "tools/native-player-probe/CMakeLists.txt": "48e05d23f7228bc322b61c6350557df1b7cdd037a5a16496b39a858e02e95aa9",
+    "tools/native-player-probe/test_main.c": "e14701a3a7aa5a5f43f0dd0bc0af6080fbdd8011edee33ab692f542e42c0b675",
+    "tools/native-player-probe/probe.h": "136553aa4784a94507e9a4a52586982be4b731bbe3ca316bf395496076b8e9ff",
+    "tools/native-player-probe/build_lex.py": "d3e14103feed099ba857b64658dc521cea32e260c167419fd9ccc1dd4e8180d8",
+    "tools/native-player-probe/test_lex.py": "3dba48af77faffe2478f53495017e4dda1a334df6fb32829de0288246c76de98",
+    "tools/native-player-probe/build_bridge.py": "8d6d62d0d2fa170903e32062fc423320832ed8bcca272dd492b631d8542035d4",
+    "tools/native-player-probe/main.c": "3f665ffdc42207df6c62a7282bd57ca12e03999eeaacc611eff0d60ac191333f",
+    "tools/native-player-probe/native_route.c": "238dc6d3966d8464eb8a970d9f408439d25a96f3f06435db6d5c49ee995cc7ac",
+    "tools/native-player-probe/test_package_check.c": "07309352989a7a73c49644366ff1b516972877086bfce44fa86146c22fc59524",
+    "tools/native-player-probe/test_probe.c": "205050ef31b1d4134e1e472f855200d53e70b18a24aa994dc9a42a37fa9af74d",
+    "tools/native-player-probe/README.txt": "8eefb05055abacba15046501103883e07001435d557d2b95dd3855a438efe2b7",
+    "tools/native-player-probe/native-video.lua": "a7f6135f0e6e5230b83a7ac28c7aa5a25bc9e0d2b13b4dc78a48f074c7044eb7",
+    "tools/native-player-probe/check_loader_gate.py": "7a09190005f0284807951941350a157077984073995d1be5d89217e6f3fae842",
+    "tools/native-player-probe/probe.c": "02c161032ef09b1dc10c7a72efa7a34055920902570bd2228706b9e480a3f5d9",
+    "tools/native-player-probe/package_check.c": "5721d6f4725c67e33009270d2838ef899cba00c171538e70a889e4312d9b70aa",
+    "tools/native-player-probe/test_bridge.lua": "d29f2d4a9072bc254c52867e3a33976a3808c178f932d1c1d502e045b693752a",
+    "tools/native-player-probe/test_native_route.c": "d79cf7d434d4666b7cf11347d8bc8a0f7bee479c80c18f614e8771896e4eb421",
+    "tools/verify_xex.py": "a0de2fe94f58ba61fa2c21201163638bb59ff5fd6ab8e8d384371c72b22acffc"
+  },
+  "artifacts": {
+    "dist/diagnostics/native-video-probe-5/NativeVideoProbe-5-Assets.zip": {
+      "bytes": 2001,
+      "sha256": "e85c90717898c1f9a95377c4d5eadbb83ff927b943a8b8a151bc4aba6e4d4522"
+    },
+    "dist/diagnostics/native-video-probe-5/NativeVideoProbe-5-USB.zip": {
+      "bytes": 2573516,
+      "sha256": "f4808e48faf55adee147d9e6eae4124b856d6dc46df17c905831d177288f983d"
+    },
+    "dist/diagnostics/native-video-probe-5/README.txt": {
+      "bytes": 4967,
+      "sha256": "8eefb05055abacba15046501103883e07001435d557d2b95dd3855a438efe2b7"
+    },
+    "dist/diagnostics/native-video-probe-5/control.xex": {
+      "bytes": 401408,
+      "sha256": "e4b031e9ac2d7d83e2a554213cdd3e0e7fff209e8473766982c3ff2188fec9d4"
+    },
+    "dist/diagnostics/native-video-probe-5/default.xex": {
+      "bytes": 401408,
+      "sha256": "e4b031e9ac2d7d83e2a554213cdd3e0e7fff209e8473766982c3ff2188fec9d4"
+    }
+  }
+}
