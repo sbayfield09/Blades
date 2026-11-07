@@ -1,26 +1,24 @@
-# Blades 0.37 walkthrough
+# Blades0.38 walkthrough
 
-[Watch/download the MP4](../dist/Blades-v0.37-walkthrough.mp4)
+[Watch/download the MP4](../dist/Blades-v0.38-walkthrough.mp4)
 
-Fresh 84-second 1280x720 desktop GPU capture at 30fps with 48kHz stereo AAC audio.
-Profiles, achievements, storage, FTP and native Guide/keyboard requests are
-explicitly simulated. This captures the release renderer and matching artwork;
-it does not demonstrate console I/O, authentication or native hardware FPS.
+Fresh108-second1280x720 desktop GPU capture at30fps with48kHz stereo AAC.
+The shared release renderer uses the matching unchanged235-entry artwork pack.
+An on-video label identifies the desktop preview and simulated storage/player
+handoff. This is not footage of Xbox decoder playback or the new adapter.
 
-- 00:02: highlighted signed-out profile card.
-- 00:06: signed-in card with restored pre-0.36 Gamerscore icon position.
-- 00:18–00:34: Games, achievements, file browsing and Media.
-- 00:35–00:55: System and Computers/FTP, including smoothly moving focus and
-  equally spaced status/IP/login/device fields.
-- 01:12–01:14: Xbox Live Messages and Friends.
-- 01:15: Chat selected by Down from Friends.
-- 01:16: Open Tray selected.
-- 01:17–01:18: Chat selected by Up from Open Tray.
-- 01:19–01:24: Marketplace with the blended tint.
+The first84 seconds cover blade changes, profile/Guide requests, achievements,
+File Manager, FTP and the retained0.37 highlights/tints/shadows. Profile, storage,
+FTP, Guide and keyboard events are explicitly simulated.
 
-Both Chat approaches settle with the full bottom divider and no downward
-shadow. Cache/direct-frame regression tests cover every frame of both approaches,
-including the half-pixel rounding boundary that previously retained a lip.
-Games and System keep 0.36 tints; Live softens 0.35, Media is slightly darker and
-Marketplace is halfway between the two. The stock 360 logo shadow is retained.
-Artwork/audio credit: zivvoz / DashX360 and respective rights holders.
+- 01:24–01:29: navigate from Marketplace to Media, then open Video.
+- 01:30: populated Blades Videos list with a selected WMV.
+- 01:31: explicit desktop-only simulated exact-file handoff notice.
+- 01:35: return to the same list in the preview.
+- 01:37–01:43: select an MKV and repeat the simulated handoff.
+- 01:45–01:48: close the list and switch to System.
+
+This verifies the choosing-file layout and current renderer. Actual autoplay,
+Peer Pressure DLL attachment, decoded video/audio and return to Blades need the
+new console test. The user's earlier successful test established only the
+unmodified player engine. Artwork/audio: zivvoz / DashX360 and respective owners.

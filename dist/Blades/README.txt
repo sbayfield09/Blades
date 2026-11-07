@@ -1,11 +1,32 @@
-Blades 0.37.0 - Tint feedback and direction-independent Chat shadow hardware test build
+Blades 0.38.0 - Selected-file video playback through Simple360Player
 
-Extract Blades-v0.37-USB.zip onto USB and launch Blades/default.xex. The ZIP
-includes the complete Assets folder and notices. It excludes local library
+Extract Blades-v0.38-USB.zip onto USB and launch Blades/default.xex. The ZIP
+includes the complete Assets and Players folders, source and notices. It excludes local library
 paths, FTP settings/login details and logs, preserving those on an update.
 Separate matching XEX/artwork/video downloads remain available.
 
-Version 0.37 corrections:
+Version 0.38 video playback:
+- Keep choosing files in Blades: Media > Video. Add your video folder under
+  Media > Video Marketplace, choose Video and a scan depth, then Scan Now.
+- A opens the exact selected file in the bundled Simple360Player0.2. Its
+  browser is bypassed by a local Peer Pressure title adapter. No DashLaunch
+  or stock-dashboard plugin/HDD installation is required; copy Players too.
+- A pauses/resumes; Left/Right seeks; Y opens player options; B stops playback
+  and returns to the Blades Videos list. EOF returns there too. The startup
+  animation is skipped on return, and the selected file is restored after scan.
+- Video filters now include MKV, MPEG, TS/M2TS and FLV in addition to MP4/MOV/
+  M4V/MP4V, AVI, ASF and WMV. The codec inside still has to be supported.
+- The user confirmed unmodified Simple360Player0.2 plays on Peer Pressure.
+  This new exact-selection/return adapter needs a separate console test.
+- If the player browser appears, return fails, or a file will not play, send
+  Blades/default.log, Players/Simple360Player/playerlog.txt and blades-video.log.
+  Report a missing adapter log too. These logs stay local and may contain paths.
+- Music/Pictures playback and the original Xbox music visualisations are not
+  implemented. The video engine does not require the retail optional-codec update.
+- A complete third-party source/licence bundle is included under Players.
+  The unchanged235-entry artwork pack retains the0.37 tints and shadows.
+
+Retained 0.37 corrections:
 - Marketplace tint is halfway between 0.35 and 0.36. Xbox Live keeps the
   0.35 hue with lower saturation. Media is about 7% darker than 0.36.
   Games and System retain their 0.36 colours. Cap/tray masks match the tints.

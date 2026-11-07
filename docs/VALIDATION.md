@@ -422,3 +422,23 @@ box is verified through actual image/glyph ink bounds (the prior six-pixel
 placement difference). Independent animation expectations use the adjusted
 palette; prior 0.36 expectations are reproduced first. Mask alpha/dimensions
 and all unmodified pack entries must remain identical to 0.36.
+
+Version0.38: all23 host suites pass across the core run plus separately configured
+GPU and loopback FTP runs. The first full run exposed a stale audio fixture
+expecting the old Music placeholder; it now tests generic selection/dialog audio
+through System. GPU needs the resource-pack environment variable; FTP needs
+socket access outside the restricted shell. New request/backend tests pass
+ASan/UBSan with leak checking disabled for the traced executor. They exercise
+exact1016-byte launch/return data, physical storage paths, root/spaces names,
+malformed/truncated/overlong/traversal/config-injection refusal, incomplete/wrong
+player packages, atomic replacement on second selection and correct Media chrome/
+row/scroll restoration. Existing library cancellation/no-autoplay guards pass.
+The two guarded application-method CRCs match the independently decoded pinned
+upstream player; mutations/truncation/base changes refuse all writes, and only
+its two16-byte entries change/restore. Both new native XEX and title DLL validate
+all page/import/header digests. The packaged adapter source independently rebuilds
+to a byte-identical XEX. The upstream player/fonts are unchanged. Archive/checksum/
+entry-whitelist checks exclude personal scan paths, FTP settings and player logs/
+requests. A fresh108-second labeled desktop GPU walkthrough fully decodes.
+The user confirmed standalone Simple360Player0.2 works on Peer Pressure; its new
+adapter/alias/autoplay/return lifecycle has not been executed on the Xbox here.

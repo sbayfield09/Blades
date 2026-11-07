@@ -154,3 +154,13 @@ The 235-entry pack changes only 15 tint masks from 0.36; alpha/dimensions,
 stock logo/shadow and all other entries/notices remain unchanged. Publish a
 fresh 84-second video showing Down to Chat and Up from the tray, plus all four
 matching downloads and cache regression/asset audit evidence.
+
+Version0.38 packages the unmodified user-tested Simple360Player0.2, its runtime
+fonts and an original local Peer Pressure title adapter under Players. Include
+both complete upstream source and adapter source with GPL/dependency notices.
+The pinned upstream source/XEX come from the existing third-party diagnostic
+artifacts; tools/package-video-player.py validates their SHA256. Do not ship
+player.ini, settings.ini, playerlog.txt, blades-video.log or temporary requests.
+The complete USB ZIP includes Players. Publish Blades-video-player-pack.zip
+alongside separate XEX/artwork downloads so manual updates remain complete.
+Capture the current shared renderer; label desktop player handoffs as simulated.
