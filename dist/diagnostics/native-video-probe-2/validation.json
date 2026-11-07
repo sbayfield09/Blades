@@ -1,0 +1,63 @@
+{
+  "diagnostic": "native-video-probe-2",
+  "not_a_blades_release": true,
+  "blades_release_unchanged": "0.37.0",
+  "recorded_utc": "2026-11-07T01:13:54.809225+00:00",
+  "xex_version": "0.0.2.0",
+  "title_id": "424C5052",
+  "target_kernel": "2.0.17559",
+  "sdk_commit": "5f6dc726f65f6d171493a3628c2415c03551f27b",
+  "native_playback_verified": false,
+  "prior_console_result": "Both probe1 modes passed local preflight and reached SDK handoff; user reports stock Home. Same WMV plays manually. Uploaded logs remain private.",
+  "implementation": "Dynamic XamLaunchURI ordinal0x4AC, user/ASCII URI/zero flags/null context; no manual dashboard fallback; raw HRESULT on return; bounded observation. control.xex selects native videolibrary; default.xex selects the PAM bridge/file.",
+  "bridge_sha256": "02396676cb6c717cd15dcb4917a983557d91c39a0f0129d002c224fe3a88ba63",
+  "bridge_unchanged": true,
+  "sample_sha256": "316b28a2a8aa82a213190a65c4ee61aca92a897938bca3fa7cc04866264c07f1",
+  "sample_unchanged": true,
+  "control_and_default_identical": true,
+  "tests": {
+    "path-tests.txt": "PASS: physical paths survive title handoff; exact WMV selection; bounded PAM data; unsafe/unresolved paths rejected\n",
+    "native-route-tests.txt": "PASS: real native URI adapter; ordinal/prototype, exact arguments, user/size bounds, export failures and HRESULT propagation\n",
+    "main-tests.txt": "PASS: native URI main; signed-out/signed-in users; native errors stop; bounded wait on success; independent library control; preflight guards\n",
+    "lua-tests.txt": "PASS: bridge in Lua 5.1 VM; exact selection and native activation behavior (Xbox services simulated)\n",
+    "xex-verification.txt": "PASS: XEX2 PowerPC-BE, Xbox subsystem, entry 0x82030f20\nPASS: 9 verified image pages; header/image/import digest chains valid\nPASS: xam.xex: 60 import slots\nPASS: xboxkrnl.exe: 106 import slots\nConsole launch and Peer Pressure compatibility remain unverified.\n",
+    "xex-mutation.txt": "PASS: changed image byte rejected: image digest mismatch at page 7\n"
+  },
+  "zip": "CRC, internal checksums and exact executable/asset matches passed; no personal paths, settings, logs or stock executable/UI resources",
+  "source_sha256": {
+    "tools/native-player-probe/CMakeLists.txt": "8db96e2be03e8e038c1dfb8cbb33030d23505933229aafbe4023902782ec814a",
+    "tools/native-player-probe/test_main.c": "2722ce20d2afb7e277217ce0759e1cac9125c1b514347f342d3acefafa78d119",
+    "tools/native-player-probe/probe.h": "88f58ee840d6ea057a9e4bc47d7b184f1c53e3eb2986ea3aaa4307f43caac28c",
+    "tools/native-player-probe/build_bridge.py": "8d6d62d0d2fa170903e32062fc423320832ed8bcca272dd492b631d8542035d4",
+    "tools/native-player-probe/main.c": "811b52bc026f7650fbd51d79c869d73aadce289a0336b605970da258f21724c0",
+    "tools/native-player-probe/native_route.c": "ae534eab47d7335ac398c9c802e396b0673f8f93819df06de88c2d5c35b3d649",
+    "tools/native-player-probe/test_probe.c": "a55b9a92aa9a0bc10d835cfb5d428ce818a732ea52bed2d3aae53ed701271225",
+    "tools/native-player-probe/README.txt": "c9c387d126742c9643beff7fbfc6094e3b177f7090785f884f13d2ee1282ab09",
+    "tools/native-player-probe/native-video.lua": "b209adac639041b0cecafb11e90fc00a91ae46c9e1778c7b8547906b79c8fb5e",
+    "tools/native-player-probe/probe.c": "7d17c0d2a359a81e327eae4321d6feac7db7a82ea11db16b5d13d5f7924d9d61",
+    "tools/native-player-probe/test_bridge.lua": "1669b305ddf210ef72dff325dbf06f4ea0211cb051403f545edefb928b25009a",
+    "tools/native-player-probe/test_native_route.c": "b8ca2d0efddf4be2f352f2002319285300406e0caceaae0f1041830ac41eb465"
+  },
+  "artifacts": {
+    "dist/diagnostics/native-video-probe-2/README.txt": {
+      "bytes": 2803,
+      "sha256": "c9c387d126742c9643beff7fbfc6094e3b177f7090785f884f13d2ee1282ab09"
+    },
+    "dist/diagnostics/native-video-probe-2/control.xex": {
+      "bytes": 401408,
+      "sha256": "0d0dc27cd586ee5b1e3eddc4a961882c245bd7775e46ee2c087782e170763164"
+    },
+    "dist/diagnostics/native-video-probe-2/NativeVideoProbe-2-Assets.zip": {
+      "bytes": 519,
+      "sha256": "8c59e43a63314c039c664136a9b0916845c933f555a83d7b74d10bd11664dcc7"
+    },
+    "dist/diagnostics/native-video-probe-2/NativeVideoProbe-2-USB.zip": {
+      "bytes": 2556052,
+      "sha256": "5d67ddb02f93f48513ee4535a5637679b3d280b35f005931ee6ab06808220768"
+    },
+    "dist/diagnostics/native-video-probe-2/default.xex": {
+      "bytes": 401408,
+      "sha256": "0d0dc27cd586ee5b1e3eddc4a961882c245bd7775e46ee2c087782e170763164"
+    }
+  }
+}
