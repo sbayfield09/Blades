@@ -1,0 +1,50 @@
+{
+  "diagnostic": "native-video-probe-1",
+  "not_a_blades_release": true,
+  "blades_release_unchanged": "0.37.0",
+  "recorded_utc": "2026-11-07T00:25:46.025250+00:00",
+  "target_kernel": "2.0.17559",
+  "xex_version": "0.0.1.0",
+  "title_id": "424C5052",
+  "native_playback_verified": false,
+  "source_sha256": {
+    "tools/native-player-probe/CMakeLists.txt": "ec996eba5de5dc8fad39331a9a2cca155d0c57b49f3738540aef69ad95b59f13",
+    "tools/native-player-probe/test_main.c": "158fc1888816dcf82806ff39d64821b2854328d3cbb544ca507c1c712136c271",
+    "tools/native-player-probe/probe.h": "180783c6424708cf6cd400159093e977ee240c307f68c674a7ea2e9233752901",
+    "tools/native-player-probe/build_bridge.py": "8d6d62d0d2fa170903e32062fc423320832ed8bcca272dd492b631d8542035d4",
+    "tools/native-player-probe/main.c": "e820af3e5ddf015e440ae3a0de2207ca4bae897dd39e16d8f254e128d43d0ace",
+    "tools/native-player-probe/test_probe.c": "0ab68304b8a09c8c49d060f07d1179630a37e446734b1f7552bcccac0eec2cc8",
+    "tools/native-player-probe/README.txt": "144367cc8d046a2626ca2d9198570fe676efd9779502e8cfed60aaa62ce4926a",
+    "tools/native-player-probe/native-video.lua": "b209adac639041b0cecafb11e90fc00a91ae46c9e1778c7b8547906b79c8fb5e",
+    "tools/native-player-probe/probe.c": "a8dc09dc12cb0c54e7a707dd1a1bccd086027b19c8792851d7fde0691bc4ee03",
+    "tools/native-player-probe/test_bridge.lua": "1669b305ddf210ef72dff325dbf06f4ea0211cb051403f545edefb928b25009a"
+  },
+  "sdk_commit": "5f6dc726f65f6d171493a3628c2415c03551f27b",
+  "tests": {
+    "probe-path-tests.txt": "PASS: physical paths survive title handoff; exact WMV selection; bounded PAM data; unsafe/unresolved paths rejected\n",
+    "probe-main-tests.txt": "PASS: diagnostic main guards wrong kernel, unresolved path, absent/empty media and missing asset; checked exact SDK handoff and returned failure\n",
+    "probe-lua-validation.txt": "PASS: bridge in Lua 5.1 VM; exact selection and native activation behavior (Xbox services simulated)\nPASS: XUIZ v3 bounds/manifest; native BE32 Lua5.1; architecture round trip; truncated/corrupt bytecode rejected\n",
+    "probe-xex-verification.txt": "PASS: XEX2 PowerPC-BE, Xbox subsystem, entry 0x82030cb8\nPASS: 9 verified image pages; header/image/import digest chains valid\nPASS: xam.xex: 64 import slots\nPASS: xboxkrnl.exe: 106 import slots\nConsole launch and Peer Pressure compatibility remain unverified.\n",
+    "library-sanitizers.txt": "PASS: three filtered media libraries, persisted per-category paths/depth, no autoplay, typed/manual/cancel-safe launch requests and Media-only path manager\nPASS: recursive library, packages, categories, settings, async launch, cancellation and navigation\n"
+  },
+  "xex_mutation": "one changed payload byte rejected by image digest verification",
+  "scope": "Host Lua calls simulate Xbox services; package loading, file visibility and native playback require console testing. No main dashboard renderer is present in this separate launcher.",
+  "artifacts": {
+    "dist/diagnostics/native-video-probe-1/NativeVideoProbe-1-USB.zip": {
+      "bytes": 175447,
+      "sha256": "fec1387ad3e463e0578d9c7b6ae200bd9f7e0cdb5b4f7826001df3a5201930ae"
+    },
+    "dist/diagnostics/native-video-probe-1/README.txt": {
+      "bytes": 1855,
+      "sha256": "144367cc8d046a2626ca2d9198570fe676efd9779502e8cfed60aaa62ce4926a"
+    },
+    "dist/diagnostics/native-video-probe-1/default.xex": {
+      "bytes": 409600,
+      "sha256": "5d4f50989765692e148da0cb59a0158bd8b36a4d8173fece2d38a3f836c0501b"
+    },
+    "dist/diagnostics/native-video-probe-1/NativeVideoProbe-1-Assets.zip": {
+      "bytes": 519,
+      "sha256": "8c59e43a63314c039c664136a9b0916845c933f555a83d7b74d10bd11664dcc7"
+    }
+  }
+}
