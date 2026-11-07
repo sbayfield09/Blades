@@ -1,0 +1,124 @@
+{
+  "diagnostic": "native-video-probe-3",
+  "not_a_blades_release": true,
+  "blades_release_unchanged": "0.37.0",
+  "recorded_utc": "2026-11-07T01:24:44.191294+00:00",
+  "xex_version": "0.0.3.0",
+  "title_id": "424C5052",
+  "target_kernel": "2.0.17559",
+  "sdk_commit": "5f6dc726f65f6d171493a3628c2415c03551f27b",
+  "native_playback_verified": false,
+  "prior_console_result": "Probe2 selected-video call returned80070005 then normal exit1; Aurora reported. Control log unavailable. Uploaded log remains private.",
+  "correction": "Use native flags80000004 instead of0. Internal/activation bits set; fallback bit0 clear. No binary patches or console setting changes.",
+  "native_alias_gate": {
+    "scope": "Bounded native PowerPC alias-gate branch executed from the user-supplied decoded 17559 XAM with controlled flag registers. No console routing/playback claimed.",
+    "image_sha256": "f9e44cd6f4b04875ddc5a3b8fd519785ba2b0488b1c4622f818b740ba4064313",
+    "flag_source": "Native srwi at819A06E8: incoming flags bit31; callback gate8199FF64..8199FF88. Stock dashboard helper921902F0 uses80000005 for internal routes.",
+    "correction": "80000004 preserves internal alias and activation flags but leaves fallback bit0 clear.",
+    "results": [
+      {
+        "uri": "pam",
+        "flags": "00000000",
+        "outcome": "rejected 80070005",
+        "trace": [
+          "8199FF64",
+          "8199FF68",
+          "8199FF6C",
+          "8199FF70",
+          "8199FF74",
+          "8199FF78",
+          "8199FF7C",
+          "8199FF80",
+          "8199FF84",
+          "8199FF88"
+        ]
+      },
+      {
+        "uri": "pam",
+        "flags": "80000004",
+        "outcome": "allowed to expand alias",
+        "trace": [
+          "8199FF64",
+          "8199FF68",
+          "8199FF6C"
+        ]
+      },
+      {
+        "uri": "videolibrary",
+        "flags": "00000000",
+        "outcome": "rejected 80070005",
+        "trace": [
+          "8199FF64",
+          "8199FF68",
+          "8199FF6C",
+          "8199FF70",
+          "8199FF74",
+          "8199FF78",
+          "8199FF7C",
+          "8199FF80",
+          "8199FF84",
+          "8199FF88"
+        ]
+      },
+      {
+        "uri": "videolibrary",
+        "flags": "80000004",
+        "outcome": "allowed to expand alias",
+        "trace": [
+          "8199FF64",
+          "8199FF68",
+          "8199FF6C"
+        ]
+      }
+    ]
+  },
+  "bridge_sha256": "02396676cb6c717cd15dcb4917a983557d91c39a0f0129d002c224fe3a88ba63",
+  "bridge_unchanged": true,
+  "sample_sha256": "316b28a2a8aa82a213190a65c4ee61aca92a897938bca3fa7cc04866264c07f1",
+  "sample_unchanged": true,
+  "control_and_default_identical": true,
+  "tests": {
+    "path-tests.txt": "PASS: physical paths survive title handoff; exact WMV selection; bounded PAM data; unsafe/unresolved paths rejected\n",
+    "native-route-tests.txt": "PASS: real native URI adapter; corrected internal/activation flags, fallback disabled, ordinal/prototype, exact arguments, user/size bounds, export failures and HRESULT propagation\n",
+    "main-tests.txt": "PASS: native URI main; signed-out/signed-in users; native errors stop; bounded wait on success; independent library control; preflight guards\n",
+    "xex-verification.txt": "PASS: XEX2 PowerPC-BE, Xbox subsystem, entry 0x82030f30\nPASS: 9 verified image pages; header/image/import digest chains valid\nPASS: xam.xex: 60 import slots\nPASS: xboxkrnl.exe: 106 import slots\nConsole launch and Peer Pressure compatibility remain unverified.\n",
+    "xex-mutation.txt": "PASS: changed image byte rejected: image digest mismatch at page 7\n"
+  },
+  "zip": "CRC/internal checksums/XEX equality passed; no personal logs, paths or settings; no stock binary/UI payloads",
+  "source_sha256": {
+    "tools/native-player-probe/CMakeLists.txt": "d44f958f05ae129afaea0075d11cadc880f789ebcfb75429f2920fc1847d6eed",
+    "tools/native-player-probe/test_main.c": "2722ce20d2afb7e277217ce0759e1cac9125c1b514347f342d3acefafa78d119",
+    "tools/native-player-probe/probe.h": "7011eb8ebe2899214b3e741a3ed6db9772af46970b5e90c6d773e1c900295821",
+    "tools/native-player-probe/build_bridge.py": "8d6d62d0d2fa170903e32062fc423320832ed8bcca272dd492b631d8542035d4",
+    "tools/native-player-probe/main.c": "2e6090db63dabc0e1a9e9bb0f46a6bc1af044a88dbb0d393cbdb6f4f9237ba3f",
+    "tools/native-player-probe/native_route.c": "238dc6d3966d8464eb8a970d9f408439d25a96f3f06435db6d5c49ee995cc7ac",
+    "tools/native-player-probe/test_probe.c": "a55b9a92aa9a0bc10d835cfb5d428ce818a732ea52bed2d3aae53ed701271225",
+    "tools/native-player-probe/README.txt": "f6d41c011bd9837013fd0991ab212aec10d526a8b2942b609eaff703a421f589",
+    "tools/native-player-probe/native-video.lua": "b209adac639041b0cecafb11e90fc00a91ae46c9e1778c7b8547906b79c8fb5e",
+    "tools/native-player-probe/probe.c": "7d17c0d2a359a81e327eae4321d6feac7db7a82ea11db16b5d13d5f7924d9d61",
+    "tools/native-player-probe/test_bridge.lua": "1669b305ddf210ef72dff325dbf06f4ea0211cb051403f545edefb928b25009a",
+    "tools/native-player-probe/test_native_route.c": "931ccd9ade30670cbeb840f50b2fcd45a0dc177bdcf98318b60ae5c5cd79b7dd"
+  },
+  "artifacts": {
+    "dist/diagnostics/native-video-probe-3/NativeVideoProbe-3-Assets.zip": {
+      "bytes": 519,
+      "sha256": "8c59e43a63314c039c664136a9b0916845c933f555a83d7b74d10bd11664dcc7"
+    },
+    "dist/diagnostics/native-video-probe-3/README.txt": {
+      "bytes": 3180,
+      "sha256": "f6d41c011bd9837013fd0991ab212aec10d526a8b2942b609eaff703a421f589"
+    },
+    "dist/diagnostics/native-video-probe-3/control.xex": {
+      "bytes": 401408,
+      "sha256": "9c10769588d644eeec9692c4052b26deba055de55e1016a42168af032bc19eec"
+    },
+    "dist/diagnostics/native-video-probe-3/default.xex": {
+      "bytes": 401408,
+      "sha256": "9c10769588d644eeec9692c4052b26deba055de55e1016a42168af032bc19eec"
+    },
+    "dist/diagnostics/native-video-probe-3/NativeVideoProbe-3-USB.zip": {
+      "bytes": 2556485,
+      "sha256": "7ef63604e3d947474eaec66cc27876fc5ab1be4fd12d458ac47b8fde0ed7ed4e"
+    }
+  }
+}
