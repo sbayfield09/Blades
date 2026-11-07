@@ -1,0 +1,87 @@
+{
+  "diagnostic": "native-video-probe-6",
+  "not_a_blades_release": true,
+  "blades_release_unchanged": "0.37.0",
+  "recorded_utc": "2026-11-07T18:00:42.518098+00:00",
+  "xex_version": "0.0.6.0",
+  "title_id": "424C5052",
+  "target_kernel": "2.0.17559",
+  "sdk_commit": "5f6dc726f65f6d171493a3628c2415c03551f27b",
+  "native_playback_verified": false,
+  "peer_pressure_dashboard_sideload_verified": false,
+  "official_peer_pressure_documentation": "https://github.com/grimdoomer/Xbox360PeerPressure/wiki/Softmod-Features#dll-sideloading",
+  "ini_syntax_reference": "Official PeerPressure v1.0.477 UpdateData.zip SideLoading/SideLoad.ini; no official binaries redistributed",
+  "prior_console_result": "Probe5: bridge XexLoadImage00000000, lua XUIZ1515bytes; XamLaunchURI00000000; visible feature-unavailable8B050008. Personal logs remain private.",
+  "candidate": "Peer Pressure title DLL redirects only dash-owned XdfLoadXex import for named Blades bridge; other calls forwarded; kernel/XAM code unchanged; original import restored on detach if still ours",
+  "helper_sha256": "5b2fc6e07c1a86b7b18a5d0d80f9e67387a5316f85d72ff7f8fa8c2bdfb9a4d4",
+  "helper_no_undefined_symbols": true,
+  "bridge_unchanged_from_probe5": true,
+  "bridge_sha256": "6fc9d28ca1ae855bab7f746cfb2e3acace473105c0b75acbbe2e2644e5b7573f",
+  "sample_unchanged": true,
+  "sample_sha256": "316b28a2a8aa82a213190a65c4ee61aca92a897938bca3fa7cc04866264c07f1",
+  "control_and_default_identical": true,
+  "tests": {
+    "build/media-v0.38/probe6/main-tests.txt": "PASS: native URI main; signed-out/signed-in users; native errors stop; bounded wait on success; independent library control; preflight guards\n",
+    "build/media-v0.38/peerpressure-helper/import-tests.txt": "PASS: import parsing/address decoding; malformed bounds/records/modified thunks refused; 10000 mutated header fixtures under ASan/UBSan (leak checking disabled: no heap allocation)\n",
+    "build/media-v0.38/peerpressure-helper/route-tests.txt": "PASS: scoped local-load dispatch; unrelated/unsupported calls forwarded; native errors preserved; invalid modules released; synchronous success leaves overlapped untouched\n",
+    "build/media-v0.38/peerpressure-helper/stock-import-tests.txt": "PASS: supplied17559 dashboard import table selects the XDF thunk at RVA0093B8EC; only its16 bytes change and restore exactly; duplicate or modified thunks refused; no fixed function address needed at runtime\n"
+  },
+  "xex_verification": "PASS: XEX2 PowerPC-BE, Xbox subsystem, entry 0x820311e0\nPASS: 9 verified 65536-byte image pages; header/image/import digest chains valid\nPASS: xam.xex: 60 import slots\nPASS: xboxkrnl.exe: 108 import slots\nConsole launch and Peer Pressure compatibility remain unverified.\n",
+  "lex_verification": "PASS: XEX2 PowerPC-BE, Xbox subsystem, entry 0x9b010000\nPASS: 33 verified 4096-byte image pages; header/image/import digest chains valid\nPASS: import-free resource DLL; lua XUIZ 1515 bytes; no TLS\nConsole launch and Peer Pressure compatibility remain unverified.\n",
+  "helper_verification": "PASS: XEX2 PowerPC-BE, Xbox subsystem, entry 0x9b102498\nPASS: 5 verified 4096-byte image pages; header/image/import digest chains valid\nPASS: xboxkrnl.exe: 15 import slots\nPASS: Peer Pressure title DLL; kernel imports only; no TLS\nConsole launch and Peer Pressure compatibility remain unverified.\n",
+  "regular_blades_xex_verification": "PASS: XEX2 PowerPC-BE, Xbox subsystem, entry 0x820dc9e8\nPASS: 21 verified 65536-byte image pages; header/image/import digest chains valid\nPASS: xam.xex: 92 import slots\nPASS: xboxkrnl.exe: 122 import slots\nConsole launch and Peer Pressure compatibility remain unverified.\n",
+  "limits": "Host dispatch and bounded import parser tested, including private supplied dashboard import table with simulated resolved thunk; platform adapter/Peer Pressure attachment/native Lua/player/lifetime require hardware test. ASan/UBSan used with leak checking disabled; tested code allocates no heap.",
+  "zip": "CRC/checksums/entry whitelist/payload equality passed; includes recursive original source; no personal logs, stock binaries, Peer Pressure binaries or extracted stock resources",
+  "source_sha256": {
+    "tools/native-player-probe/CMakeLists.txt": "5d5b7c3766cd3fb6ec3008502050579dc70840a4f54cfa8581f22607472b9e33",
+    "tools/native-player-probe/README.txt": "cbbddabc15d290798d3cbfe34d1c74ba4512fd8759ab68457e7d2cbb802c9f47",
+    "tools/native-player-probe/build_bridge.py": "8d6d62d0d2fa170903e32062fc423320832ed8bcca272dd492b631d8542035d4",
+    "tools/native-player-probe/build_lex.py": "7fb54b2fcca68fa6bd9bcd4ea4d331fc250d69bc0aefa456368f40fcaa2b5159",
+    "tools/native-player-probe/check_loader_gate.py": "7a09190005f0284807951941350a157077984073995d1be5d89217e6f3fae842",
+    "tools/native-player-probe/main.c": "60e7dddbeafcd494f782522c892061069d36d6cb6ae0fdbabd3061f707689ada",
+    "tools/native-player-probe/native-video.lua": "a7f6135f0e6e5230b83a7ac28c7aa5a25bc9e0d2b13b4dc78a48f074c7044eb7",
+    "tools/native-player-probe/native_route.c": "238dc6d3966d8464eb8a970d9f408439d25a96f3f06435db6d5c49ee995cc7ac",
+    "tools/native-player-probe/package_check.c": "5721d6f4725c67e33009270d2838ef899cba00c171538e70a889e4312d9b70aa",
+    "tools/native-player-probe/peerpressure/DESIGN.md": "d30873524850e1b691e3e7a7adba82266f287781144c640664dda5ec065f5d4d",
+    "tools/native-player-probe/peerpressure/build_helper.py": "9e5a758544c6e532da6b54c1b000735c5caa7ab0b76ccdedfa39e7411c57afdc",
+    "tools/native-player-probe/peerpressure/fffe07d1.ini": "8deabadc55306b534433a0ada95fe76ccf47b88808c3003f6ecca18b6db1068a",
+    "tools/native-player-probe/peerpressure/helper.c": "adf567f6e09e52488ee8b40bf59ea6842b66557490af7ba2d9dce433ce7f3100",
+    "tools/native-player-probe/peerpressure/helper.ld": "b825078a11f809f6415c12e2ceca56bfd81c7ebebb4c08cb2c8492afac6da967",
+    "tools/native-player-probe/peerpressure/route.c": "251db9222568af376c8c503a4b91549b5b4778b0da825c1162c62b6bb7491f52",
+    "tools/native-player-probe/peerpressure/route.h": "d93dfb1fad1927dcd05b5511f1d0d4a811274146dc23a4337674584635fa35b5",
+    "tools/native-player-probe/peerpressure/test_import.c": "c9dd883211d147ea68c97ac5be0bbeae038ea0decd3e35c8441a42f903ab19fd",
+    "tools/native-player-probe/peerpressure/test_route.c": "5e012e82c21a705f5c6f69d3327fe70fc3f43e73085de8f4aa19fcab36d2af86",
+    "tools/native-player-probe/peerpressure/test_stock_import.py": "1e91c2a74acb5b647b6065b87c5079f41abdda8fb051376406e24c4aa0e8de6b",
+    "tools/native-player-probe/probe.c": "02c161032ef09b1dc10c7a72efa7a34055920902570bd2228706b9e480a3f5d9",
+    "tools/native-player-probe/probe.h": "136553aa4784a94507e9a4a52586982be4b731bbe3ca316bf395496076b8e9ff",
+    "tools/native-player-probe/test_bridge.lua": "d29f2d4a9072bc254c52867e3a33976a3808c178f932d1c1d502e045b693752a",
+    "tools/native-player-probe/test_lex.py": "3dba48af77faffe2478f53495017e4dda1a334df6fb32829de0288246c76de98",
+    "tools/native-player-probe/test_main.c": "58e1a9851899a2a5f33793b0dce197ed37549927dc6b226775d1877adcd0b8bf",
+    "tools/native-player-probe/test_native_route.c": "d79cf7d434d4666b7cf11347d8bc8a0f7bee479c80c18f614e8771896e4eb421",
+    "tools/native-player-probe/test_package_check.c": "07309352989a7a73c49644366ff1b516972877086bfce44fa86146c22fc59524",
+    "tools/native-player-probe/test_probe.c": "205050ef31b1d4134e1e472f855200d53e70b18a24aa994dc9a42a37fa9af74d",
+    "tools/verify_xex.py": "67e0f92963f9ff8d7c65097ffdc558769cbe94646d0a20eddb86e65962618a07"
+  },
+  "artifacts": {
+    "dist/diagnostics/native-video-probe-6/NativeVideoProbe-6-Assets.zip": {
+      "bytes": 9706,
+      "sha256": "5dad4b07c2e8471c4011d3b05042df16ee522efa9e7b36ee5e47d239a868c53b"
+    },
+    "dist/diagnostics/native-video-probe-6/NativeVideoProbe-6-USB.zip": {
+      "bytes": 2592147,
+      "sha256": "d5b62720d0a714dacaa21cde98cb332d736ea099761486697da28a3b560acee8"
+    },
+    "dist/diagnostics/native-video-probe-6/README.txt": {
+      "bytes": 5687,
+      "sha256": "cbbddabc15d290798d3cbfe34d1c74ba4512fd8759ab68457e7d2cbb802c9f47"
+    },
+    "dist/diagnostics/native-video-probe-6/control.xex": {
+      "bytes": 401408,
+      "sha256": "7bf0fb7100b56572106357227d836bb81dec8f590ee8435c4606121a93e4ddf3"
+    },
+    "dist/diagnostics/native-video-probe-6/default.xex": {
+      "bytes": 401408,
+      "sha256": "7bf0fb7100b56572106357227d836bb81dec8f590ee8435c4606121a93e4ddf3"
+    }
+  }
+}
