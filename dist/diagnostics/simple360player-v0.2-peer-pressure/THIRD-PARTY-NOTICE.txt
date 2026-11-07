@@ -1,0 +1,29 @@
+Simple 360 Player v0.2 by HG-ERIK
+https://github.com/HG-ERIK/simple360player
+Release: https://github.com/HG-ERIK/simple360player/releases/tag/v0.2
+Tag commit:5d235c1fd24c098ccc1b2463c1b4265bf2e7844c
+
+This test bundle redistributes the upstream release XEX and runtime fonts
+without modification, plus original Blades test videos and test instructions.
+It is not a Blades release or a claim of Peer Pressure compatibility.
+
+Simple 360 Player is GPLv3; its full tagged source, external dependency sources,
+project files and build scripts are included in Source/Simple360Player-0.2-source.zip.
+The same source ZIP is published beside the test USB ZIP for separate download.
+Upstream code uses FFmpeg0.7 from FFPlay360, mbedTLS2.16 and Inter fonts.
+Licence texts are in Notices; dependency copyright notices and additional
+licensing/build details remain in the complete source. Keep these notices.
+
+Rebuild the player using the source README: Xbox360 XDK2.0.21256 and Visual
+Studio2010 SP1, build FFmpeg then SimplePlayer.vcxproj (Release|Xbox360).
+The tools/build.ps1 script targets the sibling Plex client, so use the player
+project specified in README for this executable. A compatible XDK toolchain
+is a separate prerequisite and is not included. This package was not rebuilt
+with xsdk and contains no changes to Blades.
+
+Both short test videos are self-generated. selected.wmv is byte-identical to
+the sample previously confirmed playing in the stock Xbox player. test360.mp4
+is an H.264 Constrained Baseline640x360 video with AAC stereo44100Hz audio.
+Neither has yet been tested in this player on Peer Pressure. They contain no
+reference dashboard footage or third-party music. Logs/settings are created
+only when the application is run on the console, and are not bundled.
