@@ -1,0 +1,251 @@
+{
+  "release": "0.50.0",
+  "recorded_utc": "2026-11-08T20:53:40.247238+00:00",
+  "source_publication": "Complete browsable application source prepared for main; historical binary downloads retained, new binary versions reserved for Release assets.",
+  "github_administration": {
+    "target_repository": "sbayfield09/Blades-reimagined",
+    "rename_verified": false,
+    "release_assets_published": false,
+    "blocker": "Environment denies CONNECT to api.github.com. A network configuration draft adds api.github.com/uploads.github.com while retaining prior custom domains. Saved draft is not an applied runtime change. Publication helper is prepared; no rename/Release claim until verified."
+  },
+  "display": {
+    "startup": "Initialize black scanout before artwork/resource allocations",
+    "shutdown": "Fill/drain two black buffers, including tiled padding, before worker/audio/renderer cleanup; bounded fence/vblank waits and diagnostic log",
+    "scope": "SDK/XAM final restoration unchanged; no firmware/kernel/HDMI changes. Physical console launch/exit static needs retest; desktop cannot prove the visual fix."
+  },
+  "animations": {
+    "cursor": "Shared interpolated highlight now targets media/Jellyfin visible row, with scroll-offset correction",
+    "pages": "150ms content fade on folder/page changes, preserving layout and avoiding artwork/status reset flicker",
+    "coverage": "All library pages plus Jellyfin browser; unit and intermediate GPU/software checks"
+  },
+  "updater": {
+    "location": "System > Update Blades; auto-check on opening, check/download controls, version/status/progress/cancel",
+    "source": "Latest stable GitHub Release update.json, authenticated by HTTPS rather than a token",
+    "TLS": "Mbed TLS3.6.5, chain/hostname verification, public Mozilla roots, native XeCryptRandom, scalar portable C; native excludes desktop proxy/test-origin/extra-CA overrides",
+    "bounds": {
+      "manifest_bytes": 16384,
+      "USB_ZIP_bytes": 67108864,
+      "redirects": 5,
+      "idle_seconds": 15,
+      "per_connection_seconds": 600
+    },
+    "validation": "Strict numeric version/filename/schema, exact length and SHA256 before final rename; flush disk and remove failed/cancelled temporary files",
+    "scope": "Downloads only to game:/Updates. No automatic installation/restart, running XEX/config/NAND/default-dashboard changes. Existing completed filenames are preserved."
+  },
+  "validation": {
+    "host_suites": 32,
+    "additional_final_TLS_modes": 16,
+    "sanitizer_suites": 5,
+    "sanitizer_TLS_modes": 16,
+    "sanitizer_scope": "Application and bundled TLS instrumented; prebuilt FFmpeg not instrumented, LeakSanitizer off",
+    "live_GitHub_HTTPS": "PASS: verified HTTPS to GitHub; unpublished release correctly reported",
+    "official_Jellyfin": "Disposable10.10.7 actual movie/episode artwork and metadata, retained15 source-frame seek targets and12seconds continuous picture/clock agreement",
+    "TLS_cases": [
+      "trusted Content-Length download",
+      "chunked download",
+      "current/older version",
+      "invalid metadata",
+      "checksum mismatch",
+      "oversized body",
+      "truncation",
+      "cancel/partial cleanup",
+      "absolute/relative redirects",
+      "unsafe redirect host",
+      "redirect loop",
+      "HTTP downgrade",
+      "wrong hostname",
+      "valid but untrusted certificate chain"
+    ],
+    "source_application_rebuild_byte_identical": true,
+    "rebuild_scope": "Exact archived application using pinned SDK5f6dc726f65f6d171493a3628c2415c03551f27b and same verified FFmpeg dependency; complete dependency sources/config/build tools included",
+    "native": "PASS: XEX2 PowerPC-BE, Xbox subsystem, entry 0x826bd498\nPASS: 158 verified 65536-byte image pages; header/image/import digest chains valid\nPASS: xam.xex: 92 import slots\nPASS: xboxkrnl.exe: 124 import slots\nConsole launch and Peer Pressure compatibility remain unverified.\n",
+    "TLS_instructions": "PASS: 172691 TLS instructions checked; no vector instructions, scalar crypto config and explicit no-AltiVec flags. Kernel CSPRNG is linked; desktop test/proxy/extra-CA overrides are excluded from native code.\n",
+    "decoder_instructions": "PASS: 1041821 instructions checked across five archives; vectors only in the two Simple360 filter objects, restricted to the explicit Xenon shift/add/permute subset. Generic PPC/AltiVec remains off; GPLv3 enabled, nonfree off.\n",
+    "shaders": "PASS: 240 compiled Xenos swirl samples match supplied equations within one RGB level\nPASS: compiled Xenos point fetches and separable 720p background filtering\nPASS: compiled Xenos glyph tint and integer alpha coverage\nPASS: compiled Xenos content fade shader\nPASS: compiled Xenos cap box filter preserves alpha-aware area samples\nPASS: 72 compiled Xenos video samples; three Y/U/V sampler slots, BT601/709 limited/full, boundaries and RGB\n",
+    "unchanged_since_v049": [
+      "include/video.h",
+      "src/core/library.c",
+      "src/core/video_ui.c",
+      "src/core/jellyfin.c",
+      "src/core/http_client.c",
+      "src/core/ftp.c",
+      "src/platform/xbox_ftp.c",
+      "src/platform/xbox_renderer.c",
+      "src/render/shaders/video.frag",
+      "src/render/video_colour.c",
+      "tools/build-video-ffmpeg.py",
+      "third_party/ffmpeg/patches/xsdk.patch"
+    ],
+    "video_c_change": "Release User-Agent version only; decoder/audio/seek implementation retained",
+    "safe_payload": "USB/source CRC/manifests/current source/notices, one XEX, matching artwork, no private configs/logs/helper/updates"
+  },
+  "walkthrough": {
+    "probe": {
+      "streams": [
+        {
+          "index": 0,
+          "codec_name": "h264",
+          "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+          "profile": "High",
+          "codec_type": "video",
+          "codec_tag_string": "avc1",
+          "codec_tag": "0x31637661",
+          "width": 1280,
+          "height": 720,
+          "coded_width": 1280,
+          "coded_height": 720,
+          "closed_captions": 0,
+          "film_grain": 0,
+          "has_b_frames": 2,
+          "pix_fmt": "yuv420p",
+          "level": 31,
+          "chroma_location": "left",
+          "field_order": "progressive",
+          "refs": 1,
+          "is_avc": "true",
+          "nal_length_size": "4",
+          "id": "0x1",
+          "r_frame_rate": "30/1",
+          "avg_frame_rate": "30/1",
+          "time_base": "1/15360",
+          "start_pts": 0,
+          "start_time": "0.000000",
+          "duration_ts": 3686400,
+          "duration": "240.000000",
+          "bit_rate": "798838",
+          "bits_per_raw_sample": "8",
+          "nb_frames": "7200",
+          "extradata_size": 46,
+          "disposition": {
+            "default": 1,
+            "dub": 0,
+            "original": 0,
+            "comment": 0,
+            "lyrics": 0,
+            "karaoke": 0,
+            "forced": 0,
+            "hearing_impaired": 0,
+            "visual_impaired": 0,
+            "clean_effects": 0,
+            "attached_pic": 0,
+            "timed_thumbnails": 0,
+            "non_diegetic": 0,
+            "captions": 0,
+            "descriptions": 0,
+            "metadata": 0,
+            "dependent": 0,
+            "still_image": 0,
+            "multilayer": 0
+          },
+          "tags": {
+            "language": "und",
+            "handler_name": "VideoHandler",
+            "vendor_id": "[0][0][0][0]",
+            "encoder": "Lavc61.19.101 libx264"
+          }
+        },
+        {
+          "index": 1,
+          "codec_name": "aac",
+          "codec_long_name": "AAC (Advanced Audio Coding)",
+          "profile": "LC",
+          "codec_type": "audio",
+          "codec_tag_string": "mp4a",
+          "codec_tag": "0x6134706d",
+          "sample_fmt": "fltp",
+          "sample_rate": "48000",
+          "channels": 2,
+          "channel_layout": "stereo",
+          "bits_per_sample": 0,
+          "initial_padding": 0,
+          "id": "0x2",
+          "r_frame_rate": "0/0",
+          "avg_frame_rate": "0/0",
+          "time_base": "1/48000",
+          "start_pts": 0,
+          "start_time": "0.000000",
+          "duration_ts": 11520000,
+          "duration": "240.000000",
+          "bit_rate": "43920",
+          "nb_frames": "11251",
+          "extradata_size": 5,
+          "disposition": {
+            "default": 1,
+            "dub": 0,
+            "original": 0,
+            "comment": 0,
+            "lyrics": 0,
+            "karaoke": 0,
+            "forced": 0,
+            "hearing_impaired": 0,
+            "visual_impaired": 0,
+            "clean_effects": 0,
+            "attached_pic": 0,
+            "timed_thumbnails": 0,
+            "non_diegetic": 0,
+            "captions": 0,
+            "descriptions": 0,
+            "metadata": 0,
+            "dependent": 0,
+            "still_image": 0,
+            "multilayer": 0
+          },
+          "tags": {
+            "language": "und",
+            "handler_name": "SoundHandler",
+            "vendor_id": "[0][0][0][0]"
+          }
+        }
+      ],
+      "format": {
+        "filename": "Blades-v0.50-walkthrough.mp4",
+        "nb_streams": 2,
+        "nb_programs": 0,
+        "nb_stream_groups": 0,
+        "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+        "format_long_name": "QuickTime / MOV",
+        "start_time": "0.000000",
+        "duration": "240.000000",
+        "size": "25546430",
+        "bit_rate": "851547",
+        "probe_score": 100,
+        "tags": {
+          "major_brand": "isom",
+          "minor_version": "512",
+          "compatible_brands": "isomiso2avc1mp41",
+          "encoder": "Lavf61.7.103"
+        }
+      }
+    },
+    "scope": "Fresh240second720p30 desktop GPU capture with48kHz stereo, final renderer/artwork; actual Local/Jellyfin, metadata/seeks; Guide/profile/storage/FTP/updater simulated and labelled. Actual updater worker tested separately with real TLS."
+  },
+  "artifacts": {
+    "dist/Blades-v0.50-USB.zip": {
+      "bytes": 5449449,
+      "sha256": "320d80c42112778072dc667f29c936156a7436f6514d63f1990655a55fd6b7fb"
+    },
+    "dist/Blades/default.xex": {
+      "bytes": 7340032,
+      "sha256": "a474f5a26abc14c9ae7e030e2af8426855901266318e8d573b8bcd17853bc5c9"
+    },
+    "dist/Blades-artwork-pack.zip": {
+      "bytes": 2041912,
+      "sha256": "7417accd71918a01d316ae20f8471af504969f35a19870ff70fc4edd060690bf"
+    },
+    "dist/Blades-v0.50-walkthrough.mp4": {
+      "bytes": 25546430,
+      "sha256": "bf309ba594743965b18964d9de47040e32822f19f7bddb87a33c65f41d74b030"
+    },
+    "dist/Blades-v0.50-source.zip": {
+      "bytes": 33774639,
+      "sha256": "803ce48602bfb7fc6c6026f6781a279c4dfe952140ad1e35337157c82ff02664"
+    }
+  },
+  "update_manifest": {
+    "schema": 1,
+    "version": "0.50.0",
+    "asset": "Blades-v0.50-USB.zip",
+    "size": 5449449,
+    "sha256": "320d80c42112778072dc667f29c936156a7436f6514d63f1990655a55fd6b7fb"
+  }
+}

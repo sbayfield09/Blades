@@ -1,3 +1,32 @@
+# Validation — Blades0.50 prepared release
+
+All32 host suites pass. Final HTTPS checks pass16 modes, including chunked/
+Content-Length downloads, absolute/relative redirects, real trusted/untrusted
+chains, wrong hosts, cancellation, checksum/length failures and temporary cleanup.
+Five application sanitizer suites and16 actual TLS integration modes pass;
+bundled TLS is instrumented, prebuilt FFmpeg is not, LeakSanitizer is off.
+The same HTTPS client verifies a live GitHub request and reports no unpublished
+Release normally. No GitHub authentication is required for client downloads.
+
+Media cursor/fade unit and intermediate GPU/software rendering checks pass.
+Retained official Jellyfin10.10.7 tests verify actual movie/episode images and
+metadata plus source-frame seek content and sustained playback. Existing decoder,
+audio, FTP, renderer/shaders, library scanning and settings implementations are
+retained. The native XEX integrity/import/page checks, scalar TLS instruction
+audit, restricted decoder instruction audit and compiled Xenos shader checks pass.
+The archived application rebuild is byte-identical to the staged XEX.
+
+USB/source CRCs, source manifests/current files, licence payload, matching artwork,
+private-config exclusions and native absence of desktop test/proxy overrides pass.
+The fresh240second720p30 desktop GPU video fully decodes with48kHz stereo; its
+Guide/profile/storage/FTP/updater snapshots are labelled simulations. The actual
+HTTPS worker has separate integration evidence. Physical launch/exit static,
+console folder animation and update/network/storage behavior still need retest.
+
+GitHub rename/Release publication remain unverified while the environment blocks
+API access. The prepared manifest/packages/publication helper do not establish
+an actual Release; see data/v0.50-release-audit.json for recorded scope/hashes.
+
 # Validation — Blades0.49
 
 All30 host suites pass, including new movie/episode artwork and FTP cases.

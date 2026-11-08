@@ -1,0 +1,12 @@
+/build/
+/dist/
+*.log
+__pycache__/
+
+# User-supplied stock dashboard resources stay local.
+*.xzp
+/Assets/
+
+# Private scan/login settings.
+/Config/
+/Updates/

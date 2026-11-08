@@ -1,0 +1,52 @@
+Blades DashX360 background and transition-audio attribution
+
+Motion and lighting adapted from BladeAmbientTexture.cs; blade tint values
+from BladeCenterHost.cs in the user-supplied DashX360 project.
+
+Original project by zivvoz / DashX360 - inspired by Microsoft's Xbox 360
+Dashboard interfaces.
+
+Source: https://github.com/ZivvoZ/dashx360
+Inspected revision: 0c8adb2cef4ad7dff2bf889351efa1f1c244aef2
+Paths:
+XboxMetroLauncher/XboxMetroLauncher.Controls/BladeAmbientTexture.cs
+XboxMetroLauncher/XboxMetroLauncher.Controls/BladeCenterHost.cs
+
+The upstream README's "Working on the Project" section states:
+"If you use this project, modify it, or build on top of it, please credit
+Xbox/Microsoft, the project and the project's creator."
+
+This notice records the upstream attribution and source. It does not assign
+a new licence to upstream code or third-party assets. Xbox/Microsoft and
+other rights holders retain ownership of their respective material. The
+standalone application is independent and unaffiliated with Microsoft/Xbox.
+
+Transition recordings in the separate artwork/audio pack come from
+Assets/Audio/Sounds in the same pinned repository revision. Used files:
+blades-switch-marketplace-to-live.wav, blades-switch-live-to-games.wav,
+blades-switch-games-to-media.wav, blades-switch-media-to-system.wav,
+blades-menu-open.wav and dash_2ndLevelClose.wav. Xbox/Microsoft and the
+respective rights holders retain ownership of these sounds. Recordings are
+converted to PCM16 stereo at 48 kHz; the XEX embeds none of these recordings.
+
+The v0.16 Xbox Live panel texture adapts the rounded grey Border in
+XboxMetroLauncher/MainWindow.xaml and the ring colour/stroke from
+XboxMetroLauncher/XboxMetroLauncher.Controls/BladeRingBackground.cs, inspected
+at repository revision 7d92705cf2131e6159120cfa5ae10736ddfabf68. Geometry,
+neutral colour, bevel, ring spacing and outer shadow follow the user-supplied
+reference. This is adapted vector artwork, not an extracted retail bitmap.
+
+Version 0.17 imports Assets/Blades/Startup/anim-left-runner.png and
+anim-right-runner.png, cropped after conversion to the 1280x720 design grid.
+The initial radial reveal and side-leaf staging adapt MainWindow.xaml,
+MainWindow.cs and BladesArtworkHost.cs in the same project at pinned revision
+0c8adb2cef4ad7dff2bf889351efa1f1c244aef2. Shutter positions are measured from
+the user-supplied reference recording. Startup reuses dash_2ndLevelClose.wav
+without pitch modification; all previously supplied recordings are unchanged.
+
+Version 0.18 adapts the console silhouette, sixteen-dot orbit and 1.7 Hz
+timing from XboxMetroLauncher/XboxMetroLauncher.Controls/BladesLoadingIndicator.cs
+at pinned revision 0c8adb2cef4ad7dff2bf889351efa1f1c244aef2. The small transparent
+frames use the dark indicator treatment observed in the user's disc-reading
+video. They are prepared in the premade pack and played through the existing
+GPU compositor; no video footage is embedded.

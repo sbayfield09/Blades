@@ -1,9 +1,9 @@
-# Jellyfin and Local video — Blades0.49
+# Jellyfin and Local video — Blades0.50
 
 The Jellyfin browser shows selected movie/episode primary artwork, runtime and
 overview on the right. Thumbnails load in a cancellable low-priority worker
 operation with bounded PNG storage and three cached items. No player decoder
-changes in0.49; the0.48 seek generation isolation is retained.
+changes in0.50; the0.48 seek generation isolation is retained.
 
 Media > Video contains Jellyfin and Local. Media Center manages the Jellyfin
 server/login. See [connection setup and limits](JELLYFIN.md). Local retains the
@@ -12,7 +12,7 @@ folders in Video Marketplace are classified by supported file extension; no
 category selection or migration of old paths. Music/Pictures playback remains
 unimplemented.
 
-Small-seek correctness in0.49: each restart has a unique User-Agent generation,
+Small-seek correctness in0.50: each restart has a unique User-Agent generation,
 which isolates Jellyfin's progressive cache filename while preserving the device/
 logical playback session. Stop/delete is asynchronous and seek time is not part
 of that filename; reuse returned old pictures under a new clock. Frame-coded

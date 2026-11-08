@@ -1,0 +1,7 @@
+{
+  "repository": "https://github.com/Mbed-TLS/mbedtls",
+  "tag": "mbedtls-3.6.5",
+  "source_url": "https://codeload.github.com/Mbed-TLS/mbedtls/tar.gz/refs/tags/mbedtls-3.6.5",
+  "sha256": "828ed5cde86688ff0c9de511cabd1598544006336759a75aa917cb2c58f1128f",
+  "license": "Apache-2.0 OR GPL-2.0-or-later"
+}

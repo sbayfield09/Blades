@@ -1,0 +1,11 @@
+{
+  "repository": "https://github.com/HG-ERIK/simple360player",
+  "commit": "5d235c1fd24c098ccc1b2463c1b4265bf2e7844c",
+  "license": "GPL-3.0",
+  "files": {
+    "external/ffmpeg360/libavcodec/xbox360/h264_chroma_xb.c": "649fcb94237a6659fbfcfd89772577dfbf5b255cc480e423f8f8036e60648597",
+    "external/ffmpeg360/libavcodec/xbox360/h264_qpel_xb.c": "59be4ac2ec6984ab97a9fbea4acd5a96f9bb35b80b2f89d37264ed9744a9081d",
+    "src/ffglue.c": "f2f4dd0e11a26df4fdaca99e9cae595c210a0b8a143f8072998c855d8e6fa735",
+    "src/FFPlayer.cpp": "9415d6b2a7041ced2eda7eb5d93b041846fce7093ea4d2854be6dbe025323651"
+  }
+}

@@ -1,3 +1,25 @@
+# Current release workflow
+
+User requirement from0.50 onward: source is browsable on main; new USB ZIPs,
+XEX, artwork, source ZIP and navigation video are assets of a new GitHub Release
+in sbayfield09/Blades-reimagined. Rename the existing repository when GitHub
+administration access permits it. Preserve historical committed downloads.
+Do not add new binary versions to random dist folders on main.
+
+Build/test/package locally, commit the complete public application source,
+then run tools/publish-release.py --version 0.50 --commit <source-commit>.
+The tool creates update.json/SHA256SUMS, uploads to a draft Release, verifies
+asset sizes/digests and downloaded ZIP/manifest, then publishes it as latest.
+Do not overwrite published assets or claim rename/publication without checking
+GitHub. Updater downloads only; users exit and extract the ZIP themselves.
+Native display handoff and console update/network behavior require retesting.
+Run the TLS failure/cancel/checksum/redirect tests and Media cursor/fade checks,
+plus retained host/native/real-server checks. Fresh240second desktop capture
+labels Guide/profile/storage/FTP/updater simulations and shows real Jellyfin.
+
+Historical delivery notes follow; their old artifact-branch workflow is retained
+for context and superseded by the current user instruction above.
+
 # Release delivery
 
 Standing user request: every new release must provide a compiled XEX, premade

@@ -1,8 +1,8 @@
-# Blades 0.49 walkthrough
+# Blades 0.50 walkthrough
 
-[Watch/download](../dist/Blades-v0.49-walkthrough.mp4): fresh 215-second 720p30
+[Watch/download](https://github.com/sbayfield09/Blades-reimagined/releases/download/v0.50.0/Blades-v0.50-walkthrough.mp4): fresh 240-second 720p30
 shared desktop GPU capture, 48kHz stereo, matching 235-entry artwork pack.
-The video labels desktop GPU rendering and simulated Xbox services. Jellyfin
+The video labels desktop GPU rendering and simulated Xbox services, including updater states. Jellyfin
 uses an actual isolated official 10.10.7 server, a generated test account and
 synthetic HEVC/AAC movies/episodes with baked source frame counters; no passwords or session tokens are shown.
 
@@ -40,3 +40,12 @@ of continuous content/clock agreement. The capture waits for actual asynchronous
 scripted controller. Host FFmpeg uses scalar code; native Xenon kernels are
 unchanged and audited separately. This is not console performance evidence.
 Artwork/font/audio attribution remains in the runtime notices and artwork pack.
+
+- 03:29–03:49: System > Update Blades, simulated version check, download progress,
+  cancellation/retry and verified ZIP location. The real HTTPS worker is tested
+  separately with trusted/untrusted servers; no fake public Release is created.
+- 03:51–04:00: return through Media and System. Media highlights/fades throughout
+  this recording use the production animated list path.
+
+The recording cannot demonstrate console startup/exit static or hardware updater
+transport. Those require an Xbox retest.

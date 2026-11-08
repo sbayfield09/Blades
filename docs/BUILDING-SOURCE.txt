@@ -1,4 +1,4 @@
-Blades 0.49 complete source and FFmpeg relink instructions
+Blades 0.50 complete source and FFmpeg relink instructions
 
 This archive contains the application source, embedded font, GLSL shaders,
 MIT/GPLv3/STB/artwork/font notices, original FFmpeg 2.8.22 source archive, xsdk changes
@@ -73,7 +73,7 @@ The temporary PPC harness uses the same GCC vector source, with test-only
 store-merging disabled and32-bit stack-save/pointer-extension ABI adaptation.
 Production objects are not edited. This does not measure Xbox timing.
 
-Blades0.49 enables vectors ONLY in its two Simple360 H264 filter objects.
+Blades0.50 enables vectors ONLY in its two Simple360 H264 filter objects.
 Generic FFmpeg PPC/AltiVec and compiler vectorization stay disabled. Run
   python3 tools/verify-video-decoder.py <FFmpeg-build> --objdump <toolchain-objdump>
 to audit all five decoder libraries. Run tools/test-gpu-shaders.py XSDK_ROOT
@@ -85,7 +85,7 @@ separate slow-decoder library with BLADES_VIDEO_TEST_DECODE_NS; that macro is
 absent from the captured and Xbox shipping builds. The combined binary is GPLv3;
 COPYING.GPLv3 and all original source/artwork/font notices are included.
 
-Jellyfin0.49 seeking/resume and Next Up/Continue Watching use the preserved/ported XenonFin native protocol/JSON/browser
+Jellyfin0.50 seeking/resume and Next Up/Continue Watching use the preserved/ported XenonFin native protocol/JSON/browser
 sources under third_party/xenonfin (GPL-2.0-or-later, combined under GPLv3),
 BSD socket adapter and workers/UI/tests. No FFmpeg-network, curl or new SDK
 binary is required. Native source rebuilds against the same verified0.43
@@ -104,9 +104,16 @@ Use --seek-content with tests/test_jellyfin_real.py for actual frame-coded seek
 verification against the disposable official server. It checks source pictures,
 not only the player's rebased clock. No user media or settings are needed.
 
-Version0.49 adds bounded authenticated PNG artwork transport/decode, a debounced
+Version0.50 adds bounded authenticated PNG artwork transport/decode, a debounced
 selection worker/cache and right-side metadata rendering. Native XAM startup
 buffers and FTP bulk POSIX I/O/control replies are tuned; no new SDK dependencies.
 Optional desktop FTP comparison:
   python3 tests/benchmark_ftp.py /path/to/old-fixture build/linux/blades-ftp-fixture
 These local measurements do not establish hardware speed.
+
+Version0.50 adds the dedicated update HTTPS worker and bundled Mbed TLS3.6.5
+source/config, public CA roots and the root-header embedding script. All are
+built by CMake for desktop/Xbox; no TLS binary download or new SDK is needed.
+The updater uses XeCryptRandom on Xbox and portable scalar crypto, independent
+of the video/Jellyfin path. tools/publish-release.py prepares and publishes the
+verified Release assets/update manifest. See UPDATES.md.

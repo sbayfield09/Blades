@@ -1,0 +1,22 @@
+Optional Convection / Xbox TC glyph resources
+
+The separate artwork pack may contain a raster coverage atlas and advance
+metrics recovered from the user's Convection.Font.for.Xbox.360.JTAG+RGH.zip.
+The original main resource identifies its family as "Xbox TC". The archive
+author describes these as the original Convection console fonts. Font rights
+remain with Microsoft and the respective rights holders. These glyphs are
+not covered by the project's MIT licence.
+
+Input: xenonclatin.xtt (1,159,168 bytes)
+SHA-256: 977bbe13d5545d300e57dacf9dff492476452f50880ef3868d3aa308d041187d
+All 271 compressed glyph-page SHA-1 values match the input xchk table.
+
+The source is paged zlib-compressed font data, not an encrypted font.
+An external, GPL-3.0 conversion tool was used offline:
+https://github.com/taglocklar/360dashboards/blob/ad85c697bde95022cf3c9425bb0b51e7c4a9f1e9/tools/xtt2ttf.py
+That converter is not incorporated into or linked with the executable.
+The pack includes coverage for the application's 95 printable ASCII
+characters, with fractional advances. It contains no raw TTF/XTT files.
+
+The executable retains its Apache-licensed Open Sans fallback. No console
+system-font installation or flash modification is required.

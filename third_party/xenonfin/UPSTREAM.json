@@ -1,0 +1,17 @@
+{
+  "repository": "https://github.com/sbayfield09/XenonFin",
+  "commit": "554adb8d79a251e4b502ac4a87a328cbe5055b09",
+  "license": "GPL-2.0-or-later",
+  "files": {
+    "platform/xenon/protocol.c": "46a2d7887abc37bdaf91c71b726691aee348917c691aea19d4d27e8c74bbf4e1",
+    "platform/xenon/protocol.h": "ae271bcba506253c84366649aa56dec330bef6fc1d4b3315c8c5a8cbe08bd2cc",
+    "platform/xenon/http.c": "e1a2d5120432f3524cf349fc621930a719b0c9b79356fb6a410a8f7bd8f87bdb",
+    "platform/xenon/json.c": "d91e266948c40cc1d229c7bab6525b0b3d3139d3c087a232c75864c4f4bb6d7b",
+    "platform/xenon/browse.c": "3fae516060fd53b59773f1f5cdf8f43f9b6608dc7c27f0b0f9afde1ad74f1689",
+    "platform/xenon/browse.h": "01b9338d332f5bb128df64d7a440d1804e0c142a3650ad80cee3c2ec47cf672e",
+    "platform/xenon/video_api.c": "d818f2ede536feb4d4c6132fb2826c1d9c676b835e0647020acc7b255cb73cdf",
+    "platform/xenon/video_api.h": "d57ef3a78dddaa8ccafffbb9d58dc71db4716f51ca82cf84e53285a2405ea986",
+    "platform/xenon/tests/protocol_tests.c": "be7344a208d2a60d72df831cfa2d1cdfa0b70c30d24d4002131551aed9bf6b3c",
+    "scripts/fetch_test_server.py": "80ef785d3f445634aa6a2f135ee7167c3afaf2efd55f450c8ac3fffdceb64a2f"
+  }
+}
