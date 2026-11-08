@@ -33,7 +33,7 @@ def main():
         if target=='/metadata' and mode!='relative':target=f'https://localhost:{self.server.server_port}/metadata'
         self.send_response(302);self.send_header('Location',target);self.send_header('Content-Length','0');self.end_headers();return
       if self.path in ('/update.json','/metadata'):
-       version='0.50.0' if mode=='current' else '0.49.0' if mode=='older' else '0.51.0'
+       version='0.51.0' if mode=='current' else '0.50.0' if mode=='older' else '0.52.0'
        meta={'schema':1,'version':version,'asset':'Blades-v'+version.removesuffix('.0')+'-USB.zip','size':len(data),'sha256':hashlib.sha256(data).hexdigest() if mode!='badsha' else '0'*64}
        if mode=='badmanifest':meta['asset']='../default.xex'
        body=json.dumps(meta).encode();self.send_response(200);self.send_header('Content-Length',str(len(body)));self.end_headers();self.wfile.write(body);return
@@ -64,8 +64,8 @@ def main():
      assert requests and requests[0]=='/sbayfield09/Blades-reimagined/main/dist/update.json',requests
     assert not list(destination.glob('*.tmp'))
     if mode in ('normal','redirect','relative','chunked'):
-     assert '/sbayfield09/Blades-reimagined/main/dist/Blades-v0.51-USB.zip' in requests
-     final=destination/'Blades-v0.51-USB.zip';assert final.read_bytes()==data
+     assert '/sbayfield09/Blades-reimagined/main/dist/Blades-v0.52-USB.zip' in requests
+     final=destination/'Blades-v0.52-USB.zip';assert final.read_bytes()==data
      with zipfile.ZipFile(final) as z:assert z.testzip() is None
     else:assert not list(destination.glob('*.zip'))
     print(result.stdout.strip(),flush=True)

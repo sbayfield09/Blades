@@ -6,9 +6,12 @@ Application source is browsable in src/, include/ and tests/ on main. Download
 builds, USB ZIPs, premade artwork, walkthroughs and complete source bundles from
 [the downloads folder](dist/).
 
-[Complete v0.50 USB ZIP](dist/Blades-v0.50-USB.zip) ·
-[Walkthrough](dist/Blades-v0.50-walkthrough.mp4) ·
-[Complete source bundle](dist/Blades-v0.50-source.zip)
+[Complete v0.51 USB ZIP](dist/Blades-v0.51-USB.zip) ·
+[Walkthrough](dist/Blades-v0.51-walkthrough.mp4) ·
+[Complete source bundle](dist/Blades-v0.51-source.zip)
+
+Version0.51 is a version-only build for testing the updater; behavior is
+unchanged from0.50. Install it through System > Update Blades in0.50.
 
 Version0.50 adds System > Update Blades: check the manifest in main/dist,
 download the matching USB ZIP from that folder with progress/cancel and verify its SHA256 before

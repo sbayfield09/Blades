@@ -1,3 +1,19 @@
+# Validation — Blades0.51 version-only updater test
+
+All79 published runtime source files match0.50 after replacing only0.51 version
+strings with0.50. No feature/layout/settings/decoder/transport behavior changes.
+The XEX header/build version and packaging/test labels are updated accordingly.
+Targeted updater, real TLS service and dashboard suites pass (three suites;
+16 TLS success/failure modes). Other0.50 validation remains applicable to the
+unchanged implementation; it is recorded below without claiming a new full run.
+
+Native integrity/import/page checks pass. The archived corresponding application
+source rebuild produces byte-identical XEX bytes. USB/source CRCs, source hashes,
+matching artwork and private-config/log exclusions pass. The fresh matching
+240second720p30 desktop video labels simulated Xbox services. Actual live0.50
+client detection/download is checked after publication. Console installation
+and current-version confirmation remain the user's hardware test.
+
 # Validation — Blades0.50 repository updater
 
 All32 host suites pass. Final HTTPS checks pass16 modes, including chunked/

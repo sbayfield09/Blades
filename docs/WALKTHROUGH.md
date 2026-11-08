@@ -1,6 +1,8 @@
-# Blades 0.50 walkthrough
+# Blades 0.51 walkthrough
 
-[Watch/download](../dist/Blades-v0.50-walkthrough.mp4): fresh 240-second 720p30
+Version-only updater test; application behavior and artwork are unchanged from0.50.
+
+[Watch/download](../dist/Blades-v0.51-walkthrough.mp4): fresh 240-second 720p30
 shared desktop GPU capture, 48kHz stereo, matching 235-entry artwork pack.
 The video labels desktop GPU rendering and simulated Xbox services, including updater states. Jellyfin
 uses an actual isolated official 10.10.7 server, a generated test account and

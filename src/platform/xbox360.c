@@ -135,7 +135,7 @@ static unsigned buttons(const INPUT_GAMEPAD *p) {
     return a;
 }
 int main(void) {
-    xsdk_log_write("Blades 0.50.0: boot; embedded video decoding; no video XEX handoff or adapter");
+    xsdk_log_write("Blades 0.51.0: boot; embedded video decoding; no video XEX handoff or adapter");
     if(atexit(close_app)!=0)return 1;
     NTSTATUS status=xsdk_gpu_open();
     if(!NT_SUCCESS(status)) {xsdk_log_write("gpu_open: %08X",(unsigned)status);return 1;}

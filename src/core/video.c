@@ -566,7 +566,7 @@ static bool stream_position(VideoHttpInput *input,double target,uint64_t generat
     size_t tail=strlen(end)+1,head=(size_t)(value-updated.request);
     if(n<0||head+(size_t)n+tail>sizeof updated.request)return false;
     memmove(value+n,end,tail);memcpy(value,ticks,(size_t)n);
-    char agent[96];n=snprintf(agent,sizeof agent,"User-Agent: Blades/0.50 stream/%llu\r\n",(unsigned long long)generation);
+    char agent[96];n=snprintf(agent,sizeof agent,"User-Agent: Blades/0.51 stream/%llu\r\n",(unsigned long long)generation);
     char *line=strstr(updated.request,"\r\nUser-Agent:");
     if(line){line+=2;end=strstr(line,"\r\n");if(!end)return false;end+=2;}
     else {line=strstr(updated.request,"\r\n\r\n");if(!line)return false;line+=2;end=line;}

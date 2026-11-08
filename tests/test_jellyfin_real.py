@@ -27,7 +27,7 @@ def main():
    cover(show/f'Blades Test - S01E{episode:02d}-thumb.png',640,360,f'Blades Test - Episode {episode}')
   password=secrets.token_urlsafe(24);token='';opener=urllib.request.build_opener(urllib.request.ProxyHandler({}))
   def api(path,method='GET',body=None):
-   headers={'Content-Type':'application/json','Authorization':'MediaBrowser Client="BladesTests", Device="Desktop", DeviceId="blades-test-setup", Version="0.50"'+(', Token="'+token+'"' if token else '')}
+   headers={'Content-Type':'application/json','Authorization':'MediaBrowser Client="BladesTests", Device="Desktop", DeviceId="blades-test-setup", Version="0.51"'+(', Token="'+token+'"' if token else '')}
    data=None if body is None else json.dumps(body).encode()
    with opener.open(urllib.request.Request(base+path,data=data,headers=headers,method=method),timeout=15) as response:
     data=response.read();return json.loads(data) if data else None
@@ -82,7 +82,7 @@ def main():
     if '--record' in sys.argv:
      api('/Users/'+user+'/Items/'+episodes[1]['Id']+'/UserData','POST',{'PlaybackPositionTicks':40000000,'Played':False,'LastPlayedDate':datetime.datetime.now(datetime.timezone.utc).isoformat()})
      config=root/'capture-settings.json';config.write_text(json.dumps({'Server':f'127.0.0.1:{port}','Username':'blades-test','UserId':user,'AccessToken':token,'DeviceId':secrets.token_hex(16)}));config.chmod(0o600)
-     subprocess.run([sys.executable,str(ROOT/'tools/record-walkthrough.py'),'--version','0.50'],env={**env,'BLADES_JELLYFIN_CONFIG':str(config)},check=True)
+     subprocess.run([sys.executable,str(ROOT/'tools/record-walkthrough.py'),'--version','0.51'],env={**env,'BLADES_JELLYFIN_CONFIG':str(config)},check=True)
 
    except Exception:
     # Sanitized server messages can aid diagnosis; never print requests/tokens.

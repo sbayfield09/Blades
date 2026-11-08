@@ -2,7 +2,7 @@
 """Capture the release's shared GPU renderer; optionally use a disposable Jellyfin server."""
 import argparse,os,subprocess
 from pathlib import Path
-p=argparse.ArgumentParser(description=__doc__);p.add_argument('--version',default='0.50');a=p.parse_args()
+p=argparse.ArgumentParser(description=__doc__);p.add_argument('--version',default='0.51');a=p.parse_args()
 r=Path(__file__).resolve().parents[1];b=r/('build/media-v'+a.version);b.mkdir(parents=True,exist_ok=True)
 env=dict(os.environ,BLADES_RESOURCE_PACK=str(r/'dist/Blades/Assets/blades.xzp'),BLADES_TEST_MEDIA=str(r/'tests/media'),EGL_PLATFORM='surfaceless',LIBGL_ALWAYS_SOFTWARE='1')
 label="drawbox=x=0:y=0:w=iw:h=21:color=black@0.78:t=fill,drawtext=fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf:text='Blades "+a.version+" | DESKTOP GPU | CPU decode / GPU YUV | Guide-profile-storage-FTP-updater simulated; isolated Jellyfin server':x=10:y=2:fontsize=14:fontcolor=white"

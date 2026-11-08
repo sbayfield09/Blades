@@ -1,3 +1,11 @@
+Blades0.51 — version-only updater test
+
+This build changes only the release version and associated labels/metadata.
+App behavior, artwork, settings and playback are identical to0.50.
+Use System > Update Blades in0.50 to download this ZIP. Exit Blades and extract
+it over the existing installation; keep your Config files. Reopen Blades: the
+updater should show0.51.0 installed and no newer version available.
+
 Blades0.50 — display handoff, Media animations and repository-hosted updates
 
 On startup the initialized black presentation buffers are established before

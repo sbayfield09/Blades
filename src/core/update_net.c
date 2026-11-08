@@ -133,7 +133,7 @@ bool update_https(const char *url,uint64_t limit,UpdateSink sink,void *context,U
         Sink output={.response=r,.sink=sink,.context=context};xf_response_stream(r,receive_byte,&output,limit);
         char raw_header[XF_HEADER_LIMIT+1]={0};size_t header_bytes=0;bool raw_complete=false;
         if(!connect_tls(s,&u)){snprintf(error,error_bytes,"HTTPS connection failed. Check network and console date/time.");goto done;}
-        char request[2048];int n=snprintf(request,sizeof request,"GET %s HTTP/1.1\r\nHost: %s\r\nUser-Agent: Blades/0.50.0\r\nAccept: application/octet-stream,application/json\r\nAccept-Encoding: identity\r\nCache-Control: no-cache\r\nConnection: close\r\n\r\n",u.path,u.host);
+        char request[2048];int n=snprintf(request,sizeof request,"GET %s HTTP/1.1\r\nHost: %s\r\nUser-Agent: Blades/0.51.0\r\nAccept: application/octet-stream,application/json\r\nAccept-Encoding: identity\r\nCache-Control: no-cache\r\nConnection: close\r\n\r\n",u.path,u.host);
         if(n<0||(size_t)n>=sizeof request)goto done;
         for(size_t sent=0;sent<(size_t)n;){int count=mbedtls_ssl_write(&s->ssl,(const unsigned char *)request+sent,(size_t)n-sent);if(count>0)sent+=(size_t)count;else if(!retry(s,count))goto done;}
         while(!r->complete&&!r->failed&&!cancelled(s)){

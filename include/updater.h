@@ -4,7 +4,7 @@
 #include <stddef.h>
 #include <stdint.h>
 #ifndef BLADES_VERSION
-#define BLADES_VERSION "0.50.0"
+#define BLADES_VERSION "0.51.0"
 #endif
 #define BLADES_REPOSITORY "sbayfield09/Blades-reimagined"
 #define BLADES_UPDATE_PATH "/" BLADES_REPOSITORY "/main/dist/"
