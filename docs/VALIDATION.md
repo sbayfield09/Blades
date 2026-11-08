@@ -1,3 +1,31 @@
+# Current release: Blades 0.46
+
+- All 29 host suites pass. The changed library/UI paths pass application
+  ASan/UBSan; external FFmpeg is not instrumented and leak detection is disabled.
+- One mixed shared media root yields separate Music, Pictures and Video lists.
+  Tests cover case-insensitive/nested extensions, depth, overlap/deduplication,
+  settings persistence, async rescan, no autoplay, unsupported/executable files
+  and direct folder-to-depth routing. Existing typed settings are unchanged;
+  there is no migration. Existing game categories and roots remain separate.
+- Native XEX 139-page/import digests, decoder instruction whitelist and actual
+  Xenos shader checks pass. Local/Jellyfin playback, seek/resume, FFmpeg build,
+  Xenon filter and GPU renderer sources are byte-identical to 0.45.
+- Archived application rebuild yields an identical XEX SHA256:
+  b6caeb82c3e1b0e5ae54a215ec03c16e79ba937210cc5365b56a464978685438.
+- Source/USB CRC, manifests, current-source identity, artwork and licences pass.
+  No private settings/logs bundled. Complete GPLv3 source/build scripts and
+  pinned free SDK supplied with original notices and attribution.
+- Fresh 200-second 720p30 desktop GPU walkthrough with 48kHz stereo fully
+  decodes. It adds a shared media root, skips the category screen and visits
+  filtered lists. Storage/Guide/profile/FTP simulated and labelled; extension
+  classification uses production code. Actual synthetic Local/Jellyfin playback
+  and the official isolated Jellyfin test pass. No private account/media used.
+- Real Xbox storage/scanning and playback still need hardware testing.
+  No native timing, GPU compressed decoding or 1080p30 claim is made.
+
+See [release](RELEASE-0.46.md), [audit](data/v0.46-media-audit.json).
+Previous validation follows.
+
 # Current release: Blades 0.45
 
 - All 29 host suites and eight application ASan/UBSan suites pass. External

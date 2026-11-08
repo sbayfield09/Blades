@@ -1,8 +1,11 @@
-# Jellyfin and Local video — Blades0.45
+# Jellyfin and Local video — Blades0.46
 
 Media > Video contains Jellyfin and Local. Media Center manages the Jellyfin
 server/login. See [connection setup and limits](JELLYFIN.md). Local retains the
-existing scanned-video library and the0.43 decoder/GPU path.
+existing scanned-video library and the0.43 decoder/GPU path. New shared media
+folders in Video Marketplace are classified by supported file extension; no
+category selection or migration of old paths. Music/Pictures playback remains
+unimplemented.
 
 Jellyfin uses authenticated, bounded custom HTTP AVIO and server-negotiated
 MPEG2/MP2 MPEG-TS up to720p30. The console remains in the same executable.

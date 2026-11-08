@@ -222,3 +222,11 @@ only the test server's minimum resume duration. Never modify a user's server
 settings or include private configs, tokens, media URLs or logs in a release.
 The fresh 160-second walkthrough must show actual resume/seeking and Next Up
 playback, label desktop/simulated services, and use this renderer/artwork.
+
+Version 0.46 adds LIB_MEDIA_FOLDER shared roots (config version 4). Keep legacy
+typed roots unchanged; no migration/deduplication of saved roots is performed.
+New Media folder selection goes directly to Scan Depth. Verify mixed-type and
+nested extension classification, duplicate suppression, old settings, no media
+executables, async depth/rescan and game-root separation. The fresh 200-second
+walkthrough adds a shared path and visits all three filtered lists; console
+storage is simulated and labelled, using the production extension classifier.

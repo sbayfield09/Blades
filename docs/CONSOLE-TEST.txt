@@ -1,6 +1,16 @@
-Blades0.45 — Jellyfin seeking, resume, Continue Watching and Next Up
+Blades0.46 — shared media scan folders with automatic file-type filtering
 
-Extract Blades-v0.45-USB.zip onto USB; launch Blades/default.xex. The complete
+New media folders are shared by Music, Pictures and Local Video. Open Media >
+Video Marketplace > Add Folder, choose a folder, press X and choose scan depth.
+There is no Music/Pictures/Video category step. Supported filename extensions
+are classified automatically, including mixed folders/subfolders and uppercase
+extensions. Unsupported files and executables are ignored in media scans.
+Existing saved typed paths are unchanged, with no migration. Remove/re-add a
+path if you want it to use the new shared behaviour. Game paths remain separate.
+Music/Pictures playback is still unfinished; their lists filter the files.
+
+
+Extract Blades-v0.46-USB.zip onto USB; launch Blades/default.xex. The complete
 matching Assets folder/notices are included. Keep your existing Config files
 when updating. No adapter, converter, DashLaunch or extra executable is needed.
 
@@ -36,7 +46,7 @@ the screen and send default.log; do not share your private Jellyfin config.
 
 Fresh desktop walkthrough includes Local and actual isolated Jellyfin playback.
 Xbox Guide/profiles/storage/FTP are simulated and labelled. The combined binary
-is GPLv3 with complete corresponding source in Blades-v0.45-source.zip; original
+is GPLv3 with complete corresponding source in Blades-v0.46-source.zip; original
 MIT/FFmpeg/Simple360Player/XenonFin/artwork/font/SDK notices are preserved.
 
 Retained 0.37 corrections:

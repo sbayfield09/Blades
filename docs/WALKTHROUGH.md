@@ -1,6 +1,6 @@
-# Blades 0.45 walkthrough
+# Blades 0.46 walkthrough
 
-[Watch/download](../dist/Blades-v0.45-walkthrough.mp4): fresh 160-second 720p30
+[Watch/download](../dist/Blades-v0.46-walkthrough.mp4): fresh 200-second 720p30
 shared desktop GPU capture, 48kHz stereo, matching 235-entry artwork pack.
 The video labels desktop GPU rendering and simulated Xbox services. Jellyfin
 uses an actual isolated official 10.10.7 server, a generated test account and
@@ -18,7 +18,15 @@ synthetic HEVC/AAC movies/episodes; no passwords or session tokens are shown.
 - 02:02–02:07: return, refresh, then Next Up and its next episode.
 - 02:10–02:16: actual next-episode playback, pause/resume and return.
 - 02:26–02:32: Media Center connection/status controls; password remains hidden.
-- 02:34–02:40: System blade and completion.
+- 02:34: System blade.
+- 02:38–02:49: Video Marketplace media paths; browse USB0/Mixed Media, press X
+  directly to Scan Depth, select Unlimited and add the shared folder. There is
+  no category screen. Storage is explicitly simulated; filename classification
+  uses the production library code.
+- 02:51: shared root information shows Music, Pictures and Video.
+- 02:57/03:01: Music/Pictures each list their supported file from the shared path.
+- 03:05–03:07: Video > Local retains only videos.
+- 03:12–03:20: System blade and completion.
 
 The capture waits for actual asynchronous page/seek work before advancing the
 scripted controller. Host FFmpeg uses scalar code; native Xenon kernels are

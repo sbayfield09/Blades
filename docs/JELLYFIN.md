@@ -1,8 +1,13 @@
-# Jellyfin in Blades0.45
+# Jellyfin in Blades0.46
 
 Media > Video now contains **Jellyfin** and **Local**. These are navigation
 folders: Jellyfin lists server videos; Local lists the existing scanned files.
 No library media is copied to USB or downloaded in full.
+New local scan folders added through Video Marketplace are shared by Music,
+Pictures and Local Video and sorted by supported filename extension. Choose
+folder and depth only. Existing typed saved paths are left unchanged; no migration.
+Music/Pictures playback remains unfinished. This change does not affect Jellyfin
+server libraries or saved resume positions.
 
 ## Connect
 
