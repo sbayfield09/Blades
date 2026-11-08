@@ -1,4 +1,4 @@
-# Jellyfin and Local video — Blades0.46
+# Jellyfin and Local video — Blades0.47
 
 Media > Video contains Jellyfin and Local. Media Center manages the Jellyfin
 server/login. See [connection setup and limits](JELLYFIN.md). Local retains the
@@ -15,6 +15,13 @@ any partial video fetches fresh resume ticks. Remote seeking restarts transcodin
 at StartTimeTicks within the same session, cancels old opens, resets decoder/audio/
 picture queues and maps both clocks to the full-item position. Pause is retained.
 Local byte seeking and the verified0.43 codec/GPU path remain unchanged.
+Jellyfin media inactivity allows30seconds rather than8, retaining short control
+API deadlines and immediate cancellation. Remote opening/probing is bounded at
+60seconds. The previous timeout is reproduced by a post-seek ten-second delivery
+gap and the fixed reader recovers; genuine30second stalls still fail. Resume/
+Next Up episode labels include the series once. Codec kernels and GPU unchanged. Audio FIFO now preserves source gaps/overlaps
+and resampler delay, keeping its clock anchored to the seek origin. The flash/
+tone regression verifies alignment within100ms initially and after seeking.
 The remote AVIO buffer uses FFmpeg2.8's standard32KiB. A64KiB original buffer
 can trigger its nonseekable probe/refill assertion after short TCP reads;
 the fragmented-stream regression exercises the fixed path. HTTP errors and

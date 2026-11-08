@@ -1,4 +1,21 @@
-Blades0.46 — shared media scan folders with automatic file-type filtering
+Blades0.47 — tolerate post-seek media stalls and identify episodes by series
+
+Jellyfin media delivery now allows30seconds of inactivity instead of8seconds,
+so a transient transcoder stall after seeking can recover. The same ten-second
+stall reproduces the old timeout and succeeds in this build. Connect/send and
+control API timeouts stay short; B still cancels promptly. A real30second media
+stall still fails clearly. Remote opening/probing has a cancellable60second
+budget; local opening/probing is unchanged.
+Continue Watching and Next Up show Series Name S1E2 - Episode Name for episodes.
+Existing series/season prefixes are normalized without duplication. Specials
+can use S0E1; missing numbers fall back to series/title. Movies/missing series
+keep their original titles. Raw episode metadata is retained.
+Audio PCM preserves timestamp gaps as silence and trims overlaps, with resampler
+latency accounted for. A flash/tone test reproduces0.52seconds of early audio
+and now aligns within100ms both at start and after seeking. The log includes
+audio_gap_frames/audio_overlap_frames. Actual Xbox lip sync still needs testing.
+
+Shared media folders (retained from0.46)
 
 New media folders are shared by Music, Pictures and Local Video. Open Media >
 Video Marketplace > Add Folder, choose a folder, press X and choose scan depth.
@@ -10,7 +27,7 @@ path if you want it to use the new shared behaviour. Game paths remain separate.
 Music/Pictures playback is still unfinished; their lists filter the files.
 
 
-Extract Blades-v0.46-USB.zip onto USB; launch Blades/default.xex. The complete
+Extract Blades-v0.47-USB.zip onto USB; launch Blades/default.xex. The complete
 matching Assets folder/notices are included. Keep your existing Config files
 when updating. No adapter, converter, DashLaunch or extra executable is needed.
 
@@ -46,7 +63,7 @@ the screen and send default.log; do not share your private Jellyfin config.
 
 Fresh desktop walkthrough includes Local and actual isolated Jellyfin playback.
 Xbox Guide/profiles/storage/FTP are simulated and labelled. The combined binary
-is GPLv3 with complete corresponding source in Blades-v0.46-source.zip; original
+is GPLv3 with complete corresponding source in Blades-v0.47-source.zip; original
 MIT/FFmpeg/Simple360Player/XenonFin/artwork/font/SDK notices are preserved.
 
 Retained 0.37 corrections:

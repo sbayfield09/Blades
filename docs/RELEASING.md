@@ -230,3 +230,12 @@ nested extension classification, duplicate suppression, old settings, no media
 executables, async depth/rescan and game-root separation. The fresh 200-second
 walkthrough adds a shared path and visits all three filtered lists; console
 storage is simulated and labelled, using the production extension classifier.
+
+Version0.47 fixes short post-seek media idle deadlines and PCM timestamp-gap/
+overlap handling; Resume/Next Up episode labels include the series once.
+Preserve both old-failure reproductions privately in the build evidence, not
+uploaded user logs. Verify10second gap recovery, prompt cancellation, genuine
+30second timeout, decoded flash/tone alignment initially/after seek, existing
+preroll/late/pause/end behavior and12wall-clock seconds of actual Jellyfin
+post-seek playback. Record the final audio/player/renderer,215seconds, with
+both episode lists and simulated console services labelled. No settings migration.

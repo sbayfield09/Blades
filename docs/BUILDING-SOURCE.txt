@@ -1,4 +1,4 @@
-Blades 0.46 complete source and FFmpeg relink instructions
+Blades 0.47 complete source and FFmpeg relink instructions
 
 This archive contains the application source, embedded font, GLSL shaders,
 MIT/GPLv3/STB/artwork/font notices, original FFmpeg 2.8.22 source archive, xsdk changes
@@ -73,7 +73,7 @@ The temporary PPC harness uses the same GCC vector source, with test-only
 store-merging disabled and32-bit stack-save/pointer-extension ABI adaptation.
 Production objects are not edited. This does not measure Xbox timing.
 
-Blades0.46 enables vectors ONLY in its two Simple360 H264 filter objects.
+Blades0.47 enables vectors ONLY in its two Simple360 H264 filter objects.
 Generic FFmpeg PPC/AltiVec and compiler vectorization stay disabled. Run
   python3 tools/verify-video-decoder.py <FFmpeg-build> --objdump <toolchain-objdump>
 to audit all five decoder libraries. Run tools/test-gpu-shaders.py XSDK_ROOT
@@ -85,7 +85,7 @@ separate slow-decoder library with BLADES_VIDEO_TEST_DECODE_NS; that macro is
 absent from the captured and Xbox shipping builds. The combined binary is GPLv3;
 COPYING.GPLv3 and all original source/artwork/font notices are included.
 
-Jellyfin0.46 seeking/resume and Next Up/Continue Watching use the preserved/ported XenonFin native protocol/JSON/browser
+Jellyfin0.47 seeking/resume and Next Up/Continue Watching use the preserved/ported XenonFin native protocol/JSON/browser
 sources under third_party/xenonfin (GPL-2.0-or-later, combined under GPLv3),
 BSD socket adapter and workers/UI/tests. No FFmpeg-network, curl or new SDK
 binary is required. Native source rebuilds against the same verified0.43

@@ -1,4 +1,4 @@
 The USB-ready ZIP includes default.xex and Assets/blades.xzp together.
-Extract Blades-v0.46-USB.zip onto USB and launch Blades/default.xex.
+Extract Blades-v0.47-USB.zip onto USB and launch Blades/default.xex.
 No video helper, DLL, Players folder or converter is required.
 See artwork notices for sources and attribution.

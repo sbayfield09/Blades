@@ -1,4 +1,4 @@
-# Jellyfin in Blades0.46
+# Jellyfin in Blades0.47
 
 Media > Video now contains **Jellyfin** and **Local**. These are navigation
 folders: Jellyfin lists server videos; Local lists the existing scanned files.
@@ -41,15 +41,26 @@ B/Back returns to the same Jellyfin list. Guide opening pauses. Seeking restarts
 server transcoding at the requested full-item timestamp; a short buffering delay
 is expected. Old decoder, packet, audio and picture queues are drained before
 reopening, and both clocks are mapped back to the full item timeline. Seeking
-while paused stays paused. Rapid presses accumulate against the requested
+while paused stays paused. Media response/body inactivity allows30seconds so a
+transcoder pause after seeking can recover; no-data waits remain cancellable.
+Connect/send and control API deadlines remain8seconds idle/20seconds total.
+Remote opening/probing has a60second bound; local probing retains15seconds. Rapid presses accumulate against the requested
 position and cancel superseded opens. Targets are clamped to the item bounds.
 The server playback session stays the same, with CanSeek reported and absolute
 positions in start/progress/stop messages. Local byte seeking and the verified
-0.43 decoder/GPU optimisations are retained. Jellyfin subtitles, HDR
+0.43 decoder/GPU optimisations are retained. The PCM timeline now preserves
+missing source time as silence, trims overlapping samples and accounts for
+resampler delay. This prevents sound being concatenated early across timestamp
+gaps; the clock starts at the seek origin. Native lip sync still needs testing.
+Logs include audio_gap_frames/audio_overlap_frames without exposing credentials. Jellyfin subtitles, HDR
 validation, Live TV, external media origins and stream-quality choices are not
 implemented. Server HEVC->MPEG2 compatibility is tested with SDR synthetic media.
 
 ## Continue Watching, Next Up and resume
+
+Episodes in these two folders show Series Name S1E2 - Episode Name. Season and episode numbers come from Jellyfin; specials can use S0E1. Existing
+series/season prefixes are normalized without duplication. Missing numbers fall
+back to series/title, and movies or missing-series metadata keep their titles. Episode metadata itself remains unchanged.
 
 The two folders use Jellyfin's own account-specific Resume and Shows/NextUp
 endpoints and preserve the server ordering. Empty lists remain valid folders;
@@ -97,7 +108,13 @@ The renderer/player is the working Blades code, without a new decoder backend.
 Checks include upstream malformed HTTP/JSON regressions, real worker/player
 fixtures with fragmented media, pagination, cancellation,401/503/truncation,
 fresh/stale/finished resume data, paused/rapid/end-bound seeking and seek failure,
-plus UI and application ASan/UBSan. An isolated official Jellyfin10.10.7 test
+plus UI and application ASan/UBSan. A ten-second post-seek body gap reproduces
+the old timeout, recovers in0.47, cancels promptly and still fails for a genuine
+30second stall. Actual server playback is also observed for12wall-clock seconds
+after seeking, beyond the original deadline. A decoded flash/tone fixture
+reproduces0.52seconds of early audio across a timestamp gap; the corrected FIFO
+aligns it within100ms at startup and after seeking. Application sanitizer tests
+also cover the new queue accounting. An isolated official Jellyfin10.10.7 test
 uses generated credentials and synthetic HEVC/AAC movies/episodes. It verifies
 a real next episode and Continue Watching result, resume at4seconds, MPEG2/MP2
 playback, forward/back/paused seeks, full-item clocks and saved stop position.

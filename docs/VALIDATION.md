@@ -1,3 +1,36 @@
+# Current release: Blades 0.47
+
+- All30 host suites pass. Application ASan/UBSan covers four protocol/UI/video/
+  sync suites plus two actual stalled-stream recovery/cancel modes. External
+  FFmpeg is not instrumented; leak detection disabled.
+- Reproduced the old timeout/I-O failure with a ten-second post-seek body gap.
+  Media idle now30s, short control deadlines retained. Positive recovery,
+  cancellation under1s and genuine30s inactivity failure pass. Remote open/probe
+  bounded60s, local15s. Server-side cause of the user's gap is not established.
+- Reproduced audio0.523s ahead of picture in a decoded MPEG2/MP2 flash/tone test.
+  The FIFO now preserves timestamp gaps as silence, trims overlaps and accounts
+  for resampler delay. The test aligns within100ms at start and after seek.
+- Resume/NextUp labels use Series S1E2 - Episode, with metadata presence for
+  specials/episode0, prefix normalization and missing-number fallback. Raw
+  metadata, movie and ordinary nested titles retained; long-label tests pass.
+- Official isolated Jellyfin10.10.7 verifies actual numbered episode metadata,
+  resume/seek/history and12wall-clock seconds of post-seek pictures/audio.
+  Synthetic media and generated credentials only; user logs/configs stay private.
+- Native XEX/import digests, decoder instruction whitelist and Xenos shader
+  checks pass. Codec kernels, workers, GPU and0.46 media root code preserved.
+- Archived application rebuild produces identical XEX SHA256:
+  9ecdd9ecce0f701cd72184b4d4f8ecac78f2eb9df80bf3bfe8fd9af99bc5e428.
+- Source/USB CRC, manifests, current-source identity, artwork and licences pass.
+  Complete GPLv3 source/build scripts and pinned free SDK included; no private
+  logs/settings. Fresh215second720p30 desktop GPU capture,48kHz stereo fully
+  decodes. Both numbered lists and sustained post-seek playback shown; console
+  Guide/profile/storage/FTP simulated and labelled.
+- Actual Xbox timeout recovery and lip sync still need hardware testing.
+  No console timing, GPU compressed decode or1080p30 claim is made.
+
+See [release](RELEASE-0.47.md), [audit](data/v0.47-jellyfin-audit.json).
+Previous validation follows.
+
 # Current release: Blades 0.46
 
 - All 29 host suites pass. The changed library/UI paths pass application
