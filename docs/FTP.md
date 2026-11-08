@@ -58,7 +58,7 @@ when extracting an update over the existing installation.
 Networking, directory enumeration, file transfers and settings I/O run on
 workers. Xbox workers use a lower scheduling priority on hardware thread 5;
 rendering exchanges only a small locked snapshot. Each connection uses a
-64 KiB streaming transfer buffer. There are no whole-file reads into RAM.
+256 KiB streaming transfer buffer. There are no whole-file reads into RAM.
 The foreground draw cache only responds to FTP changes on the Computers
 page. FTP stops and joins its workers when Blades exits or successfully hands
 off to another title; failed launch preflight leaves Blades and FTP running.
@@ -125,3 +125,20 @@ fields down while retaining the same 50px gap after the last value line. The
 maximum supported login strings remain inside the status column and footer.
 
 Version 0.36 retains the 0.35 field spacing and cursor-animation fixes.
+
+Version0.49 increases XAM startup send/receive buffers from default16KiB to
+the SDK-supported63KiB maximum, and requests63KiB passive/data socket buffers.
+Uploads drain recv immediately, poll only on would-block, and aggregate short
+network reads into256KiB POSIX writes. Downloads use256KiB POSIX reads, bypassing
+newlib1KiB stdio buffering. Partial writes/EINTR and final tails are handled;
+cancellation still returns no success for interrupted transfers. TCP_NODELAY
+on control connections removes delayed reply overhead for small-file queues.
+Per-transfer memory remains bounded; no whole-file buffering. Worker placement
+and priority are unchanged. tests/benchmark_ftp.py compares old/new binaries
+over desktop loopback with SHA256 verification, including48small files. Those
+numbers do not predict console disk/network speeds or equality with Aurora.
+
+Each actual console transfer logs direction, completed bytes, elapsed milliseconds,
+disk call count, accepted receive/send buffer sizes and success as ftp-transfer.
+No filenames, paths or login details are logged by this diagnostic. Use a large
+file on the same wired link/storage/client to compare with Aurora.

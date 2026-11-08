@@ -1,4 +1,22 @@
-Blades0.48 — correct small Jellyfin seeks that replayed the same scene
+Blades0.49 — Jellyfin details and faster FTP transfers
+
+Selected movies/episodes show server artwork, description and runtime on the
+right. Portrait posters and landscape episode images keep their aspect ratio.
+Long descriptions wrap with an ellipsis; absent metadata has explicit fallbacks.
+Artwork loads after a short selection pause, on the network worker, with bounded
+PNG size/dimensions and three cached thumbnails. No images are saved to disk.
+Navigation and playback preempt an artwork request; B still cancels promptly.
+
+FTP now batches disk I/O in256KiB blocks, drains ready upload data without
+a redundant poll per read and uses63KiB XAM/socket buffers instead of16KiB.
+TCP_NODELAY avoids delayed control replies during queues of small files.
+Check bulk upload/download, many small files, resume/append and menu responsiveness
+on HDD and USB. Desktop benchmarks do not establish Xbox/Aurora throughput.
+Existing credentials, toggle and exported drive roots are unchanged.
+Look for ftp-transfer lines in default.log: bytes, elapsed_ms, disk_calls and
+accepted socket buffers are reported without filenames or credentials.
+
+Retained0.48 seek fixes:
 
 Every restarted stream now has its own progressive-cache request identity.
 Jellyfin excludes the seek time from its cache filename and deletes old output
@@ -40,7 +58,7 @@ path if you want it to use the new shared behaviour. Game paths remain separate.
 Music/Pictures playback is still unfinished; their lists filter the files.
 
 
-Extract Blades-v0.48-USB.zip onto USB; launch Blades/default.xex. The complete
+Extract Blades-v0.49-USB.zip onto USB; launch Blades/default.xex. The complete
 matching Assets folder/notices are included. Keep your existing Config files
 when updating. No adapter, converter, DashLaunch or extra executable is needed.
 
@@ -76,7 +94,7 @@ the screen and send default.log; do not share your private Jellyfin config.
 
 Fresh desktop walkthrough includes Local and actual isolated Jellyfin playback.
 Xbox Guide/profiles/storage/FTP are simulated and labelled. The combined binary
-is GPLv3 with complete corresponding source in Blades-v0.48-source.zip; original
+is GPLv3 with complete corresponding source in Blades-v0.49-source.zip; original
 MIT/FFmpeg/Simple360Player/XenonFin/artwork/font/SDK notices are preserved.
 
 Retained 0.37 corrections:

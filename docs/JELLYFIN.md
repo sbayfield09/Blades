@@ -136,3 +136,12 @@ fractional/one-second/ten-second forward, backward and return seeks match source
 frames within one30fps frame, including end bounds and delayed cleanup. This
 runs against both a cache/deletion fixture and official Jellyfin10.10.7. Normal
 Jellyfin/keyboard/network and A/V timing still require a physical Xbox retest.
+
+Selected movie/episode details in0.49: the right panel shows the primary artwork,
+wrapped overview and full-item runtime. Artwork uses the authenticated image
+endpoint with PNG output, a288x176 bound and256KiB response limit. A200ms
+selection debounce and three-item memory cache avoid repeated requests while
+scrolling. Work runs below navigation/play commands and is cancelled when the
+selection changes or the browser closes. No artwork is stored on disk. Posters
+keep their proportions; absent/corrupt artwork and missing text/runtime have
+fallbacks. Long descriptions end with an ellipsis inside the available panel.

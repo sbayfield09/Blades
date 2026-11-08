@@ -1,0 +1,391 @@
+{
+  "release": "0.49.0",
+  "recorded_utc": "2026-11-08T20:02:04.593720+00:00",
+  "feature": "Jellyfin selected movie/episode artwork, overview and runtime; FTP throughput improvements",
+  "sdk_commit": "5f6dc726f65f6d171493a3628c2415c03551f27b",
+  "artwork": {
+    "source": "Authenticated /Items/{id}/Images/Primary with PNG output",
+    "response_limit_bytes": 262144,
+    "max_decoded_size": [
+      288,
+      176
+    ],
+    "selection_debounce_ms": 200,
+    "cache_entries": 3,
+    "persistence": "Memory only",
+    "fallbacks": "Missing/corrupt/oversized image, absent overview or duration",
+    "worker": "Low-priority operation, immediate navigation/play/cancel preemption; does not mark menu busy",
+    "layout": "Aspect-preserving image, two-line title, minutes or hours/minutes, bounded wrapped overview with ellipsis; stale image IDs hidden"
+  },
+  "ftp": {
+    "transfer_buffer_bytes": 262144,
+    "startup_receive_send_kib": 63,
+    "data_socket_receive_send_kib": 63,
+    "storage": "POSIX read/write bypass small newlib stdio buffer, aggregate fragmented uploads, partial-write/EINTR handling, flush final tail before226",
+    "network": "Drain recv directly, poll on would-block; TCP_NODELAY on control socket",
+    "logging": "Per-transfer completed bytes, elapsed_ms, disk_calls, accepted socket buffers, success; no paths/names/credentials",
+    "retained": "Plain FTP, saved on/off/login, root drive aliases, workers/priority and four sessions"
+  },
+  "validation": {
+    "host_suites": 30,
+    "final_targeted_suites": 3,
+    "sanitizer_suites": 4,
+    "sanitizer_network_modes": [
+      "artwork",
+      "FTP with parallel/boundary/resume/append/cancellation"
+    ],
+    "sanitizer_scope": "Application instrumented; external FFmpeg static libraries not instrumented, LeakSanitizer disabled",
+    "artwork_tests": "artwork: PASS: selected movie/episode metadata and authenticated bounded PNG artwork; correct dimensions, background loading, fallback/cache, rapid selection and preemption",
+    "ftp_tests": "PASS: real FTP login/root/listings, PASV/EPSV, binary upload/download/resume/append, Unicode, metadata, rename/delete, path boundaries, unique device counts, off cancellation, on/off restart persistence and shared status/toggle navigation",
+    "official_server": "Official disposable10.10.7 with generated movies/episodes/local artwork/NFO descriptions. Authenticated movie and episode images and metadata pass. No user server, account or media accessed.",
+    "seek_content_positions": [
+      [
+        4.0,
+        4.0,
+        4.01
+      ],
+      [
+        4.25,
+        4.267,
+        4.26
+      ],
+      [
+        4.0,
+        4.0,
+        4.01
+      ],
+      [
+        4.05,
+        4.067,
+        4.06
+      ],
+      [
+        4.0,
+        4.0,
+        4.01
+      ],
+      [
+        5.0,
+        5.0,
+        5.01
+      ],
+      [
+        4.0,
+        4.0,
+        4.01
+      ],
+      [
+        14.0,
+        14.0,
+        14.01
+      ],
+      [
+        4.0,
+        4.0,
+        4.01
+      ],
+      [
+        4.75,
+        4.767,
+        4.76
+      ],
+      [
+        4.25,
+        4.267,
+        4.26
+      ],
+      [
+        4.5,
+        4.5,
+        4.51
+      ],
+      [
+        4.0,
+        4.0,
+        4.01
+      ],
+      [
+        44.5,
+        44.5,
+        44.51
+      ],
+      [
+        4.0,
+        4.0,
+        4.01
+      ]
+    ],
+    "max_content_error_seconds": 0.017000000000000348,
+    "source_application_rebuild_byte_identical": true,
+    "rebuild_scope": "Exact archived application against pinned SDK and same verified native FFmpeg dependency; complete dependency source/patches/scripts included",
+    "linked_startup_buffer_bytes": "\nbuild/xbox/default:     file format elf32-powerpc\n\nContents of section .data:\n 8260324c 00003f3f                             ..??            \n",
+    "xex": "PASS: XEX2 PowerPC-BE, Xbox subsystem, entry 0x825ab5f8\nPASS: 140 verified 65536-byte image pages; header/image/import digest chains valid\nPASS: xam.xex: 92 import slots\nPASS: xboxkrnl.exe: 122 import slots\nConsole launch and Peer Pressure compatibility remain unverified.\n",
+    "instruction_audit": "PASS: 1041821 instructions checked across five archives; vectors only in the two Simple360 filter objects, restricted to the explicit Xenon shift/add/permute subset. Generic PPC/AltiVec remains off; GPLv3 enabled, nonfree off.\n",
+    "shader_tests": "PASS: 240 compiled Xenos swirl samples match supplied equations within one RGB level\nPASS: compiled Xenos point fetches and separable 720p background filtering\nPASS: compiled Xenos glyph tint and integer alpha coverage\nPASS: compiled Xenos content fade shader\nPASS: compiled Xenos cap box filter preserves alpha-aware area samples\nPASS: 72 compiled Xenos video samples; three Y/U/V sampler slots, BT601/709 limited/full, boundaries and RGB\n",
+    "unchanged_sources_since_v048": [
+      "include/video.h",
+      "src/core/video_ui.c",
+      "src/platform/xbox_renderer.c",
+      "src/render/shaders/video.frag",
+      "src/render/video_colour.c",
+      "src/core/library.c",
+      "src/core/library_ui.c",
+      "tools/build-video-ffmpeg.py",
+      "third_party/ffmpeg/patches/xsdk.patch",
+      "third_party/ffmpeg/xenon/simple360_intrinsics.h",
+      "third_party/ffmpeg/xenon/simple360_chroma.c",
+      "third_party/ffmpeg/xenon/simple360_qpel.c"
+    ],
+    "video_c_only_change": "User-Agent release version string; decoder, audio, seeking algorithms unchanged",
+    "package_safety": "USB/source CRC/manifests/current source/licences verified; no user settings/logs/helper"
+  },
+  "ftp_benchmark": {
+    "scope": "Desktop loopback and temporary local disk. Not Xbox/Aurora throughput; XAM buffer increases require console verification.",
+    "results": [
+      {
+        "binary": "ftp-before-fixture",
+        "bulk_bytes": 33554569,
+        "rounds": 3,
+        "upload_MiB_s": [
+          777.0474961849833,
+          728.1114030472579,
+          666.482218264798
+        ],
+        "download_MiB_s": [
+          666.564057616188,
+          751.8723991225879,
+          716.4026902216848
+        ],
+        "median_upload_MiB_s": 728.1114030472579,
+        "median_download_MiB_s": 716.4026902216848,
+        "48_small_files_seconds": 2.120040916997823,
+        "sha256_verified": true
+      },
+      {
+        "binary": "blades-ftp-fixture",
+        "bulk_bytes": 33554569,
+        "rounds": 3,
+        "upload_MiB_s": [
+          1451.9595135905115,
+          1797.4222744669664,
+          1290.9379733308945
+        ],
+        "download_MiB_s": [
+          1387.0220794524998,
+          1277.4338540767228,
+          1423.6199495256503
+        ],
+        "median_upload_MiB_s": 1451.9595135905115,
+        "median_download_MiB_s": 1387.0220794524998,
+        "48_small_files_seconds": 0.010275917004037183,
+        "sha256_verified": true
+      }
+    ]
+  },
+  "ftp_initial_benchmark": {
+    "scope": "Desktop loopback and temporary local disk. Not Xbox/Aurora throughput; XAM buffer increases require console verification.",
+    "results": [
+      {
+        "binary": "ftp-before-fixture",
+        "bulk_bytes": 33554569,
+        "rounds": 3,
+        "upload_MiB_s": [
+          699.6346273070993,
+          726.9704351578675,
+          666.5300282913269
+        ],
+        "download_MiB_s": [
+          700.6387336527508,
+          697.5768535670818,
+          692.2303998468888
+        ],
+        "median_upload_MiB_s": 699.6346273070993,
+        "median_download_MiB_s": 697.5768535670818,
+        "48_small_files_seconds": 2.1159615099968505,
+        "sha256_verified": true
+      },
+      {
+        "binary": "blades-ftp-fixture",
+        "bulk_bytes": 33554569,
+        "rounds": 3,
+        "upload_MiB_s": [
+          650.8551409464743,
+          1702.139407812885,
+          1482.227820482359
+        ],
+        "download_MiB_s": [
+          1251.099766988957,
+          1327.008999701348,
+          1302.4992847791923
+        ],
+        "median_upload_MiB_s": 1482.227820482359,
+        "median_download_MiB_s": 1302.4992847791923,
+        "48_small_files_seconds": 0.018139623003662564,
+        "sha256_verified": true
+      }
+    ]
+  },
+  "walkthrough": {
+    "probe": {
+      "streams": [
+        {
+          "index": 0,
+          "codec_name": "h264",
+          "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+          "profile": "High",
+          "codec_type": "video",
+          "codec_tag_string": "avc1",
+          "codec_tag": "0x31637661",
+          "width": 1280,
+          "height": 720,
+          "coded_width": 1280,
+          "coded_height": 720,
+          "closed_captions": 0,
+          "film_grain": 0,
+          "has_b_frames": 2,
+          "pix_fmt": "yuv420p",
+          "level": 31,
+          "chroma_location": "left",
+          "field_order": "progressive",
+          "refs": 1,
+          "is_avc": "true",
+          "nal_length_size": "4",
+          "id": "0x1",
+          "r_frame_rate": "30/1",
+          "avg_frame_rate": "30/1",
+          "time_base": "1/15360",
+          "start_pts": 0,
+          "start_time": "0.000000",
+          "duration_ts": 3302400,
+          "duration": "215.000000",
+          "bit_rate": "788265",
+          "bits_per_raw_sample": "8",
+          "nb_frames": "6450",
+          "extradata_size": 46,
+          "disposition": {
+            "default": 1,
+            "dub": 0,
+            "original": 0,
+            "comment": 0,
+            "lyrics": 0,
+            "karaoke": 0,
+            "forced": 0,
+            "hearing_impaired": 0,
+            "visual_impaired": 0,
+            "clean_effects": 0,
+            "attached_pic": 0,
+            "timed_thumbnails": 0,
+            "non_diegetic": 0,
+            "captions": 0,
+            "descriptions": 0,
+            "metadata": 0,
+            "dependent": 0,
+            "still_image": 0,
+            "multilayer": 0
+          },
+          "tags": {
+            "language": "und",
+            "handler_name": "VideoHandler",
+            "vendor_id": "[0][0][0][0]",
+            "encoder": "Lavc61.19.101 libx264"
+          }
+        },
+        {
+          "index": 1,
+          "codec_name": "aac",
+          "codec_long_name": "AAC (Advanced Audio Coding)",
+          "profile": "LC",
+          "codec_type": "audio",
+          "codec_tag_string": "mp4a",
+          "codec_tag": "0x6134706d",
+          "sample_fmt": "fltp",
+          "sample_rate": "48000",
+          "channels": 2,
+          "channel_layout": "stereo",
+          "bits_per_sample": 0,
+          "initial_padding": 0,
+          "id": "0x2",
+          "r_frame_rate": "0/0",
+          "avg_frame_rate": "0/0",
+          "time_base": "1/48000",
+          "start_pts": 0,
+          "start_time": "0.000000",
+          "duration_ts": 10320000,
+          "duration": "215.000000",
+          "bit_rate": "46940",
+          "nb_frames": "10080",
+          "extradata_size": 5,
+          "disposition": {
+            "default": 1,
+            "dub": 0,
+            "original": 0,
+            "comment": 0,
+            "lyrics": 0,
+            "karaoke": 0,
+            "forced": 0,
+            "hearing_impaired": 0,
+            "visual_impaired": 0,
+            "clean_effects": 0,
+            "attached_pic": 0,
+            "timed_thumbnails": 0,
+            "non_diegetic": 0,
+            "captions": 0,
+            "descriptions": 0,
+            "metadata": 0,
+            "dependent": 0,
+            "still_image": 0,
+            "multilayer": 0
+          },
+          "tags": {
+            "language": "und",
+            "handler_name": "SoundHandler",
+            "vendor_id": "[0][0][0][0]"
+          }
+        }
+      ],
+      "format": {
+        "filename": "Blades-v0.49-walkthrough.mp4",
+        "nb_streams": 2,
+        "nb_programs": 0,
+        "nb_stream_groups": 0,
+        "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+        "format_long_name": "QuickTime / MOV",
+        "start_time": "0.000000",
+        "duration": "215.000000",
+        "size": "22682571",
+        "bit_rate": "844002",
+        "probe_score": 100,
+        "tags": {
+          "major_brand": "isom",
+          "minor_version": "512",
+          "compatible_brands": "isomiso2avc1mp41",
+          "encoder": "Lavf61.7.103"
+        }
+      }
+    },
+    "scope": "Fresh215second720p30 desktop GPU capture using this release renderer/artwork,48kHz stereo; actual Jellyfin selected episode image/overview/runtime and playback. Guide/profile/storage/FTP simulated and labelled; no console capture/performance claim."
+  },
+  "hardware_retest": "Console artwork responsiveness and FTP throughput vs Aurora need retest on matching wired network, storage and client.",
+  "artifacts": {
+    "dist/Blades-v0.49-USB.zip": {
+      "bytes": 4733915,
+      "sha256": "f31073768f530e5e18e4156df8077f654d1d0db2b52b18fdbff7d08ff02a682e"
+    },
+    "dist/Blades/default.xex": {
+      "bytes": 6246400,
+      "sha256": "04e0fffb6addae2d9611542009b0b6025ec60d1632a70f3dad9b2e8f0a7fb78d"
+    },
+    "dist/Blades-artwork-pack.zip": {
+      "bytes": 2041912,
+      "sha256": "7417accd71918a01d316ae20f8471af504969f35a19870ff70fc4edd060690bf"
+    },
+    "dist/Blades-v0.49-walkthrough.mp4": {
+      "bytes": 22682571,
+      "sha256": "fc0fa85aef8c50c35fe8835695f828d5f7d48867a9ae53f3ca8fdfca531abcad"
+    },
+    "dist/Blades-v0.49-source.zip": {
+      "bytes": 32031818,
+      "sha256": "58dbfe338001d56100a95ed03e060703f8b991c0fcc62d292bf1be400356fbd7"
+    }
+  }
+}

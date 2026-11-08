@@ -248,3 +248,13 @@ return-to-same-time, EOF0.5s margin, delayed deletion and12s continuous content/
 clock agreement. Reproduce old cached-picture behavior against the official
 server. Fresh215s desktop capture uses baked source frame numbers; retained
 console services remain simulated and labelled. No user settings migration.
+
+Version0.49 adds movie/episode primary artwork, overview and runtime on the right
+of Jellyfin lists. Verify actual authenticated movie/episode PNGs with official
+Jellyfin, portrait/landscape bounds, missing/corrupt/oversized responses, cache/
+debounce and command preemption. Verify GPU/software panel agreement. FTP uses
+256KiB disk aggregation,63KiB XAM/socket buffers and TCP_NODELAY control replies;
+verify byte hashes, boundary tails, parallel upload/download, resume/append and
+off cancellation. Publish desktop benchmark scope explicitly, with native
+transfer diagnostics for hardware retest. Record a fresh matching walkthrough
+showing real server metadata; no user artwork/credentials are packaged.

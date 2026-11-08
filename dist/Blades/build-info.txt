@@ -1,7 +1,7 @@
-Blades 0.48.0 - video compatibility hardware test build
+Blades 0.49.0 - video compatibility hardware test build
 SDK commit: 5f6dc726f65f6d171493a3628c2415c03551f27b
 powerpc-xsdk-elf-gcc (GCC) 15.3.0
-XEX container version: 0.0.48.0
+XEX container version: 0.0.49.0
 Title ID: 0x424C4453
 Resolution: 1280x720
 Video: FFmpeg 2.8.22 + Simple360 H264 DSP, GPLv3, statically linked, same XEX/GPU/audio

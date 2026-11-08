@@ -1,6 +1,6 @@
-# Blades 0.48 walkthrough
+# Blades 0.49 walkthrough
 
-[Watch/download](../dist/Blades-v0.48-walkthrough.mp4): fresh 215-second 720p30
+[Watch/download](../dist/Blades-v0.49-walkthrough.mp4): fresh 215-second 720p30
 shared desktop GPU capture, 48kHz stereo, matching 235-entry artwork pack.
 The video labels desktop GPU rendering and simulated Xbox services. Jellyfin
 uses an actual isolated official 10.10.7 server, a generated test account and
@@ -12,14 +12,16 @@ synthetic HEVC/AAC movies/episodes with baked source frame counters; no password
 - 01:33/01:40: actual local 1080p MPEG2 and 720p H264 samples through CPU decoding
   and GPU YUV display, including pause/resume and return to the Blades list.
 - 01:47: Jellyfin root with Continue Watching, Next Up and video libraries.
-- 01:50–01:53: Continue Watching includes Series Name S1E2 - Episode Name labels; actual
+- 01:50–01:53: selected episode artwork, overview and runtime on the right.
+  Continue Watching includes Series Name S1E2 - Episode Name labels; actual
   server playback resumes at 4 seconds. Next Up uses the same series/season/episode format.
 - 01:54–01:59: pause, seek forward while paused, resume, then seek backward;
   the baked source frame counter visibly changes with the seek, alongside the
   full-item playback timeline. The server source encodes its frame number in
   eleven luma bars for independent actual-content checks.
 - 02:02–02:17: sustained actual playback after the backward seek.
-- 02:17–02:22: return, refresh, then Next Up and its next episode.
+- 02:17–02:22: return to the episode details, refresh, then Next Up and its
+  next episode artwork/overview/runtime. The server uses generated local images.
 - 02:25–02:31: actual next-episode playback, pause/resume and return.
 - 02:41–02:47: Media Center connection/status controls; password remains hidden.
 - 02:49: System blade.

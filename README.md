@@ -1,36 +1,43 @@
-# Blades 0.48
+# Blades 0.49
 
-Xbox 360 Blades recreation. Extract the [complete USB ZIP](dist/Blades-v0.48-USB.zip)
+Xbox 360 Blades recreation. Extract the [complete USB ZIP](dist/Blades-v0.49-USB.zip)
 onto your USB drive and launch Blades/default.xex. Matching Assets are included.
 Keep existing Config files; private paths, sessions and logs are not bundled.
 
 [Separate XEX](dist/Blades/default.xex) · [Premade artwork](dist/Blades-artwork-pack.zip) ·
-[Desktop walkthrough](dist/Blades-v0.48-walkthrough.mp4) ·
-[Complete corresponding source](dist/Blades-v0.48-source.zip)
+[Desktop walkthrough](dist/Blades-v0.49-walkthrough.mp4) ·
+[Complete corresponding source](dist/Blades-v0.49-source.zip)
 
-Small Jellyfin seeks now display the requested part of the video. The old build
-could reopen cached pictures while showing an updated clock: on the official
-10.10.7 server, a request for 4.25 seconds decoded the 4.00-second picture.
-Each restart now isolates its progressive cache generation while retaining the
-device, authentication and logical playback/history session. Delayed cleanup of
-an older stream cannot delete the new generation. Left/Right remains ten seconds;
-network EOF seeks use the server's half-second margin. [Setup/limits](docs/JELLYFIN.md).
+Selected Jellyfin movies and episodes now show their primary artwork,
+description and full runtime in the right panel, including Continue Watching
+and Next Up. Posters and landscape pictures keep their proportions. Descriptions
+wrap with an ellipsis when needed; absent metadata has explicit fallbacks.
+Artwork loads on the worker with a short selection debounce, three-item memory
+cache and bounded PNG response/dimensions. Navigation/playback preempt downloads;
+no artwork is saved to disk. [Jellyfin setup and limits](docs/JELLYFIN.md).
 
-Tests compare actual decoded source frame numbers, including fractional,
-one-second and ten-second forward/backward/return seeks, EOF and 12 seconds of
-continuous picture/clock agreement. Official-server content checks pass within
-40 ms, with a maximum measured rounding of 17 ms at 30 fps. All 30 host suites,
-four application sanitizer suites plus the cache-content mode, native integrity/
-shader/instruction checks and an identical archived-source rebuild pass.
-The fresh 215-second desktop walkthrough shows source counters changing across
-seeks; simulated console services are labelled. Xbox behavior needs hardware retesting.
+FTP now batches fragmented uploads into 256 KiB POSIX disk writes and uses
+256 KiB disk reads. It bypasses small newlib stdio buffers and redundant ready
+polls, increases XAM/socket buffers to 63 KiB and uses TCP_NODELAY on the control
+connection. Transfer logs report bytes, elapsed_ms, disk_calls, accepted buffers
+and success without paths or credentials. Existing login, on/off choice, root
+drives and worker priority are retained. [FTP details](docs/FTP.md).
 
-The 0.47 media-inactivity/audio-sync corrections and **Series Name S1E2 - Episode Name**
-labels are retained. Shared media folders and existing saved paths remain as in
-0.46, with no migration. Codec kernels, decoder workers, GPU conversion and PCM
-functions are unchanged this release.
+Desktop loopback benchmarks improved median bulk transfers by about 2x, with
+much faster small-file queues. These measurements do not establish Xbox speeds
+or parity with Aurora. Actual console transfer speed and menu responsiveness
+need retesting on the same network/client/storage.
 
+All 30 host suites and final targeted UI/FTP/GPU checks pass. Four application
+sanitizer suites plus bounded artwork and parallel/boundary FTP modes pass.
+Official Jellyfin 10.10.7 tests verify actual movie/episode images and metadata,
+retained source-frame seek correctness and sustained playback. Native integrity/
+shader/instruction checks and an identical archived-source application rebuild
+pass. The fresh 215-second walkthrough is desktop GPU playback; console services
+are simulated and labelled.
+
+The 0.48 seek correction, 0.47 audio/timeouts/Series S1E2 labels and shared media
+folders remain. No settings migration or decoder algorithm changes this release.
 The combined executable is GPLv3. Original MIT/FFmpeg/Simple360Player/XenonFin/
-artwork notices are preserved. Complete source, changes, build scripts and
-pinned free SDK are in the source ZIP; no Microsoft XDK is needed.
-See [release notes](docs/RELEASE-0.48.md) and [licence notice](docs/VIDEO-LICENSE-NOTICE.txt).
+artwork notices and complete source/build scripts/pinned free SDK are supplied.
+See [release notes](docs/RELEASE-0.49.md) and [licence notice](docs/VIDEO-LICENSE-NOTICE.txt).

@@ -1,3 +1,30 @@
+# Validation — Blades0.49
+
+All30 host suites pass, including new movie/episode artwork and FTP cases.
+Final targeted Jellyfin UI/FTP/GPU suites pass after the final bounded-text and
+transfer-diagnostic edits. Four application sanitizer suites plus authenticated
+artwork and parallel/boundary FTP integration modes pass. LeakSanitizer is off;
+external FFmpeg libraries are not instrumented.
+
+Official disposable Jellyfin10.10.7 returns actual movie/episode primary PNGs,
+overviews and runtimes. Portrait/landscape GPU/software panel comparisons pass.
+Missing/corrupt/oversized PNGs, rapid selection, cache and preemption are covered.
+Retained15 actual source-frame seek checks agree within40ms, with12seconds of
+continuous post-seek picture/clock agreement. No user server/media was accessed.
+
+FTP checks verify fragmented and256KiB boundary tails, parallel8MiB transfers,
+resume/append, byte hashes, storage roots/login persistence and off cancellation.
+The final transfer callback asserts large storage-call batches. Desktop loopback
+benchmarks and their scope are recorded in data/v0.49-media-ftp-audit.json;
+these are not console/Aurora speeds. Native startup symbol bytes confirm63KiB
+send/receive configuration; actual socket acceptance is logged on hardware.
+
+Native XEX header/pages/imports, compiled Xenos shaders and decoder instruction
+restrictions pass. Exact archived application rebuild yields identical XEX bytes.
+USB/source CRCs, manifest/source consistency, notices and safe payload checks pass.
+The fresh215second720p30 desktop walkthrough fully decodes with48kHz stereo.
+Xbox artwork, transfer throughput and responsiveness still need hardware retest.
+
 # Current release: Blades 0.48
 
 - All30 host suites pass, including the new cache/content mode. Application
