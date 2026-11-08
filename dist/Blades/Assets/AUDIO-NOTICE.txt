@@ -1,0 +1,1 @@
+Transition recordings from the user-supplied ZivvoZ/dashx360 repository, revision 0c8adb2cef4ad7dff2bf889351efa1f1c244aef2. Original project: zivvoz / DashX360. Xbox audio rights remain with Microsoft and respective rights holders. Converted only to PCM16 stereo at 48 kHz.

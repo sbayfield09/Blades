@@ -1,4 +1,4 @@
-Blades 0.43 complete source and FFmpeg relink instructions
+Blades 0.44 complete source and FFmpeg relink instructions
 
 This archive contains the application source, embedded font, GLSL shaders,
 MIT/GPLv3/STB/artwork/font notices, original FFmpeg 2.8.22 source archive, xsdk changes
@@ -73,7 +73,7 @@ The temporary PPC harness uses the same GCC vector source, with test-only
 store-merging disabled and32-bit stack-save/pointer-extension ABI adaptation.
 Production objects are not edited. This does not measure Xbox timing.
 
-Blades0.43 enables vectors ONLY in its two Simple360 H264 filter objects.
+Blades0.44 enables vectors ONLY in its two Simple360 H264 filter objects.
 Generic FFmpeg PPC/AltiVec and compiler vectorization stay disabled. Run
   python3 tools/verify-video-decoder.py <FFmpeg-build> --objdump <toolchain-objdump>
 to audit all five decoder libraries. Run tools/test-gpu-shaders.py XSDK_ROOT
@@ -84,3 +84,18 @@ The default decoder build is build/ffmpeg-xbox-v043-final. Pacing tests use a
 separate slow-decoder library with BLADES_VIDEO_TEST_DECODE_NS; that macro is
 absent from the captured and Xbox shipping builds. The combined binary is GPLv3;
 COPYING.GPLv3 and all original source/artwork/font notices are included.
+
+Jellyfin0.44 adds the preserved/ported XenonFin native protocol/JSON/browser
+sources under third_party/xenonfin (GPL-2.0-or-later, combined under GPLv3),
+BSD socket adapter and workers/UI/tests. No FFmpeg-network, curl or new SDK
+binary is required. Native source rebuilds against the same verified0.43
+FFmpeg libraries; the builder's default remains ffmpeg-xbox-v043-final.
+
+The local network fixture requires Python3 and installed ffmpeg:
+  ctest --test-dir build/linux --output-on-failure -R jellyfin
+For optional real-server integration, download the checksum-pinned test server:
+  python3 tools/fetch-jellyfin-test-server.py /path/to/test-server
+  JELLYFIN_TEST_SERVER=/path/to/test-server/jellyfin python3 tests/test_jellyfin_real.py
+It creates/deletes only its own disposable account/media/config. --record also
+captures the shared renderer against that temporary server. No account data
+or test-server binaries are packaged. Normal builds do not need that server.

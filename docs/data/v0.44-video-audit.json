@@ -1,0 +1,262 @@
+{
+  "release": "0.44.0",
+  "recorded_utc": "2026-11-08T14:08:56.815661+00:00",
+  "xex_version": "0.0.44.0",
+  "sdk_commit": "5f6dc726f65f6d171493a3628c2415c03551f27b",
+  "feature": "XenonFin-based Jellyfin video browser, Media Center connection, Local/Jellyfin source folders",
+  "upstreams": {
+    "xenonfin": {
+      "repository": "https://github.com/sbayfield09/XenonFin",
+      "commit": "554adb8d79a251e4b502ac4a87a328cbe5055b09",
+      "license": "GPL-2.0-or-later",
+      "files": {
+        "platform/xenon/protocol.c": "46a2d7887abc37bdaf91c71b726691aee348917c691aea19d4d27e8c74bbf4e1",
+        "platform/xenon/protocol.h": "ae271bcba506253c84366649aa56dec330bef6fc1d4b3315c8c5a8cbe08bd2cc",
+        "platform/xenon/http.c": "e1a2d5120432f3524cf349fc621930a719b0c9b79356fb6a410a8f7bd8f87bdb",
+        "platform/xenon/json.c": "d91e266948c40cc1d229c7bab6525b0b3d3139d3c087a232c75864c4f4bb6d7b",
+        "platform/xenon/browse.c": "3fae516060fd53b59773f1f5cdf8f43f9b6608dc7c27f0b0f9afde1ad74f1689",
+        "platform/xenon/browse.h": "01b9338d332f5bb128df64d7a440d1804e0c142a3650ad80cee3c2ec47cf672e",
+        "platform/xenon/video_api.c": "d818f2ede536feb4d4c6132fb2826c1d9c676b835e0647020acc7b255cb73cdf",
+        "platform/xenon/video_api.h": "d57ef3a78dddaa8ccafffbb9d58dc71db4716f51ca82cf84e53285a2405ea986",
+        "platform/xenon/tests/protocol_tests.c": "be7344a208d2a60d72df831cfa2d1cdfa0b70c30d24d4002131551aed9bf6b3c",
+        "scripts/fetch_test_server.py": "80ef785d3f445634aa6a2f135ee7167c3afaf2efd55f450c8ac3fffdceb64a2f"
+      }
+    },
+    "simple360player": {
+      "repository": "https://github.com/HG-ERIK/simple360player",
+      "commit": "5d235c1fd24c098ccc1b2463c1b4265bf2e7844c",
+      "license": "GPL-3.0",
+      "files": {
+        "external/ffmpeg360/libavcodec/xbox360/h264_chroma_xb.c": "649fcb94237a6659fbfcfd89772577dfbf5b255cc480e423f8f8036e60648597",
+        "external/ffmpeg360/libavcodec/xbox360/h264_qpel_xb.c": "59be4ac2ec6984ab97a9fbea4acd5a96f9bb35b80b2f89d37264ed9744a9081d",
+        "src/ffglue.c": "f2f4dd0e11a26df4fdaca99e9cae595c210a0b8a143f8072998c855d8e6fa735",
+        "src/FFPlayer.cpp": "9415d6b2a7041ced2eda7eb5d93b041846fce7093ea4d2854be6dbe025323651"
+      }
+    }
+  },
+  "changes": {
+    "connection": "Native HTTP numeric IPv4/default8096; Xbox keyboard for server/user/password; private atomic bearer-token config; startup validation/retry and disconnect/remove; no password persistence or request/token logging.",
+    "browser": "Video-only views, nested movies/series/seasons/episodes/folders and10-item pagination; worker I/O and cancellable navigation; existing local scan paths remain in Video Marketplace.",
+    "playback": "Authenticated PlaybackInfo and progressive MPEG-TS MPEG2/MP2, up to1280x720/30fps,8Mbps video, stereo48kHz/192kbps audio. Server transcoding required. Same Blades decoder/GPU path. Playback reporting/encoder cleanup.",
+    "HTTP_AVIO": "Bounded cancellable socket transport; remote32KiB AVIO buffer avoids old FFmpeg2.8 refill assertion on fragmented streams. Local64KiB and v0.43 decoder/GPU optimisations retained.",
+    "limits": "No DNS/HTTPS/base-path/redirect support, network seeking, subtitles, Live TV or quality selector; no standalone media download or external-player adapter.",
+    "licence": "GPLv3 combined binary, complete corresponding source/build scripts and pinned SDK; original MIT/GPL/FFmpeg/XenonFin/artwork notices preserved."
+  },
+  "validation": {
+    "host_suites_passed": 29,
+    "core_host": "Internal ctest changing into directory: /workspace/Blades/build/linux\nTest project /workspace/Blades/build/linux\n      Start  1: jellyfin-protocol\n 1/27 Test  #1: jellyfin-protocol ................   Passed    0.00 sec\n      Start  2: jellyfin-ui\n 2/27 Test  #2: jellyfin-ui ......................   Passed    0.00 sec\n      Start  3: video-audio-preroll\n 3/27 Test  #3: video-audio-preroll ..............   Passed    1.45 sec\n      Start  4: video-startup-clock\n 4/27 Test  #4: video-startup-clock ..............   Passed    3.24 sec\n      Start  5: video-late-presentation\n 5/27 Test  #5: video-late-presentation ..........   Passed    3.25 sec\n      Start  6: video-rgba-fallback\n 6/27 Test  #6: video-rgba-fallback ..............   Passed    2.74 sec\n      Start  7: video\n 7/27 Test  #7: video ............................   Passed    5.07 sec\n      Start  8: dashboard\n 8/27 Test  #8: dashboard ........................   Passed    5.41 sec\n      Start  9: resources\n 9/27 Test  #9: resources ........................   Passed    0.00 sec\n      Start 10: skin\n10/27 Test #10: skin .............................   Passed    0.01 sec\n      Start 11: ambient\n11/27 Test #11: ambient ..........................   Passed    0.05 sec\n      Start 12: font\n12/27 Test #12: font .............................   Passed    0.01 sec\n      Start 13: audio\n13/27 Test #13: audio ............................   Passed    0.00 sec\n      Start 14: animation\n14/27 Test #14: animation ........................   Passed    0.00 sec\n      Start 15: pixels\n15/27 Test #15: pixels ...........................   Passed    0.04 sec\n      Start 16: draw-list\n16/27 Test #16: draw-list ........................   Passed    2.43 sec\n      Start 17: startup\n17/27 Test #17: startup ..........................   Passed    0.78 sec\n      Start 18: disc\n18/27 Test #18: disc .............................   Passed    0.07 sec\n      Start 19: media-launch\n19/27 Test #19: media-launch .....................   Passed    0.00 sec\n      Start 20: achievement-backend\n20/27 Test #20: achievement-backend ..............   Passed    0.04 sec\n      Start 21: profile-backend\n21/27 Test #21: profile-backend ..................   Passed    0.30 sec\n      Start 22: achievements\n22/27 Test #22: achievements .....................   Passed    0.05 sec\n      Start 23: profile\n23/27 Test #23: profile ..........................   Passed    2.56 sec\n      Start 24: profile-count\n24/27 Test #24: profile-count ....................   Passed    0.00 sec\n      Start 25: library\n25/27 Test #25: library ..........................   Passed    0.08 sec\n      Start 26: gpu\n26/27 Test #26: gpu ..............................   Passed    6.80 sec\n      Start 27: preview-smoke\n27/27 Test #27: preview-smoke ....................   Passed    0.20 sec\n\n100% tests passed, 0 tests failed out of 27\n\nTotal Test time (real) =  34.61 sec\n",
+    "network": "Internal ctest changing into directory: /workspace/Blades/build/linux\nTest project /workspace/Blades/build/linux\n    Start 26: jellyfin-service\n1/2 Test #26: jellyfin-service .................   Passed    4.15 sec\n    Start 27: ftp\n2/2 Test #27: ftp ..............................   Passed    2.12 sec\n\n100% tests passed, 0 tests failed out of 2\n\nTotal Test time (real) =   6.27 sec\n",
+    "sanitizers": "Internal ctest changing into directory: /workspace/Blades/build/video-sanitize\nTest project /workspace/Blades/build/video-sanitize\n    Start 1: jellyfin-protocol\n1/7 Test #1: jellyfin-protocol ................   Passed    0.01 sec\n    Start 2: jellyfin-ui\n2/7 Test #2: jellyfin-ui ......................   Passed    0.00 sec\n    Start 3: video-audio-preroll\n3/7 Test #3: video-audio-preroll ..............   Passed    1.48 sec\n    Start 4: video-startup-clock\n4/7 Test #4: video-startup-clock ..............   Passed    3.22 sec\n    Start 5: video-late-presentation\n5/7 Test #5: video-late-presentation ..........   Passed    3.22 sec\n    Start 6: video-rgba-fallback\n6/7 Test #6: video-rgba-fallback ..............   Passed    2.78 sec\n    Start 7: video\n7/7 Test #7: video ............................   Passed    5.25 sec\n\n100% tests passed, 0 tests failed out of 7\n\nTotal Test time (real) =  15.96 sec\n",
+    "sanitizer_service": "Internal ctest changing into directory: /workspace/Blades/build/video-sanitize\nTest project /workspace/Blades/build/video-sanitize\n    Start 26: jellyfin-service\n1/1 Test #26: jellyfin-service .................   Passed    4.30 sec\n\n100% tests passed, 0 tests failed out of 1\n\nTotal Test time (real) =   4.30 sec\n",
+    "sanitizer_scope": "Application wrappers/tests; external FFmpeg static libraries not instrumented; LeakSanitizer disabled in traced executor.",
+    "official_server": "PASS: official Jellyfin 10.10.7; HEVC/AAC source -> negotiated MPEG2/MP2 MPEG-TS -> Blades AVIO/decoder, real sound/picture data, pause/end, watch-history report, saved-token reconnect and disconnect\nPASS: Jellyfin authentication, video-only libraries, folders/pages, authenticated MPEG2/MP2 playback (90 pictures), pause/end, reporting/cleanup, saved-session reconnect/disconnect/remove\n",
+    "official_server_scope": "Isolated official10.10.7 loopback instance, generated disposable credentials and synthetic HEVC/AAC video; actual production worker/HTTP/AVIO/decoder, watch-history and reconnect tests. No user server or private media accessed.",
+    "instruction_audit": "PASS: 1041821 instructions checked across five archives; vectors only in the two Simple360 filter objects, restricted to the explicit Xenon shift/add/permute subset. Generic PPC/AltiVec remains off; GPLv3 enabled, nonfree off.\n",
+    "actual_Xenos_shader": "PASS: 240 compiled Xenos swirl samples match supplied equations within one RGB level\nPASS: compiled Xenos point fetches and separable 720p background filtering\nPASS: compiled Xenos glyph tint and integer alpha coverage\nPASS: compiled Xenos content fade shader\nPASS: compiled Xenos cap box filter preserves alpha-aware area samples\nPASS: 72 compiled Xenos video samples; three Y/U/V sampler slots, BT601/709 limited/full, boundaries and RGB\n",
+    "xex": "PASS: XEX2 PowerPC-BE, Xbox subsystem, entry 0x825a78a0\nPASS: 139 verified 65536-byte image pages; header/image/import digest chains valid\nPASS: xam.xex: 92 import slots\nPASS: xboxkrnl.exe: 122 import slots\nConsole launch and Peer Pressure compatibility remain unverified.\n",
+    "v043_decoder_build_kernels_GPU_sources_byte_identical": [
+      "src/platform/xbox_renderer.c",
+      "src/render/shaders/video.frag",
+      "src/render/video_colour.c",
+      "tools/build-video-ffmpeg.py",
+      "third_party/ffmpeg/patches/xsdk.patch",
+      "third_party/ffmpeg/xenon/simple360_chroma.c",
+      "third_party/ffmpeg/xenon/simple360_intrinsics.h",
+      "third_party/ffmpeg/xenon/simple360_qpel.c"
+    ],
+    "source_application_rebuild_byte_identical": true,
+    "rebuild_scope": "Exact archived application, pinned SDK, same fully built/audited native FFmpeg dependency; all sources/patches/build scripts supplied.",
+    "USB_source_CRC_manifest_current_source_payload_license_safety": "passed"
+  },
+  "video": {
+    "streams": [
+      {
+        "index": 0,
+        "codec_name": "h264",
+        "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+        "profile": "High",
+        "codec_type": "video",
+        "codec_tag_string": "avc1",
+        "codec_tag": "0x31637661",
+        "width": 1280,
+        "height": 720,
+        "coded_width": 1280,
+        "coded_height": 720,
+        "closed_captions": 0,
+        "film_grain": 0,
+        "has_b_frames": 2,
+        "pix_fmt": "yuv420p",
+        "level": 31,
+        "chroma_location": "left",
+        "field_order": "progressive",
+        "refs": 1,
+        "is_avc": "true",
+        "nal_length_size": "4",
+        "id": "0x1",
+        "r_frame_rate": "30/1",
+        "avg_frame_rate": "30/1",
+        "time_base": "1/15360",
+        "start_pts": 0,
+        "start_time": "0.000000",
+        "duration_ts": 2150400,
+        "duration": "140.000000",
+        "bit_rate": "913034",
+        "bits_per_raw_sample": "8",
+        "nb_frames": "4200",
+        "extradata_size": 46,
+        "disposition": {
+          "default": 1,
+          "dub": 0,
+          "original": 0,
+          "comment": 0,
+          "lyrics": 0,
+          "karaoke": 0,
+          "forced": 0,
+          "hearing_impaired": 0,
+          "visual_impaired": 0,
+          "clean_effects": 0,
+          "attached_pic": 0,
+          "timed_thumbnails": 0,
+          "non_diegetic": 0,
+          "captions": 0,
+          "descriptions": 0,
+          "metadata": 0,
+          "dependent": 0,
+          "still_image": 0,
+          "multilayer": 0
+        },
+        "tags": {
+          "language": "und",
+          "handler_name": "VideoHandler",
+          "vendor_id": "[0][0][0][0]",
+          "encoder": "Lavc61.19.101 libx264"
+        }
+      },
+      {
+        "index": 1,
+        "codec_name": "aac",
+        "codec_long_name": "AAC (Advanced Audio Coding)",
+        "profile": "LC",
+        "codec_type": "audio",
+        "codec_tag_string": "mp4a",
+        "codec_tag": "0x6134706d",
+        "sample_fmt": "fltp",
+        "sample_rate": "48000",
+        "channels": 2,
+        "channel_layout": "stereo",
+        "bits_per_sample": 0,
+        "initial_padding": 0,
+        "id": "0x2",
+        "r_frame_rate": "0/0",
+        "avg_frame_rate": "0/0",
+        "time_base": "1/48000",
+        "start_pts": 0,
+        "start_time": "0.000000",
+        "duration_ts": 6720000,
+        "duration": "140.000000",
+        "bit_rate": "32334",
+        "nb_frames": "6564",
+        "extradata_size": 5,
+        "disposition": {
+          "default": 1,
+          "dub": 0,
+          "original": 0,
+          "comment": 0,
+          "lyrics": 0,
+          "karaoke": 0,
+          "forced": 0,
+          "hearing_impaired": 0,
+          "visual_impaired": 0,
+          "clean_effects": 0,
+          "attached_pic": 0,
+          "timed_thumbnails": 0,
+          "non_diegetic": 0,
+          "captions": 0,
+          "descriptions": 0,
+          "metadata": 0,
+          "dependent": 0,
+          "still_image": 0,
+          "multilayer": 0
+        },
+        "tags": {
+          "language": "und",
+          "handler_name": "SoundHandler",
+          "vendor_id": "[0][0][0][0]"
+        }
+      }
+    ],
+    "format": {
+      "filename": "Blades-v0.44-walkthrough.mp4",
+      "nb_streams": 2,
+      "nb_programs": 0,
+      "nb_stream_groups": 0,
+      "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+      "format_long_name": "QuickTime / MOV",
+      "start_time": "0.000000",
+      "duration": "140.000000",
+      "size": "16698979",
+      "bit_rate": "954227",
+      "probe_score": 100,
+      "tags": {
+        "major_brand": "isom",
+        "minor_version": "512",
+        "compatible_brands": "isomiso2avc1mp41",
+        "encoder": "Lavf61.7.103"
+      }
+    }
+  },
+  "video_scope": "Fresh140second720p30 desktop GPU walkthrough with local MPEG2/H264 and actual Jellyfin streaming from an isolated official server. Same0.44 renderer/assets and decoder. Guide/profile/storage/FTP simulated and labelled. A subsequent transient503 saved-token retry fix affects failure handling only; final XEX/source contain that tested fix. No native-hardware capture claim.",
+  "console_scope": "Jellyfin connection, keyboard, real-console networking and playback still need Xbox360 testing. Previous0.43 local decoder was user-confirmed working. No1080p30 or GPU compressed-video decode claim.",
+  "artifacts": {
+    "dist/Blades-v0.44-USB.zip": {
+      "bytes": 4722363,
+      "sha256": "4e717e75e897c4e22839e94183e8b4c9676099bb78372423fad9018d85583d65"
+    },
+    "dist/Blades/default.xex": {
+      "bytes": 6221824,
+      "sha256": "c16cc1721b044f8225f2b017e120a12fcc33679325952274085be3269220e683"
+    },
+    "dist/Blades-artwork-pack.zip": {
+      "bytes": 2041912,
+      "sha256": "7417accd71918a01d316ae20f8471af504969f35a19870ff70fc4edd060690bf"
+    },
+    "dist/Blades-v0.44-walkthrough.mp4": {
+      "bytes": 16698979,
+      "sha256": "3bc2ca2cb5a5c26b63b0baa7c5952b1b4c3e3551acfe1fbe5c0739cde522431f"
+    },
+    "dist/Blades-v0.44-source.zip": {
+      "bytes": 32003252,
+      "sha256": "9a4c1cb3000911d046524080a0d49d77350778300e3c3cceda3204d4bf4f7366"
+    }
+  },
+  "source_sha256": {
+    "CMakeLists.txt": "92c1bdf03e2949240d9a226be5239c8f32f301e1102307903518644d54dde862",
+    "include/http_client.h": "da40083ad601f84cdd2702d9fb460a197f572120a42527f9b1bccca64d317aa8",
+    "include/jellyfin.h": "a13aacb53cb4bc2ad0af64769c90e855dabbdaf4868407325df486b57ded774f",
+    "include/video.h": "6d966762ed8057fc7fa2ebe28c2cdb562c202e61fb1da4492dc24e5505f2114d",
+    "src/core/http_client.c": "f804f8232fb04278f41f483c0918e7559b44ff40edbd5bb2126105a40220352b",
+    "src/core/jellyfin.c": "0fd052bb031ea51c9ba5cfa8e0483af3b95bb2c28f3cdd11de20c5f4e846013f",
+    "src/core/jellyfin_ui.c": "1d343b927a620841f78f4bd00d369f7a65cd3cd8a871077dfbb2b393a2f58596",
+    "src/core/video.c": "648794220d8719abf538b89d2b34054ed1999932051949944994842c6cd23ba2",
+    "src/platform/xbox360.c": "94e3246379fbf6af7663ac65e7c1a64d8a388e582e869c30bf680bf88e5f25dd",
+    "src/platform/xbox_renderer.c": "9a27fa889d3a9a3d269d3fc187d976bec6fba7b003083734e96cac0b2982ad9e",
+    "src/render/dashboard_render.c": "6416b04fa415d2ffa319a44136ce5453f36229643b59e59abd4e46dc3c5a8d40",
+    "src/render/shaders/video.frag": "4cff720419253301da4c8696925577c806eb0a72132532d1765d62ee01c276c7",
+    "src/render/video_colour.c": "f53b50fc34b2cfe8a4f67b653e11b559da545372deffb5b30f8286e423da784e",
+    "src/render/video_render.c": "1b5b449b2df9d59cc113ebc6ad40435425e4e1a0a1ea060772d0901e7a3b9145",
+    "tests/jellyfin_fixture.c": "b6bc2b6d396c4fea55a6fb7ad40f4b350a5138101e35a163fb98bf3f411907a0",
+    "tests/test_jellyfin.py": "4c04e2536d8dfa9627a5ab3f884a1bff0cc78d03ae3bfbf8a5c8b73d8ad674f8",
+    "tests/test_jellyfin_real.py": "4dcc9f5f0a335d70cfa768a5dae3e7925ca0d2ca08e2f685759b82a0c45213f5",
+    "tests/test_jellyfin_ui.c": "a6a9515dd6c439ec1db7b92dcf3562e083180c71cb8851e2398b77826a6c37cd",
+    "tests/test_xenonfin_protocol.c": "0a62b8fddb6f5d6223fc1719a95eaf348142e01b3bfc1e390a0cfaf23c68ab27",
+    "third_party/ffmpeg/patches/xsdk.patch": "8828d8e2c1309dec9d9c3c50671d9aae96608974486cceff8383db20599d75f6",
+    "third_party/ffmpeg/xenon/simple360_chroma.c": "f6e448bd77f4468c7d722b0379ffea372da65f202af14f090095453cb24b3575",
+    "third_party/ffmpeg/xenon/simple360_intrinsics.h": "d34f1c43f54c6ff813c2015fe70ddaf3967a4c655729f3d7ddb17b4d8f2e1037",
+    "third_party/ffmpeg/xenon/simple360_qpel.c": "98a049564a7cdaa1841faa33942d4e17facdaec816860655b3300a342fc2a2c0",
+    "tools/build-video-ffmpeg.py": "252e21e44f126110048383c5a20c15a2d7f103ce226524fb11f3c5a58eac1836",
+    "tools/build-xbox.sh": "0a3f5c7bf085acce2d1ade130eeaed6b906e12102f23f618e8055f3cbcd5c2b6",
+    "tools/fetch-jellyfin-test-server.py": "80ef785d3f445634aa6a2f135ee7167c3afaf2efd55f450c8ac3fffdceb64a2f",
+    "tools/package-source.py": "40b1b0e4208cf84ff343bb662d0cf99e4fc59d9a822230a9a00ecb946bb543a7",
+    "tools/record-walkthrough.py": "37caebf13e0f5ac775b4ab05e57c52ac80a49584161098faaf9384092542f238"
+  }
+}

@@ -204,3 +204,12 @@ The complete source ZIP must include ported/preserved upstream files, exact
 patches/scripts, all application source and pinned SDK. Never reuse an LGPL-only
 licence claim for0.43. Verify the two-object SIMD restriction and source hashes;
 PPC arithmetic tests are not console performance evidence.
+
+Version0.44 adds native Jellyfin controls/browsing and an authenticated custom
+HTTP stream feeding the existing player. Include XenonFin original/ported code,
+GPL-2.0-or-later notice and all changes/tests/scripts in the GPLv3 source bundle.
+Never include Config/jellyfin-settings.json, tokens, passwords, authenticated
+requests or personal server media in any release or test recording. The fresh
+0.44 walkthrough uses only a temporary official server/account/synthetic movie.
+Local0.43 FFmpeg flags/kernels/GPU sources remain unchanged; the remote AVIO buffer
+is32KiB to satisfy FFmpeg2.8's nonseekable short-read refill assumptions.

@@ -1,30 +1,39 @@
-Blades0.43 — Simple360Player H264 kernels and playback scheduling
+Blades0.44 — Jellyfin connection and streaming in the Blades layout
 
-Extract Blades-v0.43-USB.zip onto USB and launch Blades/default.xex. XEX, Assets
-and notices are included; personal paths, FTP settings and logs are excluded.
-Keep existing Config files when updating. No adapter or additional XEX is used.
+Extract Blades-v0.44-USB.zip onto USB; launch Blades/default.xex. The complete
+matching Assets folder/notices are included. Keep your existing Config files
+when updating. No adapter, converter, DashLaunch or extra executable is needed.
 
-This release ports Simple360Player's actual shift/add H264 chroma and qpel
-filters, enables them only after a scalar comparison self-test, and matches
-its four frame workers,3/4/5/2 placement, four-picture buffer, preroll and
-40/250ms adaptive catch-up. Generic AltiVec stays off. GPU colour conversion
-and scaling are retained; the CPU decodes the compressed video.
+Media > Media Center: Server Address, Username, Password, Connect/Disconnect,
+Remove Connection. Use a LAN IPv4 address and optional port, e.g.10.0.0.20:8096.
+Native HTTP only, as in XenonFin: no HTTPS/DNS/base path. Enter up to128 ASCII
+characters with the Xbox keyboard. The account must permit server transcoding.
+A saved bearer session reconnects next start; passwords are never saved.
+Config/jellyfin-settings.json is private and excluded from all release ZIPs.
 
-Try the SAME H264 file used in Simple360Player for at least15seconds. Actual
-speed improvement/parity is not yet hardware verified. default.log records
-Simple360 H264 DSP chroma=0 qpel=0 when both runtime tests pass; positive values
-mean scalar fallback. video-perf includes catchup/catchup_episodes and lag_ms.
-If still slower, send default.log after normal playback, excluding pauses.
-No1080p30 result is claimed. Logs can contain private paths/profile IDs.
+Media > Video > Jellyfin: browse video libraries, folders, series/seasons,
+movies and episodes. Previous/Next Page are10-item pages. X refreshes, B returns.
+Jellyfin negotiates and streams MPEG2/MP2 up to720p30 to the existing player.
+A pause/resume, X fit/stretch, B/Back returns to the same list. Guide pauses.
+This progressive remote stream does not support seeking; Local still does.
+Media > Video > Local retains scanned videos. Video Marketplace manages paths.
+There is no video autoplay on startup/sign-in. No whole-file download is needed.
 
-A pause/resume; Left/Right seek10s; X fit/stretch; Y controls; B/Back returns
-to the same Blades list. Guide pauses. Video Marketplace manages scan paths.
-Music/Pictures playback and original visualisations remain unfinished.
+The verified0.43 Simple360 H264 routines, workers and GPU display are retained.
+All artwork/tints/highlights are retained. Music/Pictures playback and music
+visualisations are still unfinished. See docs/JELLYFIN.md for detailed scope.
 
-Same premade235-entry artwork. Fresh desktop walkthrough labels simulated
-console services. The combined executable is GPLv3; original Blades MIT and
-artwork/font notices are retained. Complete corresponding source/build scripts:
-Blades-v0.43-source.zip. No Microsoft XDK is needed to rebuild it.
+An isolated official Jellyfin10.10.7 server passed authentication/browsing and
+HEVC/AAC -> MPEG2/MP2 ->90pictures with audio data, pause/end/watch history and
+saved-session reconnect. Protocol/network/UI/sanitizer/render/build checks pass.
+Physical Xbox Jellyfin/network/keyboard playback still needs your test; no
+new console throughput/1080p30 result is claimed. If a problem occurs, describe
+the screen and send default.log; do not share your private Jellyfin config.
+
+Fresh desktop walkthrough includes Local and actual isolated Jellyfin playback.
+Xbox Guide/profiles/storage/FTP are simulated and labelled. The combined binary
+is GPLv3 with complete corresponding source in Blades-v0.44-source.zip; original
+MIT/FFmpeg/Simple360Player/XenonFin/artwork/font/SDK notices are preserved.
 
 Retained 0.37 corrections:
 - Marketplace tint is halfway between 0.35 and 0.36. Xbox Live keeps the

@@ -1,8 +1,17 @@
-# Video playback — Blades0.43
+# Jellyfin and Local video — Blades0.44
 
-Media > Video keeps the Blades chooser; Video Marketplace manages folders/depth.
-A pause/resume, Left/Right seek10seconds, X fit/stretch, Y controls, B/Back return
-to the same list; EOF returns too. Guide pauses and restores the prior state.
+Media > Video contains Jellyfin and Local. Media Center manages the Jellyfin
+server/login. See [connection setup and limits](JELLYFIN.md). Local retains the
+existing scanned-video library and the0.43 decoder/GPU path.
+
+Jellyfin uses authenticated, bounded custom HTTP AVIO and server-negotiated
+MPEG2/MP2 MPEG-TS up to720p30. The console remains in the same executable.
+A pause/resume, X fit/stretch, B/Back return to Jellyfin list. No progressive
+stream seeking is advertised or enabled; Local's10second seek is retained.
+The remote AVIO buffer uses FFmpeg2.8's standard32KiB. A64KiB original buffer
+can trigger its nonseekable probe/refill assertion after short TCP reads;
+the fragmented-stream regression exercises the fixed path. HTTP errors and
+incomplete chunk/content-length EOF fail visibly instead of silently ending.
 
 ## Decoder changes
 

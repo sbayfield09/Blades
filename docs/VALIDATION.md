@@ -1,3 +1,34 @@
+# Current release: Blades0.44
+
+-29 host suites pass, including XenonFin protocol, Media Center/source/browser
+  routing, cancellable HTTP service/player and existing FTP/video suites.
+- Application ASan/UBSan passes eight suites, including the real socket/decoder
+  fixture. External FFmpeg libraries are not instrumented; leak detection off.
+- Official Jellyfin10.10.7 isolated test: synthetic HEVC/AAC -> authenticated
+  MPEG2/MP2 progressive MPEG-TS ->90 decoded pictures with audio, pause/end,
+  watch-history reports and saved-token reconnect/disconnect. Fresh capture uses
+  an8second/240picture source. No user server/media or real credentials used.
+- Fragmented/chunked responses, active/queued cancellation,401 expiry,503 saved
+  session retry and truncated-media errors tested. Remote32KiB AVIO avoids an
+  FFmpeg2.8 refill assertion reproduced by the fixture; local64KiB retained.
+- Native build,139 XEX image-page/import digest checks, five decoder-library
+  instruction audit and actual compiled Xenos shader checks pass. The0.43
+  FFmpeg build, Xenon filter and GPU renderer/shader/colour sources are unchanged.
+- Archived application rebuild yields byte-identical XEX SHA256:
+  c16cc1721b044f8225f2b017e120a12fcc33679325952274085be3269220e683.
+- USB/source CRC, manifest, current-source, matching-artwork and licence checks
+  pass. No private settings/logs are bundled. Combined binary GPLv3; complete
+  source/build scripts/pinned free SDK and original notices supplied.
+- Fresh140second720p30 desktop GPU walkthrough,48kHz stereo, fully decoded;
+  includes actual Local and Jellyfin playback. Console Guide/profile/storage/FTP
+  simulated and labelled. A later tested503 retry fix only affects connection
+  failure handling; renderer/player/artwork match the recorded release.
+- Actual Xbox Jellyfin network, keyboard and playback still need hardware
+  testing. No native timing,1080p30 or GPU compressed-video decode claim.
+
+See [release](RELEASE-0.44.md), [Jellyfin setup/limits](JELLYFIN.md),
+[audit](data/v0.44-video-audit.json). Previous validation follows.
+
 # Current release: Blades0.43
 
 - Actual Simple360Player chroma/qpel shift/add kernels ported from pinned
