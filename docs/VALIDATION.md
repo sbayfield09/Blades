@@ -1,3 +1,31 @@
+# Current release: Blades0.41
+
+- The user reported0.40 audio without picture and a hard crash. The log has no
+  fault address, so the exact crash cause is not proven. Raw logs remain private.
+- Remove generic decoder AltiVec/compiler vectorization; restore the earlier
+  four-worker2–5 placement. Five FFmpeg archives are instruction-scanned: no
+  VMX operations in1,029,070 checked instructions. SDK copy code is separate.
+- GPU display remains enabled with three separate linear Y/U/V textures and a
+  simpler matrix shader, following Simple360Player's CPU-decode/GPU-display split.
+- All23 host suites pass, including explicit RGBA fallback, early B/reopen and
+  held-buffer ownership;328 desktop GPU comparisons pass. The actual compiled
+  Xenos shader passes72 video samples, three sampler slots, limited/full range,
+  BT601/709 and boundaries, plus the earlier UI/swirl/cap shader checks.
+- Application ASan/UBSan passes; external FFmpeg libraries are not instrumented,
+  LeakSanitizer disabled. Native XEX integrity passes. The source application
+  rebuild produces identical XEX SHA256:
+  9b9aa6a51c0f7dcbe40fed8c9e06bcda08b2f381f26209559c0e83493b208b26.
+- USB/source CRC/manifest/payload checks pass; no saved paths, credentials or logs.
+  Artwork is unchanged; fresh108-second720p30 desktop GPU walkthrough is fully
+  decoded and screenshots inspected. Console services are labelled simulations.
+- New first-frame stage logs isolate future failures better. Console texture
+  behaviour, crash outcome and1080p30 performance remain unverified. Display
+  remains720p; neither player implements full GPU compressed-video decoding.
+
+See [release](RELEASE-0.41.md), [audit](data/v0.41-video-audit.json),
+[upstream pipeline](SIMPLE360PLAYER-PIPELINE.md) and [playback](VIDEO-PLAYBACK.md).
+Earlier validation history follows.
+
 # Current release: Blades 0.40
 
 - User-confirmed0.39 baseline:720p MPEG2/WMV work well;720p H264 is slow/jittery.

@@ -1,40 +1,34 @@
-Blades 0.40.0 - Video playback inside the Blades executable
+Blades 0.41.0 - CPU decode / three-plane GPU video display
 
-Extract Blades-v0.40-USB.zip onto USB and launch Blades/default.xex. The ZIP
-includes default.xex, complete Assets and licences. No Players folder, adapter,
-DLL, DashLaunch or stock player is required. Existing 0.38 Players files are
-unused; you may remove that old folder manually. The ZIP excludes saved scan
-paths, FTP credentials and logs, preserving those on an update.
+Extract Blades-v0.41-USB.zip onto USB and launch Blades/default.xex. Complete
+Assets and notices are included. Saved scan folders, FTP credentials and logs
+are excluded, preserving existing settings on update. No adapter/Players needed.
 
-Version 0.40 video performance:
-- AltiVec decoding enabled; three workers span all physical cores.
-- Common YUV420 frames use GPU colour conversion/scaling.1080p input remains
-  full resolution until the GPU; the actual display surface is still720p.
-- Try the supplied1080p30 MPEG2 sample and the same720p H264 file from0.39.
-  Leave a long file playing normally for15seconds, then send default.log.
-  New video-perf lines show decoded/presented FPS, preparation time and underruns.
-- User-confirmed0.39 baseline:720p MPEG2/WMV good,720p H264 slow/jittery.
-  0.40 performance and vector/GPU runtime still need console verification.
+Version0.41 compatibility correction:
+- Remove0.40's generic AltiVec decoder routines/compiler vectorization; restore
+  the earlier four-worker2,3,4,5 placement. SDK memory copies are unchanged.
+- Keep GPU colour conversion and scaling. Separate linear Y/U/V textures and a
+  simple matrix shader replace the single tiled atlas texture, following the
+  standalone Simple360Player layout. Compressed video still decodes on the CPU.
+  Neither player transcodes/re-encodes files or provides full GPU codec decoding.
+- First-frame logs now show codec flush, decoded/prepared output, delivery,
+  upload, submission and GPU fence completion. Existing video-perf lines measure
+  actual decoded/presented FPS independently of UI FPS.
+- The exact0.40 crash address/cause was not recorded. This revision needs a
+  hardware retest; host/Xbox shader arithmetic checks do not prove console GPU
+  texture behaviour or1080p30 performance. Display output remains720p.
 
-Retained video controls:
-- Keep choosing files in Media > Video. Add folders under Media > Video
-  Marketplace; choose Video, a scan depth and Scan Now.
-- A plays the exact selected file inside Blades. A pauses/resumes, Left/Right
-  seeks ten seconds, X switches fit/stretch, Y toggles the controls.
-- B or Back stops and returns to the same list and selected row. EOF returns
-  there too. Opening Guide pauses and restores the previous pause state on close.
-- WMV/MP4/MOV/MKV/AVI/ASF/MPEG/TS/FLV containers are accepted; their codec/profile
-  must also be supported. Input above 1920x1080 is rejected; output is at most
-  1280x720. Console performance for this new engine is not yet measured.
-- Start with the synthetic 640x360 sample.wmv and sample.mp4 in tests/media of
-  Blades-v0.40-source.zip. Host playback/controls and Xbox build/integrity passed;
-  this embedded Xbox playback needs a new hardware test.
-- If it fails, send Blades/default.log and the last screen/sound observed.
-  No separate player/adapter logs are used. Logs may contain selected filenames.
-- Music/Pictures playback and original Xbox music visualisations are unfinished.
-- FFmpeg is LGPL2.1+; complete corresponding source and relink instructions are
-  in Blades-v0.40-source.zip. See licenses/VIDEO-LICENSE-NOTICE.txt.
-- Artwork is the unchanged matching 235-entry pack with retained tints/shadows.
+Test the same720p MPEG2 file that worked in0.39, then H264. Open via Media > Video;
+manage folders with Video Marketplace. A pauses/resumes, Left/Right seeks10seconds,
+X changes fit/stretch, Y toggles controls, B/Back returns to the same list. EOF
+returns too. Guide opening pauses and closing restores the prior pause state.
+If it fails, send Blades/default.log and describe the last screen/audio. Logs
+stay local and may contain filenames/profile identifiers.
+
+Music/Pictures playback and original music visualisations remain unfinished.
+The235-entry artwork is unchanged. The matching desktop walkthrough labels
+simulated console services and actual host sample playback. Complete application,
+FFmpeg and SDK sources/relink instructions: Blades-v0.41-source.zip.
 
 Retained 0.37 corrections:
 - Marketplace tint is halfway between 0.35 and 0.36. Xbox Live keeps the

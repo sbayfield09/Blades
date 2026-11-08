@@ -1,0 +1,217 @@
+{
+  "release": "0.41.0",
+  "recorded_utc": "2026-11-08T11:22:41.557730+00:00",
+  "xex_version": "0.0.41.0",
+  "sdk_commit": "5f6dc726f65f6d171493a3628c2415c03551f27b",
+  "feature": "Compatible CPU decoding and three-plane GPU colour conversion/display after0.40 audio-only crash",
+  "console_evidence": {
+    "user_report": "Video audio played without picture, then console hard-crashed",
+    "log_scope": "Decoder initialization and later B/reopen input are present; no completed frame-upload evidence or crash address. Exact fault not established.",
+    "private_logs_published": false
+  },
+  "upstream_comparison": {
+    "Simple360Player_commit": "5d235c1fd24c098ccc1b2463c1b4265bf2e7844c",
+    "CPU": "ffglue.c calls avcodec_decode_video2",
+    "GPU": "FFPlayer.cpp uses three linear L8 textures and matrix pixel shader for YUV to RGB/scaling",
+    "full_GPU_codec_decoding": false
+  },
+  "changes": {
+    "decoder": "FFmpeg assembly/AltiVec and compiler vectorization disabled; four workers2\u20135, decode submission2, demux5, audio1",
+    "display": "GPU colour conversion retained; three independent linear R8 Y/U/V textures replace single tiled atlas. Source storage remains owned/strided; each plane upload respects pitch and prior fence. Cache counts/frees all three textures.",
+    "diagnostics": "Input/codec-flush/first decode/first preparation/first delivery/first upload/submission/fence completion, plus existing video-perf counters",
+    "resolution": "up to1920x1080 YUV input,1280x720 display; no re-encoding/transcoding",
+    "fallback": "RGBA/swscale fallback retained and tested across early stop/reopen with held prior frame"
+  },
+  "validation": {
+    "host_suites_passed": 23,
+    "core_host": "Internal ctest changing into directory: /workspace/Blades/build/linux\nTest project /workspace/Blades/build/linux\n      Start  1: video-rgba-fallback\n 1/22 Test  #1: video-rgba-fallback ..............   Passed    2.61 sec\n      Start  2: video\n 2/22 Test  #2: video ............................   Passed    5.05 sec\n      Start  3: dashboard\n 3/22 Test  #3: dashboard ........................   Passed    5.36 sec\n      Start  4: resources\n 4/22 Test  #4: resources ........................   Passed    0.00 sec\n      Start  5: skin\n 5/22 Test  #5: skin .............................   Passed    0.01 sec\n      Start  6: ambient\n 6/22 Test  #6: ambient ..........................   Passed    0.06 sec\n      Start  7: font\n 7/22 Test  #7: font .............................   Passed    0.01 sec\n      Start  8: audio\n 8/22 Test  #8: audio ............................   Passed    0.01 sec\n      Start  9: animation\n 9/22 Test  #9: animation ........................   Passed    0.00 sec\n      Start 10: pixels\n10/22 Test #10: pixels ...........................   Passed    0.05 sec\n      Start 11: draw-list\n11/22 Test #11: draw-list ........................   Passed    2.44 sec\n      Start 12: startup\n12/22 Test #12: startup ..........................   Passed    0.79 sec\n      Start 13: disc\n13/22 Test #13: disc .............................   Passed    0.07 sec\n      Start 14: media-launch\n14/22 Test #14: media-launch .....................   Passed    0.00 sec\n      Start 15: achievement-backend\n15/22 Test #15: achievement-backend ..............   Passed    0.04 sec\n      Start 16: profile-backend\n16/22 Test #16: profile-backend ..................   Passed    0.30 sec\n      Start 17: achievements\n17/22 Test #17: achievements .....................   Passed    0.06 sec\n      Start 18: profile\n18/22 Test #18: profile ..........................   Passed    2.56 sec\n      Start 19: profile-count\n19/22 Test #19: profile-count ....................   Passed    0.01 sec\n      Start 20: library\n20/22 Test #20: library ..........................   Passed    0.09 sec\n      Start 21: gpu\n21/22 Test #21: gpu ..............................   Passed    6.61 sec\n      Start 22: preview-smoke\n22/22 Test #22: preview-smoke ....................   Passed    0.20 sec\n\n100% tests passed, 0 tests failed out of 22\n\nTotal Test time (real) =  26.33 sec\n",
+    "ftp": "Internal ctest changing into directory: /workspace/Blades/build/linux\nTest project /workspace/Blades/build/linux\n    Start 21: ftp\n1/1 Test #21: ftp ..............................   Passed    2.12 sec\n\n100% tests passed, 0 tests failed out of 1\n\nTotal Test time (real) =   2.12 sec\n",
+    "sanitizers": "Internal ctest changing into directory: /workspace/Blades/build/video-sanitize\nTest project /workspace/Blades/build/video-sanitize\n    Start 1: video-rgba-fallback\n1/2 Test #1: video-rgba-fallback ..............   Passed    2.66 sec\n    Start 2: video\n2/2 Test #2: video ............................   Passed    5.22 sec\n\n100% tests passed, 0 tests failed out of 2\n\nTotal Test time (real) =   7.88 sec\n",
+    "sanitizer_scope": "Application wrapper/frontend; external FFmpeg libraries not instrumented. LeakSanitizer disabled in traced executor.",
+    "GPU": "328 desktop comparisons including YUV limited/full BT601/709 gradients and sampler strides",
+    "actual_compiled_Xenos_shader": "PASS: 240 compiled Xenos swirl samples match supplied equations within one RGB level\nPASS: compiled Xenos point fetches and separable 720p background filtering\nPASS: compiled Xenos glyph tint and integer alpha coverage\nPASS: compiled Xenos content fade shader\nPASS: compiled Xenos cap box filter preserves alpha-aware area samples\nPASS: 72 compiled Xenos video samples; three Y/U/V sampler slots, BT601/709 limited/full, boundaries and RGB\n",
+    "decoder_instructions": "PASS: compatible C decoder configuration; no VMX vector operations in five FFmpeg archives (1029070 instructions checked). SDK copy code is separate.\n",
+    "xex": "PASS: XEX2 PowerPC-BE, Xbox subsystem, entry 0x8258cbd0\nPASS: 138 verified 65536-byte image pages; header/image/import digest chains valid\nPASS: xam.xex: 92 import slots\nPASS: xboxkrnl.exe: 122 import slots\nConsole launch and Peer Pressure compatibility remain unverified.\n",
+    "source_application_rebuild_byte_identical": true,
+    "source_rebuild_scope": "Exact archived application/shaders, pinned SDK and exact freshly built compatible decoder; all corresponding sources/patches/scripts included.",
+    "USB_source_CRC_manifest_safe_payloads_no_settings_logs": "passed",
+    "artwork_unchanged": true
+  },
+  "video": {
+    "streams": [
+      {
+        "index": 0,
+        "codec_name": "h264",
+        "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+        "profile": "High",
+        "codec_type": "video",
+        "codec_tag_string": "avc1",
+        "codec_tag": "0x31637661",
+        "width": 1280,
+        "height": 720,
+        "coded_width": 1280,
+        "coded_height": 720,
+        "closed_captions": 0,
+        "film_grain": 0,
+        "has_b_frames": 2,
+        "pix_fmt": "yuv420p",
+        "level": 31,
+        "chroma_location": "left",
+        "field_order": "progressive",
+        "refs": 1,
+        "is_avc": "true",
+        "nal_length_size": "4",
+        "id": "0x1",
+        "r_frame_rate": "30/1",
+        "avg_frame_rate": "30/1",
+        "time_base": "1/15360",
+        "start_pts": 0,
+        "start_time": "0.000000",
+        "duration_ts": 1658880,
+        "duration": "108.000000",
+        "bit_rate": "886974",
+        "bits_per_raw_sample": "8",
+        "nb_frames": "3240",
+        "extradata_size": 46,
+        "disposition": {
+          "default": 1,
+          "dub": 0,
+          "original": 0,
+          "comment": 0,
+          "lyrics": 0,
+          "karaoke": 0,
+          "forced": 0,
+          "hearing_impaired": 0,
+          "visual_impaired": 0,
+          "clean_effects": 0,
+          "attached_pic": 0,
+          "timed_thumbnails": 0,
+          "non_diegetic": 0,
+          "captions": 0,
+          "descriptions": 0,
+          "metadata": 0,
+          "dependent": 0,
+          "still_image": 0,
+          "multilayer": 0
+        },
+        "tags": {
+          "language": "und",
+          "handler_name": "VideoHandler",
+          "vendor_id": "[0][0][0][0]",
+          "encoder": "Lavc61.19.101 libx264"
+        }
+      },
+      {
+        "index": 1,
+        "codec_name": "aac",
+        "codec_long_name": "AAC (Advanced Audio Coding)",
+        "profile": "LC",
+        "codec_type": "audio",
+        "codec_tag_string": "mp4a",
+        "codec_tag": "0x6134706d",
+        "sample_fmt": "fltp",
+        "sample_rate": "48000",
+        "channels": 2,
+        "channel_layout": "stereo",
+        "bits_per_sample": 0,
+        "initial_padding": 0,
+        "id": "0x2",
+        "r_frame_rate": "0/0",
+        "avg_frame_rate": "0/0",
+        "time_base": "1/48000",
+        "start_pts": 0,
+        "start_time": "0.000000",
+        "duration_ts": 5184000,
+        "duration": "108.000000",
+        "bit_rate": "31104",
+        "nb_frames": "5064",
+        "extradata_size": 5,
+        "disposition": {
+          "default": 1,
+          "dub": 0,
+          "original": 0,
+          "comment": 0,
+          "lyrics": 0,
+          "karaoke": 0,
+          "forced": 0,
+          "hearing_impaired": 0,
+          "visual_impaired": 0,
+          "clean_effects": 0,
+          "attached_pic": 0,
+          "timed_thumbnails": 0,
+          "non_diegetic": 0,
+          "captions": 0,
+          "descriptions": 0,
+          "metadata": 0,
+          "dependent": 0,
+          "still_image": 0,
+          "multilayer": 0
+        },
+        "tags": {
+          "language": "und",
+          "handler_name": "SoundHandler",
+          "vendor_id": "[0][0][0][0]"
+        }
+      }
+    ],
+    "format": {
+      "filename": "Blades-v0.41-walkthrough.mp4",
+      "nb_streams": 2,
+      "nb_programs": 0,
+      "nb_stream_groups": 0,
+      "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+      "format_long_name": "QuickTime / MOV",
+      "start_time": "0.000000",
+      "duration": "108.000000",
+      "size": "12513848",
+      "bit_rate": "926951",
+      "probe_score": 100,
+      "tags": {
+        "major_brand": "isom",
+        "minor_version": "512",
+        "compatible_brands": "isomiso2avc1mp41",
+        "encoder": "Lavf61.7.103"
+      }
+    }
+  },
+  "video_scope": "Fresh108second desktop GPU capture, actual CPU decode and three-plane GPU sample display. Guide/profile/storage/FTP simulated and labelled; not console footage.",
+  "console_scope": "Revised0.41 decoder/GPU path and crash outcome still require hardware testing. No proven crash instruction or1080p30 performance claim.",
+  "artifacts": {
+    "dist/Blades-v0.41-USB.zip": {
+      "bytes": 4630504,
+      "sha256": "78f567f4ef386d7e14576accb82b434debf2c55c356e9a20c6dea2849396819a"
+    },
+    "dist/Blades/default.xex": {
+      "bytes": 6094848,
+      "sha256": "9b9aa6a51c0f7dcbe40fed8c9e06bcda08b2f381f26209559c0e83493b208b26"
+    },
+    "dist/Blades-artwork-pack.zip": {
+      "bytes": 2041912,
+      "sha256": "7417accd71918a01d316ae20f8471af504969f35a19870ff70fc4edd060690bf"
+    },
+    "dist/Blades-v0.41-walkthrough.mp4": {
+      "bytes": 12513848,
+      "sha256": "be94ddba913970a9b6ff84625d59fe6d04510e30f7e8aac322fda466b2c9a593"
+    },
+    "dist/Blades-v0.41-source.zip": {
+      "bytes": 31748941,
+      "sha256": "a2b1d3bec5474a4262a6206306bb7a42490b01c0314e50229cecb2085d98c8fe"
+    }
+  },
+  "source_sha256": {
+    "CMakeLists.txt": "8698ce28b4b9864ebd130b75781a3747627047d74f430f1b00531d6d0ca5b594",
+    "include/video.h": "3c66923be6199d21167fca96467552c40901cc5f17da723d670c5fcd28b6414b",
+    "include/draw_list.h": "5e9be9aba05712e133f0fe7686924ff0f5981a7ac5ccabe153a4fbcab68e8945",
+    "src/core/video.c": "152ade0b6212848a5e7655d095a2ecd5cd8f1b480a739714388778ac825c0579",
+    "src/platform/xbox360.c": "336cbb63a99f93bd982ba031a26f9a898f53c9a5d678d6eb59c942c4eb2ebb45",
+    "src/platform/xbox_renderer.c": "9a27fa889d3a9a3d269d3fc187d976bec6fba7b003083734e96cac0b2982ad9e",
+    "src/render/video_colour.c": "f53b50fc34b2cfe8a4f67b653e11b559da545372deffb5b30f8286e423da784e",
+    "src/render/shaders/video.frag": "4cff720419253301da4c8696925577c806eb0a72132532d1765d62ee01c276c7",
+    "tools/gl_renderer.c": "6bdf7e7a0f4dcbdb66ffa70c064d0ccf14674bf32a848e0058202464dee8a54a",
+    "tools/build-video-ffmpeg.py": "084135b5a4b00d19161f5ae3b71eb2ff928705c8f3fa81823c19b26f9e828724",
+    "tools/verify-video-decoder.py": "01097ab7a368601367bf7d94ded6eb1cdadf1c25939d3642e2f7201221fe2fc0",
+    "tools/test-gpu-shaders.py": "bb637e1926c66691b940c966e68fcf293c148edb6215383cbd7327db964a48ce",
+    "tests/test_video_compat.c": "f054e31646ca08813f33d678f7b995810af503209af59feec0c5ca026eb525f8",
+    "third_party/ffmpeg/patches/xsdk.patch": "426f3fdf442e1eeed2cadaeee0ebc5e790131c0e3dbcdb7d6cfd605f0b197a27"
+  }
+}

@@ -182,3 +182,11 @@ Ship Blades-v0.40-source.zip, the fresh matching single-XEX USB/walkthrough and
 the synthetic1080p30 MPEG2 sample under dist/diagnostics/blades-v0.40/. Keep
 console logs private; publish only sanitized aggregate observations. Do not
 claim1080p30 console performance from host tests or UI presentation FPS.
+
+
+Version0.41 retains GPU colour conversion with three separate linear R8 planes,
+returns decoder workers to2–5 and disables generic decoder AltiVec/compiler
+vectorization after the0.40 crash. Publish source/relink and a fresh desktop
+walkthrough with the same pipeline. Run verify-video-decoder.py and the actual
+compiled Xenos shader arithmetic/sampler checks. Keep uploaded logs private.
+Do not claim a proven faulting instruction, console fix or frame-rate result.
