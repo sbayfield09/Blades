@@ -1,6 +1,6 @@
-# Blades0.42 walkthrough
+# Blades0.43 walkthrough
 
-[Watch/download](../dist/Blades-v0.42-walkthrough.mp4): fresh108-second720p30
+[Watch/download](../dist/Blades-v0.43-walkthrough.mp4): fresh108-second720p30
 desktop GPU capture with48kHz stereo and matching235-entry artwork. The on-video
 label distinguishes CPU decoding/GPU YUV display from simulated console services.
 
@@ -12,5 +12,9 @@ return to the list. At01:39 the720p H264/AAC fixture plays through the same path
 
 These are original synthetic samples, not reference footage. This is not console
 performance evidence. The separate controlled40ms-decoder regression tests verify
-the timing fix; their artificial delay is absent from the captured/shipping engine.
+the playback policy; their artificial delay is absent from the captured/shipping engine.
 Artwork/audio attribution is retained in the pack and runtime notices.
+
+The desktop host uses scalar FFmpeg; the console-only Xenon filter port is
+validated separately by PPC/runtime tests. This video does not demonstrate
+its performance or pretend to be an Xbox hardware capture.

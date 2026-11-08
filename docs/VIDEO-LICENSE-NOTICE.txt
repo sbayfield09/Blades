@@ -1,14 +1,17 @@
-Blades 0.42 embeds FFmpeg 2.8.22, Copyright (c) the FFmpeg developers.
-FFmpeg is free software under the GNU Lesser General Public License 2.1
-or, at your option, any later version. See FFMPEG-LGPL-2.1.txt.
-Build configuration disables GPL and nonfree components.
-Blades application code is MIT; fonts/artwork retain their separate notices.
+Blades 0.43 includes FFmpeg 2.8.22 and ported Simple360Player H264 filters.
+The combined executable is distributed under GNU GPL version 3; see LICENSE
+and SIMPLE360PLAYER-GPL-3.0.txt. Original Blades files remain available under
+their MIT notices (BLADES-MIT.txt). FFmpeg's original LGPL2.1+ source notices
+are preserved; this build enables GPL and version3 and disables nonfree code.
+Fonts, artwork and the SDK retain their separate attribution and licences.
 
-Complete corresponding application/FFmpeg source, local changes, build scripts
-and a pinned open-source SDK are available in:
-https://github.com/sbayfield09/Blades/raw/refs/heads/main/dist/Blades-v0.42-source.zip
-The immutable matching link is also in the release download instructions.
-See BUILDING.txt within that archive to replace FFmpeg and rebuild/relink the
-executable using the free xsdk GCC toolchain. Reverse engineering/debugging for
-modifications to the LGPL library is permitted. No warranty is provided.
-No GPL Simple360Player application/UI code or XDK player binary is linked.
+Simple360Player upstream: https://github.com/HG-ERIK/simple360player
+Pinned commit: 5d235c1fd24c098ccc1b2463c1b4265bf2e7844c.
+Ported h264_chroma_xb.c/h264_qpel_xb.c: GCC intrinsics and FFmpeg context/stride
+API adaptations; synchronized runtime self-tests. No XDK binary is linked.
+Complete corresponding source, all local modifications, build scripts and a
+pinned open-source SDK are supplied alongside the executable in:
+https://github.com/sbayfield09/Blades/raw/refs/heads/main/dist/Blades-v0.43-source.zip
+The immutable matching download is also in the release instructions.
+See BUILDING.txt within it to modify, rebuild or relink using free xsdk/GCC.
+There is no warranty. Playback does not use a proprietary player or firmware.

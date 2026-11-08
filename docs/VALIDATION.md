@@ -1,3 +1,31 @@
+# Current release: Blades0.43
+
+- Actual Simple360Player chroma/qpel shift/add kernels ported from pinned
+  commit5d235c1fd24c098ccc1b2463c1b4265bf2e7844c. Original source hashes verified.
+- Big-endian PPC check: runtime self-tests pass; all positions/weights, put/avg,
+  widths, alignments, destination guards and scalar small-block fallback pass.
+  Independent scalar oracle matches pinned FFmpeg in66,560 cases. Test ABI
+  adaptation is documented; these are arithmetic checks, not Xbox performance.
+- Five decoder libraries:1,041,821 instructions audited. Vector instructions
+  only in the two port objects, constrained to explicit shift/add/permute ops.
+  Generic PPC/AltiVec/autovectorisation stay disabled; GPLv3 enabled, nonfree off.
+- Four frame workers3/4/5/2, demux1, four picture slots, preroll and upstream
+  catch-up thresholds implemented. Slow-decoder test now asserts activation.
+- All26 host suites pass; application ASan/UBSan passes five video suites.
+  External FFmpeg is not instrumented; leak detection disabled. Actual compiled
+  Xenos shader checks and native XEX digest/import checks pass.
+- Matching source application rebuild yields identical executable SHA256:
+  cf614d403e54dd310d5f26c0d2c2f96d646b424acddce2c3d00a1bbe293e7ed5.
+- Source/USB CRC/manifest/payload/licence checks pass. Combined executable
+  distributed under GPLv3, complete corresponding source/scripts/SDK included;
+  original MIT/FFmpeg/artwork notices preserved. No private logs/settings.
+- Fresh108second720p30 desktop GPU walkthrough,48kHz stereo, fully decoded.
+  Host uses scalar decoder; console services simulated and labelled. GPU source
+  unchanged from0.42. No real console speed/parity/1080p30 claim is made.
+
+See [release](RELEASE-0.43.md), [audit](data/v0.43-video-audit.json),
+[source comparison](SIMPLE360PLAYER-PIPELINE.md). Previous validation follows.
+
 # Current release: Blades0.42
 
 - Private0.41 log: H264 decoded roughly29–33fps in several intervals while

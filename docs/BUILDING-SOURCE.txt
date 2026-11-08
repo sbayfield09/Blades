@@ -1,7 +1,7 @@
-Blades 0.42 complete source and FFmpeg relink instructions
+Blades 0.43 complete source and FFmpeg relink instructions
 
 This archive contains the application source, embedded font, GLSL shaders,
-MIT/STB/artwork/font notices, original FFmpeg 2.8.22 source archive, xsdk changes
+MIT/GPLv3/STB/artwork/font notices, original FFmpeg 2.8.22 source archive, xsdk changes
 to FFmpeg, pinned xsdk source, tests/synthetic WMV/MP4, and premade artwork ZIP.
 The proprietary stock Xbox firmware, uploaded reference videos and personal
 logs/settings are NOT included. No Microsoft XDK or Simple360Player is needed.
@@ -24,8 +24,8 @@ Xbox rebuild / relink (from the archive's Blades directory):
   bash tools/build-xbox.sh
 
 The script builds the SDK library/shader compiler, extracts the pinned FFmpeg
-archive, applies third_party/ffmpeg/patches/xsdk.patch, configures LGPL-only
-static libraries, compiles the application and links them into default.xex.
+archive, applies third_party/ffmpeg/patches/xsdk.patch, copies third_party/ffmpeg/xenon into libavcodec/xenon and builds GPLv3
+static libraries including the ported Simple360Player kernels, compiles the application and links them into default.xex.
 It also verifies the XEX and makes a complete USB ZIP using the included artwork.
 No converter is needed. No Players directory, adapter or sideload.ini is used.
 SDK source commit: 5f6dc726f65f6d171493a3628c2415c03551f27b.
@@ -34,13 +34,14 @@ See third_party/ffmpeg/README.md for FFmpeg source provenance and exact hash.
 To modify/relink FFmpeg:
 
 1. Extract third_party/ffmpeg/ffmpeg-n2.8.22.tar.gz into a directory you choose.
-2. Apply third_party/ffmpeg/patches/xsdk.patch with patch -p1 there; edit freely.
-3. The generated build/ffmpeg-xbox-v041/objects/blades-configure.txt records every
+2. Apply third_party/ffmpeg/patches/xsdk.patch with patch -p1 there, and copy
+   third_party/ffmpeg/xenon to libavcodec/xenon; edit freely.
+3. The generated build/ffmpeg-xbox-v043-final/objects/blades-configure.txt records every
    configure option from the standard build. Run that source's configure in a
    fresh objects directory with the same options, adjusting --prefix to your
    own install directory; then make -j4 and make install. You can alternatively
-   edit the extracted standard build/ffmpeg-xbox-v041/source/FFmpeg-n2.8.22 sources
-   after the first build and run make -C build/ffmpeg-xbox-v041/objects install.
+   edit the extracted standard build/ffmpeg-xbox-v043-final/source/FFmpeg-n2.8.22 sources
+   after the first build and run make -C build/ffmpeg-xbox-v043-final/objects install.
 4. Set BLADES_FFMPEG_PREFIX to that install directory and run tools/build-xbox.sh.
    The application recompiles/relinks against your replacement static libraries.
    Modifications/debugging for the LGPL library are permitted. FFmpeg version/API
@@ -63,16 +64,23 @@ Leak detection is disabled in the cloud's traced executor; ASan/UBSan covered th
 application wrapper. The prebuilt FFmpeg libraries were not sanitizer-instrumented.
 These host tests do not establish Xbox runtime behaviour or performance.
 
-Vector arithmetic check: tools/test-video-vmx.sh <FFmpeg-build-directory> <qemu-ppc>.
-The temporary harness adapts only64-bit GPR saves for the32-bit QEMU7400 ABI;
-production objects/vector math are unchanged. This is not Xenon timing evidence.
+Vector arithmetic check:
+  python3 tools/test-simple360-dsp.py <FFmpeg-build-directory> --qemu <qemu-ppc>
+It uses an independent scalar interpolation oracle. tests/test_simple360_reference.c
+separately validates that oracle against FFmpeg's own scalar functions, linking
+libavcodec/libavutil with the decoder's extracted internal headers.
+The temporary PPC harness uses the same GCC vector source, with test-only
+store-merging disabled and32-bit stack-save/pointer-extension ABI adaptation.
+Production objects are not edited. This does not measure Xbox timing.
 
-Blades0.42 uses the compatible C decoder build, with decoder assembly/compiler
-vectorization disabled, and three linear GPU planes for colour conversion.
-Run tools/verify-video-decoder.py <FFmpeg-build> --objdump <toolchain-objdump>
-to check decoder instruction restrictions. tools/test-gpu-shaders.py checks
-actual compiled Xbox shader arithmetic/samplers; it is not console execution.
+Blades0.43 enables vectors ONLY in its two Simple360 H264 filter objects.
+Generic FFmpeg PPC/AltiVec and compiler vectorization stay disabled. Run
+  python3 tools/verify-video-decoder.py <FFmpeg-build> --objdump <toolchain-objdump>
+to audit all five decoder libraries. Run tools/test-gpu-shaders.py XSDK_ROOT
+build/xbox/default_shaders.h for actual compiled shader arithmetic/samplers.
+These arithmetic checks do not execute console GPU hardware.
 
-The decoder remains the compatible build/ffmpeg-xbox-v041 configuration.
-The0.42 pacing tests build a separate slow-decoder test library with
-BLADES_VIDEO_TEST_DECODE_NS; that macro is absent from Xbox compilation.
+The default decoder build is build/ffmpeg-xbox-v043-final. Pacing tests use a
+separate slow-decoder library with BLADES_VIDEO_TEST_DECODE_NS; that macro is
+absent from the captured and Xbox shipping builds. The combined binary is GPLv3;
+COPYING.GPLv3 and all original source/artwork/font notices are included.

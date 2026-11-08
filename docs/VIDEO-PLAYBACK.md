@@ -1,69 +1,55 @@
-# Video playback — Blades0.42
+# Video playback — Blades0.43
 
-Media > Video keeps the existing Blades chooser. Video Marketplace manages scan
-folders/depth. A pauses/resumes, Left/Right seeks10seconds, X switches fit/stretch,
-Y toggles controls, B/Back returns to the same list; EOF returns too. Guide
-opening pauses and closing restores the previous pause state.
+Media > Video keeps the Blades chooser; Video Marketplace manages folders/depth.
+A pause/resume, Left/Right seek10seconds, X fit/stretch, Y controls, B/Back return
+to the same list; EOF returns too. Guide pauses and restores the prior state.
 
-## Confirmed timing regression and fix
+## Decoder changes
 
-The user's0.41 log shows H264 at29–33 decoded FPS in several intervals while
-presentation falls to0FPS and late-discard counts rise. The GPU first-frame
-upload/fence succeeds. This is evidence of a presentation-policy defect, not
-proof that every part of decoding is fast enough for every stream.
+The user reports that the same H264 file still plays better in Simple360Player
+than Blades0.42. This release ports its actual Xenon H264 chroma/quarter-pixel
+motion-compensation algorithms and matches its worker placement, four-picture
+buffer, preroll and catch-up policy. See [source comparison](SIMPLE360PLAYER-PIPELINE.md)
+for exact sources and remaining SDK/FFmpeg boundaries.
 
-Audio was allowed to advance during initial decoder buffering. An early-output
-rule discarded every picture more than80ms late, so a decoder near the stream's
-frame rate could remain permanently behind and produce no new visible pictures.
-Two controlled tests reproduce those failures in0.41: PCM before the first image,
-and picture freezes with a40ms-per-frame decode budget.
+Only the two ported filter objects enable vector instructions. The rest of
+FFmpeg retains scalar compilation, no generic PPC/AltiVec dispatch, no VSX,
+no vector integer multiply and no G5 cache probe. Each port runs a serialized
+self-test against the scalar functions before installing pointers. A failure
+leaves scalar routines installed and records the verdict in default.log.
 
-Version0.42 waits for the first picture to be handed to the renderer before
-starting normal PCM delivery. The first buffered picture is selected without
-requiring an already-running audio clock. It also removes the all-late-frame
-discard rule. The renderer still picks the newest due picture and coalesces
-older queued ones, while preserving frame ownership and bounded queues.
-Late pictures remain eligible for display; they are not all thrown away.
+H264 uses four frame workers on3,4,5,2, priority+1. Demux moves off worker5 to1;
+video feeding stays2 and audio1. MPEG2/other codecs without frame threading keep
+slice fallback. Four picture slots replace three. Audio waits for three ready
+pictures (at most2seconds after the first picture) before normal start, with
+the existing bounded-queue escape for a genuine audio-only lead. Rendering
+chooses the newest picture due within5ms, replacing the former35ms tolerance.
 
-An intentional audio-only lead is handled separately: if the bounded audio queue
-blocks demux while video waits for its first packet, PCM is allowed to advance
-until that packet can be reached. It then respects the video's timestamp. This
-breaks the dependency without using a timeout or showing future video early.
-The gate resets after seeking; pause/stop/reopen and prior held frames are tested.
+When late by40ms, skip deblocking on non-reference pictures; over250ms, also
+skip decoding non-reference pictures. Retain the level until back on time,
+then restore full decoding/filtering. Pictures over500ms late may be discarded
+but one remains eligible at least every500ms. This matches upstream's adaptive
+policy instead of doing all decode work and merely discarding its output.
+Seek/reopen reset the policy. Frame ownership, pause, stop and buffer bounds stay.
 
-video-perf still reports actual decoded/presented FPS and preparation/decode-call
-costs. lag_ms and late_presented now make residual A/V lag visible; audio_preroll
-identifies the intentional-leading-audio path. The ordinary perf: fps line measures
-UI presentation. Pauses/seeks affect readings; compare sustained normal playback.
+video-perf records decoded/presented FPS, decode/preparation cost, lag_ms,
+late_presented, audio_preroll, catchup level and catchup_episodes. Startup logs
+record the chroma/qpel verdicts and thread layout. Normal UI perf: fps is a
+separate measure. Compare steady playback of the same file for15seconds.
 
-## Decoder and GPU work
+## Display and validation
 
-The compatible CPU decoder and three independent linear Y/U/V GPU textures from
-0.41 are retained. GPU colour conversion/scaling stays enabled; no new SIMD,
-quality-reduction or non-reference-frame skipping is enabled. MPEG2's decoder
-and display path are unchanged. Neither project transcodes/re-encodes playback
-or implements compressed-video GPU decoding. See SIMPLE360PLAYER-PIPELINE.md.
+The GPU still converts three independent linear Y/U/V planes and scales to720p.
+Native YUV input up to1920x1080 remains full resolution until GPU scaling. Other
+pixel formats retain the RGBA/swscale fallback. CPU FFmpeg decodes compressed
+video; there is no GPU codec decoder, transcoder or claim of proven1080p30.
 
-Simple360Player's source also contains Xbox-specific shift/add H264 kernels and
-adaptive catch-up logic. Those differ from generic AltiVec code and may be useful
-for later CPU tuning, but this release fixes the measured timing defect first.
-There is no claim that new CPU kernels were ported or that CPU decoding got faster.
-
-Native YUV input up to1920x1080 stays full resolution until GPU scaling; display
-output remains1280x720. Other pixel formats retain the swscale/RGBA fallback.
+The big-endian PPC harness checks ported filters, every subpixel position,
+put/average, widths, alignments and destination guards. Its scalar oracle is
+separately checked in66,560 cases against FFmpeg. Actual console self-tests
+remain enabled. Host playback/ownership/seek/preroll/slow-decoder tests, native
+instruction/XEX checks and shader tests complement this; they do not measure
+console speed. FFmpeg external libraries are not sanitizer-instrumented.
+A fresh desktop GPU walkthrough labels simulated console services. The source
+bundle contains the complete GPLv3 combined work and free SDK/build scripts.
 Music/Pictures playback and original music visualisations remain unfinished.
-
-## Validation scope
-
-New startup/slow-decoder tests fail on0.41 and pass with this fix. A test with
-five seconds of audio before the first video packet reaches EOF and verifies
-that future pictures are not shown early. Artificial decode delay exists only
-in the test library and is absent from shipping Xbox compilation.
-Host ownership, controls, early B/reopen, held-frame, seek and end tests pass.
-GPU shader/renderer checks and native XEX integrity checks are separate from
-console testing. ASan/UBSan cover the application; FFmpeg libraries are external.
-
-The user confirmed0.41 MPEG2 playback. The0.42 pacing fix and real H264/MPEG4
-smoothness still need a console retest. Try the same long file and send
-Blades/default.log after normal playback if it remains slow. Raw uploaded logs
-stay private. Complete corresponding source/relink bundle: Blades-v0.42-source.zip.

@@ -1,32 +1,30 @@
-Blades0.42 - Video startup and late-frame pacing fix
+Blades0.43 — Simple360Player H264 kernels and playback scheduling
 
-Extract Blades-v0.42-USB.zip and launch Blades/default.xex. Assets/notices are
-included; saved scan/FTP settings and logs are excluded, preserving them on update.
+Extract Blades-v0.43-USB.zip onto USB and launch Blades/default.xex. XEX, Assets
+and notices are included; personal paths, FTP settings and logs are excluded.
+Keep existing Config files when updating. No adapter or additional XEX is used.
 
-The0.41 log showed H264 decoding near30fps but sometimes0fps presentation.
-Audio advanced before initial video buffering finished; the late-output rule
-then discarded every picture behind it. Version0.42 waits for the first picture
-before normal PCM delivery and keeps late pictures eligible for presentation.
-The renderer coalesces older queued frames only when a newer one is due.
-Intentional audio-only leads still advance without a bounded-queue deadlock.
+This release ports Simple360Player's actual shift/add H264 chroma and qpel
+filters, enables them only after a scalar comparison self-test, and matches
+its four frame workers,3/4/5/2 placement, four-picture buffer, preroll and
+40/250ms adaptive catch-up. Generic AltiVec stays off. GPU colour conversion
+and scaling are retained; the CPU decodes the compressed video.
 
-The compatible CPU decoder and working three-plane GPU colour conversion/scaling
-are unchanged from0.41. No generic AltiVec or new CPU SIMD is enabled. Display
-remains720p, with up to1080p YUV input. No re-encoding/transcoding occurs.
+Try the SAME H264 file used in Simple360Player for at least15seconds. Actual
+speed improvement/parity is not yet hardware verified. default.log records
+Simple360 H264 DSP chroma=0 qpel=0 when both runtime tests pass; positive values
+mean scalar fallback. video-perf includes catchup/catchup_episodes and lag_ms.
+If still slower, send default.log after normal playback, excluding pauses.
+No1080p30 result is claimed. Logs can contain private paths/profile IDs.
 
-Test the same long H264/MPEG4 file, playing normally for15seconds. If it still
-lags, send default.log. New video-perf fields lag_ms, late_presented and
- audio_preroll distinguish residual timing from decoder speed. Original first-
-frame decoder/upload/fence logs are retained. Logs may contain private paths/IDs.
-
-Media > Video chooses files; Video Marketplace manages paths. A pause/resume,
-Left/Right seek10seconds, X fit/stretch, Y controls, B/Back return to same list.
-EOF returns too. Guide opening pauses and closing restores the prior pause state.
+A pause/resume; Left/Right seek10s; X fit/stretch; Y controls; B/Back returns
+to the same Blades list. Guide pauses. Video Marketplace manages scan paths.
 Music/Pictures playback and original visualisations remain unfinished.
 
-The same235-entry artwork is included. Source/relink bundle and original test
-samples: Blades-v0.42-source.zip. Fresh desktop walkthrough labels simulated
-console services. Native pacing and real console performance need a retest.
+Same premade235-entry artwork. Fresh desktop walkthrough labels simulated
+console services. The combined executable is GPLv3; original Blades MIT and
+artwork/font notices are retained. Complete corresponding source/build scripts:
+Blades-v0.43-source.zip. No Microsoft XDK is needed to rebuild it.
 
 Retained 0.37 corrections:
 - Marketplace tint is halfway between 0.35 and 0.36. Xbox Live keeps the

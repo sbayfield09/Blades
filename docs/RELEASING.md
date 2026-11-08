@@ -197,3 +197,10 @@ Version0.42 fixes confirmed audio-start/late-picture timing while retaining the
 Include the before/after controlled regression evidence, intentional audio lead
 case and shipping-test-delay exclusion. Keep uploaded logs private and distinguish
 host regression proof from unmeasured console smoothness. No new CPU SIMD claim.
+
+Version0.43 ports actual GPLv3 Simple360Player chroma/qpel source. Distribute
+the combined binary under GPLv3, preserving original MIT/FFmpeg/artwork notices.
+The complete source ZIP must include ported/preserved upstream files, exact
+patches/scripts, all application source and pinned SDK. Never reuse an LGPL-only
+licence claim for0.43. Verify the two-object SIMD restriction and source hashes;
+PPC arithmetic tests are not console performance evidence.

@@ -1,0 +1,228 @@
+{
+  "release": "0.43.0",
+  "recorded_utc": "2026-11-08T12:48:26.198543+00:00",
+  "xex_version": "0.0.43.0",
+  "sdk_commit": "5f6dc726f65f6d171493a3628c2415c03551f27b",
+  "feature": "Actual Simple360 Xenon H264 chroma/qpel port and scheduling parity",
+  "user_evidence": "Same H264 still plays better in Simple360Player than Blades0.42; no fresh console measurement of0.43 yet",
+  "upstream": {
+    "repository": "https://github.com/HG-ERIK/simple360player",
+    "commit": "5d235c1fd24c098ccc1b2463c1b4265bf2e7844c",
+    "license": "GPL-3.0",
+    "files": {
+      "external/ffmpeg360/libavcodec/xbox360/h264_chroma_xb.c": "649fcb94237a6659fbfcfd89772577dfbf5b255cc480e423f8f8036e60648597",
+      "external/ffmpeg360/libavcodec/xbox360/h264_qpel_xb.c": "59be4ac2ec6984ab97a9fbea4acd5a96f9bb35b80b2f89d37264ed9744a9081d",
+      "src/ffglue.c": "f2f4dd0e11a26df4fdaca99e9cae595c210a0b8a143f8072998c855d8e6fa735",
+      "src/FFPlayer.cpp": "9415d6b2a7041ced2eda7eb5d93b041846fce7093ea4d2854be6dbe025323651"
+    }
+  },
+  "changes": {
+    "DSP": "Actual shift/add/6-tap code ported with GCC intrinsics and split context/const-stride ABI. Native scalar self-tests must pass before table installation.8-bit chroma8/4 and qpel16/8, small/high-depth scalar fallback.",
+    "workers": "H264 four FRAME workers3,4,5,2 at priority+1. Demux1, feeding2, audio1. Preserve slice fallback for codecs without FRAME capability.",
+    "buffering": "Four slots,3-ready audio preroll with2s bound, first-image and audio-lead protection retained.5ms due tolerance.",
+    "catchup": "40ms skip nonref deblocking;250ms skip nonref frames; retain level until on time. Over500ms late output may drop but actual-take timestamp permits frame at least every500ms.",
+    "diagnostics": "DSP verdict at decoder open and first actual frame, placement, catchup/catchup_episodes and existing FPS/lag diagnostics",
+    "GPU": "Renderer/shader/colour sources byte-identical to0.42. CPU compressed-video decode, three linear GPU Y/U/V colour conversion/scaling to720p. No transcoder.",
+    "license": "GPLv3 combined executable; original MIT/FFmpeg/artwork/font/SDK notices preserved, complete corresponding source and build scripts supplied",
+    "boundaries": "FFmpeg2.8.22/free xsdk retained instead of whole upstream XDK/0.7 binary; bounded queues, correct scalar vertical deblocking retained instead of upstream incomplete no-op hook. Full binary is not byte-identical."
+  },
+  "validation": {
+    "host_suites_passed": 26,
+    "core_host": "Internal ctest changing into directory: /workspace/Blades/build/linux\nTest project /workspace/Blades/build/linux\n      Start  1: video-audio-preroll\n 1/25 Test  #1: video-audio-preroll ..............   Passed    1.46 sec\n      Start  2: video-startup-clock\n 2/25 Test  #2: video-startup-clock ..............   Passed    3.24 sec\n      Start  3: video-late-presentation\n 3/25 Test  #3: video-late-presentation ..........   Passed    3.24 sec\n      Start  4: video-rgba-fallback\n 4/25 Test  #4: video-rgba-fallback ..............   Passed    2.74 sec\n      Start  5: video\n 5/25 Test  #5: video ............................   Passed    5.11 sec\n      Start  6: dashboard\n 6/25 Test  #6: dashboard ........................   Passed    5.45 sec\n      Start  7: resources\n 7/25 Test  #7: resources ........................   Passed    0.00 sec\n      Start  8: skin\n 8/25 Test  #8: skin .............................   Passed    0.01 sec\n      Start  9: ambient\n 9/25 Test  #9: ambient ..........................   Passed    0.05 sec\n      Start 10: font\n10/25 Test #10: font .............................   Passed    0.01 sec\n      Start 11: audio\n11/25 Test #11: audio ............................   Passed    0.00 sec\n      Start 12: animation\n12/25 Test #12: animation ........................   Passed    0.00 sec\n      Start 13: pixels\n13/25 Test #13: pixels ...........................   Passed    0.05 sec\n      Start 14: draw-list\n14/25 Test #14: draw-list ........................   Passed    2.38 sec\n      Start 15: startup\n15/25 Test #15: startup ..........................   Passed    0.78 sec\n      Start 16: disc\n16/25 Test #16: disc .............................   Passed    0.07 sec\n      Start 17: media-launch\n17/25 Test #17: media-launch .....................   Passed    0.00 sec\n      Start 18: achievement-backend\n18/25 Test #18: achievement-backend ..............   Passed    0.04 sec\n      Start 19: profile-backend\n19/25 Test #19: profile-backend ..................   Passed    0.30 sec\n      Start 20: achievements\n20/25 Test #20: achievements .....................   Passed    0.06 sec\n      Start 21: profile\n21/25 Test #21: profile ..........................   Passed    2.56 sec\n      Start 22: profile-count\n22/25 Test #22: profile-count ....................   Passed    0.00 sec\n      Start 23: library\n23/25 Test #23: library ..........................   Passed    0.08 sec\n      Start 24: gpu\n24/25 Test #24: gpu ..............................   Passed    6.51 sec\n      Start 25: preview-smoke\n25/25 Test #25: preview-smoke ....................   Passed    0.21 sec\n\n100% tests passed, 0 tests failed out of 25\n\nTotal Test time (real) =  34.36 sec\n",
+    "ftp": "Internal ctest changing into directory: /workspace/Blades/build/linux\nTest project /workspace/Blades/build/linux\n    Start 24: ftp\n1/1 Test #24: ftp ..............................   Passed    2.12 sec\n\n100% tests passed, 0 tests failed out of 1\n\nTotal Test time (real) =   2.12 sec\n",
+    "PPC_DSP": "chroma self-test=00000000\nqpel self-test=00000000\nPASS: shipping Simple360 chroma/qpel, runtime self-tests; all subpixel positions, put/average, widths, alignments, destination guards and scalar small-block fallback\n",
+    "PPC_scope": "Same vector source under big-endian QEMU7400, test-only no-store-merging and32-bit GPR stack-save/pointer-extension adaptation; no production object edits. Arithmetic/guards, not native timing.",
+    "independent_reference": "PASS: 66560 independent interpolation/guard cases against pinned FFmpeg scalar H264\n",
+    "reference_scope": "66,560 cases against pinned scalar FFmpeg; all weights/positions/widths/put/average/alignments and full destination guards",
+    "instruction_audit": "PASS: 1041821 instructions checked across five archives; vectors only in the two Simple360 filter objects, restricted to the explicit Xenon shift/add/permute subset. Generic PPC/AltiVec remains off; GPLv3 enabled, nonfree off.\n",
+    "native_DSP_runtime_tests_retained": true,
+    "delay_macro_absent_from_native_compilation": true,
+    "sanitizers": "Internal ctest changing into directory: /workspace/Blades/build/video-sanitize\nTest project /workspace/Blades/build/video-sanitize\n    Start 1: video-audio-preroll\n1/5 Test #1: video-audio-preroll ..............   Passed    1.47 sec\n    Start 2: video-startup-clock\n2/5 Test #2: video-startup-clock ..............   Passed    3.22 sec\n    Start 3: video-late-presentation\n3/5 Test #3: video-late-presentation ..........   Passed    3.22 sec\n    Start 4: video-rgba-fallback\n4/5 Test #4: video-rgba-fallback ..............   Passed    2.90 sec\n    Start 5: video\n5/5 Test #5: video ............................   Passed    5.34 sec\n\n100% tests passed, 0 tests failed out of 5\n\nTotal Test time (real) =  16.15 sec\n",
+    "sanitizer_scope": "Application wrappers/tests; external FFmpeg static libraries not instrumented; LeakSanitizer disabled in traced executor",
+    "actual_Xenos_shader": "PASS: 240 compiled Xenos swirl samples match supplied equations within one RGB level\nPASS: compiled Xenos point fetches and separable 720p background filtering\nPASS: compiled Xenos glyph tint and integer alpha coverage\nPASS: compiled Xenos content fade shader\nPASS: compiled Xenos cap box filter preserves alpha-aware area samples\nPASS: 72 compiled Xenos video samples; three Y/U/V sampler slots, BT601/709 limited/full, boundaries and RGB\n",
+    "xex": "PASS: XEX2 PowerPC-BE, Xbox subsystem, entry 0x82599c08\nPASS: 138 verified 65536-byte image pages; header/image/import digest chains valid\nPASS: xam.xex: 92 import slots\nPASS: xboxkrnl.exe: 122 import slots\nConsole launch and Peer Pressure compatibility remain unverified.\n",
+    "source_application_rebuild_byte_identical": true,
+    "rebuild_scope": "Exact archived application, pinned SDK, same fully built and audited native FFmpeg dependency; all sources/patches/scripts included.",
+    "USB_source_CRC_manifest_payload_license_safety": "passed"
+  },
+  "video": {
+    "streams": [
+      {
+        "index": 0,
+        "codec_name": "h264",
+        "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+        "profile": "High",
+        "codec_type": "video",
+        "codec_tag_string": "avc1",
+        "codec_tag": "0x31637661",
+        "width": 1280,
+        "height": 720,
+        "coded_width": 1280,
+        "coded_height": 720,
+        "closed_captions": 0,
+        "film_grain": 0,
+        "has_b_frames": 2,
+        "pix_fmt": "yuv420p",
+        "level": 31,
+        "chroma_location": "left",
+        "field_order": "progressive",
+        "refs": 1,
+        "is_avc": "true",
+        "nal_length_size": "4",
+        "id": "0x1",
+        "r_frame_rate": "30/1",
+        "avg_frame_rate": "30/1",
+        "time_base": "1/15360",
+        "start_pts": 0,
+        "start_time": "0.000000",
+        "duration_ts": 1658880,
+        "duration": "108.000000",
+        "bit_rate": "885878",
+        "bits_per_raw_sample": "8",
+        "nb_frames": "3240",
+        "extradata_size": 46,
+        "disposition": {
+          "default": 1,
+          "dub": 0,
+          "original": 0,
+          "comment": 0,
+          "lyrics": 0,
+          "karaoke": 0,
+          "forced": 0,
+          "hearing_impaired": 0,
+          "visual_impaired": 0,
+          "clean_effects": 0,
+          "attached_pic": 0,
+          "timed_thumbnails": 0,
+          "non_diegetic": 0,
+          "captions": 0,
+          "descriptions": 0,
+          "metadata": 0,
+          "dependent": 0,
+          "still_image": 0,
+          "multilayer": 0
+        },
+        "tags": {
+          "language": "und",
+          "handler_name": "VideoHandler",
+          "vendor_id": "[0][0][0][0]",
+          "encoder": "Lavc61.19.101 libx264"
+        }
+      },
+      {
+        "index": 1,
+        "codec_name": "aac",
+        "codec_long_name": "AAC (Advanced Audio Coding)",
+        "profile": "LC",
+        "codec_type": "audio",
+        "codec_tag_string": "mp4a",
+        "codec_tag": "0x6134706d",
+        "sample_fmt": "fltp",
+        "sample_rate": "48000",
+        "channels": 2,
+        "channel_layout": "stereo",
+        "bits_per_sample": 0,
+        "initial_padding": 0,
+        "id": "0x2",
+        "r_frame_rate": "0/0",
+        "avg_frame_rate": "0/0",
+        "time_base": "1/48000",
+        "start_pts": 0,
+        "start_time": "0.000000",
+        "duration_ts": 5184000,
+        "duration": "108.000000",
+        "bit_rate": "31130",
+        "nb_frames": "5064",
+        "extradata_size": 5,
+        "disposition": {
+          "default": 1,
+          "dub": 0,
+          "original": 0,
+          "comment": 0,
+          "lyrics": 0,
+          "karaoke": 0,
+          "forced": 0,
+          "hearing_impaired": 0,
+          "visual_impaired": 0,
+          "clean_effects": 0,
+          "attached_pic": 0,
+          "timed_thumbnails": 0,
+          "non_diegetic": 0,
+          "captions": 0,
+          "descriptions": 0,
+          "metadata": 0,
+          "dependent": 0,
+          "still_image": 0,
+          "multilayer": 0
+        },
+        "tags": {
+          "language": "und",
+          "handler_name": "SoundHandler",
+          "vendor_id": "[0][0][0][0]"
+        }
+      }
+    ],
+    "format": {
+      "filename": "Blades-v0.43-walkthrough.mp4",
+      "nb_streams": 2,
+      "nb_programs": 0,
+      "nb_stream_groups": 0,
+      "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+      "format_long_name": "QuickTime / MOV",
+      "start_time": "0.000000",
+      "duration": "108.000000",
+      "size": "12499415",
+      "bit_rate": "925882",
+      "probe_score": 100,
+      "tags": {
+        "major_brand": "isom",
+        "minor_version": "512",
+        "compatible_brands": "isomiso2avc1mp41",
+        "encoder": "Lavf61.7.103"
+      }
+    }
+  },
+  "video_scope": "Fresh108second desktop GPU capture; actual samples through shipping host engine, same renderer/artwork. Host decoder scalar: native Xenon kernels are separately tested. Guide/profile/storage/FTP simulated and labelled. Final Xbox-only diagnostic change leaves host capture binary byte-identical.",
+  "console_scope": "Native0.43 smoothness, performance parity and1080p30 not established; same-file hardware retest required. Uploaded logs stay private.",
+  "artifacts": {
+    "dist/Blades-v0.43-USB.zip": {
+      "bytes": 4679028,
+      "sha256": "1871178dea5ebf4fedf07a5a04138b4504368cd26c1feea3a2127a20690bb548"
+    },
+    "dist/Blades/default.xex": {
+      "bytes": 6156288,
+      "sha256": "cf614d403e54dd310d5f26c0d2c2f96d646b424acddce2c3d00a1bbe293e7ed5"
+    },
+    "dist/Blades-artwork-pack.zip": {
+      "bytes": 2041912,
+      "sha256": "7417accd71918a01d316ae20f8471af504969f35a19870ff70fc4edd060690bf"
+    },
+    "dist/Blades-v0.43-walkthrough.mp4": {
+      "bytes": 12499415,
+      "sha256": "e8aa79946f631c3c5d3c1cf48441f9d88d214217db506dfffbe7cbe9200cb406"
+    },
+    "dist/Blades-v0.43-source.zip": {
+      "bytes": 31925314,
+      "sha256": "5147708c48251aea2f7cd7f5bf2b181dacf71bd1ae064ad3c6bb982281142b62"
+    }
+  },
+  "source_sha256": {
+    "CMakeLists.txt": "873866c3caa74d2c01e72f7e183cab48daa231d310ee996af631ab2931674e6c",
+    "include/video.h": "4c03caa8dc5ec137d932f15a9f1c82289edf8c947e6e00ac77b06fdaee472d9c",
+    "src/core/video.c": "6fa890bffcee5fca082d5081b32b83803b23f534d3bfb69bf09c7c2073c7541d",
+    "src/platform/xbox360.c": "d25ff0b9e5643a19742780f529f078253c077d6af0dd7b05325c498800af9e2e",
+    "tests/test_video_pacing.c": "9da42cdaf96ed926185f7db3b49a9e9177958a4b4af52cc431e2ce6877519d71",
+    "tests/test_simple360_dsp.c": "9bffc7acb8a9aefb3493faf194a5cd3034a0504e0b4999a585908cb8e11f79e9",
+    "tests/test_simple360_reference.c": "f1b2ce6b88e1d0880b31f1265ad2149fefedea1c57b07350e0ef61191d2c194f",
+    "tests/simple360_scalar.h": "8fa403a538bac38219ff6afbfb7c847cbd21e018c84abfec888dfc3b39c90625",
+    "tools/build-xbox.sh": "87a281caf3606f5fb9f1bb2fc7f0b5e714405d1d68ba31ab2def8f0bccbf17e2",
+    "tools/build-video-ffmpeg.py": "252e21e44f126110048383c5a20c15a2d7f103ce226524fb11f3c5a58eac1836",
+    "tools/package-source.py": "b2678cbce85fb1c6f7d335e4f73d83b063b3f154c5d2c48cf370cd41416d50e0",
+    "tools/test-simple360-dsp.py": "ae7432b519733a2d9d1b45424bf9a6c224d85575090edc69c7e2d0c6e1223e87",
+    "tools/verify-video-decoder.py": "31aef1bde6710d870fc5bfbe3e04ea7a7572d78a433717483dac2839912cadb7",
+    "third_party/ffmpeg/patches/xsdk.patch": "8828d8e2c1309dec9d9c3c50671d9aae96608974486cceff8383db20599d75f6",
+    "third_party/ffmpeg/xenon/simple360_chroma.c": "f6e448bd77f4468c7d722b0379ffea372da65f202af14f090095453cb24b3575",
+    "third_party/ffmpeg/xenon/simple360_intrinsics.h": "d34f1c43f54c6ff813c2015fe70ddaf3967a4c655729f3d7ddb17b4d8f2e1037",
+    "third_party/ffmpeg/xenon/simple360_qpel.c": "98a049564a7cdaa1841faa33942d4e17facdaec816860655b3300a342fc2a2c0"
+  }
+}
