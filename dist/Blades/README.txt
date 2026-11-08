@@ -1,4 +1,29 @@
-Blades0.49 — Jellyfin details and faster FTP transfers
+Blades0.50 — display handoff, Media animations and repository-hosted updates
+
+On startup the initialized black presentation buffers are established before
+artwork/resources are loaded. Shutdown presents and drains black frames before
+workers, audio, renderer resources and the SDK display are released. The code
+avoids showing the previous title while artwork allocations run. Native build
+and ordering review pass; actual launch/exit static must be retested on Xbox.
+The SDK's final XAM display restoration still belongs to the platform; no kernel,
+firmware, HDMI mode or XAM modifications are installed by this build.
+
+All Media library lists and Jellyfin subfolders now move highlights with the
+shared cursor animation. Folder/page changes fade content in; scrolling keeps
+the cursor within the visible rows. Test Music/Pictures/Video, Jellyfin/Local,
+Media Center, scan paths and nested folder navigation. Existing layout and
+settings are retained.
+
+System > Update Blades checks the main/dist/update.json repository manifest. Download Update saves the USB ZIP
+to game:/Updates with progress, X cancellation, HTTPS certificate/hostname checks,
+exact length and SHA256 verification. Partial files are discarded; completed
+files and the running XEX are not overwritten. Exit Blades before extracting
+it manually. No installation, plugin, NAND or default-dashboard changes occur.
+The repository target is sbayfield09/Blades-reimagined. The versioned USB ZIP
+and matching dist/update.json are committed together in main. GitHub Releases
+and API access are unnecessary. Install this build manually once.
+
+Retained0.49 features:
 
 Selected movies/episodes show server artwork, description and runtime on the
 right. Portrait posters and landscape episode images keep their aspect ratio.
@@ -58,7 +83,7 @@ path if you want it to use the new shared behaviour. Game paths remain separate.
 Music/Pictures playback is still unfinished; their lists filter the files.
 
 
-Extract Blades-v0.49-USB.zip onto USB; launch Blades/default.xex. The complete
+Extract Blades-v0.50-USB.zip onto USB; launch Blades/default.xex. The complete
 matching Assets folder/notices are included. Keep your existing Config files
 when updating. No adapter, converter, DashLaunch or extra executable is needed.
 
@@ -94,7 +119,7 @@ the screen and send default.log; do not share your private Jellyfin config.
 
 Fresh desktop walkthrough includes Local and actual isolated Jellyfin playback.
 Xbox Guide/profiles/storage/FTP are simulated and labelled. The combined binary
-is GPLv3 with complete corresponding source in Blades-v0.49-source.zip; original
+is GPLv3 with complete corresponding source in Blades-v0.50-source.zip; original
 MIT/FFmpeg/Simple360Player/XenonFin/artwork/font/SDK notices are preserved.
 
 Retained 0.37 corrections:

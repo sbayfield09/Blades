@@ -1,4 +1,4 @@
-Blades 0.49 includes FFmpeg 2.8.22 and ported Simple360Player H264 filters.
+Blades 0.50 includes FFmpeg 2.8.22 and ported Simple360Player H264 filters.
 The combined executable is distributed under GNU GPL version 3; see LICENSE
 and SIMPLE360PLAYER-GPL-3.0.txt. Original Blades files remain available under
 their MIT notices (BLADES-MIT.txt). FFmpeg's original LGPL2.1+ source notices
@@ -11,15 +11,20 @@ Ported h264_chroma_xb.c/h264_qpel_xb.c: GCC intrinsics and FFmpeg context/stride
 API adaptations; synchronized runtime self-tests. No XDK binary is linked.
 Complete corresponding source, all local modifications, build scripts and a
 pinned open-source SDK are supplied alongside the executable in:
-https://github.com/sbayfield09/Blades/raw/refs/heads/main/dist/Blades-v0.49-source.zip
+https://raw.githubusercontent.com/sbayfield09/Blades-reimagined/main/dist/Blades-v0.50-source.zip
 The immutable matching download is also in the release instructions.
 See BUILDING.txt within it to modify, rebuild or relink using free xsdk/GCC.
 There is no warranty. Playback does not use a proprietary player or firmware.
 
-Blades0.49 also adapts native HTTP/JSON/auth/browser code from XenonFin,
+Blades0.50 also adapts native HTTP/JSON/auth/browser code from XenonFin,
 https://github.com/sbayfield09/XenonFin at commit
 554adb8d79a251e4b502ac4a87a328cbe5055b09. XenonFin's original source is
 GPL-2.0-or-later; the combined executable remains GPLv3. See
 XENONFIN-GPL-2.0.txt and the original/ported sources, hashes and notices in
 the matching complete source bundle. The private login/session file is not
 included. No Microsoft firmware or proprietary SDK is distributed.
+
+Updater HTTPS includes Mbed TLS3.6.5, Apache-2.0 OR GPL-2.0-or-later, and public
+Mozilla CA roots. See MBEDTLS-LICENSE.txt, UPDATE-TLS-NOTICE.txt and
+MOZILLA-CA-COPYRIGHT.txt. Complete TLS source and Blades configuration are in
+third_party/mbedtls in the corresponding source and browsable repository.

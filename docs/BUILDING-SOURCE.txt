@@ -115,5 +115,5 @@ Version0.50 adds the dedicated update HTTPS worker and bundled Mbed TLS3.6.5
 source/config, public CA roots and the root-header embedding script. All are
 built by CMake for desktop/Xbox; no TLS binary download or new SDK is needed.
 The updater uses XeCryptRandom on Xbox and portable scalar crypto, independent
-of the video/Jellyfin path. tools/publish-release.py prepares and publishes the
-verified Release assets/update manifest. See UPDATES.md.
+of the video/Jellyfin path. tools/prepare-update.py verifies repository-hosted
+versioned downloads and generates dist/update.json; commit it with the files. See UPDATES.md.

@@ -1,12 +1,13 @@
-# Validation — Blades0.50 prepared release
+# Validation — Blades0.50 repository updater
 
 All32 host suites pass. Final HTTPS checks pass16 modes, including chunked/
 Content-Length downloads, absolute/relative redirects, real trusted/untrusted
 chains, wrong hosts, cancellation, checksum/length failures and temporary cleanup.
 Five application sanitizer suites and16 actual TLS integration modes pass;
 bundled TLS is instrumented, prebuilt FFmpeg is not, LeakSanitizer is off.
-The same HTTPS client verifies a live GitHub request and reports no unpublished
-Release normally. No GitHub authentication is required for client downloads.
+Repository-path assertions cover the exact main/dist manifest and ZIP routes.
+Certificate rejection occurs before HTTP requests. No GitHub authentication is
+required for public client downloads.
 
 Media cursor/fade unit and intermediate GPU/software rendering checks pass.
 Retained official Jellyfin10.10.7 tests verify actual movie/episode images and
@@ -23,9 +24,11 @@ Guide/profile/storage/FTP/updater snapshots are labelled simulations. The actual
 HTTPS worker has separate integration evidence. Physical launch/exit static,
 console folder animation and update/network/storage behavior still need retest.
 
-GitHub rename/Release publication remain unverified while the environment blocks
-API access. The prepared manifest/packages/publication helper do not establish
-an actual Release; see data/v0.50-release-audit.json for recorded scope/hashes.
+The rename to sbayfield09/Blades-reimagined is verified. Downloads and the
+matching manifest are prepared for one Git commit on main; no API or GitHub
+Releases access is required. See data/v0.50-release-audit.json for artifact
+hashes and validation scope. The actual production-path updater is checked
+after publication with both current-version and older-client download probes.
 
 # Validation — Blades0.49
 

@@ -1,24 +1,26 @@
-# Current release workflow
+# Current repository-download workflow
 
-User requirement from0.50 onward: source is browsable on main; new USB ZIPs,
-XEX, artwork, source ZIP and navigation video are assets of a new GitHub Release
-in sbayfield09/Blades-reimagined. Rename the existing repository when GitHub
-administration access permits it. Preserve historical committed downloads.
-Do not add new binary versions to random dist folders on main.
+The user's latest instruction replaces Releases-only publishing: new versioned
+USB ZIPs, XEX, artwork, source ZIP, walkthrough and dist/update.json go into the
+normal downloads folder on main in sbayfield09/Blades-reimagined. Source stays
+browsable in the same repository. The updater reads raw.githubusercontent.com
+under /sbayfield09/Blades-reimagined/main/dist/; no API or Releases are required.
 
-Build/test/package locally, commit the complete public application source,
-then run tools/publish-release.py --version 0.50 --commit <source-commit>.
-The tool creates update.json/SHA256SUMS, uploads to a draft Release, verifies
-asset sizes/digests and downloaded ZIP/manifest, then publishes it as latest.
-Do not overwrite published assets or claim rename/publication without checking
-GitHub. Updater downloads only; users exit and extract the ZIP themselves.
-Native display handoff and console update/network behavior require retesting.
-Run the TLS failure/cancel/checksum/redirect tests and Media cursor/fade checks,
-plus retained host/native/real-server checks. Fresh240second desktop capture
-labels Guide/profile/storage/FTP/updater simulations and shows real Jellyfin.
+Build/test/package and run tools/prepare-update.py --version <version>. Verify
+all hashes/CRCs and publish matching source, manifest and artifacts in one commit.
+Preserve published versioned files; future updates use new version numbers.
+Keep user configs/logs out of both archives and unpacked runtime files. Provide
+immutable matching USB/XEX/artwork/source/video links. Never update source or
+binaries under an existing version once published. The optional Release mirror
+helper may be used separately; the updater does not query it.
 
-Historical delivery notes follow; their old artifact-branch workflow is retained
-for context and superseded by the current user instruction above.
+Fresh240second desktop capture labels Guide/profile/storage/FTP/updater
+simulations and includes real Jellyfin/Local playback. Verify actual TLS checks,
+repository paths, old-client download, checksum/cancel failures and retained
+host/native/shader/source-rebuild checks. Hardware handoff still needs retest.
+
+Historical delivery notes follow; prior Release-only and artifact-branch
+instructions are superseded by the current user instruction above.
 
 # Release delivery
 

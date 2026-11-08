@@ -11,7 +11,7 @@ Ported h264_chroma_xb.c/h264_qpel_xb.c: GCC intrinsics and FFmpeg context/stride
 API adaptations; synchronized runtime self-tests. No XDK binary is linked.
 Complete corresponding source, all local modifications, build scripts and a
 pinned open-source SDK are supplied alongside the executable in:
-https://github.com/sbayfield09/Blades-reimagined/releases/download/v0.50.0/Blades-v0.50-source.zip
+https://raw.githubusercontent.com/sbayfield09/Blades-reimagined/main/dist/Blades-v0.50-source.zip
 The immutable matching download is also in the release instructions.
 See BUILDING.txt within it to modify, rebuild or relink using free xsdk/GCC.
 There is no warranty. Playback does not use a proprietary player or firmware.

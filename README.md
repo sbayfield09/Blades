@@ -4,10 +4,14 @@ An Xbox 360 Blades dashboard recreation using the open-source xsdk, with a
 shared SDL3 desktop preview. The application remains named Blades on the console.
 Application source is browsable in src/, include/ and tests/ on main. Download
 builds, USB ZIPs, premade artwork, walkthroughs and complete source bundles from
-[GitHub Releases](https://github.com/sbayfield09/Blades-reimagined/releases).
+[the downloads folder](dist/).
 
-Version0.50 adds System > Update Blades: check the latest stable Release,
-download the complete USB ZIP with progress/cancel and verify its SHA256 before
+[Complete v0.50 USB ZIP](dist/Blades-v0.50-USB.zip) ·
+[Walkthrough](dist/Blades-v0.50-walkthrough.mp4) ·
+[Complete source bundle](dist/Blades-v0.50-source.zip)
+
+Version0.50 adds System > Update Blades: check the manifest in main/dist,
+download the matching USB ZIP from that folder with progress/cancel and verify its SHA256 before
 saving it in Updates. Exit Blades before extracting it; the running XEX and
 private Config files are never overwritten by the updater. [Details](docs/UPDATES.md).
 
@@ -25,7 +29,7 @@ conversion. Video decode itself runs on the CPU. [Build from source](docs/BUILDI
 
 The combined binary is GPLv3. Original MIT, dependency, artwork, font and SDK
 notices are preserved. Complete corresponding source and a pinned free SDK are
-also supplied as a Release asset; no Microsoft XDK is required.
+also supplied in the dist source ZIP; no Microsoft XDK is required.
 
 ## Implemented
 

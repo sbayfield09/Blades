@@ -39,14 +39,21 @@ static bool cancelled(void *context){Updater *u=context;return __atomic_load_n(&
 static void state(Updater *u,UpdateState value,const char *message){pthread_mutex_lock(&u->lock);u->view.state=value;snprintf(u->view.message,sizeof u->view.message,"%s",message);u->view.revision++;pthread_mutex_unlock(&u->lock);}
 typedef struct {char data[16385];size_t bytes;} Metadata;
 static bool metadata(void *context,const unsigned char *data,size_t bytes){Metadata *m=context;if(bytes>sizeof m->data-1-m->bytes)return false;memcpy(m->data+m->bytes,data,bytes);m->bytes+=bytes;m->data[m->bytes]=0;return true;}
+static bool update_address(char *out,size_t bytes,const char *filename){
+    const char *origin="https://raw.githubusercontent.com";
+#ifndef BLADES_XBOX
+    const char *test=getenv("BLADES_UPDATE_TEST_ORIGIN");if(test)origin=test;
+#endif
+    int n=snprintf(out,bytes,"%s" BLADES_UPDATE_PATH "%s",origin,filename);
+    return n>0&&(size_t)n<bytes;
+}
 static void check(Updater *u){
     Metadata *m=calloc(1,sizeof *m);char error[192]={0};if(!m){state(u,UPDATE_ERROR,"Not enough memory to check updates.");return;}
-    state(u,UPDATE_CHECKING,"Checking GitHub Releases...");
-    const char *url="https://github.com/" BLADES_REPOSITORY "/releases/latest/download/update.json";
-#ifndef BLADES_XBOX
-    char local[2048];const char *test=getenv("BLADES_UPDATE_TEST_ORIGIN");if(test){snprintf(local,sizeof local,"%s/update.json",test);url=local;}
-#endif
-    bool ok=update_https(url,16384,metadata,m,cancelled,u,error,sizeof error);UpdateManifest manifest;
+    state(u,UPDATE_CHECKING,"Checking GitHub for updates...");
+    char url[2048];bool ok=update_address(url,sizeof url,"update.json");
+    if(ok)ok=update_https(url,16384,metadata,m,cancelled,u,error,sizeof error);
+    else snprintf(error,sizeof error,"Invalid update source address.");
+    UpdateManifest manifest;
     if(ok&&!update_manifest_parse(m->data,m->bytes,&manifest)){ok=false;snprintf(error,sizeof error,"GitHub returned invalid update information.");}
     free(m);
     if(cancelled(u)){state(u,UPDATE_CANCELLED,"Update check cancelled.");return;}
@@ -72,10 +79,7 @@ static void download(Updater *u){
     if(!stat(final,&st)){state(u,UPDATE_ERROR,"This update ZIP already exists in Updates. Remove it to download again.");return;}
     snprintf(temporary,sizeof temporary,"%s.tmp",final);int fd=open(temporary,O_CREAT|O_TRUNC|O_WRONLY,0600);if(fd<0){state(u,UPDATE_ERROR,"Could not write to the Updates folder.");return;}
     Download d={.updater=u,.fd=fd};mbedtls_sha256_init(&d.hash);bool ok=mbedtls_sha256_starts(&d.hash,0)==0;
-    snprintf(url,sizeof url,"https://github.com/" BLADES_REPOSITORY "/releases/download/v%s/%s",u->manifest.version,u->manifest.filename);
-#ifndef BLADES_XBOX
-    const char *test=getenv("BLADES_UPDATE_TEST_ORIGIN");if(test)snprintf(url,sizeof url,"%s/%s",test,u->manifest.filename);
-#endif
+    if(!update_address(url,sizeof url,u->manifest.filename))ok=false;
     state(u,UPDATE_DOWNLOADING,"Downloading the USB ZIP...");
     if(ok)ok=update_https(url,u->manifest.bytes,download_bytes,&d,cancelled,u,error,sizeof error);
     unsigned char digest[32]={0};char actual[65];if(mbedtls_sha256_finish(&d.hash,digest))ok=false;mbedtls_sha256_free(&d.hash);
@@ -99,7 +103,7 @@ static void *worker(void *context){
 Updater *updater_open(const char *directory,void (*start)(void *),void *context){
     if(!directory||!*directory||strlen(directory)>=256)return NULL;
     Updater *u=calloc(1,sizeof *u);if(!u)return NULL;snprintf(u->directory,sizeof u->directory,"%s",directory);u->worker_start=start;u->context=context;u->view.revision=1;
-    snprintf(u->view.message,sizeof u->view.message,"Check GitHub Releases for a newer version of Blades.");pthread_mutex_init(&u->lock,NULL);pthread_cond_init(&u->wake,NULL);
+    snprintf(u->view.message,sizeof u->view.message,"Check GitHub for a newer version of Blades.");pthread_mutex_init(&u->lock,NULL);pthread_cond_init(&u->wake,NULL);
     pthread_attr_t attr;pthread_attr_init(&attr);pthread_attr_setstacksize(&attr,512*1024);int error=pthread_create(&u->thread,&attr,worker,u);pthread_attr_destroy(&attr);
     if(error){pthread_cond_destroy(&u->wake);pthread_mutex_destroy(&u->lock);free(u);return NULL;}return u;
 }

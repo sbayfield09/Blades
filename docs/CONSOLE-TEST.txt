@@ -1,4 +1,4 @@
-Blades0.50 — display handoff, Media animations and GitHub updates
+Blades0.50 — display handoff, Media animations and repository-hosted updates
 
 On startup the initialized black presentation buffers are established before
 artwork/resources are loaded. Shutdown presents and drains black frames before
@@ -14,13 +14,14 @@ the cursor within the visible rows. Test Music/Pictures/Video, Jellyfin/Local,
 Media Center, scan paths and nested folder navigation. Existing layout and
 settings are retained.
 
-System > Update Blades checks GitHub Releases. Download Update saves the USB ZIP
+System > Update Blades checks the main/dist/update.json repository manifest. Download Update saves the USB ZIP
 to game:/Updates with progress, X cancellation, HTTPS certificate/hostname checks,
 exact length and SHA256 verification. Partial files are discarded; completed
 files and the running XEX are not overwritten. Exit Blades before extracting
 it manually. No installation, plugin, NAND or default-dashboard changes occur.
-The repository target is sbayfield09/Blades-reimagined; the matching Release
-must be published with update.json. A missing Release is reported normally.
+The repository target is sbayfield09/Blades-reimagined. The versioned USB ZIP
+and matching dist/update.json are committed together in main. GitHub Releases
+and API access are unnecessary. Install this build manually once.
 
 Retained0.49 features:
 

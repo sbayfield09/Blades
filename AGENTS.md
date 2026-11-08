@@ -1,13 +1,15 @@
 # Release delivery
 
-Current user instruction: publish new USB ZIPs, XEX, artwork, source bundle and
-walkthrough as assets of a new GitHub Release, rather than adding new binary
-versions to dist on main. Keep browsable application source on main. Target
-repository name is sbayfield09/Blades-reimagined; perform the requested GitHub
-rename when administration access is available, then update origin. Retain
-historical release files already committed. tools/publish-release.py prepares
-the update.json manifest and verifies draft assets before publishing. Do not
-claim a Release or rename happened until GitHub confirms it.
+Current user instruction supersedes Releases-only delivery: publish matching
+versioned USB ZIPs, XEX, artwork, source bundle, walkthrough and dist/update.json
+in the repository's main branch, where downloads were previously uploaded.
+The updater reads raw.githubusercontent.com/sbayfield09/Blades-reimagined/main/dist/.
+Keep browsable application source on main. The repository rename is verified
+and origin now points to sbayfield09/Blades-reimagined. Retain historical files.
+tools/prepare-update.py verifies files and generates the manifest/checksums;
+commit all matching source/artifacts/manifest together. Never overwrite an
+already-published versioned download. GitHub Releases may be optional mirrors;
+they are not required for updates. Provide immutable matching download links.
 
 The user requires every new release to include the compiled Xbox 360
 `default.xex`, a premade artwork pack, and a navigation walkthrough video,

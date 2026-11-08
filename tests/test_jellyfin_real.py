@@ -63,7 +63,13 @@ def main():
     assert len(episodes)>=2
     api('/Users/'+user+'/PlayedItems/'+episodes[0]['Id'],'POST')
     api('/Users/'+user+'/Items/'+episodes[1]['Id']+'/UserData','POST',{'PlaybackPositionTicks':40000000,'Played':False,'LastPlayedDate':datetime.datetime.now(datetime.timezone.utc).isoformat()})
-    nextup=api('/Shows/NextUp?UserId='+user)['Items'];assert any(i['Id']==episodes[1]['Id'] for i in nextup)
+    # Library refresh finishes asynchronously after episode records first appear.
+    # Wait for the actual Next Up view to become ready before exercising Blades.
+    for _ in range(80):
+     nextup=api('/Shows/NextUp?UserId='+user)['Items']
+     if any(i['Id']==episodes[1]['Id'] for i in nextup):break
+     time.sleep(.25)
+    assert any(i['Id']==episodes[1]['Id'] for i in nextup)
     resumable=api('/Users/'+user+'/Items/Resume?MediaTypes=Video')['Items'];assert any(i['Id']==items[0]['Id'] for i in resumable) and any(i['Id']==episodes[1]['Id'] for i in resumable)
     result=subprocess.run([str(binary),f'127.0.0.1:{port}',str(root/'blades-settings.json'),'real-seek-content' if '--seek-content' in sys.argv else 'real-seek'],env={**env,'BLADES_JELLYFIN_TEST_PASSWORD':password},capture_output=True,text=True,timeout=65)
     if result.returncode:raise RuntimeError('Blades failed against real Jellyfin: '+result.stdout+result.stderr)

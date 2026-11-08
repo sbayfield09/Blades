@@ -18,11 +18,15 @@ def main():
   data=payload.getvalue();assert len(data)>4096
   for mode in (sys.argv[2:] or ('normal','chunked','current','older','badmanifest','badsha','oversize','truncated','cancel','redirect','relative','redirect-bad','redirect-loop','downgrade','badhost','untrusted')):
    destination=root/mode;destination.mkdir()
+   requests=[]
    class Handler(http.server.BaseHTTPRequestHandler):
     protocol_version='HTTP/1.1'
     def log_message(self,*args):pass
     def do_GET(self):
      try:
+      requests.append(self.path)
+      prefix='/sbayfield09/Blades-reimagined/main/dist/'
+      if self.path.startswith(prefix):self.path='/'+self.path[len(prefix):]
       if mode.startswith('redirect') or mode in ('downgrade','relative'):
        if self.path=='/update.json':
         target='/metadata' if mode in ('redirect','relative') else '/update.json' if mode=='redirect-loop' else 'http://localhost/plain' if mode=='downgrade' else 'https://example.com/stolen'
@@ -54,8 +58,13 @@ def main():
     env={**os.environ,'BLADES_UPDATE_TEST_ORIGIN':f'https://localhost:{server.server_port}','SSL_CERT_FILE':str(root/'ca.pem') if mode!='untrusted' else str(root/'unrelated.pem')}
     result=subprocess.run([str(binary),str(destination),mode],env=env,text=True,capture_output=True,timeout=20)
     assert not result.returncode,mode+': '+result.stdout+result.stderr
+    if mode in ('badhost','untrusted'):
+     assert not requests # TLS must reject before sending an HTTP request.
+    else:
+     assert requests and requests[0]=='/sbayfield09/Blades-reimagined/main/dist/update.json',requests
     assert not list(destination.glob('*.tmp'))
     if mode in ('normal','redirect','relative','chunked'):
+     assert '/sbayfield09/Blades-reimagined/main/dist/Blades-v0.51-USB.zip' in requests
      final=destination/'Blades-v0.51-USB.zip';assert final.read_bytes()==data
      with zipfile.ZipFile(final) as z:assert z.testzip() is None
     else:assert not list(destination.glob('*.zip'))

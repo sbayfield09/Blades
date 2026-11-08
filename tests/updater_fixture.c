@@ -19,6 +19,7 @@ int main(int argc,char **argv){
  unit();if(argc==1){puts("PASS: updater version/manifest validation and System button routing");return 0;}assert(argc==3);Updater *u=updater_open(argv[1],NULL,NULL);assert(u&&updater_check(u));UpdateSnapshot s=settled(u);
  const char *mode=argv[2];
  if(!strcmp(mode,"github-probe")){assert(s.state==UPDATE_ERROR&&strstr(s.message,"No published update"));updater_close(u);puts("PASS: verified HTTPS to GitHub; unpublished release correctly reported");return 0;}
+ if(!strcmp(mode,"github-current")){assert(s.state==UPDATE_CURRENT&&!strcmp(s.version,BLADES_VERSION));updater_close(u);puts("PASS: live repository manifest found via raw GitHub; installed version is current");return 0;}
  if(!strcmp(mode,"current")||!strcmp(mode,"older"))assert(s.state==UPDATE_CURRENT&&!updater_download(u));
  else if(!strcmp(mode,"badmanifest")||!strcmp(mode,"badhost")||!strcmp(mode,"untrusted")||!strcmp(mode,"redirect-bad")||!strcmp(mode,"redirect-loop")||!strcmp(mode,"downgrade"))assert(s.state==UPDATE_ERROR);
  else{

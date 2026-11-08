@@ -3,8 +3,11 @@
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
+#ifndef BLADES_VERSION
 #define BLADES_VERSION "0.50.0"
+#endif
 #define BLADES_REPOSITORY "sbayfield09/Blades-reimagined"
+#define BLADES_UPDATE_PATH "/" BLADES_REPOSITORY "/main/dist/"
 typedef enum { UPDATE_IDLE,UPDATE_CHECKING,UPDATE_AVAILABLE,UPDATE_CURRENT,UPDATE_DOWNLOADING,UPDATE_READY,UPDATE_ERROR,UPDATE_CANCELLED } UpdateState;
 typedef struct {
     UpdateState state;unsigned revision;uint64_t received,total;

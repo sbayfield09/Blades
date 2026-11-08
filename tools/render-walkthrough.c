@@ -107,7 +107,7 @@ int main(int argc,char **argv){
   dashboard_jellyfin_dispatch(&d,jelly);
   /* Updater snapshots are simulated; the real TLS worker is tested separately. */
   if(dashboard_update_page(&d)){
-   if(d.update_check){update_started=frame;update_loading=false;d.update=(UpdateSnapshot){.state=UPDATE_CHECKING,.revision=1};snprintf(d.update.message,sizeof d.update.message,"Checking GitHub Releases... (simulation)");fprintf(stderr,"SIMULATED update check; real TLS worker tested separately\n");}
+   if(d.update_check){update_started=frame;update_loading=false;d.update=(UpdateSnapshot){.state=UPDATE_CHECKING,.revision=1};snprintf(d.update.message,sizeof d.update.message,"Checking GitHub for updates... (simulation)");fprintf(stderr,"SIMULATED update check; real TLS worker tested separately\n");}
    if(d.update.state==UPDATE_CHECKING&&frame-update_started>=30){d.update.state=UPDATE_AVAILABLE;strcpy(d.update.version,"0.51.0");d.update.total=6*1024*1024;snprintf(d.update.message,sizeof d.update.message,"A newer version is available. (simulation)");d.update.revision++;}
    if(d.update_download&&(d.update.state==UPDATE_AVAILABLE||d.update.state==UPDATE_CANCELLED)){update_started=frame;update_loading=true;d.update.state=UPDATE_DOWNLOADING;snprintf(d.update.message,sizeof d.update.message,"Downloading the USB ZIP... (simulation)");fprintf(stderr,"SIMULATED update download started\n");}
    if(d.update_cancel&&update_loading){update_loading=false;d.update.state=UPDATE_CANCELLED;snprintf(d.update.message,sizeof d.update.message,"Update download cancelled. (simulation)");d.update.revision++;}

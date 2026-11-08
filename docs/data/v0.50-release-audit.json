@@ -1,12 +1,11 @@
 {
   "release": "0.50.0",
-  "recorded_utc": "2026-11-08T20:53:40.247238+00:00",
-  "source_publication": "Complete browsable application source prepared for main; historical binary downloads retained, new binary versions reserved for Release assets.",
+  "recorded_utc": "2026-11-08T21:46:53.190134+00:00",
+  "source_publication": "Matching complete application source, versioned binaries/USB/source/walkthrough and update manifest prepared together for main; historical downloads retained.",
   "github_administration": {
     "target_repository": "sbayfield09/Blades-reimagined",
-    "rename_verified": false,
-    "release_assets_published": false,
-    "blocker": "Environment denies CONNECT to api.github.com. A network configuration draft adds api.github.com/uploads.github.com while retaining prior custom domains. Saved draft is not an applied runtime change. Publication helper is prepared; no rename/Release claim until verified."
+    "rename_verified": true,
+    "publication": "Repository dist folder on main; no API or Releases required. Atomic Git publication is next; live current-version and older-client download probes follow."
   },
   "display": {
     "startup": "Initialize black scanout before artwork/resource allocations",
@@ -20,7 +19,7 @@
   },
   "updater": {
     "location": "System > Update Blades; auto-check on opening, check/download controls, version/status/progress/cancel",
-    "source": "Latest stable GitHub Release update.json, authenticated by HTTPS rather than a token",
+    "source": "https://raw.githubusercontent.com/sbayfield09/Blades-reimagined/main/dist/update.json; exact repository path asserted in local TLS tests; no token",
     "TLS": "Mbed TLS3.6.5, chain/hostname verification, public Mozilla roots, native XeCryptRandom, scalar portable C; native excludes desktop proxy/test-origin/extra-CA overrides",
     "bounds": {
       "manifest_bytes": 16384,
@@ -58,7 +57,7 @@
     ],
     "source_application_rebuild_byte_identical": true,
     "rebuild_scope": "Exact archived application using pinned SDK5f6dc726f65f6d171493a3628c2415c03551f27b and same verified FFmpeg dependency; complete dependency sources/config/build tools included",
-    "native": "PASS: XEX2 PowerPC-BE, Xbox subsystem, entry 0x826bd498\nPASS: 158 verified 65536-byte image pages; header/image/import digest chains valid\nPASS: xam.xex: 92 import slots\nPASS: xboxkrnl.exe: 124 import slots\nConsole launch and Peer Pressure compatibility remain unverified.\n",
+    "native": "PASS: XEX2 PowerPC-BE, Xbox subsystem, entry 0x826bd5e8\nPASS: 158 verified 65536-byte image pages; header/image/import digest chains valid\nPASS: xam.xex: 92 import slots\nPASS: xboxkrnl.exe: 124 import slots\nConsole launch and Peer Pressure compatibility remain unverified.\n",
     "TLS_instructions": "PASS: 172691 TLS instructions checked; no vector instructions, scalar crypto config and explicit no-AltiVec flags. Kernel CSPRNG is linked; desktop test/proxy/extra-CA overrides are excluded from native code.\n",
     "decoder_instructions": "PASS: 1041821 instructions checked across five archives; vectors only in the two Simple360 filter objects, restricted to the explicit Xenon shift/add/permute subset. Generic PPC/AltiVec remains off; GPLv3 enabled, nonfree off.\n",
     "shaders": "PASS: 240 compiled Xenos swirl samples match supplied equations within one RGB level\nPASS: compiled Xenos point fetches and separable 720p background filtering\nPASS: compiled Xenos glyph tint and integer alpha coverage\nPASS: compiled Xenos content fade shader\nPASS: compiled Xenos cap box filter preserves alpha-aware area samples\nPASS: 72 compiled Xenos video samples; three Y/U/V sampler slots, BT601/709 limited/full, boundaries and RGB\n",
@@ -112,7 +111,7 @@
           "start_time": "0.000000",
           "duration_ts": 3686400,
           "duration": "240.000000",
-          "bit_rate": "798838",
+          "bit_rate": "798333",
           "bits_per_raw_sample": "8",
           "nb_frames": "7200",
           "extradata_size": 46,
@@ -166,7 +165,7 @@
           "start_time": "0.000000",
           "duration_ts": 11520000,
           "duration": "240.000000",
-          "bit_rate": "43920",
+          "bit_rate": "43886",
           "nb_frames": "11251",
           "extradata_size": 5,
           "disposition": {
@@ -206,8 +205,8 @@
         "format_long_name": "QuickTime / MOV",
         "start_time": "0.000000",
         "duration": "240.000000",
-        "size": "25546430",
-        "bit_rate": "851547",
+        "size": "25530252",
+        "bit_rate": "851008",
         "probe_score": 100,
         "tags": {
           "major_brand": "isom",
@@ -221,31 +220,31 @@
   },
   "artifacts": {
     "dist/Blades-v0.50-USB.zip": {
-      "bytes": 5449449,
-      "sha256": "320d80c42112778072dc667f29c936156a7436f6514d63f1990655a55fd6b7fb"
+      "bytes": 5449806,
+      "sha256": "aad5ab6ea91801797c2d6686f6d5efd758910867942441a659e1b85cfd25a008"
     },
     "dist/Blades/default.xex": {
       "bytes": 7340032,
-      "sha256": "a474f5a26abc14c9ae7e030e2af8426855901266318e8d573b8bcd17853bc5c9"
+      "sha256": "16ce7f29f5f6118281a47d7795d66872431036eda96779984db73755e13d36bd"
     },
     "dist/Blades-artwork-pack.zip": {
       "bytes": 2041912,
       "sha256": "7417accd71918a01d316ae20f8471af504969f35a19870ff70fc4edd060690bf"
     },
     "dist/Blades-v0.50-walkthrough.mp4": {
-      "bytes": 25546430,
-      "sha256": "bf309ba594743965b18964d9de47040e32822f19f7bddb87a33c65f41d74b030"
+      "bytes": 25530252,
+      "sha256": "a15d9c58507d75fc66a846390648ed91b0b45cbaf77d63f4f66cabe176a95255"
     },
     "dist/Blades-v0.50-source.zip": {
-      "bytes": 33774639,
-      "sha256": "803ce48602bfb7fc6c6026f6781a279c4dfe952140ad1e35337157c82ff02664"
+      "bytes": 33777637,
+      "sha256": "1ce739a8785b21eb635f7c4d438865a6372c5e24c1208464ce439194b286e811"
     }
   },
   "update_manifest": {
     "schema": 1,
     "version": "0.50.0",
     "asset": "Blades-v0.50-USB.zip",
-    "size": 5449449,
-    "sha256": "320d80c42112778072dc667f29c936156a7436f6514d63f1990655a55fd6b7fb"
+    "size": 5449806,
+    "sha256": "aad5ab6ea91801797c2d6686f6d5efd758910867942441a659e1b85cfd25a008"
   }
 }
