@@ -1,30 +1,30 @@
-Blades 0.38.0 - Selected-file video playback through Simple360Player
+Blades 0.39.0 - Video playback inside the Blades executable
 
-Extract Blades-v0.38-USB.zip onto USB and launch Blades/default.xex. The ZIP
-includes the complete Assets and Players folders, source and notices. It excludes local library
-paths, FTP settings/login details and logs, preserving those on an update.
-Separate matching XEX/artwork/video downloads remain available.
+Extract Blades-v0.39-USB.zip onto USB and launch Blades/default.xex. The ZIP
+includes default.xex, complete Assets and licences. No Players folder, adapter,
+DLL, DashLaunch or stock player is required. Existing 0.38 Players files are
+unused; you may remove that old folder manually. The ZIP excludes saved scan
+paths, FTP credentials and logs, preserving those on an update.
 
-Version 0.38 video playback:
-- Keep choosing files in Blades: Media > Video. Add your video folder under
-  Media > Video Marketplace, choose Video and a scan depth, then Scan Now.
-- A opens the exact selected file in the bundled Simple360Player0.2. Its
-  browser is bypassed by a local Peer Pressure title adapter. No DashLaunch
-  or stock-dashboard plugin/HDD installation is required; copy Players too.
-- A pauses/resumes; Left/Right seeks; Y opens player options; B stops playback
-  and returns to the Blades Videos list. EOF returns there too. The startup
-  animation is skipped on return, and the selected file is restored after scan.
-- Video filters now include MKV, MPEG, TS/M2TS and FLV in addition to MP4/MOV/
-  M4V/MP4V, AVI, ASF and WMV. The codec inside still has to be supported.
-- The user confirmed unmodified Simple360Player0.2 plays on Peer Pressure.
-  This new exact-selection/return adapter needs a separate console test.
-- If the player browser appears, return fails, or a file will not play, send
-  Blades/default.log, Players/Simple360Player/playerlog.txt and blades-video.log.
-  Report a missing adapter log too. These logs stay local and may contain paths.
-- Music/Pictures playback and the original Xbox music visualisations are not
-  implemented. The video engine does not require the retail optional-codec update.
-- A complete third-party source/licence bundle is included under Players.
-  The unchanged235-entry artwork pack retains the0.37 tints and shadows.
+Version 0.39 video playback:
+- Keep choosing files in Media > Video. Add folders under Media > Video
+  Marketplace; choose Video, a scan depth and Scan Now.
+- A plays the exact selected file inside Blades. A pauses/resumes, Left/Right
+  seeks ten seconds, X switches fit/stretch, Y toggles the controls.
+- B or Back stops and returns to the same list and selected row. EOF returns
+  there too. Opening Guide pauses and restores the previous pause state on close.
+- WMV/MP4/MOV/MKV/AVI/ASF/MPEG/TS/FLV containers are accepted; their codec/profile
+  must also be supported. Input above 1920x1080 is rejected; output is at most
+  1280x720. Console performance for this new engine is not yet measured.
+- Start with the synthetic 640x360 sample.wmv and sample.mp4 in tests/media of
+  Blades-v0.39-source.zip. Host playback/controls and Xbox build/integrity passed;
+  this embedded Xbox playback needs a new hardware test.
+- If it fails, send Blades/default.log and the last screen/sound observed.
+  No separate player/adapter logs are used. Logs may contain selected filenames.
+- Music/Pictures playback and original Xbox music visualisations are unfinished.
+- FFmpeg is LGPL2.1+; complete corresponding source and relink instructions are
+  in Blades-v0.39-source.zip. See licenses/VIDEO-LICENSE-NOTICE.txt.
+- Artwork is the unchanged matching 235-entry pack with retained tints/shadows.
 
 Retained 0.37 corrections:
 - Marketplace tint is halfway between 0.35 and 0.36. Xbox Live keeps the

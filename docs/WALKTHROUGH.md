@@ -1,24 +1,26 @@
-# Blades0.38 walkthrough
+# Blades 0.39 walkthrough
 
-[Watch/download the MP4](../dist/Blades-v0.38-walkthrough.mp4)
+[Watch/download the MP4](../dist/Blades-v0.39-walkthrough.mp4)
 
-Fresh108-second1280x720 desktop GPU capture at30fps with48kHz stereo AAC.
-The shared release renderer uses the matching unchanged235-entry artwork pack.
-An on-video label identifies the desktop preview and simulated storage/player
-handoff. This is not footage of Xbox decoder playback or the new adapter.
+Fresh 108-second 1280x720 desktop GPU capture at 30fps with 48kHz stereo AAC,
+using the release renderer and matching 235-entry artwork pack. The on-video
+label distinguishes real embedded sample playback from simulated storage,
+profile and Guide services. This is desktop footage; new Xbox playback remains
+unverified.
 
-The first84 seconds cover blade changes, profile/Guide requests, achievements,
-File Manager, FTP and the retained0.37 highlights/tints/shadows. Profile, storage,
-FTP, Guide and keyboard events are explicitly simulated.
+The first 84 seconds cover blade navigation, profile/Guide requests,
+achievements, File Manager and FTP. Console services are simulated and labelled.
 
-- 01:24–01:29: navigate from Marketplace to Media, then open Video.
-- 01:30: populated Blades Videos list with a selected WMV.
-- 01:31: explicit desktop-only simulated exact-file handoff notice.
-- 01:35: return to the same list in the preview.
-- 01:37–01:43: select an MKV and repeat the simulated handoff.
+- 01:24–01:29: navigate to Media, then Video.
+- 01:31: A opens a synthetic WMV through the actual embedded decoder.
+- 01:32/01:33: pause/resume; 01:35: B returns to the same Blades chooser.
+- 01:37: select the second item.
+- 01:39: play the MP4 through the embedded H264/AAC decoder.
+- 01:40/01:41: pause/resume; 01:43: B returns to the list.
 - 01:45–01:48: close the list and switch to System.
 
-This verifies the choosing-file layout and current renderer. Actual autoplay,
-Peer Pressure DLL attachment, decoded video/audio and return to Blades need the
-new console test. The user's earlier successful test established only the
-unmodified player engine. Artwork/audio: zivvoz / DashX360 and respective owners.
+Both samples are original FFmpeg-generated test media in the source archive,
+not reference footage. This capture tests selection, host decode/audio and
+Blades GPU rendering together. It does not establish console codec performance,
+physical controller/display/audio behaviour or Guide overlay behaviour.
+Artwork/audio attribution remains in the matching pack and runtime notices.

@@ -1,0 +1,14 @@
+Blades 0.39 embeds FFmpeg 2.8.22, Copyright (c) the FFmpeg developers.
+FFmpeg is free software under the GNU Lesser General Public License 2.1
+or, at your option, any later version. See FFMPEG-LGPL-2.1.txt.
+Build configuration disables GPL and nonfree components.
+Blades application code is MIT; fonts/artwork retain their separate notices.
+
+Complete corresponding application/FFmpeg source, local changes, build scripts
+and a pinned open-source SDK are available in:
+https://github.com/sbayfield09/Blades/raw/refs/heads/main/dist/Blades-v0.39-source.zip
+The immutable matching link is also in the release download instructions.
+See BUILDING.txt within that archive to replace FFmpeg and rebuild/relink the
+executable using the free xsdk GCC toolchain. Reverse engineering/debugging for
+modifications to the LGPL library is permitted. No warranty is provided.
+No GPL Simple360Player application/UI code or XDK player binary is linked.

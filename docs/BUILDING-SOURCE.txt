@@ -1,0 +1,64 @@
+Blades 0.39 complete source and FFmpeg relink instructions
+
+This archive contains the application source, embedded font, GLSL shaders,
+MIT/STB/artwork/font notices, original FFmpeg 2.8.22 source archive, xsdk changes
+to FFmpeg, pinned xsdk source, tests/synthetic WMV/MP4, and premade artwork ZIP.
+The proprietary stock Xbox firmware, uploaded reference videos and personal
+logs/settings are NOT included. No Microsoft XDK or Simple360Player is needed.
+
+Prerequisites on Linux/Debian: GCC/G++, make, CMake >=3.25, Python >=3.11 with
+supported tar extraction filters, git, patch, bison, flex, texinfo, GMP/MPFR/MPC
+development headers and glslang-tools. SDL3/EGL/GL headers are needed only for
+the desktop preview/tests. Follow dependencies/xsdk/docs/GETTING_STARTED.md for
+the free powerpc-xsdk-elf GCC 15.3 toolchain. Its compiler ABI must match xsdk.
+The SDK's toolchain builder verifies pinned binutils/GCC/newlib source hashes;
+it may download these free sources. This source archive does not include a
+precompiled compiler or a proprietary SDK.
+
+Xbox rebuild / relink (from the archive's Blades directory):
+
+  export XSDK_ROOT="$PWD/dependencies/xsdk"
+  export XSDK_TOOLCHAIN="$HOME/xsdk-gcc"
+  # If no xsdk toolchain is installed, build it first:
+  PREFIX="$XSDK_TOOLCHAIN" WORK="$HOME/xsdk-gcc-work" JOBS=4 bash "$XSDK_ROOT/tools/toolchain/build.sh"
+  bash tools/build-xbox.sh
+
+The script builds the SDK library/shader compiler, extracts the pinned FFmpeg
+archive, applies third_party/ffmpeg/patches/xsdk.patch, configures LGPL-only
+static libraries, compiles the application and links them into default.xex.
+It also verifies the XEX and makes a complete USB ZIP using the included artwork.
+No converter is needed. No Players directory, adapter or sideload.ini is used.
+SDK source commit: 5f6dc726f65f6d171493a3628c2415c03551f27b.
+See third_party/ffmpeg/README.md for FFmpeg source provenance and exact hash.
+
+To modify/relink FFmpeg:
+
+1. Extract third_party/ffmpeg/ffmpeg-n2.8.22.tar.gz into a directory you choose.
+2. Apply third_party/ffmpeg/patches/xsdk.patch with patch -p1 there; edit freely.
+3. The generated build/ffmpeg-xbox/objects/blades-configure.txt records every
+   configure option from the standard build. Run that source's configure in a
+   fresh objects directory with the same options, adjusting --prefix to your
+   own install directory; then make -j4 and make install. You can alternatively
+   edit the extracted standard build/ffmpeg-xbox/source/FFmpeg-n2.8.22 sources
+   after the first build and run make -C build/ffmpeg-xbox/objects install.
+4. Set BLADES_FFMPEG_PREFIX to that install directory and run tools/build-xbox.sh.
+   The application recompiles/relinks against your replacement static libraries.
+   Modifications/debugging for the LGPL library are permitted. FFmpeg version/API
+   changes may also require changing src/core/video.c. The source archive hash
+   check in the automated builder protects the original archive, not your own
+   modified-library route.
+
+Host decoder/UI tests (with SDL3 installed):
+
+  python3 tools/build-video-ffmpeg.py --target host --build build/ffmpeg-host
+  cmake -S . -B build/linux -DCMAKE_BUILD_TYPE=Release -DBLADES_FFMPEG_PREFIX="$PWD/build/ffmpeg-host/install"
+  cmake --build build/linux -j4
+  BLADES_RESOURCE_PACK="$PWD/dist/Blades/Assets/blades.xzp" ctest --test-dir build/linux --output-on-failure
+
+For full resource/GPU tests first unzip dist/Blades-artwork-pack.zip to a temporary
+location and copy its Assets/blades.xzp into dist/Blades/Assets/. Add
+-DBLADES_GPU_CHECKS=ON to CMake and EGL_PLATFORM=surfaceless for a headless Mesa
+GPU test. The embedded-engine test consumes tests/media/sample.wmv and sample.mp4.
+Leak detection is disabled in the cloud's traced executor; ASan/UBSan covered the
+application wrapper. The prebuilt FFmpeg libraries were not sanitizer-instrumented.
+These host tests do not establish Xbox runtime behaviour or performance.

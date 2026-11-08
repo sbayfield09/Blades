@@ -1,11 +1,8 @@
-# Media libraries — Blades0.38
+# Media libraries — Blades 0.39
 
-Video now uses the user-approved independent Simple360Player0.2 engine. Its
-existing autoplay feature opens the exact Blades selection. A local Peer Pressure
-title DLL prevents the player's browser from appearing and returns to the Videos
-list on stop/end. The unmodified engine is user-confirmed on Peer Pressure; the
-new adapter/return route is hardware-unverified. See VIDEO-PLAYBACK.md. Music and
-Pictures retain the explicit unimplemented-playback guard.
+Video now decodes inside the Blades executable, preserving the existing chooser.
+There is no player handoff or adapter. See [video playback](VIDEO-PLAYBACK.md).
+Music and Pictures retain the explicit unimplemented-playback guard.
 
 The following also retains the earlier retail-player investigation as history.
 

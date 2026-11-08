@@ -164,3 +164,13 @@ player.ini, settings.ini, playerlog.txt, blades-video.log or temporary requests.
 The complete USB ZIP includes Players. Publish Blades-video-player-pack.zip
 alongside separate XEX/artwork downloads so manual updates remain complete.
 Capture the current shared renderer; label desktop player handoffs as simulated.
+
+
+Version 0.39 embeds LGPL-only FFmpeg directly in Blades. Run tools/build-xbox.sh
+with XSDK_ROOT/XSDK_TOOLCHAIN; it builds the pinned decoder then the single XEX.
+The USB ZIP must contain no Players files or sideload.ini. Existing historical
+0.38 downloads are retained for provenance, not used by 0.39. Publish the complete
+Blades-v0.39-source.zip with application source, FFmpeg tarball/patches, SDK source,
+licences and BUILDING.txt. Keep its download link in the runtime LGPL notice.
+Record real host sample playback in the walkthrough, labelled desktop capture;
+storage/profile/Guide events remain simulated. Do not claim console validation.

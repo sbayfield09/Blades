@@ -1,3 +1,32 @@
+# Current release: Blades 0.39
+
+- All 22 current CTest suites pass: 21 host/core/GPU/preview suites and the FTP
+  loopback regression, run outside the sandbox to permit its socket bind.
+- The actual WMV2/WMA and H264/AAC embedded engine tests pass for frame ownership,
+  pause/resume, Guide pause restoration, seeking/end, repeated opens/cancellation,
+  stereo/six-channel resampling, silent-video clock and preserved chooser state.
+- ASan/UBSan pass for the new application wrapper/frontend. FFmpeg libraries are
+  not instrumented; LeakSanitizer is disabled in the traced executor.
+- A fresh pinned FFmpeg Xbox build passes; the single native XEX has 138 verified
+  64KiB image pages and valid header/image/import chains. Engine symbols are
+  present; video adapter/handoff symbols are absent.
+- The application and bundled SDK rebuilt from the source archive produce a
+  byte-identical default.xex (SHA256
+  3cb719e2b19e15a300dffd6ec9a66f139984bf2f4d42fa813a7ef7aafbbe5a5e).
+- USB/source ZIP CRC, source manifest, exact XEX/artwork payloads and safe-entry
+  checks pass. The USB contains one XEX and no Players, sideload.ini, saved scan
+  folders, credentials or logs. The matching 235-entry artwork pack is unchanged.
+- Fresh 108-second 720p30 walkthrough: actual host WMV/MP4 playback and return,
+  48kHz stereo, fully decoded without errors; screenshots inspected. Storage,
+  profiles, FTP and Guide events remain explicitly simulated.
+- New embedded Xbox playback, performance and Peer Pressure runtime still need
+  console testing. No Xbox/Xenia playback result is claimed. The previous 0.38
+  adapter crash is observed only as early startup in the supplied logs; its exact
+  faulting instruction was not established. Version 0.39 removes that runtime path.
+
+See [release audit](data/v0.39-video-audit.json), [playback](VIDEO-PLAYBACK.md),
+and [walkthrough](WALKTHROUGH.md). Earlier validation history follows.
+
 # Validation in the cloud workspace
 
 - Debian 13 amd64, GCC 14.2, SDL 3.2.10, CMake 3.31.6.

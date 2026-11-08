@@ -1,0 +1,221 @@
+{
+  "release": "0.39.0",
+  "recorded_utc": "2026-11-08T09:22:27.724461+00:00",
+  "xex_version": "0.0.39.0",
+  "sdk_commit": "5f6dc726f65f6d171493a3628c2415c03551f27b",
+  "feature": "Selected-file video decoding inside the Blades executable with existing chooser/GPU/audio; no video XEX handoff or adapter",
+  "prior_console_evidence": {
+    "observation": "User reported0.38 hard crash. Blades log ends at player launch; adapter log has first startup line only.",
+    "conclusion": "Observed failure region is early adapter startup; exact fault not established. That entire runtime path is removed.",
+    "private_uploaded_logs_published": false
+  },
+  "architecture": {
+    "frontend": "Original MIT Blades code",
+    "decoder": "FFmpeg2.8.22 LGPL2.1+ static libraries; GPL/nonfree disabled; no Simple360Player GPL UI or XDK binary linked",
+    "display": "Existing xsdk GPU, up to1280x720 RGBA, three owned/revisioned frames; reject input over1920x1080",
+    "audio": "Existing xsdk audio device,48kHz stereo or6channels; PCM clock and256-sample ramps",
+    "workers": "Bounded demux/packet queues, video/audio decoder workers, generation-based seek flush",
+    "controls": "A pause/resume, B/Back return, Left/Right10secondseek, X fit/stretch, Y controls, Guide pause state preserved",
+    "exit": "Same process, chooser/selection retained; no title/CRT/driver handoff",
+    "USB_XEX_count": 1,
+    "USB_Players_or_sideload": false
+  },
+  "validation": {
+    "ctest_suites_passed": 22,
+    "host_core_renderer": "Internal ctest changing into directory: /workspace/Blades/build/linux\nTest project /workspace/Blades/build/linux\n      Start  1: video\n 1/21 Test  #1: video ............................   Passed    1.84 sec\n      Start  2: dashboard\n 2/21 Test  #2: dashboard ........................   Passed    5.43 sec\n      Start  3: resources\n 3/21 Test  #3: resources ........................   Passed    0.00 sec\n      Start  4: skin\n 4/21 Test  #4: skin .............................   Passed    0.01 sec\n      Start  5: ambient\n 5/21 Test  #5: ambient ..........................   Passed    0.06 sec\n      Start  6: font\n 6/21 Test  #6: font .............................   Passed    0.01 sec\n      Start  7: audio\n 7/21 Test  #7: audio ............................   Passed    0.00 sec\n      Start  8: animation\n 8/21 Test  #8: animation ........................   Passed    0.00 sec\n      Start  9: pixels\n 9/21 Test  #9: pixels ...........................   Passed    0.05 sec\n      Start 10: draw-list\n10/21 Test #10: draw-list ........................   Passed    2.46 sec\n      Start 11: startup\n11/21 Test #11: startup ..........................   Passed    0.78 sec\n      Start 12: disc\n12/21 Test #12: disc .............................   Passed    0.08 sec\n      Start 13: media-launch\n13/21 Test #13: media-launch .....................   Passed    0.00 sec\n      Start 14: achievement-backend\n14/21 Test #14: achievement-backend ..............   Passed    0.05 sec\n      Start 15: profile-backend\n15/21 Test #15: profile-backend ..................   Passed    0.30 sec\n      Start 16: achievements\n16/21 Test #16: achievements .....................   Passed    0.06 sec\n      Start 17: profile\n17/21 Test #17: profile ..........................   Passed    2.56 sec\n      Start 18: profile-count\n18/21 Test #18: profile-count ....................   Passed    0.00 sec\n      Start 19: library\n19/21 Test #19: library ..........................   Passed    0.09 sec\n      Start 20: gpu\n20/21 Test #20: gpu ..............................   Passed    5.81 sec\n      Start 21: preview-smoke\n21/21 Test #21: preview-smoke ....................   Passed    0.20 sec\n\n100% tests passed, 0 tests failed out of 21\n\nTotal Test time (real) =  19.80 sec\n",
+    "ftp": "Internal ctest changing into directory: /workspace/Blades/build/linux\nTest project /workspace/Blades/build/linux\n    Start 20: ftp\n1/1 Test #20: ftp ..............................   Passed    2.13 sec\n\n100% tests passed, 0 tests failed out of 1\n\nTotal Test time (real) =   2.13 sec\n",
+    "engine": "ActualWMV2/WMA andH264/AAC decode, RGBA ownership, stereo/6channel resample, video-onlyclock, pause/Guide/seek/end, repeatedopen/cancel, missingfile, chooser retained",
+    "asan_ubsan": "Application wrapper/frontend passed; externalFFmpeg static libraries not instrumented; leak checking disabled in traced executor",
+    "xex": "PASS: XEX2 PowerPC-BE, Xbox subsystem, entry 0x8258b760\nPASS: 138 verified 65536-byte image pages; header/image/import digest chains valid\nPASS: xam.xex: 92 import slots\nPASS: xboxkrnl.exe: 122 import slots\nConsole launch and Peer Pressure compatibility remain unverified.\n",
+    "native_engine_symbols_present_adapter_symbols_absent": true,
+    "offline_decoder_builder_fresh_target_build": "passed",
+    "source_application_and_bundled_sdk_rebuild_byte_identical": true,
+    "source_rebuild_decoder_libs": "Uses fresh target static libraries built from the exact included tarball/patch/configuration; application and bundled SDK rebuilt from archive",
+    "source_manifest_CRC_and_current_build_source_identity": "passed",
+    "USB_CRC_exact_payloads_safe_paths_no_configs_logs_or_adapter": "passed",
+    "artwork_byte_identical_to_0_38": true,
+    "artwork_entries": 235
+  },
+  "video": {
+    "streams": [
+      {
+        "index": 0,
+        "codec_name": "h264",
+        "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+        "profile": "High",
+        "codec_type": "video",
+        "codec_tag_string": "avc1",
+        "codec_tag": "0x31637661",
+        "width": 1280,
+        "height": 720,
+        "coded_width": 1280,
+        "coded_height": 720,
+        "closed_captions": 0,
+        "film_grain": 0,
+        "has_b_frames": 2,
+        "pix_fmt": "yuv420p",
+        "level": 31,
+        "chroma_location": "left",
+        "field_order": "progressive",
+        "refs": 1,
+        "is_avc": "true",
+        "nal_length_size": "4",
+        "id": "0x1",
+        "r_frame_rate": "30/1",
+        "avg_frame_rate": "30/1",
+        "time_base": "1/15360",
+        "start_pts": 0,
+        "start_time": "0.000000",
+        "duration_ts": 1658880,
+        "duration": "108.000000",
+        "bit_rate": "842284",
+        "bits_per_raw_sample": "8",
+        "nb_frames": "3240",
+        "extradata_size": 46,
+        "disposition": {
+          "default": 1,
+          "dub": 0,
+          "original": 0,
+          "comment": 0,
+          "lyrics": 0,
+          "karaoke": 0,
+          "forced": 0,
+          "hearing_impaired": 0,
+          "visual_impaired": 0,
+          "clean_effects": 0,
+          "attached_pic": 0,
+          "timed_thumbnails": 0,
+          "non_diegetic": 0,
+          "captions": 0,
+          "descriptions": 0,
+          "metadata": 0,
+          "dependent": 0,
+          "still_image": 0,
+          "multilayer": 0
+        },
+        "tags": {
+          "language": "und",
+          "handler_name": "VideoHandler",
+          "vendor_id": "[0][0][0][0]",
+          "encoder": "Lavc61.19.101 libx264"
+        }
+      },
+      {
+        "index": 1,
+        "codec_name": "aac",
+        "codec_long_name": "AAC (Advanced Audio Coding)",
+        "profile": "LC",
+        "codec_type": "audio",
+        "codec_tag_string": "mp4a",
+        "codec_tag": "0x6134706d",
+        "sample_fmt": "fltp",
+        "sample_rate": "48000",
+        "channels": 2,
+        "channel_layout": "stereo",
+        "bits_per_sample": 0,
+        "initial_padding": 0,
+        "id": "0x2",
+        "r_frame_rate": "0/0",
+        "avg_frame_rate": "0/0",
+        "time_base": "1/48000",
+        "start_pts": 0,
+        "start_time": "0.000000",
+        "duration_ts": 5184000,
+        "duration": "108.000000",
+        "bit_rate": "31669",
+        "nb_frames": "5064",
+        "extradata_size": 5,
+        "disposition": {
+          "default": 1,
+          "dub": 0,
+          "original": 0,
+          "comment": 0,
+          "lyrics": 0,
+          "karaoke": 0,
+          "forced": 0,
+          "hearing_impaired": 0,
+          "visual_impaired": 0,
+          "clean_effects": 0,
+          "attached_pic": 0,
+          "timed_thumbnails": 0,
+          "non_diegetic": 0,
+          "captions": 0,
+          "descriptions": 0,
+          "metadata": 0,
+          "dependent": 0,
+          "still_image": 0,
+          "multilayer": 0
+        },
+        "tags": {
+          "language": "und",
+          "handler_name": "SoundHandler",
+          "vendor_id": "[0][0][0][0]"
+        }
+      }
+    ],
+    "format": {
+      "filename": "Blades-v0.39-walkthrough.mp4",
+      "nb_streams": 2,
+      "nb_programs": 0,
+      "nb_stream_groups": 0,
+      "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+      "format_long_name": "QuickTime / MOV",
+      "start_time": "0.000000",
+      "duration": "108.000000",
+      "size": "11918267",
+      "bit_rate": "882834",
+      "probe_score": 100,
+      "tags": {
+        "major_brand": "isom",
+        "minor_version": "512",
+        "compatible_brands": "isomiso2avc1mp41",
+        "encoder": "Lavf61.7.103"
+      }
+    }
+  },
+  "video_scope": "Fresh108second desktop GPU capture; actual embedded WMV/MP4 decoding/audio and pause/return; storage/profile/Guide/FTP services explicitly simulated and labelled",
+  "console_scope": "New0.39 embedded Xbox decoder/display/audio/controls have not been executed here. Native build/integrity and desktop tests do not establish hardware runtime, Peer Pressure behaviour or frame rate.",
+  "artifacts": {
+    "dist/Blades-v0.39-USB.zip": {
+      "bytes": 4626025,
+      "sha256": "cd63fa364d7af80a5e013803f7d16ad13c59326ea41cf1131cd2fb46409771ef"
+    },
+    "dist/Blades/default.xex": {
+      "bytes": 6090752,
+      "sha256": "3cb719e2b19e15a300dffd6ec9a66f139984bf2f4d42fa813a7ef7aafbbe5a5e"
+    },
+    "dist/Blades-artwork-pack.zip": {
+      "bytes": 2041912,
+      "sha256": "7417accd71918a01d316ae20f8471af504969f35a19870ff70fc4edd060690bf"
+    },
+    "dist/Blades-v0.39-walkthrough.mp4": {
+      "bytes": 11918267,
+      "sha256": "1e299ff4b592acca4bebd1728ccf95ddb1eb61e85fd126fd55aea11da76b3300"
+    },
+    "dist/Blades-v0.39-source.zip": {
+      "bytes": 20858533,
+      "sha256": "f57f2aab872646c8d3e237294e6fd0868d28f5fd92122bea160204167cb81546"
+    }
+  },
+  "source_sha256": {
+    "CMakeLists.txt": "c38b307efc4cefde085f1a6e2f996f3eaebebb286287e53395bd80e5b041cc6c",
+    "include/video.h": "930473580c980a36d001e07a5b4187ee7ad6afc48a0b11b5c6e2f0ebef056856",
+    "include/blades.h": "692f2200851fa426abbc0edc7722eab53dc0a441440c546288ee87fe6cb156ce",
+    "src/core/video.c": "abd4bb9fe374c7a6df17536cc0e3877caa566b1d0e59fdeb508b44e582222980",
+    "src/core/video_ui.c": "8fbd145d340be7150429d678d6a8e35a8ae6eb75e69174ee97358ff179c5550d",
+    "src/core/library_ui.c": "190096d1551061a7bc4e66e96ed0c13ff64f1cf2877237ce3bf66b2b160cd14b",
+    "src/platform/xbox360.c": "76fa7c79c91510010ca3a7333e3be66e904b2e566a827b58f3eb035bb4b594ae",
+    "src/platform/xbox_library.c": "dd72d7cb1e8dc8a25fc6d2f60d96e244aca36c6f68fd880185e9fc87a2ddb2aa",
+    "src/platform/linux.c": "c0d11daff6ac9ba19accb976001e51be517fe6ff9385d21a6082eced8958fedb",
+    "src/render/video_render.c": "bb9dd9d2253437ad0238ceb42b21311fa0d955d83acd14bfed0c6c0612c381a9",
+    "src/render/dashboard_render.c": "d3a9d03fecde1418c85a41fec59f9f0a1e56f4ed6fdc6320f5d96b78092a89ee",
+    "src/render/draw_list.c": "c32eb2ea56e0aa0ab977958585fb9da7bf8072097d83e6c684ab8e07ffeadef1",
+    "tests/test_video.c": "71f51926941f31fd402ad6d00febeb1733f8e993f29268801d1f5a7c2e82e6c4",
+    "tools/build-video-ffmpeg.py": "0fb631fbb53dc1373d66e5f2f92e4ce7363c4ecf9e12682b73c10442897a2756",
+    "tools/build-xbox.sh": "abb0f1250586a96b4790005d2d8e06604f9c50b2ee71fc881511c6a4ba09f345",
+    "tools/package-source.py": "3d5e232cf9e0d63ced90c7754fa6d498922e456baf668bb246f5c49b7d8341c4",
+    "tools/package-usb.py": "bf4c809b9cc7a3c607067c443daf97b1cb76daad223c0fcadacd32553e060f4e",
+    "tools/render-walkthrough.c": "b1c48bf69154dbbeff6930a09326b77b0db873bbfe5f92beb81086e96cd52502",
+    "third_party/ffmpeg/patches/xsdk.patch": "476e162f1decf449987d4d055ea3dc97b89ca952aa7837cb1723945f796d95ed"
+  }
+}
