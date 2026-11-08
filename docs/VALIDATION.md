@@ -1,3 +1,33 @@
+# Current release: Blades 0.48
+
+- All30 host suites pass, including the new cache/content mode. Application
+  ASan/UBSan covers four protocol/UI/video/sync suites plus actual cache/content
+  HTTP playback. External FFmpeg not instrumented; leak detection disabled.
+- Reproduced old seek on official Jellyfin10.10.7 and delayed-delete fixture:
+  requested4.250s, decoded4.000s, client reported4.260s. Source pixels encode
+  their frame number; tests now verify pictures rather than only rebased clocks.
+- Unique per-restart User-Agent generations isolate the progressive cache key,
+  which omits seek time; authentication/device/logical playback session retained.
+  Actual fractional/one-second/ten-second forward/back/return/EOF targets pass,
+  maximum measured rounding 0.017s at30fps.12s continuous content/clock
+  agreement and delayed-cleanup isolation pass. Network EOF margin0.5s;
+  local byte seeking unchanged. Requests replaced atomically and not logged.
+- Native XEX/import digests, decoder instruction whitelist and Xenos shader
+  checks pass. Codec, worker, GPU, audio FIFO/resampler and0.47 scan/metadata/
+  timeout fixes are preserved. No settings migration.
+- Archived application rebuild produces identical XEX SHA256:
+  2a8805a0f24cfdcbe9f2f03ee8c0349f797b7d584b78aea20e2384eee81fcdc7.
+- Source/USB CRC, manifests, current source, artwork and licences pass. Complete
+  GPLv3 source/build scripts and pinned free SDK supplied; no private logs/configs.
+- Fresh215second720p30 desktop GPU capture,48kHz stereo fully decodes; source
+  frame counters expose real seek content. Guide/profile/storage/FTP simulated
+  and labelled. Official test uses only generated credentials/synthetic media.
+- Actual Xbox seeking and A/V timing still need hardware testing. No console
+  speed, GPU compressed decode or1080p30 claim is made.
+
+See [release](RELEASE-0.48.md), [audit](data/v0.48-seek-audit.json).
+Previous validation follows.
+
 # Current release: Blades 0.47
 
 - All30 host suites pass. Application ASan/UBSan covers four protocol/UI/video/

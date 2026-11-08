@@ -1,10 +1,10 @@
-# Blades 0.47 walkthrough
+# Blades 0.48 walkthrough
 
-[Watch/download](../dist/Blades-v0.47-walkthrough.mp4): fresh 215-second 720p30
+[Watch/download](../dist/Blades-v0.48-walkthrough.mp4): fresh 215-second 720p30
 shared desktop GPU capture, 48kHz stereo, matching 235-entry artwork pack.
 The video labels desktop GPU rendering and simulated Xbox services. Jellyfin
 uses an actual isolated official 10.10.7 server, a generated test account and
-synthetic HEVC/AAC movies/episodes; no passwords or session tokens are shown.
+synthetic HEVC/AAC movies/episodes with baked source frame counters; no passwords or session tokens are shown.
 
 - 00:00–01:24: blades, profile/Guide requests, achievements, File Manager,
   FTP controls and submenu navigation. Xbox services are simulated and labelled.
@@ -15,7 +15,9 @@ synthetic HEVC/AAC movies/episodes; no passwords or session tokens are shown.
 - 01:50–01:53: Continue Watching includes Series Name S1E2 - Episode Name labels; actual
   server playback resumes at 4 seconds. Next Up uses the same series/season/episode format.
 - 01:54–01:59: pause, seek forward while paused, resume, then seek backward;
-  both timestamps and real decoded picture/audio use the full-item timeline.
+  the baked source frame counter visibly changes with the seek, alongside the
+  full-item playback timeline. The server source encodes its frame number in
+  eleven luma bars for independent actual-content checks.
 - 02:02–02:17: sustained actual playback after the backward seek.
 - 02:17–02:22: return, refresh, then Next Up and its next episode.
 - 02:25–02:31: actual next-episode playback, pause/resume and return.
@@ -30,7 +32,9 @@ synthetic HEVC/AAC movies/episodes; no passwords or session tokens are shown.
 - 03:20–03:22: Video > Local retains only videos.
 - 03:27–03:35: System blade and completion.
 
-The capture waits for actual asynchronous page/seek work before advancing the
+The capture uses the final corrected player. The official-server setup first
+verifies actual content on fractional/one-second/ten-second seeks and12seconds
+of continuous content/clock agreement. The capture waits for actual asynchronous page/seek work before advancing the
 scripted controller. Host FFmpeg uses scalar code; native Xenon kernels are
 unchanged and audited separately. This is not console performance evidence.
 Artwork/font/audio attribution remains in the runtime notices and artwork pack.

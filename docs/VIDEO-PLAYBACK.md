@@ -1,4 +1,4 @@
-# Jellyfin and Local video — Blades0.47
+# Jellyfin and Local video — Blades0.48
 
 Media > Video contains Jellyfin and Local. Media Center manages the Jellyfin
 server/login. See [connection setup and limits](JELLYFIN.md). Local retains the
@@ -6,6 +6,13 @@ existing scanned-video library and the0.43 decoder/GPU path. New shared media
 folders in Video Marketplace are classified by supported file extension; no
 category selection or migration of old paths. Music/Pictures playback remains
 unimplemented.
+
+Small-seek correctness in0.48: each restart has a unique User-Agent generation,
+which isolates Jellyfin's progressive cache filename while preserving the device/
+logical playback session. Stop/delete is asynchronous and seek time is not part
+of that filename; reuse returned old pictures under a new clock. Frame-coded
+actual-content tests now verify fractional and10second seeks, returns and EOF
+bounds against the official server. Network EOF margin0.5s; local seek unchanged.
 
 Jellyfin uses authenticated, bounded custom HTTP AVIO and server-negotiated
 MPEG2/MP2 MPEG-TS up to720p30. The console remains in the same executable.

@@ -1,4 +1,17 @@
-Blades0.47 — tolerate post-seek media stalls and identify episodes by series
+Blades0.48 — correct small Jellyfin seeks that replayed the same scene
+
+Every restarted stream now has its own progressive-cache request identity.
+Jellyfin excludes the seek time from its cache filename and deletes old output
+asynchronously, so reusing that filename could replay the old scene while Blades
+reported the new time. A unique per-restart User-Agent isolates that cache,
+including when returning to the same timestamp, while retaining the same
+Jellyfin device, authentication and logical playback/history session.
+Actual frame-coded content now verifies fractional, one-second and ten-second
+forward/back seeks against official Jellyfin; tests no longer trust only the
+reported clock. Network end seeks follow Jellyfin's half-second EOF margin.
+Left/Right controls still skip10seconds; local seeking remains unchanged.
+
+Retained0.47 timeout/audio/episode fixes:
 
 Jellyfin media delivery now allows30seconds of inactivity instead of8seconds,
 so a transient transcoder stall after seeking can recover. The same ten-second
@@ -27,7 +40,7 @@ path if you want it to use the new shared behaviour. Game paths remain separate.
 Music/Pictures playback is still unfinished; their lists filter the files.
 
 
-Extract Blades-v0.47-USB.zip onto USB; launch Blades/default.xex. The complete
+Extract Blades-v0.48-USB.zip onto USB; launch Blades/default.xex. The complete
 matching Assets folder/notices are included. Keep your existing Config files
 when updating. No adapter, converter, DashLaunch or extra executable is needed.
 
@@ -63,7 +76,7 @@ the screen and send default.log; do not share your private Jellyfin config.
 
 Fresh desktop walkthrough includes Local and actual isolated Jellyfin playback.
 Xbox Guide/profiles/storage/FTP are simulated and labelled. The combined binary
-is GPLv3 with complete corresponding source in Blades-v0.47-source.zip; original
+is GPLv3 with complete corresponding source in Blades-v0.48-source.zip; original
 MIT/FFmpeg/Simple360Player/XenonFin/artwork/font/SDK notices are preserved.
 
 Retained 0.37 corrections:

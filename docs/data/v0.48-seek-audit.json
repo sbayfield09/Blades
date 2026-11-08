@@ -1,0 +1,366 @@
+{
+  "release": "0.48.0",
+  "recorded_utc": "2026-11-08T17:37:20.807845+00:00",
+  "xex_version": "0.0.48.0",
+  "sdk_commit": "5f6dc726f65f6d171493a3628c2415c03551f27b",
+  "feature": "Correct actual video content after small Jellyfin seeks by isolating progressive cache generations",
+  "upstreams": {
+    "xenonfin": {
+      "repository": "https://github.com/sbayfield09/XenonFin",
+      "commit": "554adb8d79a251e4b502ac4a87a328cbe5055b09",
+      "license": "GPL-2.0-or-later",
+      "files": {
+        "platform/xenon/protocol.c": "46a2d7887abc37bdaf91c71b726691aee348917c691aea19d4d27e8c74bbf4e1",
+        "platform/xenon/protocol.h": "ae271bcba506253c84366649aa56dec330bef6fc1d4b3315c8c5a8cbe08bd2cc",
+        "platform/xenon/http.c": "e1a2d5120432f3524cf349fc621930a719b0c9b79356fb6a410a8f7bd8f87bdb",
+        "platform/xenon/json.c": "d91e266948c40cc1d229c7bab6525b0b3d3139d3c087a232c75864c4f4bb6d7b",
+        "platform/xenon/browse.c": "3fae516060fd53b59773f1f5cdf8f43f9b6608dc7c27f0b0f9afde1ad74f1689",
+        "platform/xenon/browse.h": "01b9338d332f5bb128df64d7a440d1804e0c142a3650ad80cee3c2ec47cf672e",
+        "platform/xenon/video_api.c": "d818f2ede536feb4d4c6132fb2826c1d9c676b835e0647020acc7b255cb73cdf",
+        "platform/xenon/video_api.h": "d57ef3a78dddaa8ccafffbb9d58dc71db4716f51ca82cf84e53285a2405ea986",
+        "platform/xenon/tests/protocol_tests.c": "be7344a208d2a60d72df831cfa2d1cdfa0b70c30d24d4002131551aed9bf6b3c",
+        "scripts/fetch_test_server.py": "80ef785d3f445634aa6a2f135ee7167c3afaf2efd55f450c8ac3fffdceb64a2f"
+      }
+    },
+    "simple360player": {
+      "repository": "https://github.com/HG-ERIK/simple360player",
+      "commit": "5d235c1fd24c098ccc1b2463c1b4265bf2e7844c",
+      "license": "GPL-3.0",
+      "files": {
+        "external/ffmpeg360/libavcodec/xbox360/h264_chroma_xb.c": "649fcb94237a6659fbfcfd89772577dfbf5b255cc480e423f8f8036e60648597",
+        "external/ffmpeg360/libavcodec/xbox360/h264_qpel_xb.c": "59be4ac2ec6984ab97a9fbea4acd5a96f9bb35b80b2f89d37264ed9744a9081d",
+        "src/ffglue.c": "f2f4dd0e11a26df4fdaca99e9cae595c210a0b8a143f8072998c855d8e6fa735",
+        "src/FFPlayer.cpp": "9415d6b2a7041ced2eda7eb5d93b041846fce7093ea4d2854be6dbe025323651"
+      }
+    }
+  },
+  "user_evidence": "User reports one Left/Right tap resumes roughly the same scene. Uploaded log shows stream restarts without decoder errors; old build did not record network seek targets. Raw log and private paths are not published.",
+  "root_cause": "Official Jellyfin10.10.7 GetOutputFilePath hashes media/UserAgent/device/PlaySessionId but not StartTimeTicks. StopEncodingProcess starts asynchronous cleanup; progressive output deletion is delayed1500ms. Reusing the filename can reopen old pictures, later delete the restarted output and make rebased client timestamps appear correct.",
+  "server_source_references": [
+    "https://github.com/jellyfin/jellyfin/blob/v10.10.7/Jellyfin.Api/Helpers/StreamingHelpers.cs#L368",
+    "https://github.com/jellyfin/jellyfin/blob/v10.10.7/Jellyfin.Api/Controllers/HlsSegmentController.cs#L111",
+    "https://github.com/jellyfin/jellyfin/blob/v10.10.7/Jellyfin.Api/Helpers/FileStreamResponseHelpers.cs#L96"
+  ],
+  "changes": {
+    "cache_identity": "Every restarted media request replaces/inserts one bounded User-Agent with a monotonic64bit generation. This changes the server output-cache key while preserving authentication/device/logical playback session. Update is atomic, no header growth or credential logging.",
+    "seek_bounds": "Network EOF margin0.5s matches the server clamp; local0.1s retained. Left/Right still10second steps. Diagnostic log reports accepted network seek times and generation only, never private HTTP requests.",
+    "tests": "Source frame number encoded into11 luma bars, with a300frame input GOP. Actual decoded pixels compared against fractional/one-second/ten-second forward/back/return/EOF targets.12wall-clock seconds of continuous source-content/clock agreement after final seek; delayed cleanup fixture and official server.",
+    "retained": "0.47 media inactivity/audio timestamp/numbered-label fixes, local byte seeking, source scanning and settings preserved; no migration. Codec kernels, workers, GPU and PCM functions byte-identical."
+  },
+  "validation": {
+    "host_suites_passed": 30,
+    "core_host": "Internal ctest changing into directory: /workspace/Blades/build/linux\nTest project /workspace/Blades/build/linux\n      Start  1: jellyfin-protocol\n 1/28 Test  #1: jellyfin-protocol ................   Passed    0.00 sec\n      Start  2: jellyfin-ui\n 2/28 Test  #2: jellyfin-ui ......................   Passed    0.00 sec\n      Start  3: video-sync\n 3/28 Test  #3: video-sync .......................   Passed    1.17 sec\n      Start  4: video-audio-preroll\n 4/28 Test  #4: video-audio-preroll ..............   Passed    1.46 sec\n      Start  5: video-startup-clock\n 5/28 Test  #5: video-startup-clock ..............   Passed    3.24 sec\n      Start  6: video-late-presentation\n 6/28 Test  #6: video-late-presentation ..........   Passed    3.22 sec\n      Start  7: video-rgba-fallback\n 7/28 Test  #7: video-rgba-fallback ..............   Passed    2.96 sec\n      Start  8: video\n 8/28 Test  #8: video ............................   Passed    5.52 sec\n      Start  9: dashboard\n 9/28 Test  #9: dashboard ........................   Passed    5.76 sec\n      Start 10: resources\n10/28 Test #10: resources ........................   Passed    0.00 sec\n      Start 11: skin\n11/28 Test #11: skin .............................   Passed    0.01 sec\n      Start 12: ambient\n12/28 Test #12: ambient ..........................   Passed    0.05 sec\n      Start 13: font\n13/28 Test #13: font .............................   Passed    0.01 sec\n      Start 14: audio\n14/28 Test #14: audio ............................   Passed    0.00 sec\n      Start 15: animation\n15/28 Test #15: animation ........................   Passed    0.00 sec\n      Start 16: pixels\n16/28 Test #16: pixels ...........................   Passed    0.05 sec\n      Start 17: draw-list\n17/28 Test #17: draw-list ........................   Passed    2.45 sec\n      Start 18: startup\n18/28 Test #18: startup ..........................   Passed    0.78 sec\n      Start 19: disc\n19/28 Test #19: disc .............................   Passed    0.07 sec\n      Start 20: media-launch\n20/28 Test #20: media-launch .....................   Passed    0.00 sec\n      Start 21: achievement-backend\n21/28 Test #21: achievement-backend ..............   Passed    0.04 sec\n      Start 22: profile-backend\n22/28 Test #22: profile-backend ..................   Passed    0.30 sec\n      Start 23: achievements\n23/28 Test #23: achievements .....................   Passed    0.05 sec\n      Start 24: profile\n24/28 Test #24: profile ..........................   Passed    2.56 sec\n      Start 25: profile-count\n25/28 Test #25: profile-count ....................   Passed    0.00 sec\n      Start 26: library\n26/28 Test #26: library ..........................   Passed    0.11 sec\n      Start 27: gpu\n27/28 Test #27: gpu ..............................   Passed    7.41 sec\n      Start 28: preview-smoke\n28/28 Test #28: preview-smoke ....................   Passed    0.20 sec\n\n100% tests passed, 0 tests failed out of 28\n\nTotal Test time (real) =  37.46 sec\n",
+    "network": "Internal ctest changing into directory: /workspace/Blades/build/linux\nTest project /workspace/Blades/build/linux\n    Start 27: jellyfin-service\n1/2 Test #27: jellyfin-service .................   Passed   83.36 sec\n    Start 28: ftp\n2/2 Test #28: ftp ..............................   Passed    2.34 sec\n\n100% tests passed, 0 tests failed out of 2\n\nTotal Test time (real) =  85.70 sec\n",
+    "old_failure_reproduced": "Both deterministic delayed-delete fixture and official Jellyfin: requested4.250 decoded4.000 while client reported4.260.",
+    "actual_content_positions": [
+      {
+        "requested": 4.0,
+        "decoded_source": 4.0,
+        "reported_pts": 4.01
+      },
+      {
+        "requested": 4.25,
+        "decoded_source": 4.267,
+        "reported_pts": 4.26
+      },
+      {
+        "requested": 4.0,
+        "decoded_source": 4.0,
+        "reported_pts": 4.01
+      },
+      {
+        "requested": 4.05,
+        "decoded_source": 4.067,
+        "reported_pts": 4.06
+      },
+      {
+        "requested": 4.0,
+        "decoded_source": 4.0,
+        "reported_pts": 4.01
+      },
+      {
+        "requested": 5.0,
+        "decoded_source": 5.0,
+        "reported_pts": 5.01
+      },
+      {
+        "requested": 4.0,
+        "decoded_source": 4.0,
+        "reported_pts": 4.01
+      },
+      {
+        "requested": 14.0,
+        "decoded_source": 14.0,
+        "reported_pts": 14.01
+      },
+      {
+        "requested": 4.0,
+        "decoded_source": 4.0,
+        "reported_pts": 4.01
+      },
+      {
+        "requested": 4.75,
+        "decoded_source": 4.767,
+        "reported_pts": 4.76
+      },
+      {
+        "requested": 4.25,
+        "decoded_source": 4.267,
+        "reported_pts": 4.26
+      },
+      {
+        "requested": 4.5,
+        "decoded_source": 4.5,
+        "reported_pts": 4.51
+      },
+      {
+        "requested": 4.0,
+        "decoded_source": 4.0,
+        "reported_pts": 4.01
+      },
+      {
+        "requested": 44.5,
+        "decoded_source": 44.5,
+        "reported_pts": 44.51
+      },
+      {
+        "requested": 4.0,
+        "decoded_source": 4.0,
+        "reported_pts": 4.01
+      }
+    ],
+    "max_measured_content_error_seconds": 0.017000000000000348,
+    "asserted_tolerance_seconds": 0.04,
+    "sanitizers": "Internal ctest changing into directory: /workspace/Blades/build/video-sanitize\nTest project /workspace/Blades/build/video-sanitize\n    Start 1: jellyfin-protocol\n1/4 Test #1: jellyfin-protocol ................   Passed    0.01 sec\n    Start 2: jellyfin-ui\n2/4 Test #2: jellyfin-ui ......................   Passed    0.01 sec\n    Start 3: video-sync\n3/4 Test #3: video-sync .......................   Passed    1.27 sec\n    Start 8: video\n4/4 Test #8: video ............................   Passed    5.76 sec\n\n100% tests passed, 0 tests failed out of 4\n\nTotal Test time (real) =   7.05 sec\n",
+    "sanitizer_cache": "seek-cache: seek content: requested=4.000 actual=4.000 reported_pts=4.010\nseek content: requested=4.250 actual=4.267 reported_pts=4.260\nseek content: requested=4.000 actual=4.000 reported_pts=4.010\nseek content: requested=4.050 actual=4.067 reported_pts=4.060\nseek content: requested=4.000 actual=4.000 reported_pts=4.010\nseek content: requested=5.000 actual=5.000 reported_pts=5.010\nseek content: requested=4.000 actual=4.000 reported_pts=4.010\nseek content: requested=14.000 actual=14.000 reported_pts=14.010\nseek content: requested=4.000 actual=4.000 reported_pts=4.010\nseek content: requested=4.750 actual=4.767 reported_pts=4.760\nseek content: requested=4.250 actual=4.267 reported_pts=4.260\nseek content: requested=4.500 actual=4.500 reported_pts=4.510\nseek content: requested=4.000 actual=4.000 reported_pts=4.010\nseek content: requested=44.500 actual=44.500 reported_pts=44.510\nseek content: requested=4.000 actual=4.000 reported_pts=4.010\nPASS: actual frame content matches fractional/one-second/ten-second forward/back/return seeks, pause retained,12second continuous content/clock agreement, delayed cleanup isolated\nPASS: Continue Watching/Next Up navigation, fresh saved-position resume, forward/backward/rapid/bounded seeking, paused seek, reset audio/video clocks, reporting and cancellation/error cleanup\n",
+    "sanitizer_scope": "Application protocol/UI/video/sync suites and actual cache/content HTTP/player mode; external FFmpeg not instrumented, LeakSanitizer disabled.",
+    "official_server": "PASS: official Jellyfin 10.10.7; actual source-frame content agrees within40ms on fractional/one-second/ten-second forward/back/return/EOF seeks;12seconds continuous picture/clock agreement and saved absolute position\nPASS: actual frame content matches fractional/one-second/ten-second forward/back/return seeks, pause retained,12second continuous content/clock agreement, delayed cleanup isolated\nPASS: Continue Watching/Next Up navigation, fresh saved-position resume, forward/backward/rapid/bounded seeking, paused seek, reset audio/video clocks, reporting and cancellation/error cleanup\nPASS: episode names include series in Resume/NextUp; movie names and already-qualified titles are preserved",
+    "official_server_scope": "Disposable official10.10.7 loopback server, generated credentials and synthetic HEVC/AAC movies/episodes. Long GOP and baked source frame counters; actual pixel-position checks,12seconds playback and saved absolute position. No user server or media accessed.",
+    "instruction_audit": "PASS: 1041821 instructions checked across five archives; vectors only in the two Simple360 filter objects, restricted to the explicit Xenon shift/add/permute subset. Generic PPC/AltiVec remains off; GPLv3 enabled, nonfree off.\n",
+    "actual_Xenos_shader": "PASS: 240 compiled Xenos swirl samples match supplied equations within one RGB level\nPASS: compiled Xenos point fetches and separable 720p background filtering\nPASS: compiled Xenos glyph tint and integer alpha coverage\nPASS: compiled Xenos content fade shader\nPASS: compiled Xenos cap box filter preserves alpha-aware area samples\nPASS: 72 compiled Xenos video samples; three Y/U/V sampler slots, BT601/709 limited/full, boundaries and RGB\n",
+    "xex": "PASS: XEX2 PowerPC-BE, Xbox subsystem, entry 0x825a9980\nPASS: 139 verified 65536-byte image pages; header/image/import digest chains valid\nPASS: xam.xex: 92 import slots\nPASS: xboxkrnl.exe: 122 import slots\nConsole launch and Peer Pressure compatibility remain unverified.\n",
+    "unchanged_sources_since_v047": [
+      "include/video.h",
+      "include/jellyfin.h",
+      "src/core/http_client.c",
+      "src/core/jellyfin.c",
+      "src/core/jellyfin_ui.c",
+      "third_party/xenonfin/ported/browse.c",
+      "third_party/xenonfin/ported/browse.h",
+      "src/core/video_ui.c",
+      "src/core/library.c",
+      "src/core/library_ui.c",
+      "include/library.h",
+      "src/platform/xbox_renderer.c",
+      "src/render/shaders/video.frag",
+      "src/render/video_colour.c",
+      "tools/build-video-ffmpeg.py",
+      "third_party/ffmpeg/patches/xsdk.patch",
+      "third_party/ffmpeg/xenon/simple360_chroma.c",
+      "third_party/ffmpeg/xenon/simple360_intrinsics.h",
+      "third_party/ffmpeg/xenon/simple360_qpel.c"
+    ],
+    "unchanged_video_function_sections": [
+      "static AVCodecContext *open_decoder",
+      "static bool output_picture",
+      "static bool append_audio",
+      "static bool output_audio",
+      "static bool resample_audio",
+      "static void seek_session",
+      "bool video_take_picture",
+      "bool video_audio_render"
+    ],
+    "source_application_rebuild_byte_identical": true,
+    "rebuild_scope": "Exact archived application and pinned SDK, same verified native FFmpeg dependency; complete source/patches/scripts supplied.",
+    "USB_source_CRC_manifest_current_source_payload_licence_safety": "passed"
+  },
+  "video": {
+    "streams": [
+      {
+        "index": 0,
+        "codec_name": "h264",
+        "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+        "profile": "High",
+        "codec_type": "video",
+        "codec_tag_string": "avc1",
+        "codec_tag": "0x31637661",
+        "width": 1280,
+        "height": 720,
+        "coded_width": 1280,
+        "coded_height": 720,
+        "closed_captions": 0,
+        "film_grain": 0,
+        "has_b_frames": 2,
+        "pix_fmt": "yuv420p",
+        "level": 31,
+        "chroma_location": "left",
+        "field_order": "progressive",
+        "refs": 1,
+        "is_avc": "true",
+        "nal_length_size": "4",
+        "id": "0x1",
+        "r_frame_rate": "30/1",
+        "avg_frame_rate": "30/1",
+        "time_base": "1/15360",
+        "start_pts": 0,
+        "start_time": "0.000000",
+        "duration_ts": 3302400,
+        "duration": "215.000000",
+        "bit_rate": "786757",
+        "bits_per_raw_sample": "8",
+        "nb_frames": "6450",
+        "extradata_size": 46,
+        "disposition": {
+          "default": 1,
+          "dub": 0,
+          "original": 0,
+          "comment": 0,
+          "lyrics": 0,
+          "karaoke": 0,
+          "forced": 0,
+          "hearing_impaired": 0,
+          "visual_impaired": 0,
+          "clean_effects": 0,
+          "attached_pic": 0,
+          "timed_thumbnails": 0,
+          "non_diegetic": 0,
+          "captions": 0,
+          "descriptions": 0,
+          "metadata": 0,
+          "dependent": 0,
+          "still_image": 0,
+          "multilayer": 0
+        },
+        "tags": {
+          "language": "und",
+          "handler_name": "VideoHandler",
+          "vendor_id": "[0][0][0][0]",
+          "encoder": "Lavc61.19.101 libx264"
+        }
+      },
+      {
+        "index": 1,
+        "codec_name": "aac",
+        "codec_long_name": "AAC (Advanced Audio Coding)",
+        "profile": "LC",
+        "codec_type": "audio",
+        "codec_tag_string": "mp4a",
+        "codec_tag": "0x6134706d",
+        "sample_fmt": "fltp",
+        "sample_rate": "48000",
+        "channels": 2,
+        "channel_layout": "stereo",
+        "bits_per_sample": 0,
+        "initial_padding": 0,
+        "id": "0x2",
+        "r_frame_rate": "0/0",
+        "avg_frame_rate": "0/0",
+        "time_base": "1/48000",
+        "start_pts": 0,
+        "start_time": "0.000000",
+        "duration_ts": 10320000,
+        "duration": "215.000000",
+        "bit_rate": "46916",
+        "nb_frames": "10080",
+        "extradata_size": 5,
+        "disposition": {
+          "default": 1,
+          "dub": 0,
+          "original": 0,
+          "comment": 0,
+          "lyrics": 0,
+          "karaoke": 0,
+          "forced": 0,
+          "hearing_impaired": 0,
+          "visual_impaired": 0,
+          "clean_effects": 0,
+          "attached_pic": 0,
+          "timed_thumbnails": 0,
+          "non_diegetic": 0,
+          "captions": 0,
+          "descriptions": 0,
+          "metadata": 0,
+          "dependent": 0,
+          "still_image": 0,
+          "multilayer": 0
+        },
+        "tags": {
+          "language": "und",
+          "handler_name": "SoundHandler",
+          "vendor_id": "[0][0][0][0]"
+        }
+      }
+    ],
+    "format": {
+      "filename": "Blades-v0.48-walkthrough.mp4",
+      "nb_streams": 2,
+      "nb_programs": 0,
+      "nb_stream_groups": 0,
+      "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+      "format_long_name": "QuickTime / MOV",
+      "start_time": "0.000000",
+      "duration": "215.000000",
+      "size": "22641390",
+      "bit_rate": "842470",
+      "probe_score": 100,
+      "tags": {
+        "major_brand": "isom",
+        "minor_version": "512",
+        "compatible_brands": "isomiso2avc1mp41",
+        "encoder": "Lavf61.7.103"
+      }
+    }
+  },
+  "video_scope": "Fresh215second720p30 desktop GPU capture,48kHz stereo. Actual Local/Jellyfin playback, S1E2 episode lists, source-frame counters showing seek content, retained media path/filter UI. Guide/profile/storage/FTP simulated and labelled. Final player/renderer/artwork; no console performance claim.",
+  "console_scope": "Actual Xbox seek behavior and A/V timing still need hardware retest. Official-server pixel checks establish actual seek correctness in the tested client/server path, not console timing.",
+  "artifacts": {
+    "dist/Blades-v0.48-USB.zip": {
+      "bytes": 4728359,
+      "sha256": "66d62e8d39759c3ec11c812e9b91cb6ca7e0c4ff01ebc411193dbb337b3f213c"
+    },
+    "dist/Blades/default.xex": {
+      "bytes": 6238208,
+      "sha256": "2a8805a0f24cfdcbe9f2f03ee8c0349f797b7d584b78aea20e2384eee81fcdc7"
+    },
+    "dist/Blades-artwork-pack.zip": {
+      "bytes": 2041912,
+      "sha256": "7417accd71918a01d316ae20f8471af504969f35a19870ff70fc4edd060690bf"
+    },
+    "dist/Blades-v0.48-walkthrough.mp4": {
+      "bytes": 22641390,
+      "sha256": "bda24e24cbc7a2655c94d0436e72819f241b91ad1e6c8d3ec12f90a880184ebd"
+    },
+    "dist/Blades-v0.48-source.zip": {
+      "bytes": 32018960,
+      "sha256": "0ce8ce2c8c949024efeedcadd2076af8bbc13d7a7638c2903ed3677fca7baa9e"
+    }
+  },
+  "source_sha256": {
+    "include/jellyfin.h": "d527e8a55fb791b4c38cddc3b4d3c5e35747f2f3ab0024b338115e4764545991",
+    "include/library.h": "10f435cd8c6d399a20179705602739b93838043914b1ba63f202463e15ab5f63",
+    "include/video.h": "4129cb3d0782d9f494c41ce7a476a40ecc05f16630c923e5dc12b5bfbaa618b1",
+    "src/core/http_client.c": "ac64d3112f68f01065af15188a715a3580873eeaba53ea9994371906aa01b26c",
+    "src/core/jellyfin.c": "d14981726cdeccf4de7cae4264a432f546ae988a6fab94a907bac3021ad865a0",
+    "src/core/jellyfin_ui.c": "d917debe7eba7ce02ab540c478ed1d7a3cfaf24fae9ca699a38ab8702538b2ca",
+    "src/core/library.c": "d5aa088bb45697821f5d7206aa8a891fc1616f332f1078c9e3bf7efc60351187",
+    "src/core/library_ui.c": "d296fd16dc911e3b557432ac73c3999713fd39527a62e4601b0a089e58b3ea71",
+    "src/core/video.c": "499c15269d8a418c4967b4189d59f08c11981de0a3a9c8cb8d88a647f335783b",
+    "src/core/video_ui.c": "eede5aca7edf7927500f3b5fcb3ce3b7266bb2e8a0d15a43a9461106c416510e",
+    "src/platform/xbox_renderer.c": "9a27fa889d3a9a3d269d3fc187d976bec6fba7b003083734e96cac0b2982ad9e",
+    "src/render/shaders/video.frag": "4cff720419253301da4c8696925577c806eb0a72132532d1765d62ee01c276c7",
+    "src/render/video_colour.c": "f53b50fc34b2cfe8a4f67b653e11b559da545372deffb5b30f8286e423da784e",
+    "tests/jellyfin_fixture.c": "b8e856c9653553bdd1fa3ea5b4649ee3efa560196eccbb395b379866126372d6",
+    "tests/test_jellyfin.py": "a519729e8b706b1a322612938411287ba55864971bf24da05947c2620176abe7",
+    "tests/test_jellyfin_real.py": "f40b0070a61a2e2cf9bef4c6ee1605075a8d58d70b774e0750448d68c6f30412",
+    "third_party/ffmpeg/patches/xsdk.patch": "8828d8e2c1309dec9d9c3c50671d9aae96608974486cceff8383db20599d75f6",
+    "third_party/ffmpeg/xenon/simple360_chroma.c": "f6e448bd77f4468c7d722b0379ffea372da65f202af14f090095453cb24b3575",
+    "third_party/ffmpeg/xenon/simple360_intrinsics.h": "d34f1c43f54c6ff813c2015fe70ddaf3967a4c655729f3d7ddb17b4d8f2e1037",
+    "third_party/ffmpeg/xenon/simple360_qpel.c": "98a049564a7cdaa1841faa33942d4e17facdaec816860655b3300a342fc2a2c0",
+    "third_party/xenonfin/ported/browse.c": "c4f88f553d4daccc269965efb61c891b57122a8d3fde8ac234a6d33185a4d25d",
+    "third_party/xenonfin/ported/browse.h": "34890d42c977c2e7ba2cd4c31c006515693aa388540b8a545b935f151c0f562b",
+    "tools/build-video-ffmpeg.py": "252e21e44f126110048383c5a20c15a2d7f103ce226524fb11f3c5a58eac1836",
+    "tools/build-xbox.sh": "379a10ed53bed2818c5186153c0c969e0b0b292123d58f226a8d8796947187e8",
+    "tools/package-source.py": "832e80f606be3000f2def7c479d5d01ad00c6bc43abe57fe6a98e0022f7fcd85",
+    "tools/render-walkthrough.c": "4bb9bc99b9a682ef74887ed127940e33d7d8eb3ca27c26b827f13e643c85c9f4"
+  }
+}

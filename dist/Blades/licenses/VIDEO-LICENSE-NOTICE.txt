@@ -1,4 +1,4 @@
-Blades 0.47 includes FFmpeg 2.8.22 and ported Simple360Player H264 filters.
+Blades 0.48 includes FFmpeg 2.8.22 and ported Simple360Player H264 filters.
 The combined executable is distributed under GNU GPL version 3; see LICENSE
 and SIMPLE360PLAYER-GPL-3.0.txt. Original Blades files remain available under
 their MIT notices (BLADES-MIT.txt). FFmpeg's original LGPL2.1+ source notices
@@ -11,12 +11,12 @@ Ported h264_chroma_xb.c/h264_qpel_xb.c: GCC intrinsics and FFmpeg context/stride
 API adaptations; synchronized runtime self-tests. No XDK binary is linked.
 Complete corresponding source, all local modifications, build scripts and a
 pinned open-source SDK are supplied alongside the executable in:
-https://github.com/sbayfield09/Blades/raw/refs/heads/main/dist/Blades-v0.47-source.zip
+https://github.com/sbayfield09/Blades/raw/refs/heads/main/dist/Blades-v0.48-source.zip
 The immutable matching download is also in the release instructions.
 See BUILDING.txt within it to modify, rebuild or relink using free xsdk/GCC.
 There is no warranty. Playback does not use a proprietary player or firmware.
 
-Blades0.47 also adapts native HTTP/JSON/auth/browser code from XenonFin,
+Blades0.48 also adapts native HTTP/JSON/auth/browser code from XenonFin,
 https://github.com/sbayfield09/XenonFin at commit
 554adb8d79a251e4b502ac4a87a328cbe5055b09. XenonFin's original source is
 GPL-2.0-or-later; the combined executable remains GPLv3. See

@@ -1,4 +1,4 @@
-# Jellyfin in Blades0.47
+# Jellyfin in Blades0.48
 
 Media > Video now contains **Jellyfin** and **Local**. These are navigation
 folders: Jellyfin lists server videos; Local lists the existing scanned files.
@@ -45,7 +45,14 @@ while paused stays paused. Media response/body inactivity allows30seconds so a
 transcoder pause after seeking can recover; no-data waits remain cancellable.
 Connect/send and control API deadlines remain8seconds idle/20seconds total.
 Remote opening/probing has a60second bound; local probing retains15seconds. Rapid presses accumulate against the requested
-position and cancel superseded opens. Targets are clamped to the item bounds.
+position and cancel superseded opens. Targets are clamped to the item bounds; network end seeks retain Jellyfin's
+half-second EOF margin. Each restart uses a unique bounded User-Agent cache
+identity. Jellyfin10.10.7 keys progressive output by media/User-Agent/device/
+PlaySessionId and omits StartTimeTicks; its stop endpoint returns before delayed
+file deletion. Reusing that key replayed old content, even though Blades rebased
+its clock to the new target. Unique identities also protect a new stream from an
+older delayed deletion, including a return to the same timestamp. Authentication,
+device identity and logical playback/reporting session remain unchanged.
 The server playback session stays the same, with CanSeek reported and absolute
 positions in start/progress/stop messages. Local byte seeking and the verified
 0.43 decoder/GPU optimisations are retained. The PCM timeline now preserves
@@ -109,7 +116,7 @@ Checks include upstream malformed HTTP/JSON regressions, real worker/player
 fixtures with fragmented media, pagination, cancellation,401/503/truncation,
 fresh/stale/finished resume data, paused/rapid/end-bound seeking and seek failure,
 plus UI and application ASan/UBSan. A ten-second post-seek body gap reproduces
-the old timeout, recovers in0.47, cancels promptly and still fails for a genuine
+the old timeout, recovers in0.48, cancels promptly and still fails for a genuine
 30second stall. Actual server playback is also observed for12wall-clock seconds
 after seeking, beyond the original deadline. A decoded flash/tone fixture
 reproduces0.52seconds of early audio across a timestamp gap; the corrected FIFO
@@ -121,3 +128,11 @@ playback, forward/back/paused seeks, full-item clocks and saved stop position.
 Only that short-clip test server lowers its minimum resume duration; Blades
 never changes a user's server configuration. Native compilation/integrity and
 renderer checks pass; real Xbox network/keyboard/streaming need hardware testing.
+
+Actual-content seek regression (--seek-content): synthetic frames encode their
+frame number into eleven luma bars, with a long source GOP. The original client
+requested4.25seconds but decoded4.00seconds while reporting4.26. Corrected
+fractional/one-second/ten-second forward, backward and return seeks match source
+frames within one30fps frame, including end bounds and delayed cleanup. This
+runs against both a cache/deletion fixture and official Jellyfin10.10.7. Normal
+Jellyfin/keyboard/network and A/V timing still require a physical Xbox retest.

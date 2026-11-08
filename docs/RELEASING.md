@@ -239,3 +239,12 @@ uploaded user logs. Verify10second gap recovery, prompt cancellation, genuine
 preroll/late/pause/end behavior and12wall-clock seconds of actual Jellyfin
 post-seek playback. Record the final audio/player/renderer,215seconds, with
 both episode lists and simulated console services labelled. No settings migration.
+
+Version0.48 isolates progressive-cache filenames with a unique per-restart
+User-Agent while retaining the authenticated device/logical playback session.
+Actual-content tests must compare frame-coded source pixels with targets, not
+only rebased timestamps. Verify fractional/one-second/ten-second forward/back,
+return-to-same-time, EOF0.5s margin, delayed deletion and12s continuous content/
+clock agreement. Reproduce old cached-picture behavior against the official
+server. Fresh215s desktop capture uses baked source frame numbers; retained
+console services remain simulated and labelled. No user settings migration.
