@@ -1,4 +1,4 @@
-# Media libraries — Blades 0.41
+# Media libraries — Blades 0.42
 
 Video now decodes inside the Blades executable, preserving the existing chooser.
 There is no player handoff or adapter. See [video playback](VIDEO-PLAYBACK.md).

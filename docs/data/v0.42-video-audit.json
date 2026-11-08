@@ -1,0 +1,235 @@
+{
+  "release": "0.42.0",
+  "recorded_utc": "2026-11-08T11:57:50.536006+00:00",
+  "xex_version": "0.0.42.0",
+  "sdk_commit": "5f6dc726f65f6d171493a3628c2415c03551f27b",
+  "feature": "Startup PCM gate and continuous late-picture presentation, retaining0.41 decoder/GPU path",
+  "console_evidence": {
+    "user_report": "MPEG2 works; H264/MPEG4 lags more than0.39; same H264 file plays well in Simple360Player",
+    "observed_video_performance": [
+      {
+        "decoded_fps": 24.73,
+        "presented_fps": 0.2,
+        "late_discarded": 122
+      },
+      {
+        "decoded_fps": 30.3,
+        "presented_fps": 0.0,
+        "late_discarded": 274
+      },
+      {
+        "decoded_fps": 33.26,
+        "presented_fps": 9.36,
+        "late_discarded": 375
+      },
+      {
+        "decoded_fps": 29.49,
+        "presented_fps": 29.89,
+        "late_discarded": 375
+      },
+      {
+        "decoded_fps": 28.88,
+        "presented_fps": 17.93,
+        "late_discarded": 407
+      }
+    ],
+    "interpretation": "Near-stream-rate decoding combined with zero presentation and growing discarded-late count identifies a real all-late-frame policy defect. Not proof that CPU decoding always reaches target.",
+    "raw_uploaded_log_private": true
+  },
+  "changes": {
+    "startup": "Normal PCM waits until first picture is handed to renderer; bootstrap chooses earliest ready picture without an already-running audio clock",
+    "presentation": "Remove pre-output all-late discard; take newest due frame and coalesce older READY frames; held ownership preserved",
+    "audio_lead": "Break the bounded dependency only when demux waits for audio capacity and video waits for its first packet; PCM then advances until timestamped video can be reached",
+    "diagnostics": "Add lag_ms, late_presented, audio_preroll; existing FPS/decode/preparation/first-frame logs retained",
+    "decoder_GPU": "FFmpeg configuration/patches and GPU renderer/shader/colour source byte-identical to0.41. No new SIMD, quality shortcuts or decoder-frame skipping.",
+    "scope": "No new GPU codec decoder or transcoder; CPU decode plus three-plane GPU colour conversion/scaling retained;720p output"
+  },
+  "validation": {
+    "host_suites_passed": 26,
+    "core_host": "Internal ctest changing into directory: /workspace/Blades/build/linux\nTest project /workspace/Blades/build/linux\n      Start  1: video-audio-preroll\n 1/25 Test  #1: video-audio-preroll ..............   Passed    1.45 sec\n      Start  2: video-startup-clock\n 2/25 Test  #2: video-startup-clock ..............   Passed    3.24 sec\n      Start  3: video-late-presentation\n 3/25 Test  #3: video-late-presentation ..........   Passed    3.24 sec\n      Start  4: video-rgba-fallback\n 4/25 Test  #4: video-rgba-fallback ..............   Passed    3.08 sec\n      Start  5: video\n 5/25 Test  #5: video ............................   Passed    5.09 sec\n      Start  6: dashboard\n 6/25 Test  #6: dashboard ........................   Passed    5.47 sec\n      Start  7: resources\n 7/25 Test  #7: resources ........................   Passed    0.00 sec\n      Start  8: skin\n 8/25 Test  #8: skin .............................   Passed    0.01 sec\n      Start  9: ambient\n 9/25 Test  #9: ambient ..........................   Passed    0.05 sec\n      Start 10: font\n10/25 Test #10: font .............................   Passed    0.01 sec\n      Start 11: audio\n11/25 Test #11: audio ............................   Passed    0.00 sec\n      Start 12: animation\n12/25 Test #12: animation ........................   Passed    0.00 sec\n      Start 13: pixels\n13/25 Test #13: pixels ...........................   Passed    0.05 sec\n      Start 14: draw-list\n14/25 Test #14: draw-list ........................   Passed    2.44 sec\n      Start 15: startup\n15/25 Test #15: startup ..........................   Passed    0.78 sec\n      Start 16: disc\n16/25 Test #16: disc .............................   Passed    0.07 sec\n      Start 17: media-launch\n17/25 Test #17: media-launch .....................   Passed    0.00 sec\n      Start 18: achievement-backend\n18/25 Test #18: achievement-backend ..............   Passed    0.04 sec\n      Start 19: profile-backend\n19/25 Test #19: profile-backend ..................   Passed    0.30 sec\n      Start 20: achievements\n20/25 Test #20: achievements .....................   Passed    0.05 sec\n      Start 21: profile\n21/25 Test #21: profile ..........................   Passed    2.56 sec\n      Start 22: profile-count\n22/25 Test #22: profile-count ....................   Passed    0.00 sec\n      Start 23: library\n23/25 Test #23: library ..........................   Passed    0.08 sec\n      Start 24: gpu\n24/25 Test #24: gpu ..............................   Passed    6.86 sec\n      Start 25: preview-smoke\n25/25 Test #25: preview-smoke ....................   Passed    0.20 sec\n\n100% tests passed, 0 tests failed out of 25\n\nTotal Test time (real) =  35.08 sec\n",
+    "ftp": "Internal ctest changing into directory: /workspace/Blades/build/linux\nTest project /workspace/Blades/build/linux\n    Start 24: ftp\n1/1 Test #24: ftp ..............................   Passed    2.19 sec\n\n100% tests passed, 0 tests failed out of 1\n\nTotal Test time (real) =   2.19 sec\n",
+    "controlled_regression_before": "Internal ctest changing into directory: /workspace/Blades/build/linux\nTest project /workspace/Blades/build/linux\n    Start 1: video-startup-clock\n1/2 Test #1: video-startup-clock ..............Subprocess aborted***Exception:   0.02 sec\nvideo: input headers ready; opening decoder\nvideo: embedded decode h264 1280x720 audio=aac duration=6.00 workers=4 cpu_flags=0 gpu_yuv=1 fps=30.000\nvideo: worker ready; flushing codec for generation 1\nvideo: codec flush complete\nvideo: entering first video decode call\nblades-video-pacing-tests: /workspace/Blades/tests/test_video_pacing.c:21: main: Assertion `!heard&&\"PCM played before renderer received its first picture\"' failed.\n\n    Start 2: video-late-presentation\n2/2 Test #2: video-late-presentation ..........Subprocess aborted***Exception:   0.75 sec\nvideo: input headers ready; opening decoder\nvideo: embedded decode h264 1280x720 audio=aac duration=6.00 workers=4 cpu_flags=0 gpu_yuv=1 fps=30.000\nvideo: worker ready; flushing codec for generation 1\nvideo: codec flush complete\nvideo: entering first video decode call\nvideo: entering first video decode call\nvideo: entering first video decode call\nvideo: entering first video decode call\nvideo: entering first video decode call\nvideo: entering first video decode call\nvideo: first decoded frame format=0 size=1280x720\nvideo: first prepared frame format=2 size=1280x720 preparation_ms=0.52\nvideo: first frame delivered to renderer format=2 size=1280x720\nblades-video-pacing-tests: /workspace/Blades/tests/test_video_pacing.c:29: main: Assertion `now()-last_picture<.25&&\"decoder continues, but late-frame discard freezes presentation\"' failed.\n\n\n0% tests passed, 2 tests failed out of 2\n\nTotal Test time (real) =   0.77 sec\n\nThe following tests FAILED:\n\t  1 - video-startup-clock (Subprocess aborted)\n\t  2 - video-late-presentation (Subprocess aborted)\nErrors while running CTest\n",
+    "controlled_regression_after": "Internal ctest changing into directory: /workspace/Blades/build/linux\nTest project /workspace/Blades/build/linux\n    Start 1: video-startup-clock\n1/2 Test #1: video-startup-clock ..............   Passed    3.25 sec\n    Start 2: video-late-presentation\n2/2 Test #2: video-late-presentation ..........   Passed    3.25 sec\n\n100% tests passed, 0 tests failed out of 2\n\nTotal Test time (real) =   6.50 sec\n",
+    "final_pacing_and_preroll": "Internal ctest changing into directory: /workspace/Blades/build/linux\nUpdateCTestConfiguration  from :/workspace/Blades/build/linux/DartConfiguration.tcl\nUpdateCTestConfiguration  from :/workspace/Blades/build/linux/DartConfiguration.tcl\nTest project /workspace/Blades/build/linux\nConstructing a list of tests\nDone constructing a list of tests\nUpdating test list for fixtures\nAdded 0 tests to meet fixture requirements\nChecking test dependency graph...\nChecking test dependency graph end\ntest 1\n    Start 1: video-audio-preroll\n\n1: Test command: /workspace/Blades/build/linux/blades-video-preroll-tests \"/workspace/Blades/tests/media/audio-preroll.mkv\"\n1: Working Directory: /workspace/Blades/build/linux\n1: Test timeout computed to be: 15\n1: PASS: audio-only lead breaks bounded prebuffer dependency; first picture remains timestamped, playback reaches EOF\n1/3 Test #1: video-audio-preroll ..............   Passed    1.45 sec\ntest 2\n    Start 2: video-startup-clock\n\n2: Test command: /workspace/Blades/build/linux/blades-video-pacing-tests \"startup\" \"/workspace/Blades/tests/media/sample720-h264.mp4\"\n2: Working Directory: /workspace/Blades/build/linux\n2: Test timeout computed to be: 15\n2: video: input headers ready; opening decoder\n2: video: embedded decode h264 1280x720 audio=aac duration=6.00 workers=4 cpu_flags=0 gpu_yuv=1 fps=30.000\n2: video: worker ready; flushing codec for generation 1\n2: video: codec flush complete\n2: video: entering first video decode call\n2: video: entering first video decode call\n2: video: entering first video decode call\n2: video: entering first video decode call\n2: video: entering first video decode call\n2: video: entering first video decode call\n2: video: first decoded frame format=0 size=1280x720\n2: video: first prepared frame format=2 size=1280x720 preparation_ms=0.69\n2: video: first frame delivered to renderer format=2 size=1280x720\n2: PASS: startup, pictures=74 max_gap=0.050, slow decode40ms/frame remains visible\n2/3 Test #2: video-startup-clock ..............   Passed    3.24 sec\ntest 3\n    Start 3: video-late-presentation\n\n3: Test command: /workspace/Blades/build/linux/blades-video-pacing-tests \"late\" \"/workspace/Blades/tests/media/sample720-h264.mp4\"\n3: Working Directory: /workspace/Blades/build/linux\n3: Test timeout computed to be: 15\n3: video: input headers ready; opening decoder\n3: video: embedded decode h264 1280x720 audio=aac duration=6.00 workers=4 cpu_flags=0 gpu_yuv=1 fps=30.000\n3: video: worker ready; flushing codec for generation 1\n3: video: codec flush complete\n3: video: entering first video decode call\n3: video: entering first video decode call\n3: video: entering first video decode call\n3: video: entering first video decode call\n3: video: entering first video decode call\n3: video: entering first video decode call\n3: video: first decoded frame format=0 size=1280x720\n3: video: first prepared frame format=2 size=1280x720 preparation_ms=0.53\n3: video: first frame delivered to renderer format=2 size=1280x720\n3: PASS: late, pictures=74 max_gap=0.042, slow decode40ms/frame remains visible\n3/3 Test #3: video-late-presentation ..........   Passed    3.24 sec\n\nThe following tests passed:\n\tvideo-audio-preroll\n\tvideo-startup-clock\n\tvideo-late-presentation\n\n100% tests passed, 0 tests failed out of 3\n\nTotal Test time (real) =   7.93 sec\n",
+    "test_model": "Real engine with test-only40ms decode budget; asserts no PCM before first picture, no late-frame presentation freeze. Audio-only lead fixture separately tests queue dependency and timestamp respect.",
+    "delay_macro_absent_from_native_compilation": true,
+    "sanitizers": "Internal ctest changing into directory: /workspace/Blades/build/video-sanitize\nTest project /workspace/Blades/build/video-sanitize\n    Start 1: video-audio-preroll\n1/5 Test #1: video-audio-preroll ..............   Passed    1.47 sec\n    Start 2: video-startup-clock\n2/5 Test #2: video-startup-clock ..............   Passed    3.22 sec\n    Start 3: video-late-presentation\n3/5 Test #3: video-late-presentation ..........   Passed    3.22 sec\n    Start 4: video-rgba-fallback\n4/5 Test #4: video-rgba-fallback ..............   Passed    3.16 sec\n    Start 5: video\n5/5 Test #5: video ............................   Passed    5.32 sec\n\n100% tests passed, 0 tests failed out of 5\n\nTotal Test time (real) =  16.39 sec\n",
+    "sanitizer_scope": "Application wrappers/tests; external FFmpeg static libraries not instrumented; LeakSanitizer disabled in traced executor",
+    "actual_Xenos_shader": "PASS: 240 compiled Xenos swirl samples match supplied equations within one RGB level\nPASS: compiled Xenos point fetches and separable 720p background filtering\nPASS: compiled Xenos glyph tint and integer alpha coverage\nPASS: compiled Xenos content fade shader\nPASS: compiled Xenos cap box filter preserves alpha-aware area samples\nPASS: 72 compiled Xenos video samples; three Y/U/V sampler slots, BT601/709 limited/full, boundaries and RGB\n",
+    "xex": "PASS: XEX2 PowerPC-BE, Xbox subsystem, entry 0x8258ceb8\nPASS: 138 verified 65536-byte image pages; header/image/import digest chains valid\nPASS: xam.xex: 92 import slots\nPASS: xboxkrnl.exe: 122 import slots\nConsole launch and Peer Pressure compatibility remain unverified.\n",
+    "source_application_rebuild_byte_identical": true,
+    "rebuild_scope": "Exact archived application, pinned SDK and same verified compatible FFmpeg libraries. All sources/patches/build scripts provided.",
+    "USB_source_CRC_manifest_payload_safety": "passed"
+  },
+  "video": {
+    "streams": [
+      {
+        "index": 0,
+        "codec_name": "h264",
+        "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+        "profile": "High",
+        "codec_type": "video",
+        "codec_tag_string": "avc1",
+        "codec_tag": "0x31637661",
+        "width": 1280,
+        "height": 720,
+        "coded_width": 1280,
+        "coded_height": 720,
+        "closed_captions": 0,
+        "film_grain": 0,
+        "has_b_frames": 2,
+        "pix_fmt": "yuv420p",
+        "level": 31,
+        "chroma_location": "left",
+        "field_order": "progressive",
+        "refs": 1,
+        "is_avc": "true",
+        "nal_length_size": "4",
+        "id": "0x1",
+        "r_frame_rate": "30/1",
+        "avg_frame_rate": "30/1",
+        "time_base": "1/15360",
+        "start_pts": 0,
+        "start_time": "0.000000",
+        "duration_ts": 1658880,
+        "duration": "108.000000",
+        "bit_rate": "885977",
+        "bits_per_raw_sample": "8",
+        "nb_frames": "3240",
+        "extradata_size": 46,
+        "disposition": {
+          "default": 1,
+          "dub": 0,
+          "original": 0,
+          "comment": 0,
+          "lyrics": 0,
+          "karaoke": 0,
+          "forced": 0,
+          "hearing_impaired": 0,
+          "visual_impaired": 0,
+          "clean_effects": 0,
+          "attached_pic": 0,
+          "timed_thumbnails": 0,
+          "non_diegetic": 0,
+          "captions": 0,
+          "descriptions": 0,
+          "metadata": 0,
+          "dependent": 0,
+          "still_image": 0,
+          "multilayer": 0
+        },
+        "tags": {
+          "language": "und",
+          "handler_name": "VideoHandler",
+          "vendor_id": "[0][0][0][0]",
+          "encoder": "Lavc61.19.101 libx264"
+        }
+      },
+      {
+        "index": 1,
+        "codec_name": "aac",
+        "codec_long_name": "AAC (Advanced Audio Coding)",
+        "profile": "LC",
+        "codec_type": "audio",
+        "codec_tag_string": "mp4a",
+        "codec_tag": "0x6134706d",
+        "sample_fmt": "fltp",
+        "sample_rate": "48000",
+        "channels": 2,
+        "channel_layout": "stereo",
+        "bits_per_sample": 0,
+        "initial_padding": 0,
+        "id": "0x2",
+        "r_frame_rate": "0/0",
+        "avg_frame_rate": "0/0",
+        "time_base": "1/48000",
+        "start_pts": 0,
+        "start_time": "0.000000",
+        "duration_ts": 5184000,
+        "duration": "108.000000",
+        "bit_rate": "31130",
+        "nb_frames": "5064",
+        "extradata_size": 5,
+        "disposition": {
+          "default": 1,
+          "dub": 0,
+          "original": 0,
+          "comment": 0,
+          "lyrics": 0,
+          "karaoke": 0,
+          "forced": 0,
+          "hearing_impaired": 0,
+          "visual_impaired": 0,
+          "clean_effects": 0,
+          "attached_pic": 0,
+          "timed_thumbnails": 0,
+          "non_diegetic": 0,
+          "captions": 0,
+          "descriptions": 0,
+          "metadata": 0,
+          "dependent": 0,
+          "still_image": 0,
+          "multilayer": 0
+        },
+        "tags": {
+          "language": "und",
+          "handler_name": "SoundHandler",
+          "vendor_id": "[0][0][0][0]"
+        }
+      }
+    ],
+    "format": {
+      "filename": "Blades-v0.42-walkthrough.mp4",
+      "nb_streams": 2,
+      "nb_programs": 0,
+      "nb_stream_groups": 0,
+      "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+      "format_long_name": "QuickTime / MOV",
+      "start_time": "0.000000",
+      "duration": "108.000000",
+      "size": "12500741",
+      "bit_rate": "925980",
+      "probe_score": 100,
+      "tags": {
+        "major_brand": "isom",
+        "minor_version": "512",
+        "compatible_brands": "isomiso2avc1mp41",
+        "encoder": "Lavf61.7.103"
+      }
+    }
+  },
+  "video_scope": "Fresh108second desktop GPU capture, actual samples through shipping engine without test delay; Guide/profile/storage/FTP simulated and labelled",
+  "console_scope": "0.41 MPEG2 is user-confirmed.0.42 startup/presentation behaviour and H264 smoothness still require console retest. No claim of faster codec calculations or proven1080p30.",
+  "artifacts": {
+    "dist/Blades-v0.42-USB.zip": {
+      "bytes": 4630851,
+      "sha256": "6f27c0fa9d3fd80fb3151b9934d4d41762df1a2846c7bbd5510b31d9dfd4e96b"
+    },
+    "dist/Blades/default.xex": {
+      "bytes": 6094848,
+      "sha256": "1b0cd447706f31546d8c015ad9261f681856685ee681bdbff35264fa9192c155"
+    },
+    "dist/Blades-artwork-pack.zip": {
+      "bytes": 2041912,
+      "sha256": "7417accd71918a01d316ae20f8471af504969f35a19870ff70fc4edd060690bf"
+    },
+    "dist/Blades-v0.42-walkthrough.mp4": {
+      "bytes": 12500741,
+      "sha256": "2582edbf779e1e385fe07f4eef7f4d05ee53f01507587c32a192a43e3d1b7dde"
+    },
+    "dist/Blades-v0.42-source.zip": {
+      "bytes": 31860385,
+      "sha256": "1f60ab91d8adbdf0d428b3ee014f933dcb480e933f34de455081578cd9ca7538"
+    }
+  },
+  "source_sha256": {
+    "CMakeLists.txt": "8fe2deac83084a5e0214cd2c76bbb5e59d8d9f76f3a4c9e6cd925afeffb1d98d",
+    "include/video.h": "6f1a0773bc6000db270492ab951a36c266ac307aaa36901c65fc410128bf5d86",
+    "src/core/video.c": "88f1ea1e8440557272b55768b115b13380d00a43e45b04f64d6370ae49453c1f",
+    "src/platform/xbox360.c": "902a396ef71e9e4a9faae80902a03ed60b3c2f4ec4187092ab35567a1577ec45",
+    "tests/test_video_pacing.c": "d2ef0f66a7d917dac2827ecf4a9c7af1c3b108adfeee1b8ec79c885ad435aae6",
+    "tests/test_video_preroll.c": "5ef8c9ceea6857f798b2d83deb30334624da673b1d7470f2aff5b8225aa9dc14",
+    "tools/build-xbox.sh": "1f99db7d375aa2941da26b64c80a4ead07958266f0a2b854d1407a3d90527bc5",
+    "tools/package-source.py": "0902c72d4b768eac8c370850de32e8988903038ccb4eb1ae767c0f85a02368ce"
+  }
+}

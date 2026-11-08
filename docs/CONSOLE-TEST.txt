@@ -1,34 +1,32 @@
-Blades 0.41.0 - CPU decode / three-plane GPU video display
+Blades0.42 - Video startup and late-frame pacing fix
 
-Extract Blades-v0.41-USB.zip onto USB and launch Blades/default.xex. Complete
-Assets and notices are included. Saved scan folders, FTP credentials and logs
-are excluded, preserving existing settings on update. No adapter/Players needed.
+Extract Blades-v0.42-USB.zip and launch Blades/default.xex. Assets/notices are
+included; saved scan/FTP settings and logs are excluded, preserving them on update.
 
-Version0.41 compatibility correction:
-- Remove0.40's generic AltiVec decoder routines/compiler vectorization; restore
-  the earlier four-worker2,3,4,5 placement. SDK memory copies are unchanged.
-- Keep GPU colour conversion and scaling. Separate linear Y/U/V textures and a
-  simple matrix shader replace the single tiled atlas texture, following the
-  standalone Simple360Player layout. Compressed video still decodes on the CPU.
-  Neither player transcodes/re-encodes files or provides full GPU codec decoding.
-- First-frame logs now show codec flush, decoded/prepared output, delivery,
-  upload, submission and GPU fence completion. Existing video-perf lines measure
-  actual decoded/presented FPS independently of UI FPS.
-- The exact0.40 crash address/cause was not recorded. This revision needs a
-  hardware retest; host/Xbox shader arithmetic checks do not prove console GPU
-  texture behaviour or1080p30 performance. Display output remains720p.
+The0.41 log showed H264 decoding near30fps but sometimes0fps presentation.
+Audio advanced before initial video buffering finished; the late-output rule
+then discarded every picture behind it. Version0.42 waits for the first picture
+before normal PCM delivery and keeps late pictures eligible for presentation.
+The renderer coalesces older queued frames only when a newer one is due.
+Intentional audio-only leads still advance without a bounded-queue deadlock.
 
-Test the same720p MPEG2 file that worked in0.39, then H264. Open via Media > Video;
-manage folders with Video Marketplace. A pauses/resumes, Left/Right seeks10seconds,
-X changes fit/stretch, Y toggles controls, B/Back returns to the same list. EOF
-returns too. Guide opening pauses and closing restores the prior pause state.
-If it fails, send Blades/default.log and describe the last screen/audio. Logs
-stay local and may contain filenames/profile identifiers.
+The compatible CPU decoder and working three-plane GPU colour conversion/scaling
+are unchanged from0.41. No generic AltiVec or new CPU SIMD is enabled. Display
+remains720p, with up to1080p YUV input. No re-encoding/transcoding occurs.
 
-Music/Pictures playback and original music visualisations remain unfinished.
-The235-entry artwork is unchanged. The matching desktop walkthrough labels
-simulated console services and actual host sample playback. Complete application,
-FFmpeg and SDK sources/relink instructions: Blades-v0.41-source.zip.
+Test the same long H264/MPEG4 file, playing normally for15seconds. If it still
+lags, send default.log. New video-perf fields lag_ms, late_presented and
+ audio_preroll distinguish residual timing from decoder speed. Original first-
+frame decoder/upload/fence logs are retained. Logs may contain private paths/IDs.
+
+Media > Video chooses files; Video Marketplace manages paths. A pause/resume,
+Left/Right seek10seconds, X fit/stretch, Y controls, B/Back return to same list.
+EOF returns too. Guide opening pauses and closing restores the prior pause state.
+Music/Pictures playback and original visualisations remain unfinished.
+
+The same235-entry artwork is included. Source/relink bundle and original test
+samples: Blades-v0.42-source.zip. Fresh desktop walkthrough labels simulated
+console services. Native pacing and real console performance need a retest.
 
 Retained 0.37 corrections:
 - Marketplace tint is halfway between 0.35 and 0.36. Xbox Live keeps the

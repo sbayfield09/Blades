@@ -1,4 +1,4 @@
-Blades 0.41 complete source and FFmpeg relink instructions
+Blades 0.42 complete source and FFmpeg relink instructions
 
 This archive contains the application source, embedded font, GLSL shaders,
 MIT/STB/artwork/font notices, original FFmpeg 2.8.22 source archive, xsdk changes
@@ -67,8 +67,12 @@ Vector arithmetic check: tools/test-video-vmx.sh <FFmpeg-build-directory> <qemu-
 The temporary harness adapts only64-bit GPR saves for the32-bit QEMU7400 ABI;
 production objects/vector math are unchanged. This is not Xenon timing evidence.
 
-Blades0.41 uses the compatible C decoder build, with decoder assembly/compiler
+Blades0.42 uses the compatible C decoder build, with decoder assembly/compiler
 vectorization disabled, and three linear GPU planes for colour conversion.
 Run tools/verify-video-decoder.py <FFmpeg-build> --objdump <toolchain-objdump>
 to check decoder instruction restrictions. tools/test-gpu-shaders.py checks
 actual compiled Xbox shader arithmetic/samplers; it is not console execution.
+
+The decoder remains the compatible build/ffmpeg-xbox-v041 configuration.
+The0.42 pacing tests build a separate slow-decoder test library with
+BLADES_VIDEO_TEST_DECODE_NS; that macro is absent from Xbox compilation.

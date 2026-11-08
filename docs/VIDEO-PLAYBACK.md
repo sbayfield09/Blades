@@ -1,67 +1,69 @@
-# Video playback — Blades 0.41
+# Video playback — Blades0.42
 
-Media > Video keeps the Blades chooser and opens the exact selected file.
-Media > Video Marketplace manages scan folders/depth. There is no autoplay
-while scanning. A pauses/resumes, Left/Right seeks ten seconds, X changes
-fit/stretch, Y toggles controls, B/Back returns to the same list. Guide opening
-pauses and closing restores the previous pause state. EOF returns to the list.
+Media > Video keeps the existing Blades chooser. Video Marketplace manages scan
+folders/depth. A pauses/resumes, Left/Right seeks10seconds, X switches fit/stretch,
+Y toggles controls, B/Back returns to the same list; EOF returns too. Guide
+opening pauses and closing restores the previous pause state.
 
-## CPU decode, GPU display
+## Confirmed timing regression and fix
 
-FFmpeg decodes the compressed bitstream on the CPU. Common8-bit YUV420 frames
-are copied into owned frame slots and uploaded to three independent linear R8
-textures. A simple GPU matrix shader converts YUV to RGB, and texture filtering
-scales the picture. This follows Simple360Player's CPU/GPU split; neither project
-implements compressed-video GPU decoding. No video is re-encoded/transcoded.
-See [upstream source comparison](SIMPLE360PLAYER-PIPELINE.md).
+The user's0.41 log shows H264 at29–33 decoded FPS in several intervals while
+presentation falls to0FPS and late-discard counts rise. The GPU first-frame
+upload/fence succeeds. This is evidence of a presentation-policy defect, not
+proof that every part of decoding is fast enough for every stream.
 
-Native YUV input up to1920x1080 is retained until GPU scaling; the display surface
-remains1280x720. At720p YUV has1,382,400 bytes instead of3,686,400 RGBA bytes.
-Other decoded pixel formats keep the CPU swscale/RGBA fallback. Music/Pictures
-playback and original music visualisations remain unfinished.
+Audio was allowed to advance during initial decoder buffering. An early-output
+rule discarded every picture more than80ms late, so a decoder near the stream's
+frame rate could remain permanently behind and produce no new visible pictures.
+Two controlled tests reproduce those failures in0.41: PCM before the first image,
+and picture freezes with a40ms-per-frame decode budget.
 
-## Changes after the 0.40 crash
+Version0.42 waits for the first picture to be handed to the renderer before
+starting normal PCM delivery. The first buffered picture is selected without
+requiring an already-running audio clock. It also removes the all-late-frame
+discard rule. The renderer still picks the newest due picture and coalesces
+older queued ones, while preserving frame ownership and bounded queues.
+Late pictures remain eligible for display; they are not all thrown away.
 
-The user reported audio without picture followed by a hard crash. The supplied
-log shows decoder initialization, subsequent return/reopen input, and no completed
-frame-upload diagnostic or crash address. That does not identify the exact fault.
-Version0.40 changed generic AltiVec decoding, worker placement and YUV GPU output
-together, so neither host arithmetic nor those logs isolate one proven cause.
+An intentional audio-only lead is handled separately: if the bounded audio queue
+blocks demux while video waits for its first packet, PCM is allowed to advance
+until that packet can be reached. It then respects the video's timestamp. This
+breaks the dependency without using a timeout or showing future video early.
+The gate resets after seeking; pause/stop/reopen and prior held frames are tested.
 
-Version0.41 removes the unverified generic AltiVec decoder paths and disables
-compiler auto-vectorization inside FFmpeg. Decoder objects are checked for vector
-instructions. Four workers return to the earlier2,3,4,5 placement, decode submission
-to2, demux to5 and audio to1. The SDK's separately tested memory-copy code remains.
-The codec/output quality and frame ownership rules are retained.
+video-perf still reports actual decoded/presented FPS and preparation/decode-call
+costs. lag_ms and late_presented now make residual A/V lag visible; audio_preroll
+identifies the intentional-leading-audio path. The ordinary perf: fps line measures
+UI presentation. Pauses/seeks affect readings; compare sustained normal playback.
 
-GPU conversion is kept as requested. The single tiled atlas texture is replaced
-with separate linear Y/U/V textures and a simpler matrix shader, following the
-standalone player's layout. CPU frame storage still uses compact owned slots;
-GPU uploads respect the source plane strides and the previous GPU fence. All
-three textures are counted, invalidated and freed together in the renderer cache.
-There is no external player title, adapter, DashLaunch or code patch.
+## Decoder and GPU work
 
-First-frame logs now identify input-header completion, initial codec flush,
-first decoded/prepared frame, delivery to the renderer, texture upload, submission
-and completion of the first GPU fence. video-perf still records actual decoded/
-presented FPS, decode-call/preparation costs, dropped/late frames and audio underruns.
-The ordinary perf: fps line measures the UI presentation loop. Pause/seek changes
-those measurements; collect normal sustained playback for comparison.
+The compatible CPU decoder and three independent linear Y/U/V GPU textures from
+0.41 are retained. GPU colour conversion/scaling stays enabled; no new SIMD,
+quality-reduction or non-reference-frame skipping is enabled. MPEG2's decoder
+and display path are unchanged. Neither project transcodes/re-encodes playback
+or implements compressed-video GPU decoding. See SIMPLE360PLAYER-PIPELINE.md.
 
-## Checks and console test
+Simple360Player's source also contains Xbox-specific shift/add H264 kernels and
+adaptive catch-up logic. Those differ from generic AltiVec code and may be useful
+for later CPU tuning, but this release fixes the measured timing defect first.
+There is no claim that new CPU kernels were ported or that CPU decoding got faster.
 
-Host checks cover RGBA/YUV playback, native1080p MPEG2 and720p H264 frames,
-control/seek/end behaviour, early B/reopen with a held previous frame, cancellation
-and missing files. Desktop GPU comparisons verify colour/range and plane sampling.
-The actual compiled Xbox shader is separately checked against scalar colour math
-and all three sampler slots with xsdk's microcode interpreter. These do not execute
-console texture hardware or establish console frame rates.
+Native YUV input up to1920x1080 stays full resolution until GPU scaling; display
+output remains1280x720. Other pixel formats retain the swscale/RGBA fallback.
+Music/Pictures playback and original music visualisations remain unfinished.
 
-This compatibility revision still needs a console test. Start with the same720p
-MPEG2 file that worked in0.39, then H264. If it fails, send Blades/default.log and
-which screen/audio appeared. Logs remain private and may contain filenames/profile
-identifiers; the release contains none of those logs. The1080p30 goal is unproven.
-Do not infer full GPU codec decoding from GPU colour conversion.
+## Validation scope
 
-Complete source/FFmpeg patches/SDK/build instructions are in Blades-v0.41-source.zip.
-See [LGPL notice](VIDEO-LICENSE-NOTICE.txt).
+New startup/slow-decoder tests fail on0.41 and pass with this fix. A test with
+five seconds of audio before the first video packet reaches EOF and verifies
+that future pictures are not shown early. Artificial decode delay exists only
+in the test library and is absent from shipping Xbox compilation.
+Host ownership, controls, early B/reopen, held-frame, seek and end tests pass.
+GPU shader/renderer checks and native XEX integrity checks are separate from
+console testing. ASan/UBSan cover the application; FFmpeg libraries are external.
+
+The user confirmed0.41 MPEG2 playback. The0.42 pacing fix and real H264/MPEG4
+smoothness still need a console retest. Try the same long file and send
+Blades/default.log after normal playback if it remains slow. Raw uploaded logs
+stay private. Complete corresponding source/relink bundle: Blades-v0.42-source.zip.

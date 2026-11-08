@@ -1,3 +1,29 @@
+# Current release: Blades0.42
+
+- Private0.41 log: H264 decoded roughly29–33fps in several intervals while
+  presentation sometimes0fps and late-discard counts increased. GPU upload/fence
+  succeeded. This identifies a presentation defect, not universally sufficient CPU.
+- Two real-engine tests reproduce0.41 PCM-before-picture and late-frame freezes
+  with a controlled40ms decode budget. Both fail before and pass after this fix.
+  The fixed slow-decode run delivers74pictures with42ms maximum inter-frame gap;
+  that is host regression evidence, not console performance.
+- An audio-only lead fixture reaches timestamped video/EOF without a bounded
+  queue deadlock or showing future video early. Native compilation excludes
+  the test delay macro. Decoder/GPU renderer/shader/colour source matches0.41.
+- All26 host suites pass; application ASan/UBSan passes five video-related tests.
+  External FFmpeg libraries are not instrumented; LeakSanitizer disabled.
+  Actual compiled Xenos shader checks and native XEX digest/import checks pass.
+- Source application rebuild produces identical XEX SHA256:
+  1b0cd447706f31546d8c015ad9261f681856685ee681bdbff35264fa9192c155.
+- USB/source CRC/manifest/payload checks pass. Artwork unchanged, no saved paths,
+  credentials or uploaded logs. Fresh108-second720p30 desktop walkthrough is
+  fully decoded. Console services are explicitly simulated.
+- User confirmed0.41 MPEG2. Native0.42 pacing/H264 smoothness requires a console
+  retest; no new SIMD kernels, faster CPU decoder or1080p30 result is claimed.
+
+See [release](RELEASE-0.42.md), [audit](data/v0.42-video-audit.json) and
+[playback](VIDEO-PLAYBACK.md). Previous validation history follows.
+
 # Current release: Blades0.41
 
 - The user reported0.40 audio without picture and a hard crash. The log has no

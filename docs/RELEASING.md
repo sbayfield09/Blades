@@ -190,3 +190,10 @@ vectorization after the0.40 crash. Publish source/relink and a fresh desktop
 walkthrough with the same pipeline. Run verify-video-decoder.py and the actual
 compiled Xenos shader arithmetic/sampler checks. Keep uploaded logs private.
 Do not claim a proven faulting instruction, console fix or frame-rate result.
+
+
+Version0.42 fixes confirmed audio-start/late-picture timing while retaining the
+0.41 decoder/GPU path. Ship complete USB/source/artwork and a fresh walkthrough.
+Include the before/after controlled regression evidence, intentional audio lead
+case and shipping-test-delay exclusion. Keep uploaded logs private and distinguish
+host regression proof from unmeasured console smoothness. No new CPU SIMD claim.
