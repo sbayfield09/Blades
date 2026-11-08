@@ -174,3 +174,11 @@ Blades-v0.39-source.zip with application source, FFmpeg tarball/patches, SDK sou
 licences and BUILDING.txt. Keep its download link in the runtime LGPL notice.
 Record real host sample playback in the walkthrough, labelled desktop capture;
 storage/profile/Guide events remain simulated. Do not claim console validation.
+
+
+Version0.40 enables PowerPC/AltiVec, distributes three decoder workers across
+physical cores, uses R8 YUV GPU conversion/scaling and adds decoder telemetry.
+Ship Blades-v0.40-source.zip, the fresh matching single-XEX USB/walkthrough and
+the synthetic1080p30 MPEG2 sample under dist/diagnostics/blades-v0.40/. Keep
+console logs private; publish only sanitized aggregate observations. Do not
+claim1080p30 console performance from host tests or UI presentation FPS.

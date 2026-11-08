@@ -1,3 +1,38 @@
+# Current release: Blades 0.40
+
+- User-confirmed0.39 baseline:720p MPEG2/WMV work well;720p H264 is slow/jittery.
+  The supplied log measures UI presentation, not decoded video. It stays private.
+- Xbox FFmpeg now has ARCH_PPC/AltiVec enabled, with three workers on2,4,0.
+  No VSX/POWER8/ldbrx; the G5 dcbzl probe/clear path is guarded out. A fresh
+  decoder build, native XEX build and all header/image/import checks pass.
+- All22 host suites pass, with final targeted video/GPU checks after new fixtures.
+  Actual1920x1080p30 MPEG2 and1280x720p30 H264 fixtures decode to native YUV
+  frames; controls, seeking, return, ownership, cancellation and RGBA fallback
+  tests pass. The host rate is not console performance evidence.
+-328 GPU comparisons pass, including non-neutral and neutral1080p YUV ramps in
+  BT601/709 limited/full range. The new path uploads native YUV and converts/
+  scales on the GPU; the display surface remains1280x720.
+- Standalone PPC VMX H264 chroma checks pass all16 source alignments,8x8 fractional
+  weights, put/average operations and destination guards against scalar math.
+  QEMU7400 uses a temporary GPR-save ABI adaptation; production/vector code is
+  unchanged. This is neither Xbox execution nor a speed measurement.
+- ASan/UBSan pass the application wrapper's RGBA/YUV and HD paths. FFmpeg static
+  libraries are not instrumented; LeakSanitizer is disabled in the traced executor.
+- The archived application/shaders rebuild to byte-identical default.xex using
+  the pinned SDK and exact freshly built optimized decoder. SHA256:
+  945459e437acfc648599e840cb322e7742398adf64b050ad486e2f8ec6e9ffa9.
+- USB/source CRC, source manifests, exact payloads and safe-entry checks pass.
+  No adapter, saved configuration, credentials or logs are shipped. The235-entry
+  artwork is unchanged. A fresh108-second desktop GPU walkthrough includes actual
+  1080p MPEG2/720p H264 playback and fully decodes without errors.
+- New vector/GPU behaviour and1080p30 performance need console verification.
+  video-perf telemetry now measures decoded/presented rates and costs independently
+  of the UI FPS. No new console performance result is claimed.
+
+See [release audit](data/v0.40-video-audit.json), [release](RELEASE-0.40.md),
+[playback](VIDEO-PLAYBACK.md) and [walkthrough](WALKTHROUGH.md).
+Previous validation history follows.
+
 # Current release: Blades 0.39
 
 - All 22 current CTest suites pass: 21 host/core/GPU/preview suites and the FTP

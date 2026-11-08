@@ -1,0 +1,366 @@
+{
+  "release": "0.40.0",
+  "recorded_utc": "2026-11-08T10:04:06.306294+00:00",
+  "xex_version": "0.0.40.0",
+  "sdk_commit": "5f6dc726f65f6d171493a3628c2415c03551f27b",
+  "feature": "Vector decoding, three-core placement and GPU YUV conversion/scaling for the1080p30 MPEG2 goal",
+  "console_baseline": {
+    "user_observation": "0.39:720p MPEG2/WMV work well;720p H264 is slow/jittery",
+    "uploaded_log": "UI presentation mostly55-60fps during H264, with no decoder metrics; UI FPS cannot measure actual decoded FPS",
+    "raw_log_or_private_paths_published": false
+  },
+  "confirmed_avoidable_costs_0_39": [
+    "FFmpeg --disable-asm also disables ARCH_PPC/AltiVec acceleration",
+    "CPU swscale conversion/resizing for every output frame",
+    "Four workers on2,3,4,5 use two physical cores"
+  ],
+  "changes": {
+    "decoder": "ARCH_PPC/AltiVec enabled; compiler -maltivec; no VSX/POWER8/PPC4xx/ldbrx; G5 dcbzl path guarded out on xsdk; LGPL-only",
+    "threads": "Three decoder workers2,4,0, decode submission3, demux5, audio1",
+    "output": "8bitYUV420 native planes to R8 atlas; GPU BT601/709 limited/full colour conversion and scaling; RGBA fallback retained for other formats",
+    "720p_frame_bytes": {
+      "previous_RGBA": 3686400,
+      "new_YUV420": 1382400,
+      "reduction_percent": 62.5
+    },
+    "1080p_YUV_frame_bytes": 3110400,
+    "display_resolution": "1280x720;1080p is input/decoder target, not new display mode",
+    "timing": "Real stream frame rate, skip output preparation of late frames; no decoder quality/discard/deblocking shortcuts",
+    "diagnostics": "video-perf every5seconds: actual decoded/presented rates, decode-call/preparation ms, dropped/late frames, audio underruns; state included"
+  },
+  "validation": {
+    "ctest_suites_passed": 22,
+    "core_host": "Internal ctest changing into directory: /workspace/Blades/build/linux\nTest project /workspace/Blades/build/linux\n      Start  1: video\n 1/21 Test  #1: video ............................   Passed    9.66 sec\n      Start  2: dashboard\n 2/21 Test  #2: dashboard ........................   Passed    5.33 sec\n      Start  3: resources\n 3/21 Test  #3: resources ........................   Passed    0.00 sec\n      Start  4: skin\n 4/21 Test  #4: skin .............................   Passed    0.01 sec\n      Start  5: ambient\n 5/21 Test  #5: ambient ..........................   Passed    0.05 sec\n      Start  6: font\n 6/21 Test  #6: font .............................   Passed    0.01 sec\n      Start  7: audio\n 7/21 Test  #7: audio ............................   Passed    0.00 sec\n      Start  8: animation\n 8/21 Test  #8: animation ........................   Passed    0.00 sec\n      Start  9: pixels\n 9/21 Test  #9: pixels ...........................   Passed    0.05 sec\n      Start 10: draw-list\n10/21 Test #10: draw-list ........................   Passed    2.40 sec\n      Start 11: startup\n11/21 Test #11: startup ..........................   Passed    0.75 sec\n      Start 12: disc\n12/21 Test #12: disc .............................   Passed    0.07 sec\n      Start 13: media-launch\n13/21 Test #13: media-launch .....................   Passed    0.00 sec\n      Start 14: achievement-backend\n14/21 Test #14: achievement-backend ..............   Passed    0.04 sec\n      Start 15: profile-backend\n15/21 Test #15: profile-backend ..................   Passed    0.30 sec\n      Start 16: achievements\n16/21 Test #16: achievements .....................   Passed    0.05 sec\n      Start 17: profile\n17/21 Test #17: profile ..........................   Passed    2.56 sec\n      Start 18: profile-count\n18/21 Test #18: profile-count ....................   Passed    0.00 sec\n      Start 19: library\n19/21 Test #19: library ..........................   Passed    0.08 sec\n      Start 20: gpu\n20/21 Test #20: gpu ..............................   Passed    6.04 sec\n      Start 21: preview-smoke\n21/21 Test #21: preview-smoke ....................   Passed    0.20 sec\n\n100% tests passed, 0 tests failed out of 21\n\nTotal Test time (real) =  27.63 sec\n",
+    "final_video": "Internal ctest changing into directory: /workspace/Blades/build/linux\nUpdateCTestConfiguration  from :/workspace/Blades/build/linux/DartConfiguration.tcl\nUpdateCTestConfiguration  from :/workspace/Blades/build/linux/DartConfiguration.tcl\nTest project /workspace/Blades/build/linux\nConstructing a list of tests\nDone constructing a list of tests\nUpdating test list for fixtures\nAdded 0 tests to meet fixture requirements\nChecking test dependency graph...\nChecking test dependency graph end\ntest 1\n    Start 1: video\n\n1: Test command: /workspace/Blades/build/linux/blades-video-tests \"/workspace/Blades/tests/media/sample.wmv\" \"/workspace/Blades/tests/media/sample.mp4\" \"/workspace/Blades/tests/media/sample1080-mpeg2.mkv\" \"/workspace/Blades/tests/media/sample720-h264.mp4\"\n1: Working Directory: /workspace/Blades/build/linux\n1: Test timeout computed to be: 45\n1: video: embedded decode wmv2 640x360 audio=wmav2 duration=12.09 workers=1 cpu_flags=0 gpu_yuv=0 fps=30.000\n1: video: seek to 5.44\n1: video: seek to 2.44\n1: video: seek to 11.99\n1: video: embedded decode wmv2 640x360 audio=wmav2 duration=12.09 workers=1 cpu_flags=0 gpu_yuv=0 fps=30.000\n1: video: embedded decode wmv2 640x360 audio=wmav2 duration=12.09 workers=1 cpu_flags=0 gpu_yuv=0 fps=30.000\n1: video: embedded decode wmv2 640x360 audio=wmav2 duration=12.09 workers=1 cpu_flags=0 gpu_yuv=0 fps=30.000\n1: video: The selected video could not be opened: No such file or directory\n1: unexpected failure: The selected video could not be opened: No such file or directory\n1: video: embedded decode h264 640x360 audio=aac duration=12.07 workers=3 cpu_flags=0 gpu_yuv=0 fps=30.000\n1: video: seek to 5.47\n1: video: seek to 2.47\n1: video: seek to 11.97\n1: video: embedded decode h264 640x360 audio=aac duration=12.07 workers=3 cpu_flags=0 gpu_yuv=0 fps=30.000\n1: video: embedded decode h264 640x360 audio=aac duration=12.07 workers=3 cpu_flags=0 gpu_yuv=0 fps=30.000\n1: video: embedded decode h264 640x360 audio=aac duration=12.07 workers=3 cpu_flags=0 gpu_yuv=0 fps=30.000\n1: video: The selected video could not be opened: No such file or directory\n1: unexpected failure: The selected video could not be opened: No such file or directory\n1: video: embedded decode wmv2 640x360 audio=wmav2 duration=12.09 workers=1 cpu_flags=0 gpu_yuv=0 fps=30.000\n1: video: embedded decode h264 640x360 audio=aac duration=12.07 workers=3 cpu_flags=0 gpu_yuv=0 fps=30.000\n1: video: embedded decode h264 640x360 audio=none duration=12.07 workers=3 cpu_flags=0 gpu_yuv=0 fps=30.000\n1: video: seek to 11.00\n1: video: embedded decode wmv2 640x360 audio=wmav2 duration=12.09 workers=1 cpu_flags=0 gpu_yuv=1 fps=30.000\n1: video: seek to 5.44\n1: video: seek to 2.44\n1: video: seek to 11.99\n1: video: embedded decode wmv2 640x360 audio=wmav2 duration=12.09 workers=1 cpu_flags=0 gpu_yuv=1 fps=30.000\n1: video: embedded decode wmv2 640x360 audio=wmav2 duration=12.09 workers=1 cpu_flags=0 gpu_yuv=1 fps=30.000\n1: video: embedded decode wmv2 640x360 audio=wmav2 duration=12.09 workers=1 cpu_flags=0 gpu_yuv=1 fps=30.000\n1: video: The selected video could not be opened: No such file or directory\n1: unexpected failure: The selected video could not be opened: No such file or directory\n1: video: embedded decode h264 640x360 audio=aac duration=12.07 workers=3 cpu_flags=0 gpu_yuv=1 fps=30.000\n1: video: seek to 5.46\n1: video: seek to 2.46\n1: video: seek to 11.97\n1: video: embedded decode h264 640x360 audio=aac duration=12.07 workers=3 cpu_flags=0 gpu_yuv=1 fps=30.000\n1: video: embedded decode h264 640x360 audio=aac duration=12.07 workers=3 cpu_flags=0 gpu_yuv=1 fps=30.000\n1: video: embedded decode h264 640x360 audio=aac duration=12.07 workers=3 cpu_flags=0 gpu_yuv=1 fps=30.000\n1: video: The selected video could not be opened: No such file or directory\n1: unexpected failure: The selected video could not be opened: No such file or directory\n1: video: embedded decode wmv2 640x360 audio=wmav2 duration=12.09 workers=1 cpu_flags=0 gpu_yuv=1 fps=30.000\n1: video: embedded decode mpeg2video 1920x1080 audio=mp2 duration=6.00 workers=3 cpu_flags=0 gpu_yuv=1 fps=30.000\n1: PASS: native1920x1080 YUV frames; decoded=180 presented=180 elapsed_host=1.274 prepare_last_ms=0.247\n1: video: embedded decode h264 1280x720 audio=aac duration=6.00 workers=3 cpu_flags=0 gpu_yuv=1 fps=30.000\n1: PASS: native1280x720 YUV frames; decoded=180 presented=180 elapsed_host=1.250 prepare_last_ms=0.134\n1: PASS: WMV/H264 decode, WMA/AAC resampling, stereo/5.1, video-only clock, pause/Guide/seek/end, held-frame ownership, repeated opens, cancellation, missing file, chooser preserved\n1/1 Test #1: video ............................   Passed    5.03 sec\n\nThe following tests passed:\n\tvideo\n\n100% tests passed, 0 tests failed out of 1\n\nTotal Test time (real) =   5.03 sec\n",
+    "ftp": "Internal ctest changing into directory: /workspace/Blades/build/linux\nTest project /workspace/Blades/build/linux\n    Start 20: ftp\n1/1 Test #20: ftp ..............................   Passed    2.59 sec\n\n100% tests passed, 0 tests failed out of 1\n\nTotal Test time (real) =   2.60 sec\n",
+    "gpu": "328 desktop GPU comparisons including1080p YUV BT601/709 limited/full coloured and neutral ramps; all passed, worst peak5 across entire UI suite",
+    "PPC_VMX": "PASS: FFmpeg PPC VMX H264 chroma, all offsets/weights, put/average and destination guards\n",
+    "PPC_scope": "Independent H264 chroma arithmetic under classic32bit QEMU7400. Only temporary64bit GPR saves adapted; no production/vector edits. Not Xbox execution/timing.",
+    "ASAN_UBSAN": "ActualRGBA/YUV ownership/control/seek/reopen and1080p MPEG2/720p H264 tests pass; FFmpeg external libs not instrumented, LeakSanitizer disabled",
+    "xex": "PASS: XEX2 PowerPC-BE, Xbox subsystem, entry 0x825a7d98\nPASS: 139 verified 65536-byte image pages; header/image/import digest chains valid\nPASS: xam.xex: 92 import slots\nPASS: xboxkrnl.exe: 122 import slots\nConsole launch and Peer Pressure compatibility remain unverified.\n",
+    "fresh_Xbox_decoder_build": true,
+    "AltiVec_compiled_enabled": true,
+    "G5_dcbzl_instruction_absent_from_blockdsp_object": true,
+    "archive_application_rebuild_byte_identical": true,
+    "rebuild_scope": "Exact archived application/shaders; pinned SDK source/library and exact freshly built optimized decoder. Archive contains SDK/decoder sources/patch/configuration to rebuild them.",
+    "USB_source_CRC_manifest_exact_payloads_no_configs_credentials_logs": "passed",
+    "matching_artwork_unchanged": true
+  },
+  "video": {
+    "streams": [
+      {
+        "index": 0,
+        "codec_name": "h264",
+        "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+        "profile": "High",
+        "codec_type": "video",
+        "codec_tag_string": "avc1",
+        "codec_tag": "0x31637661",
+        "width": 1280,
+        "height": 720,
+        "coded_width": 1280,
+        "coded_height": 720,
+        "closed_captions": 0,
+        "film_grain": 0,
+        "has_b_frames": 2,
+        "pix_fmt": "yuv420p",
+        "level": 31,
+        "chroma_location": "left",
+        "field_order": "progressive",
+        "refs": 1,
+        "is_avc": "true",
+        "nal_length_size": "4",
+        "id": "0x1",
+        "r_frame_rate": "30/1",
+        "avg_frame_rate": "30/1",
+        "time_base": "1/15360",
+        "start_pts": 0,
+        "start_time": "0.000000",
+        "duration_ts": 1658880,
+        "duration": "108.000000",
+        "bit_rate": "888312",
+        "bits_per_raw_sample": "8",
+        "nb_frames": "3240",
+        "extradata_size": 46,
+        "disposition": {
+          "default": 1,
+          "dub": 0,
+          "original": 0,
+          "comment": 0,
+          "lyrics": 0,
+          "karaoke": 0,
+          "forced": 0,
+          "hearing_impaired": 0,
+          "visual_impaired": 0,
+          "clean_effects": 0,
+          "attached_pic": 0,
+          "timed_thumbnails": 0,
+          "non_diegetic": 0,
+          "captions": 0,
+          "descriptions": 0,
+          "metadata": 0,
+          "dependent": 0,
+          "still_image": 0,
+          "multilayer": 0
+        },
+        "tags": {
+          "language": "und",
+          "handler_name": "VideoHandler",
+          "vendor_id": "[0][0][0][0]",
+          "encoder": "Lavc61.19.101 libx264"
+        }
+      },
+      {
+        "index": 1,
+        "codec_name": "aac",
+        "codec_long_name": "AAC (Advanced Audio Coding)",
+        "profile": "LC",
+        "codec_type": "audio",
+        "codec_tag_string": "mp4a",
+        "codec_tag": "0x6134706d",
+        "sample_fmt": "fltp",
+        "sample_rate": "48000",
+        "channels": 2,
+        "channel_layout": "stereo",
+        "bits_per_sample": 0,
+        "initial_padding": 0,
+        "id": "0x2",
+        "r_frame_rate": "0/0",
+        "avg_frame_rate": "0/0",
+        "time_base": "1/48000",
+        "start_pts": 0,
+        "start_time": "0.000000",
+        "duration_ts": 5184000,
+        "duration": "108.000000",
+        "bit_rate": "31104",
+        "nb_frames": "5064",
+        "extradata_size": 5,
+        "disposition": {
+          "default": 1,
+          "dub": 0,
+          "original": 0,
+          "comment": 0,
+          "lyrics": 0,
+          "karaoke": 0,
+          "forced": 0,
+          "hearing_impaired": 0,
+          "visual_impaired": 0,
+          "clean_effects": 0,
+          "attached_pic": 0,
+          "timed_thumbnails": 0,
+          "non_diegetic": 0,
+          "captions": 0,
+          "descriptions": 0,
+          "metadata": 0,
+          "dependent": 0,
+          "still_image": 0,
+          "multilayer": 0
+        },
+        "tags": {
+          "language": "und",
+          "handler_name": "SoundHandler",
+          "vendor_id": "[0][0][0][0]"
+        }
+      }
+    ],
+    "format": {
+      "filename": "Blades-v0.40-walkthrough.mp4",
+      "nb_streams": 2,
+      "nb_programs": 0,
+      "nb_stream_groups": 0,
+      "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+      "format_long_name": "QuickTime / MOV",
+      "start_time": "0.000000",
+      "duration": "108.000000",
+      "size": "12531909",
+      "bit_rate": "928289",
+      "probe_score": 100,
+      "tags": {
+        "major_brand": "isom",
+        "minor_version": "512",
+        "compatible_brands": "isomiso2avc1mp41",
+        "encoder": "Lavf61.7.103"
+      }
+    }
+  },
+  "video_scope": "Fresh108second desktop GPU walkthrough including actual1080p MPEG2/720p H264 decode with YUV shader and pause/return. Host portable decoder; console/target SIMD speed not measured. Guide/profile/storage/FTP simulated and labelled.",
+  "sample": {
+    "streams": [
+      {
+        "index": 0,
+        "codec_name": "mpeg2video",
+        "codec_long_name": "MPEG-2 video",
+        "profile": "Main",
+        "codec_type": "video",
+        "codec_tag_string": "[0][0][0][0]",
+        "codec_tag": "0x0000",
+        "width": 1920,
+        "height": 1080,
+        "coded_width": 0,
+        "coded_height": 0,
+        "closed_captions": 0,
+        "film_grain": 0,
+        "has_b_frames": 1,
+        "sample_aspect_ratio": "1:1",
+        "display_aspect_ratio": "16:9",
+        "pix_fmt": "yuv420p",
+        "level": 4,
+        "color_range": "tv",
+        "color_space": "bt709",
+        "chroma_location": "left",
+        "field_order": "progressive",
+        "refs": 1,
+        "r_frame_rate": "30/1",
+        "avg_frame_rate": "30/1",
+        "time_base": "1/1000",
+        "start_pts": 0,
+        "start_time": "0.000000",
+        "extradata_size": 34,
+        "disposition": {
+          "default": 0,
+          "dub": 0,
+          "original": 0,
+          "comment": 0,
+          "lyrics": 0,
+          "karaoke": 0,
+          "forced": 0,
+          "hearing_impaired": 0,
+          "visual_impaired": 0,
+          "clean_effects": 0,
+          "attached_pic": 0,
+          "timed_thumbnails": 0,
+          "non_diegetic": 0,
+          "captions": 0,
+          "descriptions": 0,
+          "metadata": 0,
+          "dependent": 0,
+          "still_image": 0,
+          "multilayer": 0
+        },
+        "tags": {
+          "ENCODER": "Lavc61.19.101 mpeg2video",
+          "DURATION": "00:00:06.000000000"
+        },
+        "side_data_list": [
+          {
+            "side_data_type": "CPB properties",
+            "max_bitrate": 16000000,
+            "min_bitrate": 0,
+            "avg_bitrate": 0,
+            "buffer_size": 1835008,
+            "vbv_delay": -1
+          }
+        ]
+      },
+      {
+        "index": 1,
+        "codec_name": "mp2",
+        "codec_long_name": "MP2 (MPEG audio layer 2)",
+        "codec_type": "audio",
+        "codec_tag_string": "[0][0][0][0]",
+        "codec_tag": "0x0000",
+        "sample_fmt": "s16p",
+        "sample_rate": "48000",
+        "channels": 2,
+        "channel_layout": "stereo",
+        "bits_per_sample": 0,
+        "initial_padding": 481,
+        "r_frame_rate": "0/0",
+        "avg_frame_rate": "0/0",
+        "time_base": "1/1000",
+        "start_pts": -10,
+        "start_time": "-0.010000",
+        "bit_rate": "192000",
+        "disposition": {
+          "default": 0,
+          "dub": 0,
+          "original": 0,
+          "comment": 0,
+          "lyrics": 0,
+          "karaoke": 0,
+          "forced": 0,
+          "hearing_impaired": 0,
+          "visual_impaired": 0,
+          "clean_effects": 0,
+          "attached_pic": 0,
+          "timed_thumbnails": 0,
+          "non_diegetic": 0,
+          "captions": 0,
+          "descriptions": 0,
+          "metadata": 0,
+          "dependent": 0,
+          "still_image": 0,
+          "multilayer": 0
+        },
+        "tags": {
+          "ENCODER": "Lavc61.19.101 mp2",
+          "DURATION": "00:00:06.000000000"
+        }
+      }
+    ],
+    "format": {
+      "filename": "1080p30-mpeg2.mkv",
+      "nb_streams": 2,
+      "nb_programs": 0,
+      "nb_stream_groups": 0,
+      "format_name": "matroska,webm",
+      "format_long_name": "Matroska / WebM",
+      "start_time": "-0.010000",
+      "duration": "6.000000",
+      "size": "9109322",
+      "bit_rate": "12145762",
+      "probe_score": 100,
+      "tags": {
+        "ENCODER": "Lavf61.7.103"
+      }
+    }
+  },
+  "console_scope": "All0.40 vector/GPU behaviour and performance need console verification; no guarantee of1080p30 or any H264 profile/bitrate. User should retry same H264 file and send15second normal-playback video-perf data.",
+  "artifacts": {
+    "dist/Blades-v0.40-USB.zip": {
+      "bytes": 4676668,
+      "sha256": "731863da48e082e4af6e1222a8574b3d9dbcfd3eaefc1a99da7095ea1e91d436"
+    },
+    "dist/Blades/default.xex": {
+      "bytes": 6217728,
+      "sha256": "945459e437acfc648599e840cb322e7742398adf64b050ad486e2f8ec6e9ffa9"
+    },
+    "dist/Blades-artwork-pack.zip": {
+      "bytes": 2041912,
+      "sha256": "7417accd71918a01d316ae20f8471af504969f35a19870ff70fc4edd060690bf"
+    },
+    "dist/Blades-v0.40-walkthrough.mp4": {
+      "bytes": 12531909,
+      "sha256": "3f3eeb4674d41f22c3cd05b11d675a3213018662299b9890738dae7aad6c2691"
+    },
+    "dist/Blades-v0.40-source.zip": {
+      "bytes": 31742673,
+      "sha256": "c6974432d2981aebdfb717544aa8fd6bf1fc1e706b21e88f2546d0fdb3cdf14b"
+    },
+    "dist/diagnostics/blades-v0.40/1080p30-mpeg2.mkv": {
+      "bytes": 9109322,
+      "sha256": "765f4ced378f68ad09d94fcff0a8d999f73e6b9f14b196e5d9dc3f7d2a805368"
+    }
+  },
+  "source_sha256": {
+    "CMakeLists.txt": "df39fccf8a637cc7c81c31cefd27e1960d734de9193a3d4a46a7bd2556638b3f",
+    "include/video.h": "3c66923be6199d21167fca96467552c40901cc5f17da723d670c5fcd28b6414b",
+    "include/draw_list.h": "71a1013ece870d891a5d43d09c23f8c31e3da3f57ea1a5956df0dad9c395eda2",
+    "src/core/video.c": "21912ae240b979bd54f5e35398c8087cb5a75fda3106b17603a2103ae674e761",
+    "src/platform/xbox360.c": "ae0934df5b2ae0ada3b6344f97d8f1a3fdcb6197199308f2e967244de08d599b",
+    "src/platform/xbox_renderer.c": "c3fdd0dab11c4050c46d219950c37ff909b578428d87651e00965ee7a48d22ae",
+    "src/render/video_render.c": "c2bafe29e81877ef9f47fb0df0680fa0fd42f7f1a48e358dddd6a82885cfbb7f",
+    "src/render/video_colour.c": "ad5b83adf1e54f4d0b43969e539098a7bf14f54101dcb15763eece973103fac2",
+    "src/render/shaders/video.frag": "ba860f509d4bd9682e2dd7ae0e62cdd9112a556e8ee3bdae97a315095d84ce41",
+    "src/render/draw_list.c": "5c8b1c74fbf79f697c0c277117375ad030f051b070ea17e1562e87d5b06a41d7",
+    "tools/gl_renderer.c": "b0ce3f861674434f2f445a199178758fa9d804018af340d7deee37f14a0d8fca",
+    "tests/test_video.c": "9599ac634fbf58ad52ccc382047e16b964f03ac7a6421e257905784f995ab367",
+    "tests/test_gpu.c": "6a99c1ef8a603d41ddbe6e39ded1d66618c22a8dba7693cbb6f96564b97f8439",
+    "tests/test_video_vmx.c": "21fa808be84df60cfad019f6fb5d73c87fe791e1ddedcf373a133710a70baf30",
+    "tools/build-video-ffmpeg.py": "5b28f1a42f884496e11dde152429c7e9252532c2987c17fab2500f5b34253bb1",
+    "tools/build-xbox.sh": "37c96fb1e73fbac2e011c5cb9a4858eccfe192a78e106a146353245d42ca1a0c",
+    "tools/package-source.py": "93fba62e5eadd881db8aebe1c579786569eddf817ef5fadd62d7cac546fd6288",
+    "tools/test-video-vmx.sh": "d96380332026055f351c9d8c8b17aa2469eac1190dc1eacb26863637f82e0d39",
+    "third_party/ffmpeg/patches/xsdk.patch": "93650e95b683a53047192e8c0399278ca61c87b2b149a8fc3db21db025cbde46"
+  }
+}

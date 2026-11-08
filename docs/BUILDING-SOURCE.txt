@@ -1,4 +1,4 @@
-Blades 0.39 complete source and FFmpeg relink instructions
+Blades 0.40 complete source and FFmpeg relink instructions
 
 This archive contains the application source, embedded font, GLSL shaders,
 MIT/STB/artwork/font notices, original FFmpeg 2.8.22 source archive, xsdk changes
@@ -35,12 +35,12 @@ To modify/relink FFmpeg:
 
 1. Extract third_party/ffmpeg/ffmpeg-n2.8.22.tar.gz into a directory you choose.
 2. Apply third_party/ffmpeg/patches/xsdk.patch with patch -p1 there; edit freely.
-3. The generated build/ffmpeg-xbox/objects/blades-configure.txt records every
+3. The generated build/ffmpeg-xbox-v040/objects/blades-configure.txt records every
    configure option from the standard build. Run that source's configure in a
    fresh objects directory with the same options, adjusting --prefix to your
    own install directory; then make -j4 and make install. You can alternatively
-   edit the extracted standard build/ffmpeg-xbox/source/FFmpeg-n2.8.22 sources
-   after the first build and run make -C build/ffmpeg-xbox/objects install.
+   edit the extracted standard build/ffmpeg-xbox-v040/source/FFmpeg-n2.8.22 sources
+   after the first build and run make -C build/ffmpeg-xbox-v040/objects install.
 4. Set BLADES_FFMPEG_PREFIX to that install directory and run tools/build-xbox.sh.
    The application recompiles/relinks against your replacement static libraries.
    Modifications/debugging for the LGPL library are permitted. FFmpeg version/API
@@ -58,7 +58,11 @@ Host decoder/UI tests (with SDL3 installed):
 For full resource/GPU tests first unzip dist/Blades-artwork-pack.zip to a temporary
 location and copy its Assets/blades.xzp into dist/Blades/Assets/. Add
 -DBLADES_GPU_CHECKS=ON to CMake and EGL_PLATFORM=surfaceless for a headless Mesa
-GPU test. The embedded-engine test consumes tests/media/sample.wmv and sample.mp4.
+GPU test. The embedded-engine test consumes tests/media/sample.wmv and sample.mp4 plus the1080p MPEG2/720p H264 fixtures.
 Leak detection is disabled in the cloud's traced executor; ASan/UBSan covered the
 application wrapper. The prebuilt FFmpeg libraries were not sanitizer-instrumented.
 These host tests do not establish Xbox runtime behaviour or performance.
+
+Vector arithmetic check: tools/test-video-vmx.sh <FFmpeg-build-directory> <qemu-ppc>.
+The temporary harness adapts only64-bit GPR saves for the32-bit QEMU7400 ABI;
+production objects/vector math are unchanged. This is not Xenon timing evidence.
