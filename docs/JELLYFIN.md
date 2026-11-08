@@ -1,4 +1,4 @@
-# Jellyfin in Blades0.44
+# Jellyfin in Blades0.45
 
 Media > Video now contains **Jellyfin** and **Local**. These are navigation
 folders: Jellyfin lists server videos; Local lists the existing scanned files.
@@ -16,6 +16,7 @@ No library media is copied to USB or downloaded in full.
    up to128 printable ASCII characters, matching the old native client.
 4. Open Video > Jellyfin. Select a library, show/season/folder, then a video.
    Previous Page/Next Page traverse10-item pages; B returns, X refreshes.
+   Continue Watching and Next Up appear above the video libraries.
 
 Video libraries exclude Music/Books/Photos/Live TV views. Child queries include
 movies, series, seasons, episodes, videos, folders and collections. The status
@@ -30,12 +31,34 @@ MPEG2 decoder. Source H264/HEVC/etc is decoded/transcoded on the SERVER; the
 Xbox decodes the resulting MPEG2 with its existing CPU/GPU display pipeline.
 No server plugin, DashLaunch, extra XEX or stock-player handoff is needed.
 
-A pauses/resumes, X switches fit/stretch, B/Back returns to the same Jellyfin
-list. Guide opening pauses. **Seeking is not enabled for this progressive
-Jellyfin stream**; its controls do not advertise seek. Local file seeking and
-all local codec/worker/GPU settings remain as in0.43. Jellyfin subtitles, HDR
+A pauses/resumes, Left/Right seeks back/forward10seconds, X switches fit/stretch,
+B/Back returns to the same Jellyfin list. Guide opening pauses. Seeking restarts
+server transcoding at the requested full-item timestamp; a short buffering delay
+is expected. Old decoder, packet, audio and picture queues are drained before
+reopening, and both clocks are mapped back to the full item timeline. Seeking
+while paused stays paused. Rapid presses accumulate against the requested
+position and cancel superseded opens. Targets are clamped to the item bounds.
+The server playback session stays the same, with CanSeek reported and absolute
+positions in start/progress/stop messages. Local byte seeking and the verified
+0.43 decoder/GPU optimisations are retained. Jellyfin subtitles, HDR
 validation, Live TV, external media origins and stream-quality choices are not
 implemented. Server HEVC->MPEG2 compatibility is tested with SDR synthetic media.
+
+## Continue Watching, Next Up and resume
+
+The two folders use Jellyfin's own account-specific Resume and Shows/NextUp
+endpoints and preserve the server ordering. Empty lists remain valid folders;
+X refreshes and paging works like other lists. Next Up follows the server's
+watched-episode history rather than calculating episode order locally.
+
+Opening a video from any Jellyfin folder fetches fresh user data, even when the
+list was cached, and starts at PlaybackPositionTicks. Missing/zero positions
+start at the beginning; positions at/past the duration also restart. A valid
+partial position is respected even on a previously watched item. Stopping
+refreshes the current folder so Continue Watching/Next Up can reflect changes.
+Jellyfin's server-side minimum duration, resume percentages and watched rules
+still determine which videos appear and which positions it saves. No local
+watch-history database or separate Xbox profile mapping is used.
 
 ## Saved connection and status
 
@@ -66,12 +89,13 @@ Authentication and library APIs, bounded framing/JSON and session cleanup follow
 that project. Its MPEG1/480p profile is adapted to MPEG2/720p with stereo MP2.
 The renderer/player is the working Blades code, without a new decoder backend.
 
-Checks include the upstream protocol/JSON malformed-input regressions, real
-HTTP worker/player fixtures (bad login, video-only views, pagination, chunked
-fragmentation, cancellation,401, truncated stream, reconnect/logout), UI routing,
-CPU/desktop GPU rendering and application ASan/UBSan. An isolated official
-Jellyfin10.10.7 test uses a generated account and synthetic HEVC/AAC movie,
-negotiates MPEG2/MP2, decodes90pictures with audio data, pauses/resumes and
-verifies watch history and saved-token reconnect. It never touches a user's
-server or media. The native XEX compiles and passes integrity checks; console
-Jellyfin/network/keyboard behaviour still requires a hardware test.
+Checks include upstream malformed HTTP/JSON regressions, real worker/player
+fixtures with fragmented media, pagination, cancellation,401/503/truncation,
+fresh/stale/finished resume data, paused/rapid/end-bound seeking and seek failure,
+plus UI and application ASan/UBSan. An isolated official Jellyfin10.10.7 test
+uses generated credentials and synthetic HEVC/AAC movies/episodes. It verifies
+a real next episode and Continue Watching result, resume at4seconds, MPEG2/MP2
+playback, forward/back/paused seeks, full-item clocks and saved stop position.
+Only that short-clip test server lowers its minimum resume duration; Blades
+never changes a user's server configuration. Native compilation/integrity and
+renderer checks pass; real Xbox network/keyboard/streaming need hardware testing.

@@ -213,3 +213,12 @@ requests or personal server media in any release or test recording. The fresh
 0.44 walkthrough uses only a temporary official server/account/synthetic movie.
 Local0.43 FFmpeg flags/kernels/GPU sources remain unchanged; the remote AVIO buffer
 is32KiB to satisfy FFmpeg2.8's nonseekable short-read refill assumptions.
+
+Version 0.45 adds Jellyfin server-offset seeking, fresh automatic resume and
+account-specific Continue Watching/Next Up folders. Verify paused/rapid/bounded
+seeks, packet/audio/picture resets, full-item clocks and absolute stop reports
+against the official disposable test server. Its short synthetic fixtures lower
+only the test server's minimum resume duration. Never modify a user's server
+settings or include private configs, tokens, media URLs or logs in a release.
+The fresh 160-second walkthrough must show actual resume/seeking and Next Up
+playback, label desktop/simulated services, and use this renderer/artwork.

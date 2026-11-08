@@ -1,3 +1,34 @@
+# Current release: Blades 0.45
+
+- All 29 host suites and eight application ASan/UBSan suites pass. External
+  FFmpeg libraries are not sanitizer-instrumented; leak detection disabled.
+- Official Jellyfin 10.10.7 with synthetic HEVC/AAC movies/episodes verifies
+  Continue Watching, the actual next episode, fresh 4-second resume, paused,
+  forward/back/rapid/end-bound seeking, audio/video output and a saved absolute
+  stop position. Only this disposable short-clip server lowers resume thresholds.
+- Fragmented/chunked streams, invalid/expired sessions, temporary server failures,
+  completed and partial rewatch resume positions, seek errors and cancellation
+  pass. Root virtual-folder pagination, empty lists and malformed results tested.
+- A seek closes old I/O and decoder threads, clears queues, stops the server
+  encoder and opens the same session at StartTimeTicks. Full-item clocks and
+  paused state are retained. Local byte seeking and 0.43 decoder/GPU preserved.
+- Native XEX 139-page/import digests, five-library instruction whitelist and
+  actual Xenos shader checks pass. FFmpeg build, Xenon filters and GPU source
+  remain byte-identical to the previous release.
+- Archived source application rebuild produces an identical XEX SHA256:
+  e53b38b0c2731af06a631a9178c62669f1ed49af7aa7344e38e31bf8183b51ec.
+- ZIP CRC, source manifest/current source, one XEX, matching artwork and licence
+  checks pass. No private settings/logs packaged. GPLv3 source/build scripts and
+  pinned free SDK included; original licences and attribution preserved.
+- Fresh 160-second 720p30 desktop GPU walkthrough with 48kHz stereo fully decodes.
+  It shows actual Continue Watching resume, paused forward seek, playing backward
+  seek and Next Up playback. Xbox Guide/profile/storage/FTP simulated and labelled.
+- Real Xbox Jellyfin networking, keyboard and streaming still need hardware
+  tests. No console timing, GPU compressed decoding or 1080p30 claim is made.
+
+See [release](RELEASE-0.45.md), [setup/limits](JELLYFIN.md),
+[audit](data/v0.45-video-audit.json). Previous validation follows.
+
 # Current release: Blades0.44
 
 -29 host suites pass, including XenonFin protocol, Media Center/source/browser

@@ -1,26 +1,26 @@
-# Blades0.44 walkthrough
+# Blades 0.45 walkthrough
 
-[Watch/download](../dist/Blades-v0.44-walkthrough.mp4): fresh140second720p30
-shared desktop GPU renderer capture,48kHz stereo, matching235-entry artwork.
-The on-video label identifies the desktop GPU and simulated Xbox services.
-The Jellyfin portion talks to an actual isolated official Jellyfin10.10.7 server
-with a generated test account and synthetic media; account tokens/passwords are
-not displayed. The Xbox Guide, profile data, console storage and FTP are simulated.
+[Watch/download](../dist/Blades-v0.45-walkthrough.mp4): fresh 160-second 720p30
+shared desktop GPU capture, 48kHz stereo, matching 235-entry artwork pack.
+The video labels desktop GPU rendering and simulated Xbox services. Jellyfin
+uses an actual isolated official 10.10.7 server, a generated test account and
+synthetic HEVC/AAC movies/episodes; no passwords or session tokens are shown.
 
--00:00–01:24: blade changes, profile/Guide requests, achievements, File Manager,
-  FTP controls and submenu navigation.
--01:29–01:31: Video's Jellyfin/Local folders, then Local's scanned list.
--01:33: real1080p MPEG2 fixture through CPU decoding/GPU YUV scaling; pause/resume
-  at01:34/01:35, B returns01:37.
--01:40: real720p H264/AAC fixture; pause/resume01:41/01:42, return01:44.
--01:47–01:50: authenticated Jellyfin video library/folder navigation.
--01:53: actual Jellyfin progressive MPEG2/MP2 stream from synthetic HEVC/AAC
-  source through Blades' shipping HTTP AVIO/decoder/display path.01:54/01:55
-  pause/resume,01:58 return to the list.
--02:07–02:13: Media Center server/account/status controls; password stays hidden.
--02:15–02:20: System blade and completion.
+- 00:00–01:24: blades, profile/Guide requests, achievements, File Manager,
+  FTP controls and submenu navigation. Xbox services are simulated and labelled.
+- 01:29–01:31: Video's Jellyfin/Local folders, then the Local list.
+- 01:33/01:40: actual local 1080p MPEG2 and 720p H264 samples through CPU decoding
+  and GPU YUV display, including pause/resume and return to the Blades list.
+- 01:47: Jellyfin root with Continue Watching, Next Up and video libraries.
+- 01:50–01:53: Continue Watching, then actual server playback resumed at 4 seconds.
+- 01:54–01:59: pause, seek forward while paused, resume, then seek backward;
+  both timestamps and real decoded picture/audio use the full-item timeline.
+- 02:02–02:07: return, refresh, then Next Up and its next episode.
+- 02:10–02:16: actual next-episode playback, pause/resume and return.
+- 02:26–02:32: Media Center connection/status controls; password remains hidden.
+- 02:34–02:40: System blade and completion.
 
-The local and streamed samples are original synthetic media, not reference
-footage. Host FFmpeg uses scalar code; native Xenon kernels are unchanged from
-0.43 and verified separately. This is not Xbox hardware or console-speed evidence.
-Artwork/font/audio attribution remains in the artwork pack and runtime notices.
+The capture waits for actual asynchronous page/seek work before advancing the
+scripted controller. Host FFmpeg uses scalar code; native Xenon kernels are
+unchanged and audited separately. This is not console performance evidence.
+Artwork/font/audio attribution remains in the runtime notices and artwork pack.

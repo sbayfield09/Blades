@@ -1,6 +1,6 @@
-Blades0.44 — Jellyfin connection and streaming in the Blades layout
+Blades0.45 — Jellyfin seeking, resume, Continue Watching and Next Up
 
-Extract Blades-v0.44-USB.zip onto USB; launch Blades/default.xex. The complete
+Extract Blades-v0.45-USB.zip onto USB; launch Blades/default.xex. The complete
 matching Assets folder/notices are included. Keep your existing Config files
 when updating. No adapter, converter, DashLaunch or extra executable is needed.
 
@@ -15,7 +15,11 @@ Media > Video > Jellyfin: browse video libraries, folders, series/seasons,
 movies and episodes. Previous/Next Page are10-item pages. X refreshes, B returns.
 Jellyfin negotiates and streams MPEG2/MP2 up to720p30 to the existing player.
 A pause/resume, X fit/stretch, B/Back returns to the same list. Guide pauses.
-This progressive remote stream does not support seeking; Local still does.
+Left/Right seeks10seconds backward/forward; server transcoding restarts at
+that position, with a brief buffering delay. Paused seeks stay paused.
+Continue Watching and Next Up are above the video libraries. Opening any
+partly watched Jellyfin video resumes from fresh server user data. The current
+folder refreshes on return. Server resume/watched thresholds still apply.
 Media > Video > Local retains scanned videos. Video Marketplace manages paths.
 There is no video autoplay on startup/sign-in. No whole-file download is needed.
 
@@ -24,15 +28,15 @@ All artwork/tints/highlights are retained. Music/Pictures playback and music
 visualisations are still unfinished. See docs/JELLYFIN.md for detailed scope.
 
 An isolated official Jellyfin10.10.7 server passed authentication/browsing and
-HEVC/AAC -> MPEG2/MP2 ->90pictures with audio data, pause/end/watch history and
-saved-session reconnect. Protocol/network/UI/sanitizer/render/build checks pass.
+HEVC/AAC -> MPEG2/MP2; real Resume/Next Up episode,4second resume, paused/rapid/
+forward/back/end-bound seeking and absolute saved position. Protocol/network/UI/sanitizer/render/build checks pass.
 Physical Xbox Jellyfin/network/keyboard playback still needs your test; no
 new console throughput/1080p30 result is claimed. If a problem occurs, describe
 the screen and send default.log; do not share your private Jellyfin config.
 
 Fresh desktop walkthrough includes Local and actual isolated Jellyfin playback.
 Xbox Guide/profiles/storage/FTP are simulated and labelled. The combined binary
-is GPLv3 with complete corresponding source in Blades-v0.44-source.zip; original
+is GPLv3 with complete corresponding source in Blades-v0.45-source.zip; original
 MIT/FFmpeg/Simple360Player/XenonFin/artwork/font/SDK notices are preserved.
 
 Retained 0.37 corrections:
