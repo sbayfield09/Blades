@@ -10,8 +10,10 @@ unchanged implementation; it is recorded below without claiming a new full run.
 Native integrity/import/page checks pass. The archived corresponding application
 source rebuild produces byte-identical XEX bytes. USB/source CRCs, source hashes,
 matching artwork and private-config/log exclusions pass. The fresh matching
-240second720p30 desktop video labels simulated Xbox services. Actual live0.50
-client detection/download is checked after publication. Console installation
+240second720p30 desktop video labels simulated Xbox services. The preserved0.50
+client detected and downloaded the live0.51 GitHub ZIP with exact length/SHA256
+verification; saved bytes match the published package. The0.51 client reports
+itself current using that same live manifest. Console installation
 and current-version confirmation remain the user's hardware test.
 
 # Validation — Blades0.50 repository updater

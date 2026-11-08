@@ -56,7 +56,18 @@
     "unchanged_artwork": "PASS",
     "private_configs_logs_excluded": "PASS",
     "prior_implementation_validation": "See v0.50 audit; unchanged implementation, no new full host/sanitizer run claimed.",
-    "live_v050_client": "Pending atomic Git publication; test preserved v0.50 binary against real GitHub dist manifest/ZIP afterwards.",
+    "live_v050_client": {
+      "recorded_utc": "2026-11-08T22:00:31.355425+00:00",
+      "publication_commit": "a6f00875d93363f91d8e57a633c45436c940dfb6",
+      "preserved_v050_client": "PASS: HTTPS updater normal state=5; trusted host, bounded verified download and temporary-file cleanup",
+      "v051_current_client": "PASS: live repository manifest found via raw GitHub; installed version is current",
+      "downloaded_file": "Blades-v0.51-USB.zip",
+      "bytes": 5449950,
+      "sha256": "52174c5e78e28315202fd6b041c9be79bc7b385c0f9cb2fc031c765442e60dab",
+      "download_matches_published_USB": true,
+      "no_partial_file": true,
+      "scope": "Actual production updater workers and GitHub dist manifest/ZIP, on desktop through inherited proxy/CA; physical Xbox installation/version check remains the user test."
+    },
     "hardware": "Xbox installation and version confirmation are the user test."
   },
   "walkthrough": {
@@ -198,5 +209,6 @@
       }
     },
     "scope": "Fresh matching240s desktop GPU recording; isolated real Jellyfin server/synthetic content; Guide/profile/storage/FTP/updater states simulated and labelled."
-  }
+  },
+  "publication": "Matching source, XEX, USB/source ZIPs, artwork, fresh desktop video and update manifest published together in a6f00875d93363f91d8e57a633c45436c940dfb6"
 }
