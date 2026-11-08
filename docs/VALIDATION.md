@@ -25,10 +25,12 @@ HTTPS worker has separate integration evidence. Physical launch/exit static,
 console folder animation and update/network/storage behavior still need retest.
 
 The rename to sbayfield09/Blades-reimagined is verified. Downloads and the
-matching manifest are prepared for one Git commit on main; no API or GitHub
-Releases access is required. See data/v0.50-release-audit.json for artifact
-hashes and validation scope. The actual production-path updater is checked
-after publication with both current-version and older-client download probes.
+matching manifest are published together on main at e646013. No API or GitHub
+Releases access is required. The production-path updater recognizes0.50.0 as
+current; an older-client simulation detects it and downloads the actual USB ZIP,
+verifying exact length and SHA256. Saved bytes match the published package and
+no partial file remains. These are desktop network tests; Xbox retesting is
+still required. See data/v0.50-release-audit.json for artifact hashes and scope.
 
 # Validation — Blades0.49
 

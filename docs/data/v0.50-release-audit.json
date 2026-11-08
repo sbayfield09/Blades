@@ -1,11 +1,12 @@
 {
   "release": "0.50.0",
   "recorded_utc": "2026-11-08T21:46:53.190134+00:00",
-  "source_publication": "Matching complete application source, versioned binaries/USB/source/walkthrough and update manifest prepared together for main; historical downloads retained.",
+  "source_publication": "Matching browsable source, XEX, artwork, USB/source ZIPs, fresh walkthrough and update manifest published together on main.",
   "github_administration": {
     "target_repository": "sbayfield09/Blades-reimagined",
     "rename_verified": true,
-    "publication": "Repository dist folder on main; no API or Releases required. Atomic Git publication is next; live current-version and older-client download probes follow."
+    "publication": "Published to main at e646013812d29bc021bca41420087fc5539f6b41; Git remote verified. No API or GitHub Releases required.",
+    "live_repository_updater_verified": true
   },
   "display": {
     "startup": "Initialize black scanout before artwork/resource allocations",
@@ -37,7 +38,20 @@
     "sanitizer_suites": 5,
     "sanitizer_TLS_modes": 16,
     "sanitizer_scope": "Application and bundled TLS instrumented; prebuilt FFmpeg not instrumented, LeakSanitizer off",
-    "live_GitHub_HTTPS": "PASS: verified HTTPS to GitHub; unpublished release correctly reported",
+    "live_GitHub_HTTPS": {
+      "recorded_utc": "2026-11-08T21:48:36.303536+00:00",
+      "publication_commit": "e646013812d29bc021bca41420087fc5539f6b41",
+      "observed_main": "e646013812d29bc021bca41420087fc5539f6b41",
+      "manifest_URL": "https://raw.githubusercontent.com/sbayfield09/Blades-reimagined/main/dist/update.json",
+      "current_client": "PASS: production updater recognizes installed0.50.0 as current",
+      "older_client": "PASS: compiled0.49.0 client detects0.50.0, downloads real USB ZIP, validates exact length/SHA256 and saves completed file",
+      "download_bytes": 5449806,
+      "download_sha256": "aad5ab6ea91801797c2d6686f6d5efd758910867942441a659e1b85cfd25a008",
+      "download_matches_published_package": true,
+      "no_test_origin_override": true,
+      "transport": "Production HTTPS worker through inherited desktop proxy/CA trust; native excludes desktop proxy/test-origin overrides",
+      "scope": "Desktop network/worker verification; physical Xbox network/storage/handoff/animations still need retest"
+    },
     "official_Jellyfin": "Disposable10.10.7 actual movie/episode artwork and metadata, retained15 source-frame seek targets and12seconds continuous picture/clock agreement",
     "TLS_cases": [
       "trusted Content-Length download",
