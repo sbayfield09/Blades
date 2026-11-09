@@ -32,7 +32,7 @@ capture is not footage from an Xbox.*
 | Disc drive | Open/close the tray, show reading/game-title states and launch game discs manually. Games do not launch automatically on insertion. |
 | Profiles and achievements | Show account information, gamer picture and gamerscore; browse achievements and open the Xbox Guide for sign-in, profile and achievement actions. |
 | File browser | Browse HDD/USB files and launch supported loose `.xex` executables without adding a scan folder. |
-| Local video | Play the selected file inside Blades, with pause/resume, seeking and fit/stretch controls. Format support and performance depend on the file. |
+| Local video | Play the selected file inside Blades using FFmpeg and code adapted from [Simple360Player](https://github.com/HG-ERIK/simple360player), with pause/resume, seeking and fit/stretch controls. Format support and performance depend on the file. |
 | Jellyfin | Browse movies and series with artwork, descriptions and runtimes; use Continue Watching, Next Up, resume and seeking. The server supplies a compatible transcoded stream. |
 | FTP | Transfer files between your computer and console while Blades is open. View connection details, change the login or turn the server off. |
 | Updates | Check this repository for a newer build, download and verify it, then install and restart using the bundled installer helper. |
@@ -160,12 +160,27 @@ preview is available for development; you do not need it to use the Xbox build.
 
 ## Credits and licensing
 
+### Simple360Player — video playback
+
+**Credit to [HG-ERIK](https://github.com/HG-ERIK) and the
+[Simple360Player](https://github.com/HG-ERIK/simple360player) contributors.**
+Blades' video playback builds on their work: it ports Simple360Player's
+Xbox 360 H.264 decoding optimisations and adopts its playback/threading approach,
+integrating them with FFmpeg and the Blades file-selection interface.
+
+The upstream source, GPLv3 licence and attribution are preserved in
+[`third_party/simple360player`](third_party/simple360player) and the complete
+source bundle. See the [port and implementation notes](docs/SIMPLE360PLAYER-PIPELINE.md)
+for the exact code reused and the changes made for Blades.
+
+### Other projects and attribution
+
 Built with the open-source [xsdk](https://github.com/xenosworks/xsdk). Artwork
 adaptation and the animated background draw on
-[DashX360](https://github.com/ZivvoZ/dashx360); video playback uses FFmpeg and
-ported [Simple360Player](https://github.com/HG-ERIK/simple360player) code. Jellyfin
-integration builds on XenonFin. Attribution and source provenance are retained
-in the documentation, source bundle and runtime `licenses` folder.
+[DashX360](https://github.com/ZivvoZ/dashx360). Video decoding also uses
+[FFmpeg](https://ffmpeg.org/), and Jellyfin integration builds on XenonFin.
+Attribution and source provenance are retained in the documentation, source
+bundle and runtime `licenses` folder.
 
 The combined dashboard executable is distributed under **GNU GPLv3**. Original
 project code retains its MIT notices; dependencies, fonts and artwork retain
