@@ -1,140 +1,177 @@
 # Blades Reimagined
 
-An Xbox 360 Blades dashboard recreation using the open-source xsdk, with a
-shared SDL3 desktop preview. The application remains named Blades on the console.
-Application source is browsable in src/, include/ and tests/ on main. Download
-builds, USB ZIPs, premade artwork, walkthroughs and complete source bundles from
-[the downloads folder](dist/).
+**The classic Xbox 360 Blades interface, recreated as a homebrew dashboard for the Xbox 360.**
 
-[Complete v0.52 USB ZIP](dist/Blades-v0.52-USB.zip) ·
-[Walkthrough](dist/Blades-v0.52-walkthrough.mp4) ·
-[Complete source bundle](dist/Blades-v0.52-source.zip)
+Blades Reimagined brings back the curved tabs, sliding menus, animated backgrounds
+and sounds of the original dashboard, with tools for launching games and homebrew,
+playing videos, browsing Jellyfin and transferring files over FTP. The aim is to
+make the Blades experience useful on a console today while getting its appearance
+and movement as close to the original as possible.
 
-Version0.52 adds automatic installation and restart: System > Update Blades >
-Update and Restart downloads and verifies the package, stages it, closes Blades,
-installs using the bundled helper and relaunches the new version. Config and
-personal files are retained; file backups and a journal support rollback after
-installation errors or interrupted copying. Keep update-installer.xex beside
-default.xex. No DashLaunch/plugin is required. [Details](docs/UPDATES.md).
+It runs as a standalone app named **Blades** alongside your existing setup. It
+uses your installed Xbox kernel and Guide for account actions; installing it does
+not flash an older dashboard or change your default launcher.
 
-Install the complete0.52 ZIP manually once:0.50/0.51 only know how to download.
-Subsequent updates install automatically. The source/host tests do not establish
-physical Xbox handoff, drive-cache durability or future-build compatibility.
+**Current build: v0.52** ·
+[Download the complete USB ZIP](https://raw.githubusercontent.com/sbayfield09/Blades-reimagined/224eb37feaa31c82dee46e3007d0f9a0977250a2/dist/Blades-v0.52-USB.zip) ·
+[Watch the walkthrough](https://raw.githubusercontent.com/sbayfield09/Blades-reimagined/224eb37feaa31c82dee46e3007d0f9a0977250a2/dist/Blades-v0.52-walkthrough.mp4) ·
+[Release notes](docs/RELEASE-0.52.md)
 
-Media libraries and Jellyfin subfolders now use the shared animated cursor and
-brief content fades when changing folders. Startup initializes black scanout
-before loading artwork, and shutdown drains black frames before cleanup. The
-remaining hardware handoff and visible static need a physical-console retest;
-desktop capture cannot prove a display handoff fix.
+![Blades Reimagined Games blade, showing the profile card, game menus and disc tray option](docs/images/v0.52-dashboard.png)
 
-Jellyfin artwork/descriptions/runtime, Continue Watching/Next Up, resume and
-actual-content seeking are retained, along with the0.49 FTP improvements and
-transfer diagnostics. Existing settings/scan paths are unchanged; no migration.
-Local decoding retains the working Simple360Player H264 filters and GPU YUV
-conversion. Video decode itself runs on the CPU. [Build from source](docs/BUILDING-SOURCE.txt).
+*Desktop preview from v0.52 using the shared dashboard renderer. Profile/Guide,
+storage, FTP and update/restart scenes in the walkthrough are simulated; the
+capture is not footage from an Xbox.*
 
-The combined binary is GPLv3. Original MIT, dependency, artwork, font and SDK
-notices are preserved. Complete corresponding source and a pinned free SDK are
-also supplied in the dist source ZIP; no Microsoft XDK is required.
+## What can it do?
 
-## Implemented
+| Area | Features |
+| --- | --- |
+| Classic interface | Five blades—Marketplace, Xbox Live, Games, Media and System—with startup/menu animations, moving backgrounds, selection effects and navigation sounds. |
+| Games and homebrew | Scan folders you choose, adjust scan depth and launch supported extracted games, Arcade/Games on Demand packages, apps and homebrew. |
+| Disc drive | Open/close the tray, show reading/game-title states and launch game discs manually. Games do not launch automatically on insertion. |
+| Profiles and achievements | Show account information, gamer picture and gamerscore; browse achievements and open the Xbox Guide for sign-in, profile and achievement actions. |
+| File browser | Browse HDD/USB files and launch supported loose `.xex` executables without adding a scan folder. |
+| Local video | Play the selected file inside Blades, with pause/resume, seeking and fit/stretch controls. Format support and performance depend on the file. |
+| Jellyfin | Browse movies and series with artwork, descriptions and runtimes; use Continue Watching, Next Up, resume and seeking. The server supplies a compatible transcoded stream. |
+| FTP | Transfer files between your computer and console while Blades is open. View connection details, change the login or turn the server off. |
+| Updates | Check this repository for a newer build, download and verify it, then install and restart using the bundled installer helper. |
 
-- Shared 1280x720 renderer, five blades with vertical labels, gradients, original button prompts.
-- Staged blade sweeps, content fades, expanding submenus and selection highlight animation.
-- Continuous ambient background motion adapted from the supplied DashX360 implementation, sharing one clock across menus.
-- At least one submenu on every blade; all displayed rows are navigable. Explicit unsupported-service dialogs.
-- D-pad/stick and LB/RB navigation; A select, B back; repeat delay and release-to-rearm after controller reconnect.
-- Recorded transition/startup whooshes, GPU animated background and local Convection atlas.
-- Manual disc control/launch and user-configured Games, Apps and Homebrew libraries.
-- Embedded font/theme plus optional local XUIZ/PNG resources; absent or corrupt optional resources retain fallbacks.
-- Xbox logging and confirmed exit through the SDK's standard title termination.
-- Desktop keyboard/gamepad preview, deterministic screenshots, core tests and SDL smoke test.
+This is a work in progress. The familiar menu layout includes items whose
+original services are not implemented yet; see [Current limitations](#current-limitations).
 
-## Remaining work
+## What do I need?
 
-Music/Pictures playback, original music visualisations, recent-game persistence,
-unsupported system settings and default-dashboard registration remain unfinished.
-Profile/Guide integration, game libraries, FTP and disc functionality retain
-their existing implementations; desktop captures simulate console services.
+- **An Xbox 360 that can launch unsigned homebrew XEX files**, using an existing
+  RGH/JTAG or compatible Peer Pressure setup. An unmodified retail console cannot
+  launch this app.
+- A controller and HDD or USB storage that your console can already read.
+- The **complete USB ZIP** linked above. Artwork and the installer helper are
+  included; no font download, artwork conversion or separate video player is needed.
 
-## Build on LMDE / Debian
+Games and personal media are not included. Local use does not require a network
+connection. FTP and Jellyfin use your network; checking/downloading updates
+requires internet access. No DashLaunch plugin is required by Blades.
 
-Install GCC, CMake >=3.25, Ninja, SDL3 headers/libraries, Python >=3.11. SDL3 may require a newer package source or a source build on older LMDE releases.
+## Install and launch
 
-```sh
-python3 tools/build-video-ffmpeg.py --target host --build build/ffmpeg-host
-cmake -S . -B build/linux -G Ninja -DCMAKE_BUILD_TYPE=Release \
-  -DBLADES_FFMPEG_PREFIX="$PWD/build/ffmpeg-host/install"
-cmake --build build/linux -j4
-ctest --test-dir build/linux --output-on-failure
-./build/linux/blades-preview
-```
+1. Download the **complete v0.52 USB ZIP** above and extract it on your computer.
+2. Copy the whole `Blades` folder to your console's HDD or a USB drive.
+3. Keep the folder together, including `Assets` and `update-installer.xex`.
+4. Open your existing homebrew launcher/file browser, such as Aurora, and launch
+   `Blades/default.xex`.
 
-Keyboard: arrows or W/S for menu movement; left/right or Q/E for blades; Enter/Space select; Escape/Backspace back; X rescans libraries or selects a folder in the picker (profile dialog elsewhere); F10 opens exit confirmation. On a controller, Back opens the same confirmation. B at blade root stays in the dashboard. Desktop window close exits the preview.
-
-`blades-preview --snapshot build/games.ppm 2` exports a deterministic 720p frame (blade indices 0–4). `--frames 5` runs a finite SDL smoke session. Tests use dummy video/audio drivers; they do not establish physical gamepad/audio/display behaviour.
-
-In this cloud workspace, run `source tools/cloud-env.sh` before CMake or the preview. Dependencies are extracted under `/workspace/deps` because the machine has no sudo/root access. `bash tools/cloud-setup.sh` refreshes these packages and verifies the desktop build. The embedded font can be regenerated with `python3 tools/generate_font.py` when Pillow and Open Sans Regular are installed; regeneration is not needed for normal builds.
-
-## Xbox toolchain and build
-
-See [SDK audit](docs/SDK-AUDIT.md) for source-verified APIs and limits. The pinned SDK revision is `5f6dc726f65f6d171493a3628c2415c03551f27b`.
-
-```sh
-sudo apt install build-essential bison flex texinfo libgmp-dev libmpfr-dev libmpc-dev curl xz-utils patch python3 cmake ninja-build git
-git clone https://github.com/xenosworks/xsdk.git ../xsdk
-git -C ../xsdk checkout 5f6dc726f65f6d171493a3628c2415c03551f27b
-export XSDK_ROOT="$(realpath ../xsdk)"
-export XSDK_TOOLCHAIN="$HOME/xsdk-gcc"
-PREFIX="$XSDK_TOOLCHAIN" WORK="$HOME/xsdk-gcc-work" JOBS=4 bash "$XSDK_ROOT/tools/toolchain/build.sh"
-bash tools/build-xbox.sh
-```
-
-The SDK builds its patched GCC 15.3/binutils 2.47/newlib 4.6 compiler with archive SHA-256 verification. Do not substitute an ordinary PowerPC compiler: its calling convention differs. The official source domains `ftp.gnu.org` and `sourceware.org` must be accessible. Outbound source downloads were initially denied in the cloud. The user supplied all three archives, and every archive passed the SDK's pinned SHA-256 checks. The complete compiler, SDK library, minimal hello XEX and dashboard XEX now build successfully. See [toolchain provenance](docs/TOOLCHAIN.md) for the rootless setup and retained source cache. The sudo commands above are for the user's LMDE computer.
-
-`tools/build-xbox.sh` builds the required SDK libraries and embedded FFmpeg decoder, compiles the shared GPU shaders with glslang, packs `default.xex`, verifies its digest/import chains and stages the complete USB ZIP. The staging step only runs following a successful build/check; the current build includes a deployable Xbox folder and archives. The title ID `0x424C4453` is a provisional local homebrew identifier, not a registered ID.
-
-## First console test
-
-Copy the entire generated `dist/Blades` folder into a separate `Hdd1:\Blades\` directory:
+The important files look like this:
 
 ```text
 Blades/
-  default.xex
-  LICENSE
-  XSDK-LICENSE.txt
-  THIRD_PARTY_NOTICES.md
-  build-info.txt
-  SHA256SUMS
-  README.txt
+  default.xex             # Launch this
+  update-installer.xex    # Required for automatic updates
+  Assets/                # Premade artwork and other resources
+  Config/                # Your settings are saved here
   licenses/
-  Assets/FONT-LICENSE.txt
-  Assets/README.txt
-  Config/README.txt
+  README.txt
 ```
 
-Launch `default.xex` from Aurora's file browser. Leave Aurora, Peer Pressure and existing default-dashboard settings intact. Confirm a 720p image, correct colour channels, all blade/submenu transitions, A/B edge handling, controller disconnect/reconnect, navigation sounds and Guide open/close. Back opens a menu: select “Return to system dashboard” to exit. Returning specifically to Aurora depends on the console's current system configuration; the code does not guess its executable path.
+For an existing installation, keep your saved `Config` files when copying the
+new package. Blades runs as an app, so you can keep your current launcher and
+return to the system dashboard through the exit menu. Installing it does not
+register it as your default dashboard.
 
-Read `default.log` beside the XEX after a crash. It logs boot stages, API failures, controller changes, navigation events and the first submitted frame. Send that log and a console screenshot when reporting a failure. Optional live logging: place `net_log.txt` beside the XEX containing `PC_IP 7371`, then run the SDK's `python3 tools/net_log.py --out net_log` on your PC. Logs can diagnose the last completed stage; this is not an exception handler or crash dump.
+## Getting started
 
-## Licensing
+- **Add games/apps/homebrew:** open **Games → Played Games → Scan Folders**,
+  choose **Add Folder**, browse to a location and press **X: Use Folder**. Choose
+  its category and scan depth. Your entries appear in Game Library, Apps or
+  Homebrew. [Library and supported package formats](docs/LIBRARY.md).
+- **Browse files directly:** open **Games → Played Games → File Manager**.
+  All file types are visible; supported `.xex` files can be launched with A.
+  X refreshes the folder. This browser does not copy, delete or edit files.
+- **Add local media:** manage scan folders under **Media → Video Marketplace**.
+  New media paths are shared and filtered by file type. Videos appear under
+  **Media → Video → Local**. Music and Pictures browsing exists, but playback
+  for those two apps is unfinished. [Video playback](docs/VIDEO-PLAYBACK.md).
+- **Connect Jellyfin:** open **Media → Media Center**, enter the server's LAN
+  IPv4 address/port and your Jellyfin login, then select Connect. Browse through
+  **Media → Video → Jellyfin**. The account needs permission to transcode.
+  [Connection setup and limits](docs/JELLYFIN.md).
+- **Transfer files:** open **System → Computers** for the FTP status, console IP
+  and login controls. FTP starts enabled by default, on port **21**, with
+  **`blades` / `blades`** as the initial username/password. Use plain FTP in your
+  client. You can change the login or disable the server in that menu; it keeps
+  running across blades while the app is open. [FTP guide](docs/FTP.md).
 
-Original project code/artwork/synthesised sound: MIT. The adapted DashX360 background retains upstream attribution in `assets/licenses/DASHX360-NOTICE.txt`. Font: Open Sans (Apache 2.0) in [assets/FONT-LICENSE.txt](assets/FONT-LICENSE.txt). The Xbox package includes xsdk's MIT and third-party BSD notices, newlib notices and the GCC runtime exception/licence texts; the staging script copies them. The public XEX embeds no upstream media or proprietary XDK components. The separate premade artwork pack contains converted reference artwork with source attribution; ownership remains with the respective rights holders. Xbox trademarks belong to Microsoft; this project is unaffiliated.
+### Controller basics
 
-The PNG decoder uses pinned stb_image; its MIT/public-domain notice is included
-in `assets/licenses/STB-LICENSE.txt` and in the Xbox package's `licenses` folder.
+| Button | Action |
+| --- | --- |
+| D-pad / left stick | Move through menus |
+| LB / RB or Left / Right | Switch blades outside playback |
+| A / B | Select / go back |
+| X / Y | Context action shown on screen, such as refresh, sign out or eject |
+| Back | Open the exit menu outside playback |
 
-The current target and historical 0.2.0 reference pass are documented in [docs/VISUAL-REVISION.md](docs/VISUAL-REVISION.md). It is closer to the supplied layout but is not an identical reproduction.
+During video playback: **A** pauses/resumes, **Left/Right** seeks, **X** toggles
+fit/stretch and **B** returns to the video list.
 
-For original icon/logo/button images from a user-supplied 5766 shrdres.xzp, see [docs/LOCAL-RESOURCES.md](docs/LOCAL-RESOURCES.md). These images are not embedded in the public XEX. For blade chrome, runners, caps, tray art and additional icons from a local DashX360 checkout, see [docs/DASHX360-ASSETS.md](docs/DASHX360-ASSETS.md). The converter and instructions can be downloaded alongside the public XEX. Credit: zivvoz / DashX360, inspired by Microsoft Xbox. The supplied Convection glyphs are now supported; exact rasterization, original background matching, layout effects and audio still need comparison.
+## Updating
 
-The 0.6.0 menu-by-menu comparison and validation are recorded in [docs/MENU-ALIGNMENT.md](docs/MENU-ALIGNMENT.md). Every release includes the XEX, a premade artwork ZIP and a navigation walkthrough video; no PC conversion is required.
+In v0.52 and later, open **System → Update Blades → Update and Restart** when a
+newer version is available. Blades downloads and verifies the package, prepares
+the files, closes the running app, installs the update and relaunches. Settings
+are preserved, with backups and a journal for recovery from interrupted copying.
+Keep the storage device connected until it finishes.
 
-The animated-background source, implementation and verification are recorded in [docs/ANIMATED-BACKGROUND.md](docs/ANIMATED-BACKGROUND.md). The supplied repository generates its background in code; this release reuses that implementation.
+**If you have v0.50 or v0.51, install the complete v0.52 ZIP manually once.**
+Those versions only download ZIPs and cannot install the new updater behavior
+for themselves. Keep `update-installer.xex` beside `default.xex` for future updates.
+See [how updates and recovery work](docs/UPDATES.md).
 
-Version 0.8.0 font recovery, source verification and runtime loading are recorded in [docs/CONVECTION-FONT.md](docs/CONVECTION-FONT.md). Microsoft retains ownership of the optional font glyphs; see `assets/licenses/CONVECTION-NOTICE.txt`.
+## Current limitations
 
+- Music/Pictures playback and the original music visualisations are unfinished.
+- Many stock Marketplace, social and system-settings menus remain placeholders.
+  The Xbox Live blade does not recreate Microsoft's original online services.
+- Visual fidelity, video performance and hardware compatibility are still being
+  refined. Not every stock-dashboard behavior has been reproduced.
+- The dashboard has been tested on real Xbox 360 hardware during development.
+  The new **v0.52 automatic installer/native restart path still needs console
+  verification**; its download, file installation and rollback tests pass on the
+  desktop. Desktop captures do not establish console performance or power-loss
+  durability. [Validation details](docs/VALIDATION.md).
 
-Video playback 0.50: Media > Video plays the exact file within Blades.
-Manage folders under Video Marketplace. No separate player installation is
-needed. See [video playback](docs/VIDEO-PLAYBACK.md).
+If something goes wrong, open an [issue](https://github.com/sbayfield09/Blades-reimagined/issues)
+with the Blades version, console/kernel and launch setup, steps to reproduce,
+and a screenshot or relevant part of `default.log` beside the XEX. Remove private
+server addresses, account/session details and other personal information before
+sharing logs.
+
+## Source and development
+
+Application source is available in [`src`](src), [`include`](include) and
+[`tests`](tests). The [complete v0.52 source bundle](https://raw.githubusercontent.com/sbayfield09/Blades-reimagined/224eb37feaa31c82dee46e3007d0f9a0977250a2/dist/Blades-v0.52-source.zip)
+also includes dependency sources and a pinned open-source SDK. A Linux/SDL3
+preview is available for development; you do not need it to use the Xbox build.
+
+- [Build and relink instructions](docs/BUILDING-SOURCE.txt)
+- [SDK/API notes](docs/SDK-AUDIT.md) and [toolchain provenance](docs/TOOLCHAIN.md)
+- [Xbox testing notes](docs/CONSOLE-TEST.txt)
+- [All downloads and older builds](dist/)
+
+## Credits and licensing
+
+Built with the open-source [xsdk](https://github.com/xenosworks/xsdk). Artwork
+adaptation and the animated background draw on
+[DashX360](https://github.com/ZivvoZ/dashx360); video playback uses FFmpeg and
+ported [Simple360Player](https://github.com/HG-ERIK/simple360player) code. Jellyfin
+integration builds on XenonFin. Attribution and source provenance are retained
+in the documentation, source bundle and runtime `licenses` folder.
+
+The combined dashboard executable is distributed under **GNU GPLv3**. Original
+project code retains its MIT notices; dependencies, fonts and artwork retain
+their respective licences and ownership. See [GPLv3](COPYING.GPLv3), the original
+[MIT licence](LICENSE) and [distribution notices](docs/VIDEO-LICENSE-NOTICE.txt).
+No Microsoft XDK is required to build the project.
+
+Xbox and its associated artwork, names and trademarks belong to their respective
+owners. This is an independent fan project, unaffiliated with Microsoft.
