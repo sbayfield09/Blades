@@ -1,53 +1,26 @@
-# Blades 0.51 walkthrough
+# Blades0.52 walkthrough
 
-Version-only updater test; application behavior and artwork are unchanged from0.50.
+[Watch/download](../dist/Blades-v0.52-walkthrough.mp4): fresh240second720p30
+shared desktop GPU capture with48kHz stereo and matching235-entry artwork pack.
+The visible label identifies desktop rendering and simulated Xbox services,
+including updater/installer/restart snapshots. Actual file transaction/recovery
+and TLS behavior are tested separately; this video does not prove Xbox relaunch.
 
-[Watch/download](../dist/Blades-v0.51-walkthrough.mp4): fresh 240-second 720p30
-shared desktop GPU capture, 48kHz stereo, matching 235-entry artwork pack.
-The video labels desktop GPU rendering and simulated Xbox services, including updater states. Jellyfin
-uses an actual isolated official 10.10.7 server, a generated test account and
-synthetic HEVC/AAC movies/episodes with baked source frame counters; no passwords or session tokens are shown.
+The capture shows all blades, profile/Guide and achievement interactions, FTP,
+Local playback, Jellyfin Continue Watching/Next Up, episode artwork/description/
+runtime, actual source playback and seeking, connection controls and shared media
+path menus. Xbox Guide/profile/storage/FTP states are simulated. Jellyfin uses
+an isolated official10.10.7 server, generated account and synthetic content;
+no user account, private server, passwords or session tokens are recorded.
 
-- 00:00–01:24: blades, profile/Guide requests, achievements, File Manager,
-  FTP controls and submenu navigation. Xbox services are simulated and labelled.
-- 01:29–01:31: Video's Jellyfin/Local folders, then the Local list.
-- 01:33/01:40: actual local 1080p MPEG2 and 720p H264 samples through CPU decoding
-  and GPU YUV display, including pause/resume and return to the Blades list.
-- 01:47: Jellyfin root with Continue Watching, Next Up and video libraries.
-- 01:50–01:53: selected episode artwork, overview and runtime on the right.
-  Continue Watching includes Series Name S1E2 - Episode Name labels; actual
-  server playback resumes at 4 seconds. Next Up uses the same series/season/episode format.
-- 01:54–01:59: pause, seek forward while paused, resume, then seek backward;
-  the baked source frame counter visibly changes with the seek, alongside the
-  full-item playback timeline. The server source encodes its frame number in
-  eleven luma bars for independent actual-content checks.
-- 02:02–02:17: sustained actual playback after the backward seek.
-- 02:17–02:22: return to the episode details, refresh, then Next Up and its
-  next episode artwork/overview/runtime. The server uses generated local images.
-- 02:25–02:31: actual next-episode playback, pause/resume and return.
-- 02:41–02:47: Media Center connection/status controls; password remains hidden.
-- 02:49: System blade.
-- 02:53–03:04: Video Marketplace media paths; browse USB0/Mixed Media, press X
-  directly to Scan Depth, select Unlimited and add the shared folder. There is
-  no category screen. Storage is explicitly simulated; filename classification
-  uses the production library code.
-- 03:06: shared root information shows Music, Pictures and Video.
-- 03:12/03:16: Music/Pictures each list their supported file from the shared path.
-- 03:20–03:22: Video > Local retains only videos.
-- 03:27–03:35: System blade and completion.
+03:29 onward shows System > Update Blades, simulated newer-version detection,
+download/cancel/retry, preparation, then Installing and restarting Blades.
+At approximately03:44, the simulated installer handoff resets the actual shared
+startup renderer to the Games blade opening. The remaining navigation passes
+through Xbox Live and Games. File replacement is never performed by this capture;
+the real installer fixture independently stages and commits the actual USB ZIP.
 
-The capture uses the final corrected player. The official-server setup first
-verifies actual content on fractional/one-second/ten-second seeks and12seconds
-of continuous content/clock agreement. The capture waits for actual asynchronous page/seek work before advancing the
-scripted controller. Host FFmpeg uses scalar code; native Xenon kernels are
-unchanged and audited separately. This is not console performance evidence.
-Artwork/font/audio attribution remains in the runtime notices and artwork pack.
-
-- 03:29–03:49: System > Update Blades, simulated repository version check, download progress,
-  cancellation/retry and verified ZIP location. The real HTTPS worker is tested
-  separately with trusted/untrusted servers; no fake public Release is created.
-- 03:51–04:00: return through Media and System. Media highlights/fades throughout
-  this recording use the production animated list path.
-
-The recording cannot demonstrate console startup/exit static or hardware updater
-transport. Those require an Xbox retest.
+Existing final decoder/render/shader paths and supplied artwork are reused.
+Actual-content Jellyfin seeks and sustained playback are checked before capture.
+This is not console performance, drive durability or native restart evidence.
+Attribution remains in runtime notices and the artwork pack.

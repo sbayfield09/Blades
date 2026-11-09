@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Complete 0.51 source/relink bundle, using an explicit public-file whitelist."""
+"""Complete 0.52 source/relink bundle, using an explicit public-file whitelist."""
 import argparse,hashlib,io,subprocess,tarfile,zipfile
 from pathlib import Path
 p=argparse.ArgumentParser(description=__doc__);p.add_argument('--sdk',required=True,type=Path);p.add_argument('--output',required=True,type=Path);a=p.parse_args()

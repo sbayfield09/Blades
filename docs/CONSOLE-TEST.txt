@@ -1,35 +1,29 @@
-Blades0.51 — version-only updater test
+Blades0.52 — automatic update installation and restart
 
-This build changes only the release version and associated labels/metadata.
-App behavior, artwork, settings and playback are identical to0.50.
-Use System > Update Blades in0.50 to download this ZIP. Exit Blades and extract
-it over the existing installation; keep your Config files. Reopen Blades: the
-updater should show0.51.0 installed and no newer version available.
+Install the COMPLETE0.52 USB ZIP once; keep update-installer.xex next to default.xex.
+The0.50/0.51 updater only downloads and cannot install this new behavior for itself.
+Keep existing Config files. This package contains no private settings or logs.
 
-Blades0.50 — display handoff, Media animations and repository-hosted updates
+For subsequent updates: System > Update Blades > Update and Restart downloads,
+verifies, prepares, installs and relaunches automatically. X/Back cancels while
+preparing; once installation begins keep the drive connected. No manual ZIP
+extraction or extra confirmation. Settings and unrelated files remain intact.
+The installer runs outside the old executable after its services/files close.
+It backs up installed files, replaces default.xex last and relaunches it.
+A pending journal permits retryable rollback on a later startup. Keep the
+.blades-update/backup folder if installation reports a recovery problem.
+No DashLaunch, plugin, NAND, firmware or default-dashboard change is involved.
 
-On startup the initialized black presentation buffers are established before
-artwork/resources are loaded. Shutdown presents and drains black frames before
-workers, audio, renderer resources and the SDK display are released. The code
-avoids showing the previous title while artwork allocations run. Native build
-and ordering review pass; actual launch/exit static must be retested on Xbox.
-The SDK's final XAM display restoration still belongs to the platform; no kernel,
-firmware, HDMI mode or XAM modifications are installed by this build.
+Test on Xbox: confirm normal0.52 startup; when a newer release is available,
+select Update and Restart and verify automatic return to the Games root, the
+new installed version, retained FTP/Jellyfin/scan paths and a current update
+check. Host TLS/installer/rollback tests pass; actual XAM relaunch, storage
+power-loss behavior and launch/exit static still need physical-console testing.
+The new video is a desktop renderer capture; installer/restart scenes are
+labelled simulations. The actual shared transaction code is tested separately.
 
-All Media library lists and Jellyfin subfolders now move highlights with the
-shared cursor animation. Folder/page changes fade content in; scrolling keeps
-the cursor within the visible rows. Test Music/Pictures/Video, Jellyfin/Local,
-Media Center, scan paths and nested folder navigation. Existing layout and
-settings are retained.
-
-System > Update Blades checks the main/dist/update.json repository manifest. Download Update saves the USB ZIP
-to game:/Updates with progress, X cancellation, HTTPS certificate/hostname checks,
-exact length and SHA256 verification. Partial files are discarded; completed
-files and the running XEX are not overwritten. Exit Blades before extracting
-it manually. No installation, plugin, NAND or default-dashboard changes occur.
-The repository target is sbayfield09/Blades-reimagined. The versioned USB ZIP
-and matching dist/update.json are committed together in main. GitHub Releases
-and API access are unnecessary. Install this build manually once.
+Media animations, display handoff work and prior playback/FTP/profile features
+are retained. Historical feature/testing notes below remain for reference.
 
 Retained0.49 features:
 

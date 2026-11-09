@@ -1,5 +1,12 @@
 # Current repository-download workflow
 
+From0.52, ship and verify BOTH default.xex and update-installer.xex. Automatic
+updates stage the USB ZIP, close the old app, run a helper copy, back up/commit
+files and relaunch. Preserve private Config paths. Verify ZIP/rollback/interrupted
+recovery/cache tests and keep native handoff limitations explicit. Older manual-
+extraction-only notes below are superseded.
+
+
 The user's latest instruction replaces Releases-only publishing: new versioned
 USB ZIPs, XEX, artwork, source ZIP, walkthrough and dist/update.json go into the
 normal downloads folder on main in sbayfield09/Blades-reimagined. Source stays

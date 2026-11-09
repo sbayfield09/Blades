@@ -108,11 +108,14 @@ int main(int argc,char **argv){
   /* Updater snapshots are simulated; the real TLS worker is tested separately. */
   if(dashboard_update_page(&d)){
    if(d.update_check){update_started=frame;update_loading=false;d.update=(UpdateSnapshot){.state=UPDATE_CHECKING,.revision=1};snprintf(d.update.message,sizeof d.update.message,"Checking GitHub for updates... (simulation)");fprintf(stderr,"SIMULATED update check; real TLS worker tested separately\n");}
-   if(d.update.state==UPDATE_CHECKING&&frame-update_started>=30){d.update.state=UPDATE_AVAILABLE;strcpy(d.update.version,"0.52.0");d.update.total=6*1024*1024;snprintf(d.update.message,sizeof d.update.message,"A newer version is available. (simulation)");d.update.revision++;}
+   if(d.update.state==UPDATE_CHECKING&&frame-update_started>=30){d.update.state=UPDATE_AVAILABLE;strcpy(d.update.version,"0.53.0");d.update.total=6*1024*1024;snprintf(d.update.message,sizeof d.update.message,"A newer version is available. (simulation)");d.update.revision++;}
    if(d.update_download&&(d.update.state==UPDATE_AVAILABLE||d.update.state==UPDATE_CANCELLED)){update_started=frame;update_loading=true;d.update.state=UPDATE_DOWNLOADING;snprintf(d.update.message,sizeof d.update.message,"Downloading the USB ZIP... (simulation)");fprintf(stderr,"SIMULATED update download started\n");}
    if(d.update_cancel&&update_loading){update_loading=false;d.update.state=UPDATE_CANCELLED;snprintf(d.update.message,sizeof d.update.message,"Update download cancelled. (simulation)");d.update.revision++;}
-   if(update_loading){int elapsed=frame-update_started;d.update.received=d.update.total*(unsigned)(elapsed>120?120:elapsed)/120;d.update.revision++;
-    if(elapsed>=120){update_loading=false;d.update.state=UPDATE_READY;strcpy(d.update.saved,"game:/Updates/Blades-v0.52-USB.zip");snprintf(d.update.message,sizeof d.update.message,"Download verified. Exit Blades before extracting the ZIP. (simulation)");}}
+   if(update_loading){int elapsed=frame-update_started;d.update.revision++;
+    if(elapsed<120){d.update.total=6*1024*1024;d.update.received=d.update.total*(unsigned)elapsed/120;}
+    else if(elapsed<180){d.update.state=UPDATE_PREPARING;d.update.total=32;d.update.received=(unsigned)(elapsed-120)*32/60;snprintf(d.update.message,sizeof d.update.message,"Preparing the update... (simulation)");}
+    else if(elapsed<210){d.update.state=UPDATE_READY;snprintf(d.update.message,sizeof d.update.message,"Installing and restarting Blades... (simulation)");}
+    else{update_loading=false;fprintf(stderr,"SIMULATED installer/restart; real file commit and recovery tested separately\n");dashboard_begin_startup(&d);}}
   }
   if(jelly&&((old_stream&&!d.video_view)||d.jelly_command.type))settle_jelly(&d,jelly,old_jelly_revision);
   if(d.video_view&&d.video.network&&(action&(LEFT|RIGHT))){

@@ -12,7 +12,7 @@ with zipfile.ZipFile(base/'Blades-artwork-pack.zip') as pack:
     (app/'Assets/blades.xzp').write_bytes(payload)
     for name in ['ARTWORK-README.txt','ARTWORK-SHA256SUMS.txt','AUDIO-NOTICE.txt','FONT-NOTICE.txt','DASHX360-NOTICE.txt']:
         (app/'Assets'/name).write_bytes(pack.read(name))
-files=[app/'default.xex',app/'README.txt',app/'build-info.txt',app/'SHA256SUMS',app/'LICENSE',app/'XSDK-LICENSE.txt',app/'THIRD_PARTY_NOTICES.md',app/'Config/README.txt']
+files=[app/'default.xex',app/'update-installer.xex',app/'README.txt',app/'build-info.txt',app/'SHA256SUMS',app/'LICENSE',app/'XSDK-LICENSE.txt',app/'THIRD_PARTY_NOTICES.md',app/'Config/README.txt']
 files+=sorted((app/'Assets').rglob('*'))+sorted((app/'licenses').rglob('*'))
 output=base/f'Blades-v{version}-USB.zip'
 with zipfile.ZipFile(output,'w',zipfile.ZIP_DEFLATED) as archive:
@@ -21,6 +21,7 @@ with zipfile.ZipFile(output,'w',zipfile.ZIP_DEFLATED) as archive:
 with zipfile.ZipFile(output) as archive:
     if archive.testzip() is not None:raise ValueError('USB ZIP CRC failure')
     assert archive.read('Blades/default.xex')==(app/'default.xex').read_bytes()
+    assert archive.read('Blades/update-installer.xex')==(app/'update-installer.xex').read_bytes()
     assert archive.read('Blades/Assets/blades.xzp')==payload
     assert 'Blades/Config/library-paths.txt' not in archive.namelist()
     assert 'Blades/Config/ftp-settings.txt' not in archive.namelist()

@@ -1,5 +1,11 @@
 # Release delivery
 
+Current updater scope: automatic verified installation and native relaunch.
+Bundle update-installer.xex beside default.xex in every USB package. Preserve
+Config/private data; retain staging/backups/journal and recovery tests. Older
+0.50/0.51 builds need one manual install to gain this behavior.
+
+
 Current user instruction supersedes Releases-only delivery: publish matching
 versioned USB ZIPs, XEX, artwork, source bundle, walkthrough and dist/update.json
 in the repository's main branch, where downloads were previously uploaded.

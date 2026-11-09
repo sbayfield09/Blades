@@ -6,17 +6,20 @@ Application source is browsable in src/, include/ and tests/ on main. Download
 builds, USB ZIPs, premade artwork, walkthroughs and complete source bundles from
 [the downloads folder](dist/).
 
-[Complete v0.51 USB ZIP](dist/Blades-v0.51-USB.zip) ·
-[Walkthrough](dist/Blades-v0.51-walkthrough.mp4) ·
-[Complete source bundle](dist/Blades-v0.51-source.zip)
+[Complete v0.52 USB ZIP](dist/Blades-v0.52-USB.zip) ·
+[Walkthrough](dist/Blades-v0.52-walkthrough.mp4) ·
+[Complete source bundle](dist/Blades-v0.52-source.zip)
 
-Version0.51 is a version-only build for testing the updater; behavior is
-unchanged from0.50. Install it through System > Update Blades in0.50.
+Version0.52 adds automatic installation and restart: System > Update Blades >
+Update and Restart downloads and verifies the package, stages it, closes Blades,
+installs using the bundled helper and relaunches the new version. Config and
+personal files are retained; file backups and a journal support rollback after
+installation errors or interrupted copying. Keep update-installer.xex beside
+default.xex. No DashLaunch/plugin is required. [Details](docs/UPDATES.md).
 
-Version0.50 adds System > Update Blades: check the manifest in main/dist,
-download the matching USB ZIP from that folder with progress/cancel and verify its SHA256 before
-saving it in Updates. Exit Blades before extracting it; the running XEX and
-private Config files are never overwritten by the updater. [Details](docs/UPDATES.md).
+Install the complete0.52 ZIP manually once:0.50/0.51 only know how to download.
+Subsequent updates install automatically. The source/host tests do not establish
+physical Xbox handoff, drive-cache durability or future-build compatibility.
 
 Media libraries and Jellyfin subfolders now use the shared animated cursor and
 brief content fades when changing folders. Startup initializes black scanout

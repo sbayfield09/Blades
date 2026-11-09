@@ -8,6 +8,7 @@
 #include "xbox_ftp.h"
 #include "audio_boundary.h"
 #include "video.h"
+#include "update_install.h"
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -80,6 +81,7 @@ static FtpServer *app_ftp;
 static JellyService *app_jelly;
 static Updater *app_updater;
 static char profile_error[256];
+static char update_error[256];
 static HANDLE app_audio;
 static bool app_resources;
 static bool app_present;
@@ -135,8 +137,16 @@ static unsigned buttons(const INPUT_GAMEPAD *p) {
     return a;
 }
 int main(void) {
-    xsdk_log_write("Blades 0.51.0: boot; embedded video decoding; no video XEX handoff or adapter");
+    xsdk_log_write("Blades 0.52.0: boot; embedded video decoding; no video XEX handoff or adapter");
     if(atexit(close_app)!=0)return 1;
+    if(update_install_pending("game:")){
+        xsdk_log_write("updater: recovering interrupted installation before loading artwork");
+        (void)xsdk_launch("game:/" UPDATE_INSTALL_HELPER,NULL,0);
+        snprintf(update_error,sizeof update_error,"The update installer could not start. Reinstall the complete USB package.");
+    }else{
+        FILE *result=fopen("game:/" UPDATE_INSTALL_WORK "/result.txt","rb");
+        if(result){size_t n=fread(update_error,1,sizeof update_error-1,result);update_error[n]=0;fclose(result);remove("game:/" UPDATE_INSTALL_WORK "/result.txt");}
+    }
     NTSTATUS status=xsdk_gpu_open();
     if(!NT_SUCCESS(status)) {xsdk_log_write("gpu_open: %08X",(unsigned)status);return 1;}
     uint32_t w=0,h=0;
@@ -160,6 +170,8 @@ int main(void) {
     Dashboard d;dashboard_begin_startup(&d);
     app_jelly=jellyfin_open("game:/Config/jellyfin-settings.json",&(JellyHooks){.worker_start=jelly_worker});
     app_updater=updater_open("game:/Updates",update_worker,NULL);
+    (void)updater_install_to(app_updater,"game:");
+    if(update_error[0]){d.dialog=true;d.message=update_error;}
     Input in={0};
     app_disc=xbox_disc_open();xbox_disc_status(app_disc,&d.disc);
     app_library=xbox_library_open();
@@ -264,6 +276,11 @@ int main(void) {
         }
         bool was_achievements=d.achievement_page;
         bool old_update=dashboard_update_page(&d);updater_poll(app_updater,&d.update);
+        if(d.update.state==UPDATE_READY&&!ui){
+            xsdk_log_write("updater: verified update staged; launching local installer");
+            (void)xsdk_launch("game:/" UPDATE_INSTALL_HELPER,NULL,0);
+            updater_install_failed(app_updater,"Could not start the installer. Restart Blades to retry recovery.");
+        }
         JellyPage old_jelly_page=d.jelly_page;
         bool was_jelly_video=d.video_view&&d.video.network;
         dashboard_set_jellyfin(&d,jellyfin_poll(app_jelly));

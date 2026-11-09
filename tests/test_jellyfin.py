@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Loopback fixture for production Jellyfin workers/HTTP/player, no user account."""
-import http.server,json,os,pathlib,subprocess,sys,tempfile,threading,time,urllib.parse,struct,zlib,random
+import http.server,json,os,pathlib,subprocess,sys,tempfile,threading,time,urllib.parse,struct,zlib,random,re
+VERSION=re.search(r'#define BLADES_VERSION "([^"]+)"',(pathlib.Path(__file__).resolve().parents[1]/'include/updater.h').read_text())[1].removesuffix('.0')
 UID='11111111111111111111111111111111';VIEW='22222222222222222222222222222222'
 SOURCE='33333333333333333333333333333333';SESSION='44444444444444444444444444444444'
 PASSWORD='test-only-private-password';TOKEN='test-only-session-token'
@@ -135,7 +136,7 @@ def main():
      assert sum(p=='/Sessions/Playing/Stopped' for m,p,b in server.events)==1
      assert sum(m=='DELETE' for m,p,b in server.events)>=len(streams)
     if mode=='seek-cache':
-     assert server.agents[0]=='' and all(x.startswith('Blades/0.50 stream/') for x in server.agents[1:]) and len(set(server.agents))==len(server.agents)
+     assert server.agents[0]=='' and all(x.startswith('Blades/'+VERSION+' stream/') for x in server.agents[1:]) and len(set(server.agents))==len(server.agents)
      assert sum(p=='/Sessions/Playing' for m,p,b in server.events)==1 and sum(p=='/Sessions/Playing/Stopped' for m,p,b in server.events)==1
     print(mode+': '+result.stdout.strip(),flush=True)
    finally:server.shutdown();server.server_close();thread.join()

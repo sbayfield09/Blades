@@ -1,3 +1,38 @@
+# Validation — Blades0.52 automatic installation
+
+The main33-suite host run passed32 suites. The remaining Jellyfin suite completed
+its playback/error cases but failed an obsolete hard-coded0.50 User-Agent assertion;
+that assertion now reads the declared version and the affected seek-cache case
+passes on rerun. No player behavior changed. The new installer suite also passes
+its final expanded cases, including80 deterministic ZIP/DEFLATE mutations.
+
+Twenty real TLS modes pass, including download-to-stage-to-commit, valid cache
+reuse without a second download, damaged-cache replacement and a checksum-valid
+invalid ZIP that leaves installed files intact. Six application sanitizer suites,
+twenty TLS modes and the final expanded installer cases pass. Prebuilt FFmpeg
+is not instrumented; LeakSanitizer is off. Installer fixtures use disposable files.
+
+Failure/process-interruption injection at every file replacement restores the
+original app/artwork and removes newly added files. An interruption during
+recovery can be retried; damaged backups preserve the journal. Config, logs and
+existing downloads survive. Traversal/private Config writes/case duplicates/
+ZIP or filesystem symlinks/corrupt CRC/truncation/expansion limits are covered.
+The actual release ZIP stages and commits every file byte-for-byte on a host tree
+with an older-layout payload and bootstrap helper, preserving private Config.
+
+Both native XEX integrity/import/page checks and the corresponding archived-source
+application/helper rebuild pass, with byte-identical XEXs. Matching artwork,
+USB/source CRCs/SHA manifests/current files and private-data exclusions pass.
+Compiled Xenos shaders pass retained arithmetic checks. The fresh240s720p30
+stereo desktop video fully decodes; installer/restart scenes are labelled simulated.
+Prior decoder/FTP/Jellyfin implementation files are retained (version label only
+in video.c). Live production GitHub check/download is verified after publication.
+
+Native helper/XAM handoff, actual automatic relaunch, file-replacement support
+on console storage, drive-cache power-loss durability and launch/exit static
+still require physical Xbox testing. No claim of recovery from a future build
+that cannot boot is made. See data/v0.52-release-audit.json for hashes and scope.
+
 # Validation — Blades0.51 version-only updater test
 
 All79 published runtime source files match0.50 after replacing only0.51 version

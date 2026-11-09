@@ -217,7 +217,7 @@ static void footer(Canvas *c,int left,int right,bool depth,const DiscStatus *dis
     bool library_x=d->library_page==LIB_UI_LIST||d->library_page==LIB_UI_ROOTS||d->library_page==LIB_UI_FILES||
         (d->library_page==LIB_UI_BROWSE&&d->library&&d->library->browse_path[0]);
     bool scanning=d->library_page&&d->library_page!=LIB_UI_VIDEO_SOURCES&&d->library&&d->library->busy&&d->library->progress.scanning;
-    bool updating=dashboard_update_page(d)&&(d->update.state==UPDATE_DOWNLOADING||d->update.state==UPDATE_CHECKING);
+    bool updating=dashboard_update_page(d)&&(d->update.state==UPDATE_DOWNLOADING||d->update.state==UPDATE_CHECKING||d->update.state==UPDATE_PREPARING||d->update.state==UPDATE_READY);
     library_x|=scanning||d->achievement_page||d->jelly_page==JELLY_UI_BROWSE||updating;
     prompt(c,left+65,669,'X',0xff3d91db,scanning||((!depth||library_x)&&!d->library_wait&&!(d->profile&&d->profile->busy)));
     if(!depth)theme_label(c,left+89,651,29,profile_signed_in(d->profile)?"Sign Out":"Sign In",true);
@@ -447,14 +447,14 @@ static void scene_content(Canvas *c,const Dashboard *d) {
         int x=SUBMENU_CONTENT,info=710,hy=87+(int)lroundf(d->highlight*MENU_ROW_PITCH);
         theme_label(c,x+14,22,35,"Update Blades",true);menu_top_divider(c,x,87,495);theme_menu_upper_shadow(c,x,87,495,hy+MENU_TOP_OFFSET,true);
         selection(c,x,hy+MENU_TOP_OFFSET,495,MENU_FILL_HEIGHT,theme_color(BLADE_SYSTEM));theme_menu_shadow(c,x,hy+MENU_SHADOW_OFFSET,495,610,true);
-        for(int i=0;i<2;i++){int y=87+i*MENU_ROW_PITCH;menu_divider(c,x,y,483,menu_focus_covers_divider(y+MENU_DIVIDER_OFFSET,hy));theme_label(c,x+14,y+5,29,i?"Download Update":"Check for Updates",false);}
+        for(int i=0;i<2;i++){int y=87+i*MENU_ROW_PITCH;menu_divider(c,x,y,483,menu_focus_covers_divider(y+MENU_DIVIDER_OFFSET,hy));theme_label(c,x+14,y+5,29,i?"Update and Restart":"Check for Updates",false);}
         theme_label(c,info,94,25,"Installed version",false);theme_label(c,info,130,27,BLADES_VERSION,false);
         theme_label(c,info,180,25,"Latest release",false);theme_label(c,info,216,27,d->update.version[0]?d->update.version:"Not checked",false);
         jelly_text(c,info,277,400,24,3,d->update.message);
-        if(d->update.state==UPDATE_DOWNLOADING){char progress[96];unsigned percent=d->update.total?(unsigned)(100*d->update.received/d->update.total):0;
-            snprintf(progress,sizeof progress,"%u%%  (%llu / %llu KiB)",percent,(unsigned long long)(d->update.received/1024),(unsigned long long)(d->update.total/1024));theme_label(c,info,399,24,progress,false);
-            fill_rect(c,info,441,400,10,0x502b3239);fill_rect(c,info,441,(int)(4*percent),10,0xffd5e6ee);theme_label(c,info,479,23,"X: Cancel download",false);
-        }else if(d->update.saved[0]){theme_label(c,info,400,23,"Saved ZIP",false);library_path(c,info,441,d->update.saved,555);}
+        if(d->update.state==UPDATE_DOWNLOADING||d->update.state==UPDATE_PREPARING){char progress[96];unsigned percent=d->update.total?(unsigned)(100*d->update.received/d->update.total):0;
+            snprintf(progress,sizeof progress,"%u%%",percent);theme_label(c,info,399,24,progress,false);
+            fill_rect(c,info,441,400,10,0x502b3239);fill_rect(c,info,441,(int)(4*percent),10,0xffd5e6ee);theme_label(c,info,479,23,"X: Cancel",false);
+        }
         footer(c,SUBMENU_LEFT,SUBMENU_RIGHT,true,&d->disc,d);return;
     }
     if(d->jelly_page){

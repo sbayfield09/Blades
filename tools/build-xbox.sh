@@ -15,6 +15,8 @@ cmake --build "$project/build/xbox" -j"${JOBS:-4}"
 python3 "$project/tools/verify_xex.py" "$project/build/xbox/default.xex"
 mkdir -p "$project/dist/Blades/Assets" "$project/dist/Blades/Config" "$project/dist/Blades/licenses"
 cp "$project/build/xbox/default.xex" "$project/dist/Blades/default.xex"
+python3 "$project/tools/verify_xex.py" "$project/build/xbox/update-installer.xex"
+cp "$project/build/xbox/update-installer.xex" "$project/dist/Blades/update-installer.xex"
 cp "$project/assets/FONT-LICENSE.txt" "$project/dist/Blades/Assets/"
 cp -r "$project/assets/licenses/." "$project/dist/Blades/licenses/"
 cp "$project/third_party/ffmpeg/LICENSE" "$project/dist/Blades/licenses/FFMPEG-LGPL-2.1.txt"
@@ -26,23 +28,23 @@ cp "$project/LICENSE" "$project/dist/Blades/licenses/BLADES-MIT.txt"
 cp "$project/third_party/simple360player/COPYING.GPLv3" "$project/dist/Blades/LICENSE"
 cp "$XSDK_ROOT/LICENSE" "$project/dist/Blades/XSDK-LICENSE.txt"
 cp "$XSDK_ROOT/THIRD_PARTY_NOTICES.md" "$project/dist/Blades/"
-printf 'The USB-ready ZIP includes default.xex and Assets/blades.xzp together.\nExtract Blades-v0.51-USB.zip onto USB and launch Blades/default.xex.\nNo video helper, DLL, Players folder or converter is required.\nSee artwork notices for sources and attribution.\n' > "$project/dist/Blades/Assets/README.txt"
+printf 'The USB-ready ZIP includes default.xex, update-installer.xex and Assets/blades.xzp.\nExtract Blades-v0.52-USB.zip onto USB and launch Blades/default.xex.\nKeep update-installer.xex beside default.xex for automatic updates.\nNo DashLaunch plugin, video helper, DLL or artwork converter is required.\nSee artwork notices for sources and attribution.\n' > "$project/dist/Blades/Assets/README.txt"
 printf 'Blades saves your chosen scan folders to Config/library-paths.txt.\nFTP enabled state and login details are saved in Config/ftp-settings.txt.\nDefaults: FTP on; username/password blades / blades.\nJellyfin server/account/session: Config/jellyfin-settings.json.\nJellyfin passwords are never saved; keep this private session file private.\nThese files belong to Blades; no console-wide settings are changed.\n' > "$project/dist/Blades/Config/README.txt"
 {
-  printf 'Blades 0.51.0 - video compatibility hardware test build\nSDK commit: '
+  printf 'Blades 0.52.0 - automatic update and restart build\nSDK commit: '
   if [ -e "$XSDK_ROOT/.git" ]; then git -C "$XSDK_ROOT" rev-parse HEAD
   else cat "$XSDK_ROOT/BLADES-SDK-COMMIT"; fi
   "$XSDK_TOOLCHAIN/bin/powerpc-xsdk-elf-gcc" --version | head -1
-  printf 'XEX container version: 0.0.51.0\nTitle ID: 0x424C4453\nResolution: 1280x720\nVideo: FFmpeg 2.8.22 + Simple360 H264 DSP, GPLv3, statically linked, same XEX/GPU/audio\nNew Xbox playback: not yet hardware verified\n'
+  printf 'XEX container version: 0.0.52.0\nTitle ID: 0x424C4453\nResolution: 1280x720\nVideo: FFmpeg 2.8.22 + Simple360 H264 DSP, GPLv3, statically linked, same XEX/GPU/audio\nNew Xbox playback: not yet hardware verified\n'
 } > "$project/dist/Blades/build-info.txt"
-(cd "$project/dist/Blades" && sha256sum default.xex > SHA256SUMS)
-python3 "$project/tools/package-usb.py" "$project/dist" 0.51
+(cd "$project/dist/Blades" && sha256sum default.xex update-installer.xex > SHA256SUMS)
+python3 "$project/tools/package-usb.py" "$project/dist" 0.52
 # Archive the same explicit safe payload as the ZIP, never stale Players/logs.
 python3 - "$project/dist" <<'PY'
 import io,sys,tarfile,zipfile
 from pathlib import Path
 base=Path(sys.argv[1])
-with zipfile.ZipFile(base/'Blades-v0.51-USB.zip') as z,tarfile.open(base/'Blades-xbox360.tar.gz','w:gz') as t:
+with zipfile.ZipFile(base/'Blades-v0.52-USB.zip') as z,tarfile.open(base/'Blades-xbox360.tar.gz','w:gz') as t:
  for name in z.namelist():
   data=z.read(name);info=tarfile.TarInfo(name);info.size=len(data);info.mode=0o644;t.addfile(info,io.BytesIO(data))
 PY

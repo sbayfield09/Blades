@@ -1,52 +1,66 @@
-# Repository-hosted updates
+# Automatic updates and restart
 
-System > Update Blades opens the updater and checks the repository's published
-manifest. A selects Check for Updates or Download Update. X cancels; B leaves
-and cancels outstanding work. Network/file I/O run on a worker. No automatic
-check runs at boot. The right panel shows installed/available versions, status,
-progress and the completed ZIP path.
+In0.52 and later, System > Update Blades checks the repository manifest. Select
+Update and Restart to download, verify, install and relaunch Blades automatically.
+The app remains responsive while downloading/preparing; X or leaving the page
+cancels before handoff. Once the installer starts, keep the storage connected.
+There is no extraction prompt or second confirmation. Restart follows successful
+installation; network and disk work take time.
 
-The manifest is served directly from the normal downloads folder on main:
+Versions0.50/0.51 only download. Install the complete0.52 USB package manually
+once to gain automatic installation. Keep update-installer.xex beside default.xex;
+copying just default.xex is insufficient. No DashLaunch/plugin is required.
+Settings, saved scan paths, Jellyfin sessions, FTP credentials, logs, existing
+Downloads/Updates and unrelated files are retained. No NAND, firmware, launch.ini
+or default-dashboard changes are made. Desktop preview downloads only and never
+replaces its executable; automatic native relaunch is Xbox-only.
+
+The worker streams the ZIP into Updates, checks exact SHA256/length, then
+extracts into the private .blades-update/stage folder. ZIP paths are restricted
+to known app files, Assets and licences; private Config paths, traversal,
+absolute/drive paths, case duplicates, symlinks, encryption, ZIP64, unsupported
+methods, malformed directories and CRC failures are rejected. Config/README.txt
+is the only permitted Config entry. Bounds:64 files,32MiB per file,128MiB total
+expanded bytes; ZIPs remain limited to64MiB. Entries use stored or raw DEFLATE
+compression via the existing pinned stb decoder; no extra download is needed.
+
+After verified staging, Blades launches a copy of the currently installed helper
+from .blades-update/installer.xex. Normal atexit closes Blades services, resource
+handles, audio and renderer before the helper starts. The helper derives the app
+folder from its own image path and creates a local drive alias. It accepts no
+arbitrary destination from the manifest. All installed files are backed up and
+hashed before a persistent pending journal is written. Files are replaced by
+same-volume rename; default.xex is replaced last and remains present throughout.
+The running helper is a separate copy, so replacing its root installation is safe.
+The journal is removed only after every replacement verifies. The helper then
+launches the installed default.xex through the SDK/XAM launch path.
+
+A failed file commit restores the old files from verified backups. An interrupted
+transaction is recovered by the helper before the next normal startup loads
+artwork. Restore copies retain the originals so recovery can be repeated after
+another interruption. An unreadable/damaged backup leaves the journal intact
+and stops on a recovery message rather than continuing an incomplete install.
+Backups stay in .blades-update/backup until the next update preparation. They
+can be copied back manually if the device needs repair. Filesystem/hardware
+power-loss behavior and actual XAM handoff still need physical-console testing;
+process-interruption fixtures do not prove drive-cache durability or recovery
+from an unbootable future build.
+
+The manifest and ZIP remain in the repository downloads folder:
 https://raw.githubusercontent.com/sbayfield09/Blades-reimagined/main/dist/update.json
-It contains schema1, version, asset, size and SHA256. Only a newer numeric version
-can be downloaded. The asset must match Blades-v<version>-USB.zip and is fetched
-from that same main/dist directory. No GitHub Release, API endpoint, account or
-token is needed. The USB ZIP, manifest and matching source/artwork/video must
-be committed together. Keep published versioned filenames immutable; increment
-the version for subsequent releases. GitHub's raw CDN may cache metadata briefly.
+Schema1 includes version, asset, size and SHA256. A newer numeric version is
+required; asset must match Blades-v<version>-USB.zip in that same main/dist folder.
+No GitHub API, Release, token or account is needed. TLS verifies chain/hostname
+using bundled Mbed TLS3.6.5/public CA roots and native XeCryptRandom. Console time
+must be correct. Metadata is limited to16KiB; redirects are bounded/allowlisted,
+with15second inactivity and10minute connection limits. A matching cached ZIP is
+rehashed and reused; a damaged cache is replaced only after a verified download.
+Failed/cancelled temporary files are discarded. No boot-time update check runs.
 
-HTTPS uses included Mbed TLS3.6.5, public Mozilla CA roots, hostname/chain checks,
-native XeCryptRandom, a15second inactivity limit and a10minute per-connection
-bound. Requests ask caches to revalidate. The transport is independent of the
-video/Jellyfin HTTP path. Native code excludes desktop proxy, extra-test-CA and
-test-origin overrides. Console date/time must be correct for certificates.
-
-Metadata is limited to16KiB and USB ZIPs to64MiB. Downloads stream to
- game:/Updates/<filename>.tmp
-then flush, verify exact size/SHA256 and rename to the completed filename.
-Failed/cancelled partial files are removed. Existing completed filenames and
-private Config files are preserved. No whole-file buffering is used.
-
-The updater downloads only. Exit Blades before extracting the ZIP over your
-installation. It does not install files, replace the running XEX, restart,
-modify NAND, install plugins or change the default dashboard. Install the first
-repository-based updater build manually once; future versions use this manifest.
-
-Maintainers: build/test the XEX, generate matching video/source/artwork/USB ZIP,
-then run:
-  python3 tools/prepare-update.py --version 0.50
-This verifies package CRCs/current XEX and writes dist/update.json, SHA256SUMS
-and a reviewable repository-update-plan.json. Publish all matching public source,
-versioned artifacts and manifest together in main. Use the explicit safe USB
-payload for any unpacked runtime files; never stage user configs/logs. GitHub
-Releases can be optional mirrors, but the updater reads the repository folder.
-The older tools/publish-release.py is an optional mirror publisher, not the
-updater's required publication path.
-
-Actual TLS integration tests use the same /sbayfield09/Blades-reimagined/main/dist/
-paths as production. They cover Content-Length/chunked downloads, current/older
-versions, invalid metadata, checksum/length failures, truncation, cancellation,
-partial cleanup, allowed redirects/loops, unsafe hosts, HTTP downgrade, untrusted
-chains and wrong hostnames. The opt-in older-client live probe checks and downloads
-the actual GitHub manifest/ZIP after publication, including exact hash/size.
-Console networking/storage still need hardware retest.
+Maintainers: build/test both XEXs and package matching source/artwork/video/USB,
+then run tools/prepare-update.py --version 0.52. Publish every matching artifact
+and dist/update.json together on main; keep versioned files immutable. The source
+bundle includes the helper, ZIP/transaction modules and build tools. Tests cover
+real TLS download-to-install, cache reuse/repair, invalid verified packages,
+Config preservation, commit failures, process interruptions during install and
+recovery, damaged backup retry, unsafe ZIPs and deterministic parser mutations.

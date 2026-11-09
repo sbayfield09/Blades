@@ -1,5 +1,6 @@
 #include "updater.h"
 #include "update_net.h"
+#include "update_install.h"
 #include "protocol.h"
 #include "mbedtls/sha256.h"
 #include <errno.h>
@@ -13,7 +14,7 @@
 struct Updater {
     pthread_t thread;pthread_mutex_t lock;pthread_cond_t wake;
     unsigned stop,cancel,command;bool busy;UpdateSnapshot view;UpdateManifest manifest;
-    char directory[256];void (*worker_start)(void *);void *context;
+    char directory[256],install_root[256];void (*worker_start)(void *);void *context;
 };
 static bool version(const char *s,unsigned part[3]){
     memset(part,0,3*sizeof *part);if(!s||!*s)return false;
@@ -71,12 +72,29 @@ static bool download_bytes(void *context,const unsigned char *data,size_t bytes)
     d->bytes+=bytes;
     pthread_mutex_lock(&d->updater->lock);d->updater->view.received=d->bytes;d->updater->view.revision++;pthread_mutex_unlock(&d->updater->lock);return true;
 }
+static bool verified_zip(Updater *u,const char *path,const UpdateManifest *manifest){
+    FILE *f=fopen(path,"rb");if(!f)return false;mbedtls_sha256_context ctx;mbedtls_sha256_init(&ctx);bool ok=mbedtls_sha256_starts(&ctx,0)==0;unsigned char data[32768],digest[32]={0};uint64_t bytes=0;
+    while(ok&&!cancelled(u)){size_t n=fread(data,1,sizeof data,f);if(!n)break;bytes+=n;if(bytes>manifest->bytes||mbedtls_sha256_update(&ctx,data,n))ok=false;}
+    ok=ok&&!ferror(f)&&bytes==manifest->bytes;if(mbedtls_sha256_finish(&ctx,digest))ok=false;mbedtls_sha256_free(&ctx);fclose(f);
+    char hash[65];for(unsigned i=0;i<32;i++)snprintf(hash+i*2,3,"%02x",digest[i]);return ok&&!cancelled(u)&&!strcmp(hash,manifest->sha256);
+}
+static void install_progress(void *context,unsigned done,unsigned total){
+    Updater *u=context;pthread_mutex_lock(&u->lock);u->view.received=done;u->view.total=total;u->view.revision++;pthread_mutex_unlock(&u->lock);
+}
+static void ready(Updater *u,const char *path){
+    pthread_mutex_lock(&u->lock);snprintf(u->view.saved,sizeof u->view.saved,"%s",path);pthread_mutex_unlock(&u->lock);
+    if(u->install_root[0]){
+        state(u,UPDATE_PREPARING,"Preparing the update...");char error[192];
+        if(!update_install_stage(u->install_root,path,cancelled,install_progress,u,error,sizeof error)){state(u,cancelled(u)?UPDATE_CANCELLED:UPDATE_ERROR,error);return;}
+        state(u,UPDATE_READY,"Installing and restarting Blades...");
+    }else state(u,UPDATE_READY,"Desktop preview: download verified. Automatic restart runs on Xbox.");
+}
 static void download(Updater *u){
     char final[384],temporary[392],url[2048],error[192]={0};struct stat st;
     int count=snprintf(final,sizeof final,"%s/%s",u->directory,u->manifest.filename);
     if(count<0||(size_t)count>=sizeof final||strlen(final)>=sizeof u->view.saved){state(u,UPDATE_ERROR,"The update save path is too long.");return;}
     if((mkdir(u->directory,0755)&&errno!=EEXIST)||stat(u->directory,&st)||!S_ISDIR(st.st_mode)){state(u,UPDATE_ERROR,"Could not create the Updates folder.");return;}
-    if(!stat(final,&st)){state(u,UPDATE_ERROR,"This update ZIP already exists in Updates. Remove it to download again.");return;}
+    if(!stat(final,&st)&&verified_zip(u,final,&u->manifest)){ready(u,final);return;}
     snprintf(temporary,sizeof temporary,"%s.tmp",final);int fd=open(temporary,O_CREAT|O_TRUNC|O_WRONLY,0600);if(fd<0){state(u,UPDATE_ERROR,"Could not write to the Updates folder.");return;}
     Download d={.updater=u,.fd=fd};mbedtls_sha256_init(&d.hash);bool ok=mbedtls_sha256_starts(&d.hash,0)==0;
     if(!update_address(url,sizeof url,u->manifest.filename))ok=false;
@@ -90,8 +108,7 @@ static void download(Updater *u){
     if(cancelled(u)){ok=false;snprintf(error,sizeof error,"Update download cancelled.");}
     if(ok&&rename(temporary,final)){ok=false;snprintf(error,sizeof error,"Could not save the completed update ZIP.");}
     if(!ok){remove(temporary);state(u,cancelled(u)?UPDATE_CANCELLED:UPDATE_ERROR,error[0]?error:"Update download failed. Check free storage space.");return;}
-    pthread_mutex_lock(&u->lock);memcpy(u->view.saved,final,(size_t)count+1);pthread_mutex_unlock(&u->lock);
-    state(u,UPDATE_READY,"Download verified. Exit Blades before extracting the ZIP over your installation.");
+    ready(u,final);
 }
 static void *worker(void *context){
     Updater *u=context;if(u->worker_start)u->worker_start(u->context);
@@ -111,5 +128,10 @@ void updater_poll(Updater *u,UpdateSnapshot *out){if(!out)return;if(!u){*out=(Up
 static bool request(Updater *u,unsigned command){if(!u)return false;pthread_mutex_lock(&u->lock);bool ok=!u->busy&&!u->stop&&(command==1||((u->view.state==UPDATE_AVAILABLE||u->view.state==UPDATE_ERROR||u->view.state==UPDATE_CANCELLED)&&u->manifest.filename[0]&&update_version_compare(u->manifest.version,BLADES_VERSION)>0));if(ok){__atomic_store_n(&u->cancel,0,__ATOMIC_RELEASE);u->view.received=0;u->busy=true;u->command=command;u->view.state=command==1?UPDATE_CHECKING:UPDATE_DOWNLOADING;u->view.revision++;pthread_cond_broadcast(&u->wake);}pthread_mutex_unlock(&u->lock);return ok;}
 bool updater_check(Updater *u){return request(u,1);}
 bool updater_download(Updater *u){return request(u,2);}
+bool updater_install_to(Updater *u,const char *root){
+    if(!u||!root||!*root||strlen(root)>=sizeof u->install_root)return false;
+    pthread_mutex_lock(&u->lock);bool ok=!u->busy;if(ok)strcpy(u->install_root,root);pthread_mutex_unlock(&u->lock);return ok;
+}
+void updater_install_failed(Updater *u,const char *message){if(u)state(u,UPDATE_ERROR,message);}
 void updater_cancel(Updater *u){if(u)__atomic_store_n(&u->cancel,1,__ATOMIC_RELEASE);}
 void updater_close(Updater *u){if(!u)return;pthread_mutex_lock(&u->lock);__atomic_store_n(&u->stop,1,__ATOMIC_RELEASE);__atomic_store_n(&u->cancel,1,__ATOMIC_RELEASE);pthread_cond_broadcast(&u->wake);pthread_mutex_unlock(&u->lock);pthread_join(u->thread,NULL);pthread_cond_destroy(&u->wake);pthread_mutex_destroy(&u->lock);free(u);}

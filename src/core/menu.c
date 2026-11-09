@@ -13,7 +13,7 @@ static const char *const children[BLADE_COUNT][7][5]={
     {{"No messages"},{"No friends"},{"Chat and instant messaging support"},{"Disc tray control is not implemented"}},
     {{"Achievements support"},{"Game Library","Apps","Homebrew","File Manager","Scan Folders"},{"Arcade library support"},{"Demo library support"},{"Disc tray control is not implemented"}},
     {{"Browse music","Playback support"},{"Browse pictures","Image decoder support"},{"Jellyfin","Local"},{"Video downloads support"},{"Server Address","Username","Password","Connect","Remove Connection"},{"Disc tray control is not implemented"}},
-    {{"Display: 1280 x 720","Audio","Language","About Blades"},{"Family settings support"},{"Storage enumeration support"},{"Network information"},{"FTP server"},{"Initial setup support"},{"Check for Updates","Download Update"}}
+    {{"Display: 1280 x 720","Audio","Language","About Blades"},{"Family settings support"},{"Storage enumeration support"},{"Network information"},{"FTP server"},{"Initial setup support"},{"Check for Updates","Update and Restart"}}
 };
 int menu_count(int b,int depth,int selected) {
     int n=0;
