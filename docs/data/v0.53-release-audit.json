@@ -61,7 +61,20 @@
     "both_archived_source_rebuilds_byte_identical": true,
     "ZIP_CRC_source_hashes_current_files_matching_artwork_private_exclusions": "PASS",
     "previous_implementation_validation": "See0.52 audit. No new full regression/sanitizer run claimed for unchanged code.",
-    "live_v052_updater": "Pending atomic publication; preserved actual0.52 desktop updater will download, stage and commit the actual0.53 package on disposable app tree, preserving private Config.",
+    "live_v052_updater": {
+      "recorded_utc": "2026-11-09T21:10:26.100518+00:00",
+      "publication_commit": "641572fd09fce20b823b33f4d0ce9e9189e42a2e",
+      "client": "Preserved actual v0.52 desktop updater binary, not newly compiled simulation of an older version",
+      "old_client_result": "PASS: HTTPS updater auto state=5; trusted host, bounded verified download and temporary-file cleanup",
+      "new_client_result": "PASS: live repository manifest found via raw GitHub; installed version is current",
+      "download_bytes": 5677008,
+      "download_sha256": "e63ac472de5fab79454e460b68e9b11408fb2643de919d98a98cb369308fbd6a",
+      "all_downloaded_files_installed_byte_identical": true,
+      "private_FTP_Jellyfin_scan_Config_and_unrelated_file_preserved": true,
+      "old_application_and_helper_backups_match_v052": true,
+      "no_pending_journal": true,
+      "scope": "Production raw GitHub HTTPS download plus real staging/file commit on disposable host app tree. Actual native helper/XAM relaunch is the user Xbox test."
+    },
     "hardware": "Native Xbox install/restart is the user test; no physical XAM/FATX/power-loss durability claim."
   },
   "walkthrough": {
@@ -203,5 +216,6 @@
       }
     },
     "scope": "Fresh matching240s720p30 stereo desktop GPU renderer with isolated real Jellyfin/synthetic media; Xbox services/updater/installer/restart simulated and labelled."
-  }
+  },
+  "publication": "Matching source, both XEXs, USB/source packages, artwork, fresh walkthrough and manifest published at 641572fd09fce20b823b33f4d0ce9e9189e42a2e"
 }

@@ -13,9 +13,11 @@ hash/current-file checks pass. USB payload differences are limited to the two
 versioned XEXs and release/install metadata. Artwork bytes and private-data
 exclusions are retained. The fresh matching240s720p30 stereo desktop walkthrough
 labels simulated Xbox services and installer/restart; it does not prove native
-handoff. The preserved actual0.52 desktop updater is checked against GitHub after
-publication, including installation of the real downloaded package and retained
-private Config. Actual Xbox restart is the purpose of this user's test release.
+handoff. The preserved actual0.52 desktop updater detected and downloaded the live
+0.53 package, staged and committed all32 files byte-for-byte on a disposable
+host app tree. Private FTP/Jellyfin/scan Config and an unrelated file remain,
+old app/helper backups match0.52, and no pending journal remains. The0.53 client
+reports itself current against the same live manifest. Actual Xbox restart is the purpose of this user's test release.
 
 # Validation — Blades0.52 automatic installation
 
