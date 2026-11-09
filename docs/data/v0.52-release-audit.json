@@ -70,7 +70,17 @@
     "shaders": "PASS: 240 compiled Xenos swirl samples match supplied equations within one RGB level\nPASS: compiled Xenos point fetches and separable 720p background filtering\nPASS: compiled Xenos glyph tint and integer alpha coverage\nPASS: compiled Xenos content fade shader\nPASS: compiled Xenos cap box filter preserves alpha-aware area samples\nPASS: 72 compiled Xenos video samples; three Y/U/V sampler slots, BT601/709 limited/full, boundaries and RGB\n",
     "retained_implementation": "PASS: prior library/Jellyfin/HTTP/FTP/Xbox renderer/video shader/color code unchanged; video.c differs only by0.51 ->0.52 User-Agent label\n",
     "public_source_USB_hash_CRC_current_payload_private_exclusions": "PASS",
-    "live_repository": "Pending atomic publication; current-version and older-client actual download checks follow.",
+    "live_repository": {
+      "recorded_utc": "2026-11-09T07:27:49.860322+00:00",
+      "publication_commit": "224eb37feaa31c82dee46e3007d0f9a0977250a2",
+      "current_client": "PASS: live repository manifest found via raw GitHub; installed version is current",
+      "older_client": "PASS: actual GitHub dist manifest and USB ZIP downloaded, exact length/SHA256 verified; older-client simulation=0.51.0 latest=0.52.0 bytes=5676870",
+      "bytes": 5676870,
+      "sha256": "6de761882cf00544a22e3562ec3128321569f3ecc6012145cbdd7b2d6d5cedfc",
+      "download_matches_published_USB": true,
+      "downloaded_package_install": "PASS: shared staging/commit code installs every actual downloaded file byte-for-byte on disposable older-layout app tree plus bootstrap helper; private Config retained",
+      "scope": "Desktop production HTTPS and filesystem transaction tests. Native helper/XAM execution, automatic relaunch and console storage behavior remain hardware tests."
+    },
     "hardware": "Native helper/XAM handoff, relaunch and FATX/USB rename behavior require console testing. Process-interruption tests do not prove drive-cache power-loss durability or rollback from an unbootable future build."
   },
   "walkthrough": {
@@ -212,5 +222,6 @@
       }
     },
     "scope": "Fresh240s720p30 stereo desktop GPU renderer, actual isolated Jellyfin/Local playback; Xbox services/updater/installer/restart simulated and labelled."
-  }
+  },
+  "publication": "Matching source, both XEXs, USB/source ZIPs, artwork, fresh video and update manifest published atomically at 224eb37feaa31c82dee46e3007d0f9a0977250a2"
 }

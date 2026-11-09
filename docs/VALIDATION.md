@@ -26,7 +26,10 @@ USB/source CRCs/SHA manifests/current files and private-data exclusions pass.
 Compiled Xenos shaders pass retained arithmetic checks. The fresh240s720p30
 stereo desktop video fully decodes; installer/restart scenes are labelled simulated.
 Prior decoder/FTP/Jellyfin implementation files are retained (version label only
-in video.c). Live production GitHub check/download is verified after publication.
+in video.c). Live GitHub tests pass: the0.52 client reports current and an older-version
+desktop client downloads the actual USB ZIP with exact size/SHA256 verification.
+The downloaded ZIP then stages/commits all files byte-for-byte on a disposable
+host app tree with bootstrap helper; private Config remains intact.
 
 Native helper/XAM handoff, actual automatic relaunch, file-replacement support
 on console storage, drive-cache power-loss durability and launch/exit static

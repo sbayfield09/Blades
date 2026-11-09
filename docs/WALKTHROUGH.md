@@ -15,7 +15,7 @@ no user account, private server, passwords or session tokens are recorded.
 
 03:29 onward shows System > Update Blades, simulated newer-version detection,
 download/cancel/retry, preparation, then Installing and restarting Blades.
-At approximately03:44, the simulated installer handoff resets the actual shared
+At approximately03:46, the simulated installer handoff resets the actual shared
 startup renderer to the Games blade opening. The remaining navigation passes
 through Xbox Live and Games. File replacement is never performed by this capture;
 the real installer fixture independently stages and commits the actual USB ZIP.
