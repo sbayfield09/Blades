@@ -1,6 +1,8 @@
-# Blades0.52 walkthrough
+# Blades0.53 walkthrough
 
-[Watch/download](../dist/Blades-v0.52-walkthrough.mp4): fresh240second720p30
+Version-only updater test; interface, playback and installer logic match0.52.
+
+[Watch/download](../dist/Blades-v0.53-walkthrough.mp4): fresh240second720p30
 shared desktop GPU capture with48kHz stereo and matching235-entry artwork pack.
 The visible label identifies desktop rendering and simulated Xbox services,
 including updater/installer/restart snapshots. Actual file transaction/recovery

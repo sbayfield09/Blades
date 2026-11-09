@@ -12,16 +12,20 @@ It runs as a standalone app named **Blades** alongside your existing setup. It
 uses your installed Xbox kernel and Guide for account actions; installing it does
 not flash an older dashboard or change your default launcher.
 
-**Current build: v0.52** ·
-[Download the complete USB ZIP](https://raw.githubusercontent.com/sbayfield09/Blades-reimagined/224eb37feaa31c82dee46e3007d0f9a0977250a2/dist/Blades-v0.52-USB.zip) ·
-[Watch the walkthrough](https://raw.githubusercontent.com/sbayfield09/Blades-reimagined/224eb37feaa31c82dee46e3007d0f9a0977250a2/dist/Blades-v0.52-walkthrough.mp4) ·
-[Release notes](docs/RELEASE-0.52.md)
+**Current build: v0.53 — updater test** ·
+[Download the complete USB ZIP](https://raw.githubusercontent.com/sbayfield09/Blades-reimagined/main/dist/Blades-v0.53-USB.zip) ·
+[Watch the walkthrough](https://raw.githubusercontent.com/sbayfield09/Blades-reimagined/main/dist/Blades-v0.53-walkthrough.mp4) ·
+[Release notes](docs/RELEASE-0.53.md)
 
 ![Blades Reimagined Games blade, showing the profile card, game menus and disc tray option](docs/images/v0.52-dashboard.png)
 
 *Desktop preview from v0.52 using the shared dashboard renderer. Profile/Guide,
 storage, FTP and update/restart scenes in the walkthrough are simulated; the
 capture is not footage from an Xbox.*
+
+**v0.53 is a version-only release for testing updates from v0.52.** Features,
+artwork, settings and updater behavior are unchanged. In v0.52, select
+**System → Update Blades → Update and Restart**.
 
 ## What can it do?
 
@@ -55,7 +59,7 @@ requires internet access. No DashLaunch plugin is required by Blades.
 
 ## Install and launch
 
-1. Download the **complete v0.52 USB ZIP** above and extract it on your computer.
+1. Download the **complete v0.53 USB ZIP** above and extract it on your computer.
 2. Copy the whole `Blades` folder to your console's HDD or a USB drive.
 3. Keep the folder together, including `Assets` and `update-installer.xex`.
 4. Open your existing homebrew launcher/file browser, such as Aurora, and launch
@@ -149,7 +153,7 @@ sharing logs.
 ## Source and development
 
 Application source is available in [`src`](src), [`include`](include) and
-[`tests`](tests). The [complete v0.52 source bundle](https://raw.githubusercontent.com/sbayfield09/Blades-reimagined/224eb37feaa31c82dee46e3007d0f9a0977250a2/dist/Blades-v0.52-source.zip)
+[`tests`](tests). The [complete v0.53 source bundle](https://raw.githubusercontent.com/sbayfield09/Blades-reimagined/main/dist/Blades-v0.53-source.zip)
 also includes dependency sources and a pinned open-source SDK. A Linux/SDL3
 preview is available for development; you do not need it to use the Xbox build.
 

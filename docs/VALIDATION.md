@@ -1,3 +1,22 @@
+# Validation — Blades0.53 version-only updater test
+
+All83 published runtime source/header files match0.52 after substituting only
+0.53 version strings back to0.52. Installer/ZIP/rollback, decoder, rendering,
+settings and artwork behavior are unchanged. Both native XEX versions are bumped.
+Four targeted suites pass: updater,20 real TLS updater modes, installer/recovery
+(including80 deterministic ZIP mutations) and dashboard. This release does not
+claim a new full host/sanitizer run for the unchanged implementation.
+
+The complete corresponding source rebuild produces byte-identical application
+and installer XEXs. Native integrity/import/page checks, USB/source CRCs and source
+hash/current-file checks pass. USB payload differences are limited to the two
+versioned XEXs and release/install metadata. Artwork bytes and private-data
+exclusions are retained. The fresh matching240s720p30 stereo desktop walkthrough
+labels simulated Xbox services and installer/restart; it does not prove native
+handoff. The preserved actual0.52 desktop updater is checked against GitHub after
+publication, including installation of the real downloaded package and retained
+private Config. Actual Xbox restart is the purpose of this user's test release.
+
 # Validation — Blades0.52 automatic installation
 
 The main33-suite host run passed32 suites. The remaining Jellyfin suite completed

@@ -10,10 +10,10 @@
 static double now(void){struct timespec t;clock_gettime(CLOCK_MONOTONIC,&t);return t.tv_sec+t.tv_nsec/1e9;}
 static UpdateSnapshot settled(Updater *u){double until=now()+20;UpdateSnapshot s;do{updater_poll(u,&s);if(s.state!=UPDATE_IDLE&&s.state!=UPDATE_CHECKING&&s.state!=UPDATE_DOWNLOADING&&s.state!=UPDATE_PREPARING)return s;usleep(1000);}while(now()<until);fprintf(stderr,"updater timeout: %s\n",s.message);assert(0);return s;}
 static void unit(void){
- assert(update_version_compare("0.53.0",BLADES_VERSION)>0&&update_version_compare("0.52",BLADES_VERSION)==0&&update_version_compare("0.51.9",BLADES_VERSION)<0&&update_version_compare("0.52.1",BLADES_VERSION)>0);
- char text[512];snprintf(text,sizeof text,"{\"schema\":1,\"version\":\"0.53.0\",\"asset\":\"Blades-v0.53-USB.zip\",\"size\":4096,\"sha256\":\"%064d\"}",0);UpdateManifest m;
+ assert(update_version_compare("0.54.0",BLADES_VERSION)>0&&update_version_compare("0.53",BLADES_VERSION)==0&&update_version_compare("0.52.9",BLADES_VERSION)<0&&update_version_compare("0.53.1",BLADES_VERSION)>0);
+ char text[512];snprintf(text,sizeof text,"{\"schema\":1,\"version\":\"0.54.0\",\"asset\":\"Blades-v0.54-USB.zip\",\"size\":4096,\"sha256\":\"%064d\"}",0);UpdateManifest m;
  assert(update_manifest_parse(text,strlen(text),&m));assert(!update_manifest_parse("{}",2,&m));assert(!update_manifest_parse(text,strlen(text)-1,&m));
- char *p=strstr(text,"0.53.0");p[0]='v';assert(!update_manifest_parse(text,strlen(text),&m));
+ char *p=strstr(text,"0.54.0");p[0]='v';assert(!update_manifest_parse(text,strlen(text),&m));
  Dashboard d;dashboard_init(&d);d.blade=d.previous_blade=BLADE_SYSTEM;d.selected[BLADE_SYSTEM]=6;dashboard_update(&d,SELECT,0);assert(dashboard_update_page(&d)&&d.update_check&&!d.update_download);dashboard_update(&d,0,.016);assert(!d.update_check);dashboard_update(&d,DOWN,0);dashboard_update(&d,SELECT,0);assert(d.update_download);dashboard_update(&d,PROFILE,0);assert(d.update_cancel);dashboard_update(&d,BACK,0);assert(!dashboard_update_page(&d));
 }
 int main(int argc,char **argv){

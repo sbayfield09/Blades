@@ -137,7 +137,7 @@ static unsigned buttons(const INPUT_GAMEPAD *p) {
     return a;
 }
 int main(void) {
-    xsdk_log_write("Blades 0.52.0: boot; embedded video decoding; no video XEX handoff or adapter");
+    xsdk_log_write("Blades 0.53.0: boot; embedded video decoding; no video XEX handoff or adapter");
     if(atexit(close_app)!=0)return 1;
     if(update_install_pending("game:")){
         xsdk_log_write("updater: recovering interrupted installation before loading artwork");

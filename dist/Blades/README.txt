@@ -1,3 +1,11 @@
+Blades0.53 — version-only automatic updater test
+
+Behavior, artwork, settings and installer logic are unchanged from0.52.
+From0.52: System > Update Blades > Update and Restart should offer0.53.0,
+download, verify, install and relaunch automatically. After restart, confirm
+0.53.0 and that FTP/Jellyfin/scan settings remain. Rechecking should report current.
+The purpose of this release is to test the native updater on your Xbox.
+
 Blades0.52 — automatic update installation and restart
 
 Install the COMPLETE0.52 USB ZIP once; keep update-installer.xex next to default.xex.

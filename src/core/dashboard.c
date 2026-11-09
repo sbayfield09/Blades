@@ -156,7 +156,7 @@ void dashboard_update(Dashboard *d,unsigned a,float dt) {
             d->dialog=true;
             d->message="This service is not implemented in this build.\nDemo entries do not read or change your console.\nPress B to return.";
             if(d->blade==BLADE_SYSTEM&&d->selected[BLADE_SYSTEM]==0&&d->child==3)
-                d->message="Blades 0.52.0 - standalone homebrew dashboard\nLocal artwork and Convection font support.\nBuilt with the open-source xsdk.\nNot affiliated with Microsoft. Press B to return.";
+                d->message="Blades 0.53.0 - standalone homebrew dashboard\nLocal artwork and Convection font support.\nBuilt with the open-source xsdk.\nNot affiliated with Microsoft. Press B to return.";
         }
     }
 }
